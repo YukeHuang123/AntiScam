@@ -8,7 +8,7 @@ Lead/scribe:Zhaoyun Xu/Yuke Huang
 ## Agreed Procedure
 Stand up Procedure: 
 - decide custom features  
-- discuss:
+discuss:
 - data types
 - design patterm
 - data structure
