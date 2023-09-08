@@ -1,14 +1,15 @@
 # G32
-This following is a very simple team meeting template. You should expand it based on the scope and nature of your discussion.
 
 ## Team Meeting 2 - break week1  - 2023-09-08 11:00-12:00
 
-Lead/scribe:Zhaoyun Xu/Yuke Huang
+
+**Lead/scribe:** Zhaoyun Xu/Yuke Huang
 
 ## Agreed Procedure
 Stand up Procedure: 
-- decide custom features  
-discuss:
+
+discuss: 
+- custom features  
 - data types
 - design patterm
 - data structure
@@ -16,7 +17,7 @@ discuss:
 
 ## Agenda Items
 | Number   |        Item |
-|:---------|------------:|
+|:---------|:------------|
 | 1 | Background |
 | 2 | Potential User |
 | 3 | Basic Features of the App |
@@ -31,7 +32,7 @@ Meeting Notes:
 - Individuals who want to stay informed about the latest scam trends and prevention tips.
 - Individuals seeking assistance in identifying ongoing scams.
 3.	Basic Features of the App:
-- 4 basic features
+- four basic features
 4.	Custom Features:
 - Data-Formats
 - Data-Profile
