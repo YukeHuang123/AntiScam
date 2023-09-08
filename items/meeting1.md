@@ -1,4 +1,4 @@
-# [Team Name]
+# G32
 This following is a very simple team meeting template. You should expand it based on the scope and nature of your discussion.
 
 ## Team Meeting 1 - break week1  - 2023-09-06 16:30-17:30
