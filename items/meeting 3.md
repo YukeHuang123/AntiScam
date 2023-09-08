@@ -49,7 +49,7 @@ Meeting Notes:
 | Task                                   | Assigned To |  Due Date  |
 |:---------------------------------------|:-----------:|:----------:|
 |Research and gather at least 100 real cases of mobile scams for data integration|  Yuke Huang and Junzhe Huang   | 2023-09-10 |
-|Start designing UI diagrams, considering user-friendly navigation and visual appeal|  all   | 2023-09-10 |
+|Start designing UI diagrams, considering user-friendly navigation and visual appeal|Yijing Jia and Zhaoyun Xu  | 2023-09-10 |
 |Continuing to explore additional custom features|  all   | 2023-09-10 |
 |Gaining a better understanding of design patterns and their use cases|  all   | 2023-09-10 |
 |Gaining more knowledge about the data types and data structures to be used in the app|  all   | 2023-09-10 |
