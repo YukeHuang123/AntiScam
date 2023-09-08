@@ -3,7 +3,7 @@ This following is a very simple team meeting template. You should expand it base
 
 ## Team Meeting 2 - break week1  - 2023-09-08 11:00-12:00
 
-**Lead/scribe:**Zhaoyun Xu/Yuke Huang
+Lead/scribe:Zhaoyun Xu/Yuke Huang
 
 ## Agreed Procedure
 Stand up Procedure: 
