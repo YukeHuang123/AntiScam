@@ -1,6 +1,6 @@
 # G32
 
-## Team Meeting 2 - break week1  - 2023-09-08 11:00-12:00
+## Team Meeting 3 - break week1  - 2023-09-08 11:00-12:00
 
 
 **Lead/scribe:** Zhaoyun Xu/Yuke Huang
