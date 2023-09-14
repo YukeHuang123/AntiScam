@@ -18,13 +18,17 @@
             android:name=".MainMenu"
             android:exported="false" />
         <activity
-            android:name=".AntiScam"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".AntiScam"
+            android:exported="false">
         </activity>
     </application>
 
