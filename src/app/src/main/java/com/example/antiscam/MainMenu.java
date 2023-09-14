@@ -12,9 +12,9 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        WebView mainMenu = (WebView) findViewById(R.id.mainMenuWV);
+//        WebView mainMenu = (WebView) findViewById(R.id.mainMenuWV);
 //        Intent mainMenuInt = getIntent();
 //        startActivity(mainMenuInt);
-        mainMenu.loadUrl("https://google.com");
+//        mainMenu.loadUrl("https://google.com");
     }
 }
