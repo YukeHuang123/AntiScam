@@ -50,4 +50,12 @@ dependencies {
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Add cardView
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // Add gson
+    implementation("com.google.code.gson:gson:2.8.8")
+
 }
