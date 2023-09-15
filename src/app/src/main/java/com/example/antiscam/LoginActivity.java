@@ -74,24 +74,27 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            // UPDATE Start
+//                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                                    .setDisplayName("Emma")
+//                                    .setPhotoUri(Uri.parse("userAvatar/user01_avatar.png"))
+//                                    .build();
+//
+//                            user.updateProfile(profileUpdates)
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            if (task.isSuccessful()) {
+//                                                Log.d(TAG, "User profile updated.");
+//                                            } else {
+//                                                Log.d(TAG, "User profile update failed.");
+//                                            }
+//                                        }
+//                                    });
+                            // UPDATE End
+
                             updateUI(user);
-
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName("Emma")
-                                    .setPhotoUri(Uri.parse("gs://antiscam-5b447.appspot.com/userAvatar/user01_avatar.png"))
-                                    .build();
-
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d(TAG, "User profile updated.");
-                                            } else {
-                                                Log.d(TAG, "User profile update failed.");
-                                            }
-                                        }
-                                    });
 
                         } else {
                             // If sign in fails, display a message to the user.

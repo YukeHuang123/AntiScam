@@ -16,13 +16,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.antiscam.adapter.mainMenuCardAdapter;
+import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.dataclass.scamCase;
 import com.example.antiscam.dataclass.scamCaseListAccess;
+import com.example.antiscam.tool.CircleImageTransformer;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,40 +59,55 @@ public class MainMenu extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cardAdapter);
 
-        // Get user information from firebase
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
+        TextView userNameView = findViewById(R.id.userName);
+        ImageView imageView = findViewById(R.id.avatarImgView);
+        UserInfoManager.getUserInfo(this, userNameView, imageView);
 
-            String username = user.getDisplayName();
-//            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            TextView userNameView = findViewById(R.id.userName);
-            userNameView.setText(username);
-            userNameView.getText();
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-        }
+//        // Get user information from firebase
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            // Name, email address, and profile photo Url
+//
+//            String username = user.getDisplayName();
+////            String email = user.getEmail();
+//            Uri photoUrl = user.getPhotoUrl();
+//
+//            TextView userNameView = findViewById(R.id.userName);
+//            userNameView.setText(username);
+//
+//            // Check if user's email is verified
+////            boolean emailVerified = user.isEmailVerified();
+//
+//            // The user's ID, unique to the Firebase project. Do NOT use this value to
+//            // authenticate with your backend server, if you have one. Use
+//            // FirebaseUser.getIdToken() instead.
+//            String uid = user.getUid();
+//
+//            FirebaseStorage storage = FirebaseStorage.getInstance();
+//            StorageReference storageRef = storage.getReference();
+//
+//            // Set path
+//            String imagePath = String.valueOf(photoUrl); // 替换为你的存储路径
+//
+//            // Get StorageReference
+//            StorageReference imageRef = storageRef.child(imagePath);
+//
+//            // Download image and load to ImageView
+//            ImageView imageView = findViewById(R.id.avatarImgView); // 替换为你的 ImageView
+//
+//            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    // Use Picasso to load and transform image
+//                    Picasso.get().load(uri.toString()).transform(new CircleImageTransformer()).into(imageView);
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                    imageView.setImageResource(R.drawable.default_avatar);
+//                }
+//            });
+//
+//        }
     }
-    // For Yijing Test
-//    private List<scamCase> createDataList() {
-//        List<scamCase> dataList = new ArrayList<>();
-//        dataList.add(new scamCase("Card 1", "Description 1"));
-//        dataList.add(new scamCase("Card 2", "Description 2"));
-//        dataList.add(new scamCase("Card 3", "Description 3"));
-//        dataList.add(new scamCase("Card 4", "Description 4"));
-//        dataList.add(new scamCase("Card 5", "Description 5"));
-//        dataList.add(new scamCase("Card 6", "Description 6"));
-//        dataList.add(new scamCase("Card 7", "Description 7"));
-//        dataList.add(new scamCase("Card 8", "Description 8"));
-//        dataList.add(new scamCase("Card 9", "Description 9"));
-//        dataList.add(new scamCase("Card 10", "Description 10"));
-//        return dataList;
-//    }
 }

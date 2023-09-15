@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <com.example.antiscam.tool.BitmapShaderCircularView
+        <ImageView
             android:id="@+id/avatarImgViewCard"
             android:layout_width="30dp"
             android:layout_height="30dp"
