@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="appThemeC">#0D3880</color>
+    <color name="CardListTitleC">#4C4A4A</color>
+    <color name="CardListDescC">#5C6471</color>
+    <color name="CardListOtherC">#989898</color>
+    <color name="SearchHint">#989898</color>
+</resources>
