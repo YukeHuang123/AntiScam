@@ -43,12 +43,12 @@ Meeting Notes:
 
 
 ## Action Items
-| Task                                               | Assigned To  |   Due Date   |
-|:---------------------------------------------------|:------------:|:------------:|
-| creating 2500 data instances                       |  Yuke Huang  |  2023-09-17  |
-| **(unchange)** homepage + data display components. |  Yijing Jia  |  2023-09-17  |
-| **(unchange)** search logic + results page         | Junzhe Huang | 2023-09-17  |
-| **(unchange)** login page + knowledge items        |  Zhaoyun Xu  |  2023-09-17  |
+| Task                                                | Assigned To  |   Due Date   |
+|:----------------------------------------------------|:------------:|:------------:|
+| creating 2500 data instances                        |  Yuke Huang  |  2023-09-17  |
+| **(unchanged)** homepage + data display components. |  Yijing Jia  |  2023-09-17  |
+| **(unchanged)** search logic + results page         | Junzhe Huang | 2023-09-17  |
+| **(unchanged)** login page + knowledge items        |  Zhaoyun Xu  |  2023-09-17  |
 
 
 ## Next Metting
