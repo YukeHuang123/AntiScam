@@ -1,5 +1,6 @@
 package com.example.antiscam.tool;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -14,5 +15,9 @@ public class AuthUtils {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
+
+        if (context instanceof Activity) {
+            ((Activity) context).finish();
+        }
     }
 }
