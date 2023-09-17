@@ -63,7 +63,7 @@ public class MainMenu extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cardAdapter);
 
-        signOutButton = (Button) findViewById(R.id.loginButton);
+        signOutButton = (Button) findViewById(R.id.logout_Button);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
