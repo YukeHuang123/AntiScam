@@ -64,4 +64,15 @@ dependencies {
 
     // Add Picasso
     implementation("com.squareup.picasso:picasso:2.8")
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-database-ktx")
+
+    implementation("com.firebaseui:firebase-ui-auth:7.2.0")
+
+    implementation("com.google.auth:google-auth-library-oauth2-http:0.26.0")
+
 }
