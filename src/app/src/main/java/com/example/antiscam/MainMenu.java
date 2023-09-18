@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -75,5 +76,13 @@ public class MainMenu extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.avatarImgView);
         UserInfoManager.getUserInfo(this, userNameView, imageView);
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // When click avatar, to profile page
+                Intent intent = new Intent(MainMenu.this, Profile.class);
+                startActivity(intent);
+            }
+        });
     }
 }
