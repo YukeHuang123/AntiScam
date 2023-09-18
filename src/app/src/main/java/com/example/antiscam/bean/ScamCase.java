@@ -9,15 +9,17 @@ public class ScamCase {
 
     private Date date;
 
-    private float amount;
+    private double amount;
 
     private String victim_city;
 
     private int victim_age;
 
+    private Date post_date;
+
     private int scam_id;
 
-    private int post_user;
+    private String post_user;
 
     private String description;
 
@@ -33,11 +35,12 @@ public class ScamCase {
         // Default constructor required for calls to DataSnapshot.getValue(ScamCase.class)
     }
 
-    public ScamCase(Date date, float amount, String victim_city, int victim_age, int scam_id, int post_user, String description, String paymentMethod, String title, String scam_type, String contactMethod) {
+    public ScamCase(Date date, double amount, String victim_city, int victim_age, Date post_date, int scam_id, String post_user, String description, String paymentMethod, String title, String scam_type, String contactMethod) {
         this.date = date;
         this.amount = amount;
         this.victim_city = victim_city;
         this.victim_age = victim_age;
+        this.post_date = post_date;
         this.scam_id = scam_id;
         this.post_user = post_user;
         this.description = description;
@@ -55,11 +58,11 @@ public class ScamCase {
         this.date = date;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -79,6 +82,14 @@ public class ScamCase {
         this.victim_age = victim_age;
     }
 
+    public Date getPost_date() {
+        return post_date;
+    }
+
+    public void setPost_date(Date post_date) {
+        this.post_date = post_date;
+    }
+
     public int getScam_id() {
         return scam_id;
     }
@@ -87,11 +98,11 @@ public class ScamCase {
         this.scam_id = scam_id;
     }
 
-    public int getPost_user() {
+    public String getPost_user() {
         return post_user;
     }
 
-    public void setPost_user(int post_user) {
+    public void setPost_user(String post_user) {
         this.post_user = post_user;
     }
 
