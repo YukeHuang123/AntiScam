@@ -37,7 +37,6 @@ Meeting Notes:
 >- Task 3:  Junzhe Huang will implement the messaging functionality within the app.
 >- Task 4:  Zhaoyun Xu will work on data structures.
 
-Any challenges or obstacles encountered should be communicated promptly to ensure a smooth workflow.
 ## Action Items
 | Task                                                   | Assigned To  |  Due Date  |
 |:-------------------------------------------------------|:------------:|:----------:|
@@ -47,9 +46,6 @@ Any challenges or obstacles encountered should be communicated promptly to ensur
 | Deploy datafile to Firebase + data structure           |  Zhaoyun Xu  | 2023-10-01 |
 | assisted with case detail page and message feature     |  Zhaoyun Xu  | 2023-10-01 |
 
-
-## Next Meeting
-2023-09-24
 
 ## Scribe Rotation
 | Name |
