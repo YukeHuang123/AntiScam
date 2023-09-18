@@ -32,10 +32,10 @@ Meeting Notes:
 
 
 >**Week 8 Tasks:**
->-Task 1:  Yijing Jia will work on developing the user profile feature.
->-Task 2:  Yuke Huang's task involves adding a post creation feature to the application.
->-Task 3:  Junzhe Huang will implement the messaging functionality within the app.
->-Task 4:  Zhaoyun Xu will work on data structures.
+>- Task 1:  Yijing Jia will work on developing the user profile feature.
+>- Task 2:  Yuke Huang's task involves adding a post creation feature to the application.
+>- Task 3:  Junzhe Huang will implement the messaging functionality within the app.
+>- Task 4:  Zhaoyun Xu will work on data structures.
 
 Any challenges or obstacles encountered should be communicated promptly to ensure a smooth workflow.
 ## Action Items
