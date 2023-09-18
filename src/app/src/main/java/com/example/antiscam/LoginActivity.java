@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -143,27 +153,65 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void updateFirestore() {
+    public void updateFirestore(){
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // Get a new write batch
-        WriteBatch batch = db.batch();
+        try {
+            AssetManager assetManager = getAssets();
 
-//         Set the value of 'NYC'
-        DocumentReference t1Ref = db.collection("case_test").document("1");
+            InputStream is = assetManager.open("scamCase.json");
+            int size = is.available();
 
-        batch.set(t1Ref, new ScamCase(new Date(), 1, "Harbour", 19, new Date(), 1, "dfdf",
-                "@asnu", "They had convinced me that their weight-loss supplemen",
-                "cryptocurrency", "Promised", "Website"));
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
 
+            String jsonString = new String(buffer, StandardCharsets.UTF_8);
+            JSONArray jsonArray = new JSONArray(jsonString);
 
-//         Commit the batch
-        batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(LoginActivity.this, "已添加完成" + t1Ref.getId(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "DocumentSnapshot added with ID: " + t1Ref.getId());
+            SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            WriteBatch batch = db.batch();
+
+            for (int i = 2000; i < 2500; i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+
+                Date date = formatDate.parse(obj.getString("date"));
+                double amount = obj.getDouble("amount");
+                String victim_city = obj.getString("victim_city");
+                int victim_age = obj.getInt("victim_age");
+                Date post_date = formatTime.parse(obj.getString("post_date"));
+                int scam_id = obj.getInt("scam_id");
+                String post_user = obj.getString("post_user");
+                String description = obj.getString("description");
+                String paymentMethod = obj.getString("paymentMethod");
+                String title = obj.getString("title");
+                String scam_type = obj.getString("scam_type");
+                String contactMethod = obj.getString("contactMethod");
+
+                ScamCase scamCase = new ScamCase(date, amount, victim_city, victim_age,
+                        post_date, scam_id, post_user, description, paymentMethod, title, scam_type,
+                        contactMethod);
+
+                // Add scamCase
+                DocumentReference dRef = db.collection("scam_cases")
+                        .document(String.valueOf(i));
+                batch.set(dRef, scamCase);
+
+                Log.d(TAG, "DocumentSnapshot is adding: " + i);
+
             }
-        });
+
+            batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(LoginActivity.this, "Add Success!!!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "DocumentSnapshot added success");
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
