@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AntiScam"
         tools:targetApi="31">
         <activity
+            android:name=".caseDetail"
+            android:exported="false" />
+        <activity
             android:name=".Profile"
             android:exported="false" />
         <activity
@@ -31,7 +34,7 @@
         </activity>
         <activity
             android:name=".AntiScam"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
