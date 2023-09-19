@@ -8,12 +8,15 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiScam"
         tools:targetApi="31">
+        <activity
+            android:name=".caseDetail"
+            android:exported="false" />
         <activity
             android:name=".Profile"
             android:exported="false" />
@@ -31,7 +34,7 @@
         </activity>
         <activity
             android:name=".AntiScam"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
