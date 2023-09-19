@@ -3,6 +3,7 @@ package com.example.antiscam.dataclass;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.example.antiscam.bean.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,8 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class scamCaseListAccess {
-    public static List<scamCase> loadJsonData(Context context, String fileName) {
-        List<scamCase> dataList = new ArrayList<>();
+    public static List<scamCaseList> loadJsonData(Context context, String fileName) {
+        List<scamCaseList> dataList = new ArrayList<>();
+        String post_user;
         try {
             AssetManager assetManager = context.getAssets();
             InputStream inputStream = assetManager.open(fileName);
@@ -35,12 +37,27 @@ public class scamCaseListAccess {
             JSONArray jsonArray = new JSONArray(jsonString.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                scamCase scamcase = new scamCase("title", "description");
+                scamCaseList scamcase = new scamCaseList();
                 scamcase.setTitle(jsonObject.getString("title"));
                 scamcase.setDescription(jsonObject.getString("description"));
-                scamcase.setScamType(jsonObject.getString("scam_type"));
+                scamcase.setScam_type(jsonObject.getString("scam_type"));
+
+                post_user = jsonObject.getString("post_user");
+                UserDao userDao = new UserDao();
+                userDao.getUserByEmail(post_user, new UserDao.UserCallback() {
+                    @Override
+                    public void onUserReceived(User user) {
+                        String username = user.getUsername();
+                        scamcase.setUser_name(username);
+//                        String email = user.getEmail();
+                        String avatar = user.getAvatar();
+                        scamcase.setUser_avatar(avatar);
+                    }
+                });
+
                 dataList.add(scamcase);
             }
+
             inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,4 +66,6 @@ public class scamCaseListAccess {
         }
         return dataList;
     }
+
+
 }
