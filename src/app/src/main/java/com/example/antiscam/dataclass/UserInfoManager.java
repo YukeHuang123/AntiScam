@@ -43,7 +43,17 @@ public class UserInfoManager {
         }
     }
 
-    private static void loadUserAvatar(StorageReference imageRef, ImageView imageView) {
+    public static StorageReference getUserAvatar(String imagePath) {
+        // Get reference of Firebase storage
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        // Get image reference
+        StorageReference imageRef = storageRef.child(imagePath);
+
+        return imageRef;
+    }
+
+    public static void loadUserAvatar(StorageReference imageRef, ImageView imageView) {
         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
