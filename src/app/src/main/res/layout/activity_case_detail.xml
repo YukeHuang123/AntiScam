@@ -43,7 +43,10 @@
                 app:layout_constraintStart_toStartOf="@+id/caseTitle"
                 app:layout_constraintTop_toBottomOf="@id/caseTitle"
                 app:layout_constraintBottom_toTopOf="@id/line"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:clickable="true"
+                android:onClick="showProfile"
+                android:contentDescription="show profile page"/>
 
             <TextView
                 android:id="@+id/caseTitle"

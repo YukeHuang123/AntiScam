@@ -18,5 +18,10 @@ public class caseDetail extends AppCompatActivity {
         Intent intent=new Intent(caseDetail.this, MainMenu.class);
         startActivity(intent);
     }
+    public void showProfile(View v){
+        Intent intent=new Intent(caseDetail.this, Profile.class);
+        startActivity(intent);
+    }
+
 
 }
