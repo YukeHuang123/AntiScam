@@ -8,4 +8,5 @@
     <color name="SearchHint">#989898</color>
     <color name="registerColor">#3F51B5</color>
     <color name="loginColor">#FF4081</color>
+    <color name="searchColor">#56C0D3</color>
 </resources>

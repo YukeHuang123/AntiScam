@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.antiscam.adapter.mainMenuCardAdapter;
@@ -24,7 +25,7 @@ public class MainMenu extends AppCompatActivity {
     private RecyclerView recyclerView;
     private mainMenuCardAdapter cardAdapter;
     private Button signOutButton;
-
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,5 +63,16 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.btn_search).setOnClickListener(v -> search());
+        searchView = findViewById(R.id.searchView);
+    }
+
+    void search() {
+        String query = searchView.getQuery().toString();
+        if (query.length() == 0) {
+            return;
+        }
+        startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
     }
 }

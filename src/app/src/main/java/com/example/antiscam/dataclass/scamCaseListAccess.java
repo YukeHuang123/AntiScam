@@ -41,7 +41,8 @@ public class scamCaseListAccess {
                 scamcase.setTitle(jsonObject.getString("title"));
                 scamcase.setDescription(jsonObject.getString("description"));
                 scamcase.setScam_type(jsonObject.getString("scam_type"));
-
+                scamcase.setScam_id(jsonObject.getInt("scam_id"));
+                scamcase.setAmount(jsonObject.optDouble("amount"));
                 post_user = jsonObject.getString("post_user");
                 UserDao userDao = new UserDao();
                 userDao.getUserByEmail(post_user, new UserDao.UserCallback() {
