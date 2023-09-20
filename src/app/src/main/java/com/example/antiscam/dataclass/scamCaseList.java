@@ -166,4 +166,18 @@ public class scamCaseList {
     public void setContactMethod(String contactMethod) {
         this.contactMethod = contactMethod;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        scamCaseList aCase = (scamCaseList) o;
+        return scam_id == aCase.scam_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return scam_id;
+    }
 }

@@ -35,6 +35,7 @@
         <activity
             android:name=".AntiScam"
             android:exported="false" />
+        <activity android:name=".SearchResultActivity" />
     </application>
 
 </manifest>
