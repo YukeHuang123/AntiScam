@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".caseDetail">
 
 
@@ -13,48 +13,40 @@
         android:layout_height="wrap_content"
 
 
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="8sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blueSpace">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="420dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="144dp"
-                android:background="@color/SearchHint"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageView
                 android:id="@+id/userPicture"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="19dp"
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:layout_marginTop="19sp"
+                android:layout_marginBottom="10sp"
+                android:clickable="true"
+                android:contentDescription="show profile page"
+                android:onClick="showProfile"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/line"
                 app:layout_constraintStart_toStartOf="@+id/caseTitle"
                 app:layout_constraintTop_toBottomOf="@id/caseTitle"
-                app:layout_constraintBottom_toTopOf="@id/line"
-                tools:srcCompat="@tools:sample/avatars"
-                android:clickable="true"
-                android:onClick="showProfile"
-                android:contentDescription="show profile page"/>
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/caseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="1sp"
+                android:layout_marginTop="16sp"
                 android:text="title"
                 android:textColor="@color/appThemeC"
                 android:textSize="18sp"
@@ -67,36 +59,134 @@
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26sp"
+                android:layout_marginBottom="30sp"
                 android:text="username"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/userPicture"
-                app:layout_constraintBottom_toTopOf="@id/line" />
+                app:layout_constraintBottom_toTopOf="@id/line"
+                app:layout_constraintStart_toEndOf="@+id/userPicture" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="420sp"
+                android:layout_height="1sp"
+                android:layout_marginTop="144sp"
+                android:background="@color/SearchHint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
-                android:id="@+id/caseView"
-                android:layout_width="363dp"
+                android:id="@+id/caseType"
+                android:layout_width="363sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="22dp"
-                android:layout_marginEnd="24dp"
-                android:text="Case Description"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="12sp"
+                android:layout_marginEnd="24sp"
+                android:text="scam type"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line" />
 
             <TextView
-                android:id="@+id/tag"
-                android:layout_width="wrap_content"
+                android:id="@+id/contact"
+                android:layout_width="363sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="#tag"
-                android:textColor="#807E7E"
-                android:textStyle="italic"
+                android:layout_marginStart="24sp"
+                android:layout_marginEnd="24sp"
+                android:text="contact method"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/caseView" />
+                app:layout_constraintTop_toBottomOf="@+id/caseType" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginEnd="24sp"
+                android:text="lost amount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contact" />
+
+            <TextView
+                android:id="@+id/payment"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginEnd="24sp"
+                android:text="payment method"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/amount" />
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginEnd="24sp"
+                android:text="age"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment" />
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginEnd="24sp"
+                android:text="gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginEnd="24sp"
+                android:text="location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:layout_marginTop="12sp"
+                android:background="@color/SearchHint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/location"/>
+
+            <TextView
+                android:id="@+id/caseView"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="12sp"
+                android:layout_marginEnd="24sp"
+                android:text="Case Description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line2" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,11 +194,10 @@
 
     </ScrollView>
 
-
     <View
         android:id="@+id/blueSpace"
-        android:layout_width="411dp"
-        android:layout_height="59dp"
+        android:layout_width="411sp"
+        android:layout_height="59sp"
         android:background="@color/appThemeC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,9 +208,9 @@
         android:id="@+id/fixTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginEnd="46sp"
         android:text="fixed title"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -135,15 +224,16 @@
         android:id="@+id/leave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:contentDescription="leave page"
+        android:onClick="leave"
         android:scaleX="-1"
         app:layout_constraintBottom_toTopOf="@+id/scroll"
         app:layout_constraintEnd_toStartOf="@+id/fixTitle"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="@+id/blueSpace"
-        app:srcCompat="@drawable/leave"
-        android:clickable="true"
-        android:onClick="leave"
-        android:contentDescription="leave page"/>
+        app:srcCompat="@drawable/leave" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
