@@ -2,12 +2,12 @@ package com.example.antiscam.dataclass;
 
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.User;
+import com.example.antiscam.bean.ScamCaseWithUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScamCaseUserCombine {
-    List<ScamCaseWithUser> dataList;
 
     public ScamCaseUserCombine() {
     }

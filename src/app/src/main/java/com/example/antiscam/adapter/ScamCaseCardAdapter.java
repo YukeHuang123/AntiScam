@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
-import com.example.antiscam.dataclass.ScamCaseWithUser;
+import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
@@ -19,15 +19,17 @@ import java.util.List;
 
 public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapter.CardViewHolder> {
     List<ScamCaseWithUser> dataList = new ArrayList<>();
+    private int layoutResourceID;
 
-    public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList) {
+    public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;
+        this.layoutResourceID = layoutResourceID;
     }
 
     @NonNull
     @Override
     public ScamCaseCardAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mainmenu_cardlist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutResourceID, parent, false);
         return new ScamCaseCardAdapter.CardViewHolder(view);
     }
 
