@@ -12,44 +12,48 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.antiscam.adapter.mainMenuCardAdapter;
-import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.adapter.ScamCaseCardAdapter;
+import com.example.antiscam.dataclass.ScamCaseUserCombine;
+import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.UserInfoManager;
-import com.example.antiscam.dataclass.scamCaseList;
-import com.example.antiscam.dataclass.scamCaseListAccess;
-import com.example.antiscam.tool.AuthUtils;
 
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private mainMenuCardAdapter cardAdapter;
+    //    private mainMenuCardAdapter cardAdapter;
+    private ScamCaseCardAdapter cardAdapter;
     private Button signOutButton;
     private SearchView searchView;
+    //    private int visibleThreshold = 10;
+//    private boolean isLoading = false;
+//    private boolean isLastPage = false;
+//    private int currentPage = 1; // Current page count
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        initMainMenu();
+    }
+
+    private void initMainMenu() {
         // Data List for scam case card and set scam case data to adapter
-        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
-        cardAdapter = new mainMenuCardAdapter(dataList);
+//        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
+        List<ScamCaseWithUser> dataList = ScamCaseUserCombine.loadScamCases();
+//        cardAdapter = new mainMenuCardAdapter(dataList);
+        cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
 
         // Initialize recyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
         // Set adapter for recyclerView to display scam list cards
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cardAdapter);
 
-        signOutButton = (Button) findViewById(R.id.logout_Button);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AuthUtils.logout(MainMenu.this);
-            }
-        });
 
         TextView userNameView = findViewById(R.id.userName);
         ImageView imageView = findViewById(R.id.avatarImgView);

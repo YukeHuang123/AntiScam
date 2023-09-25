@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 import com.example.antiscam.bean.User;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +41,8 @@ public class scamCaseListAccess {
                 scamcase.setScam_id(jsonObject.getInt("scam_id"));
                 scamcase.setAmount(jsonObject.optDouble("amount"));
                 post_user = jsonObject.getString("post_user");
-                UserDao userDao = new UserDao();
-                userDao.getUserByEmail(post_user, new UserDao.UserCallback() {
+                UserDaoImpl userDaoimpl = new UserDaoImpl();
+                userDaoimpl.getUserByEmail(post_user, new UserDao.UserCallback() {
                     @Override
                     public void onUserReceived(User user) {
                         String username = user.getUsername();

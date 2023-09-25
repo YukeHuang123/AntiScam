@@ -1,57 +1,48 @@
 package com.example.antiscam.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
-import com.example.antiscam.caseDetail;
+import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.UserInfoManager;
-import com.example.antiscam.dataclass.scamCaseList;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class mainMenuCardAdapter extends RecyclerView.Adapter<mainMenuCardAdapter.CardViewHolder> {
-    private List<scamCaseList> dataList;
+public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapter.CardViewHolder> {
+    List<ScamCaseWithUser> dataList = new ArrayList<>();
+    private int layoutResourceID;
 
-    public mainMenuCardAdapter(List<scamCaseList> dataList) {
+    public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;
+        this.layoutResourceID = layoutResourceID;
+    }
+
+    @NonNull
+    @Override
+    public ScamCaseCardAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutResourceID, parent, false);
+        return new ScamCaseCardAdapter.CardViewHolder(view);
     }
 
     @Override
-    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mainmenu_cardlist, parent, false);
-        return new CardViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
-        scamCaseList data = dataList.get(position);
-        holder.titleTextView.setText(data.getTitle());
-        holder.descriptionTextView.setText(data.getDescription());
-        holder.scamTypeTextView.setText(data.getScam_type());
-        holder.usernameView.setText(data.getUser_name());
-        //create link from each card to case detail page(不确定有没有用，看到请试一下）
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), caseDetail.class);
-                intent.putExtra("title", data.getTitle());
-                intent.putExtra("userName", data.getUser_name());
-                intent.putExtra("description", data.getDescription());
-                intent.putExtra("type", data.getScam_type());
-                holder.itemView.getContext().startActivity(intent);
-            }
-        });
+    public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+        ScamCaseWithUser scamCaseWithUser = dataList.get(position);
+        holder.titleTextView.setText(scamCaseWithUser.getScamCase().getTitle());
+        holder.descriptionTextView.setText(scamCaseWithUser.getScamCase().getDescription());
+        holder.scamTypeTextView.setText(scamCaseWithUser.getScamCase().getScam_type());
+        holder.usernameView.setText(scamCaseWithUser.getUser().getUsername());
 
         // Get image path
-        String imagePath = data.getUser_avatar();
+        String imagePath = scamCaseWithUser.getUser().getAvatar();
         StorageReference imageRef;
         // Get image reference and load to ImageView
         try {

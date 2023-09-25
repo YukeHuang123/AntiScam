@@ -28,7 +28,7 @@ public class caseDetail extends AppCompatActivity {
             TextView caseTitleTextView = findViewById(R.id.caseTitle);
             TextView userNameTextView = findViewById(R.id.userName);
             TextView caseViewTextView = findViewById(R.id.caseView);
-            TextView typeTextView = findViewById(R.id.tag);
+            TextView typeTextView = findViewById(R.id.caseType);
 
             caseTitleTextView.setText(title);
             userNameTextView.setText(userName);
