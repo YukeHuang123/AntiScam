@@ -39,8 +39,6 @@ public class mainMenuCardAdapter extends RecyclerView.Adapter<mainMenuCardAdapte
         holder.descriptionTextView.setText(data.getDescription());
         holder.scamTypeTextView.setText(data.getScam_type());
         holder.usernameView.setText(data.getUser_name());
-
-
         //create link from each card to case detail page(不确定有没有用，看到请试一下）
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
