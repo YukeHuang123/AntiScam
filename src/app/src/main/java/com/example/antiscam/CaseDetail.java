@@ -30,7 +30,7 @@ public class CaseDetail extends AppCompatActivity {
 
         //receive the ScamCaseWithUser pass from main menu
         Intent intent = getIntent();
-        ScamCaseWithUser originalCase = intent.getParcelableExtra("scam_case");
+        ScamCaseWithUser originalCase = intent.getParcelableExtra("scamCaseWithUser");
 
         //get scamCase and user
         ScamCase scamCase = originalCase.getScamCase();
