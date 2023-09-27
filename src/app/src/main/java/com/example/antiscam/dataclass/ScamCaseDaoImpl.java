@@ -20,13 +20,13 @@ public class ScamCaseDaoImpl implements ScamCaseDao{
 
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
-        usersCollection.orderBy("date", Query.Direction.DESCENDING).limit(100).get()
+        usersCollection.orderBy("title", Query.Direction.ASCENDING).limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Log.d(TAG, document.getId() + " => " + document.getData().get("post_user"));
                                 // get document data
                                 ScamCase scamCase = document.toObject(ScamCase.class);
                                 // pass user class to callback function
