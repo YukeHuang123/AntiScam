@@ -54,6 +54,8 @@ public class MainMenu extends AppCompatActivity {
         });
 //        cardAdapter = new mainMenuCardAdapter(dataList);
 
+
+
         // Initialize recyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

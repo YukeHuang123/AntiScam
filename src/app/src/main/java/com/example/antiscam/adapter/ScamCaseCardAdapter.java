@@ -30,7 +30,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
 
     // Define the OnClickListener interface
     public interface OnClickListener {
-        void onItemClick(int position, ScamCaseWithUser scamCase);
+        void onItemClick(int position, ScamCaseWithUser scamCaseWithUser);
     }
 
     private OnClickListener onClickListener;
@@ -110,3 +110,4 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         }
     }
 }
+
