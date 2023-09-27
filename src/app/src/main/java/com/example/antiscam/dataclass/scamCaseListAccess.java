@@ -51,6 +51,11 @@ public class scamCaseListAccess {
                         String avatar = user.getAvatar();
                         scamcase.setUser_avatar(avatar);
                     }
+
+                    @Override
+                    public void onUsersReceived(List<User> users) {
+
+                    }
                 });
 
                 dataList.add(scamcase);
