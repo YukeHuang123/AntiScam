@@ -21,10 +21,25 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
     List<ScamCaseWithUser> dataList = new ArrayList<>();
     private int layoutResourceID;
 
+    int clickPosition;
+
     public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;
         this.layoutResourceID = layoutResourceID;
     }
+
+    // Define the OnClickListener interface
+    public interface OnClickListener {
+        void onItemClick(int position, ScamCaseWithUser scamCase);
+    }
+
+    private OnClickListener onClickListener;
+
+    // Method to set the OnClickListener
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
 
     @NonNull
     @Override
@@ -52,7 +67,21 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Set an OnClickListener for the item view(ScamCaseCardAdapter)
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null) {
+                    int adapterPosition = holder.getAdapterPosition();// if remove other error come
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        onClickListener.onItemClick(adapterPosition, scamCaseWithUser);
+                    }
+                }
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -65,6 +94,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         public TextView scamTypeTextView;
         public TextView usernameView;
         public ImageView avatarView;
+
         public CardViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);

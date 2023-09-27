@@ -8,6 +8,7 @@ android {
     namespace = "com.example.antiscam"
     compileSdk = 33
 
+
     defaultConfig {
         applicationId = "com.example.antiscam"
         minSdk = 31
@@ -38,6 +39,9 @@ android {
         exclude("META-INF/notice.txt")
         exclude("META-INF/ASL2.0")
         exclude("META-INF/*.kotlin_module")
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 

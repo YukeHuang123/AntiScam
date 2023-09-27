@@ -1,0 +1,71 @@
+package com.example.antiscam;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.bean.User;
+import com.example.antiscam.databinding.ActivityCaseDetailBinding;
+
+public class CaseDetail extends AppCompatActivity {
+    ActivityCaseDetailBinding binding;
+    //private List<ScamCaseWithUser> scamCaseWithUsers;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_case_detail);
+
+        //step: find in cache first, if nor find then find in firebase
+
+        //2. find in firebase
+        //scamCaseWithUsers=new ArrayList<>();
+        //scamCaseWithUsers=ScamCaseUserCombine.loadScamCases();
+
+
+        //receive the ScamCaseWithUser pass from main menu
+        Intent intent = getIntent();
+        ScamCaseWithUser originalCase = intent.getParcelableExtra("scam_case");
+
+        //get scamCase and user
+        ScamCase scamCase = originalCase.getScamCase();
+        User user = originalCase.getUser();
+
+        // Initialize the binding object
+        binding = ActivityCaseDetailBinding.inflate(getLayoutInflater());
+        // Set the root view of the activity
+        setContentView(binding.getRoot());
+
+        // bind data on view
+        binding.caseView.setText(scamCase.getDescription());
+        binding.userName.setText(user.getUsername());
+        binding.caseTitle.setText(scamCase.getTitle());
+        binding.fixTitle.setText(scamCase.getTitle());
+        binding.caseType.setText(scamCase.getScam_type());
+        binding.contact.setText(scamCase.getContactMethod());
+        binding.contact.setText(scamCase.getContactMethod());
+        binding.payment.setText(scamCase.getPaymentMethod());
+        binding.age.setText(scamCase.getVictim_age());
+        binding.location.setText(scamCase.getVictim_city());
+        binding.amount.setText(Double.toString(scamCase.getAmount()));//change later
+        //binding.userPicture.setText(user.getAvatar());
+
+    }
+    public void leave(View v){
+        Intent intent=new Intent(CaseDetail.this, MainMenu.class);
+        startActivity(intent);
+    }
+    public void showProfile(View v){
+        Intent intent=new Intent(CaseDetail.this, Profile.class);
+        startActivity(intent);
+    }
+
+
+
+
+}

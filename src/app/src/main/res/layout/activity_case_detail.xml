@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".caseDetail">
+    tools:context=".CaseDetail">
 
 
     <ScrollView
@@ -141,18 +141,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/payment" />
 
             <TextView
-                android:id="@+id/gender"
-                android:layout_width="363sp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24sp"
-                android:layout_marginEnd="24sp"
-                android:text="gender"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/age" />
-
-            <TextView
                 android:id="@+id/location"
                 android:layout_width="363sp"
                 android:layout_height="wrap_content"
@@ -162,7 +150,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gender" />
+                app:layout_constraintTop_toBottomOf="@+id/age" />
 
             <View
                 android:id="@+id/line2"

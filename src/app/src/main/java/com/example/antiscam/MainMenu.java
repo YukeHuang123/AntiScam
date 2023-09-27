@@ -70,6 +70,17 @@ public class MainMenu extends AppCompatActivity {
 
         findViewById(R.id.btn_search).setOnClickListener(v -> search());
         searchView = findViewById(R.id.searchView);
+
+        //connect card to case detail
+        cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
+            @Override
+            public void onItemClick(int position, ScamCaseWithUser scamCase) {
+                Intent intent=new Intent(MainMenu.this, CaseDetail.class);
+                intent.putExtra("scamCaseWithUser", scamCase);
+                startActivity(intent);
+            }
+        });
+
     }
 
     void search() {

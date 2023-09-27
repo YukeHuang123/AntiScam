@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AntiScam"
         tools:targetApi="31">
         <activity
-            android:name=".caseDetail"
+            android:name=".CaseDetail"
             android:exported="true" />
         <activity
             android:name=".Profile"

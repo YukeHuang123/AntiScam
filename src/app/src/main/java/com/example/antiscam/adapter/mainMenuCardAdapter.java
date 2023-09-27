@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
-import com.example.antiscam.caseDetail;
+import com.example.antiscam.CaseDetail;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.dataclass.scamCaseList;
 import com.google.firebase.storage.StorageReference;
@@ -41,7 +41,7 @@ public class mainMenuCardAdapter extends RecyclerView.Adapter<mainMenuCardAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), caseDetail.class);
+                Intent intent = new Intent(holder.itemView.getContext(), CaseDetail.class);
                 intent.putExtra("title", data.getTitle());
                 intent.putExtra("userName", data.getUser_name());
                 intent.putExtra("description", data.getDescription());
