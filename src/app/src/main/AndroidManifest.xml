@@ -16,6 +16,7 @@
         tools:targetApi="31">
         <activity
             android:name=".CaseDetail"
+            android:label="CaseDetailActivity"
             android:exported="true" />
         <activity
             android:name=".Profile"

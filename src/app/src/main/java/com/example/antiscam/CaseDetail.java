@@ -52,7 +52,7 @@ public class CaseDetail extends AppCompatActivity {
         binding.payment.setText(scamCase.getPaymentMethod());
         binding.age.setText(scamCase.getVictim_age());
         binding.location.setText(scamCase.getVictim_city());
-        binding.amount.setText(Double.toString(scamCase.getAmount()));//change later
+        binding.amount.setText(String.valueOf(scamCase.getAmount()));
         //binding.userPicture.setText(user.getAvatar());
 
     }
