@@ -82,6 +82,11 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         });
     }
 
+    public void setData(List<ScamCaseWithUser> newDataList) {
+        this.dataList = newDataList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {
