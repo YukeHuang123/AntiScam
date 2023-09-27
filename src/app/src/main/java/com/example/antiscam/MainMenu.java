@@ -49,11 +49,9 @@ public class MainMenu extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         // Set adapter for recyclerView to display scam list cards
-
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cardAdapter);
-
 
         TextView userNameView = findViewById(R.id.userName);
         ImageView imageView = findViewById(R.id.avatarImgView);
@@ -63,8 +61,10 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // When click avatar, to profile page
-                Intent intent = new Intent(MainMenu.this, Profile.class);
-                startActivity(intent);
+                Intent intentToProfile = new Intent(MainMenu.this, Profile.class);
+//                intentToProfile.putExtra("username", "UserFromMainMenu");
+//                intentToProfile.putExtra("email", "userA@example.com");
+                startActivity(intentToProfile);
             }
         });
 
