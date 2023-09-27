@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.ScamCase;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +20,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao{
 
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
-        usersCollection.orderBy("date", Query.Direction.DESCENDING).get()
+        usersCollection.orderBy("date", Query.Direction.DESCENDING).limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
