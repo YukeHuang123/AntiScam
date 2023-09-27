@@ -1,9 +1,5 @@
 package com.example.antiscam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +8,17 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.antiscam.adapter.ScamCaseCardAdapter;
-import com.example.antiscam.dataclass.ScamCaseUserCombine;
-import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.dataclass.UserInfoManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.antiscam.adapter.ScamCaseCardAdapter;
+import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.dataclass.ScamCaseUserCombine;
+import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.tool.DataLoadCallback;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
@@ -40,9 +42,17 @@ public class MainMenu extends AppCompatActivity {
     private void initMainMenu() {
         // Data List for scam case card and set scam case data to adapter
 //        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
-        List<ScamCaseWithUser> dataList = ScamCaseUserCombine.loadScamCases();
-//        cardAdapter = new mainMenuCardAdapter(dataList);
+        List<ScamCaseWithUser> dataList = new ArrayList<>();
         cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
+
+        ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
+            @Override
+            public void onDataLoaded(List<ScamCaseWithUser> dataList) {
+
+                cardAdapter.setData(dataList);
+            }
+        });
+//        cardAdapter = new mainMenuCardAdapter(dataList);
 
         // Initialize recyclerView
         recyclerView = findViewById(R.id.recyclerView);
