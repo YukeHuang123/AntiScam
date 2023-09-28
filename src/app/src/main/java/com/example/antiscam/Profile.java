@@ -81,7 +81,7 @@ public class Profile extends AppCompatActivity {
         // scam case list
 //        List<ScamCaseWithUser> scamCaseWithUserList = ScamCaseUserCombine.loadScamCases();
         List<ScamCaseWithUser> scamCaseWithUserList = new ArrayList<>();
-        cardAdapterProfile = new ScamCaseCardAdapter(scamCaseWithUserList, R.layout.mainmenu_cardlist);
+        cardAdapterProfile = new ScamCaseCardAdapter(scamCaseWithUserList, R.layout.profile_cardlist);
 
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
