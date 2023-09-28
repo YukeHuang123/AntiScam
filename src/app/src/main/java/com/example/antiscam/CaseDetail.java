@@ -54,7 +54,7 @@ public class CaseDetail extends AppCompatActivity {
             binding.contact.setText(scamCase.getContactMethod());
             binding.contact.setText(scamCase.getContactMethod());
             binding.payment.setText(scamCase.getPaymentMethod());
-            binding.age.setText(scamCase.getVictim_age());
+            binding.age.setText(String.valueOf(scamCase.getVictim_age()));
             binding.location.setText(scamCase.getVictim_city());
             binding.amount.setText(String.valueOf(scamCase.getAmount()));
             //binding.userPicture.setText(user.getAvatar());
