@@ -14,11 +14,13 @@ public class LRUCache<K, V> {
     }
 
     public V get(K key) {
-        if (!map.containsKey(key)) return null;
-
-        Node<K, V> node = map.get(key);
-        list.moveToFront(node);
-        return node.value;
+        if (!map.containsKey(key)){
+            return null;
+        } else {
+            Node<K, V> node = map.get(key);
+            list.moveToFront(node);
+            return node.value;
+        }
     }
 
     public void put(K key, V value) {
