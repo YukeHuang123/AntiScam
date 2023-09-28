@@ -21,6 +21,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapter.CardViewHolder> {
     private List<ScamCaseWithUser> dataList = new ArrayList<>();
     private int layoutResourceID;

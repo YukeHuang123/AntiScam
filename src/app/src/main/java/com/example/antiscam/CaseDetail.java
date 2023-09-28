@@ -24,8 +24,8 @@ public class CaseDetail extends AppCompatActivity {
         binding = ActivityCaseDetailBinding.inflate(getLayoutInflater());
         // Set the root view of the activity
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(binding.toolbar);//
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//
         binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         //step: find in cache first, if nor find then find in firebase
@@ -58,7 +58,6 @@ public class CaseDetail extends AppCompatActivity {
             binding.location.setText(scamCase.getVictim_city());
             binding.amount.setText(String.valueOf(scamCase.getAmount()));
             //binding.userPicture.setText(user.getAvatar());
-
         }
 
     }

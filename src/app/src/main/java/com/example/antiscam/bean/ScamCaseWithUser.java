@@ -10,7 +10,7 @@ import com.example.antiscam.bean.User;
 
 import java.io.Serializable;
 
-public class ScamCaseWithUser implements Serializable {
+public class ScamCaseWithUser implements Parcelable {
     private ScamCase scamCase;
     private User user;
 
@@ -20,23 +20,23 @@ public class ScamCaseWithUser implements Serializable {
     }
 
 
-//    protected ScamCaseWithUser(Parcel in) {
-//        // Read data from Parcel and initialize object
-//        scamCase = in.readParcelable(ScamCase.class.getClassLoader());
-//        user = in.readParcelable(User.class.getClassLoader());
-//    }
-//
-//    public static final Creator<ScamCaseWithUser> CREATOR = new Creator<ScamCaseWithUser>() {
-//        @Override
-//        public ScamCaseWithUser createFromParcel(Parcel in) {
-//            return new ScamCaseWithUser(in);
-//        }
-//
-//        @Override
-//        public ScamCaseWithUser[] newArray(int size) {
-//            return new ScamCaseWithUser[size];
-//        }
-//    };
+    protected ScamCaseWithUser(Parcel in) {
+        // Read data from Parcel and initialize object
+        scamCase = in.readParcelable(ScamCase.class.getClassLoader());
+        user = in.readParcelable(User.class.getClassLoader());
+    }
+
+    public static final Creator<ScamCaseWithUser> CREATOR = new Creator<ScamCaseWithUser>() {
+        @Override
+        public ScamCaseWithUser createFromParcel(Parcel in) {
+            return new ScamCaseWithUser(in);
+        }
+
+        @Override
+        public ScamCaseWithUser[] newArray(int size) {
+            return new ScamCaseWithUser[size];
+        }
+    };
 
     public ScamCase getScamCase() {
         return scamCase;
@@ -46,14 +46,14 @@ public class ScamCaseWithUser implements Serializable {
         return user;
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(@NonNull Parcel parcel, int i) {
-//        parcel.writeParcelable((Parcelable) scamCase, i);
-//        parcel.writeParcelable((Parcelable) user, i);
-//    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeParcelable((Parcelable) scamCase, i);
+        parcel.writeParcelable((Parcelable) user, i);
+    }
 }

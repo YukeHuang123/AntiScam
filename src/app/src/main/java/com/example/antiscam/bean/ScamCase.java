@@ -1,12 +1,17 @@
 package com.example.antiscam.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @IgnoreExtraProperties
-public class ScamCase implements Serializable {
+public class ScamCase implements Parcelable {
 
     private Date date;
 
@@ -50,6 +55,31 @@ public class ScamCase implements Serializable {
         this.scam_type = scam_type;
         this.contactMethod = contactMethod;
     }
+
+    protected ScamCase(Parcel in) {
+        amount = in.readDouble();
+        victim_city = in.readString();
+        victim_age = in.readInt();
+        scam_id = in.readInt();
+        post_user = in.readString();
+        description = in.readString();
+        paymentMethod = in.readString();
+        title = in.readString();
+        scam_type = in.readString();
+        contactMethod = in.readString();
+    }
+
+    public static final Creator<ScamCase> CREATOR = new Creator<ScamCase>() {
+        @Override
+        public ScamCase createFromParcel(Parcel in) {
+            return new ScamCase(in);
+        }
+
+        @Override
+        public ScamCase[] newArray(int size) {
+            return new ScamCase[size];
+        }
+    };
 
     public Date getDate() {
         return date;
@@ -145,5 +175,24 @@ public class ScamCase implements Serializable {
 
     public void setContactMethod(String contactMethod) {
         this.contactMethod = contactMethod;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeDouble(amount);
+        parcel.writeString(victim_city);
+        parcel.writeInt(victim_age);
+        parcel.writeInt(scam_id);
+        parcel.writeString(post_user);
+        parcel.writeString(description);
+        parcel.writeString(paymentMethod);
+        parcel.writeString(title);
+        parcel.writeString(scam_type);
+        parcel.writeString(contactMethod);
     }
 }
