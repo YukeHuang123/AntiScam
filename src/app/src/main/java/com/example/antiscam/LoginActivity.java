@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,19 +68,62 @@ public class LoginActivity extends AppCompatActivity {
         password= (EditText) findViewById(R.id.PasswordText);
         signInButton = (Button) findViewById(R.id.loginButton);
         firestoreButton = (Button) findViewById(R.id.firestoreButton);
+        TextInputLayout emailInputLayout = findViewById(R.id.emailInputLayout);
+        TextInputLayout passwordInputLayout = findViewById(R.id.passwordInputLayout);
+
+
+        emailAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                emailInputLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                passwordInputLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
-        // 为按钮设置点击监听器
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 获取 email 和 password 的值
                 String email_text = emailAddress.getText().toString().trim();
                 String password_text = password.getText().toString().trim();
 
-                // 调用 signIn 方法
-                signIn(email_text, password_text);
+
+
+                if (email_text.isEmpty() || password_text.isEmpty()) {
+                    if (email_text.isEmpty()) {
+                        emailAddress.setBackgroundResource(R.drawable.background_edittext_error);
+                        emailInputLayout.setError("Email can't be empty!");
+                    }
+
+                    if (password_text.isEmpty()) {
+                        password.setBackgroundResource(R.drawable.background_edittext_error);
+                        passwordInputLayout.setError("password can't be empty!");
+                    }
+
+                } else {
+                    signIn(email_text, password_text);
+                }
             }
         });
 
@@ -133,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Login failed, please check your email and your password!",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -146,7 +194,8 @@ public class LoginActivity extends AppCompatActivity {
 //
     private void updateUI(FirebaseUser user) {
         if (user == null) {
-
+            emailAddress.setText("");
+            password.setText("");
         }
         else {
             Intent intent = new Intent(LoginActivity.this, MainMenu.class);
