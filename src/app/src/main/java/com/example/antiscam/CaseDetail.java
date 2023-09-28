@@ -1,10 +1,12 @@
 package com.example.antiscam;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
@@ -13,9 +15,6 @@ import com.example.antiscam.databinding.ActivityCaseDetailBinding;
 
 public class CaseDetail extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
-    //private List<ScamCaseWithUser> scamCaseWithUsers;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +56,12 @@ public class CaseDetail extends AppCompatActivity {
             binding.age.setText(String.valueOf(scamCase.getVictim_age()));
             binding.location.setText(scamCase.getVictim_city());
             binding.amount.setText(String.valueOf(scamCase.getAmount()));
-            //binding.userPicture.setText(user.getAvatar());
+            //binding.userPicture.setImageDrawable();
+
+            //find image
+            //ImageView userAvatarView = findViewById(R.id.userPicture);
+
+
         }
 
     }
