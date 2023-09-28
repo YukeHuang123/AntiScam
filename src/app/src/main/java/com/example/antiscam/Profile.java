@@ -91,6 +91,18 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+        // Scam case card click listener
+        cardAdapterProfile.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
+            @Override
+            public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
+                Intent intentCaseDetail=new Intent(Profile.this, CaseDetail.class);
+                intentCaseDetail.putExtra("scamCaseWithUser",scamCaseWithUser);
+                startActivity(intentCaseDetail);
+            }
+        });
+
+
         // Initialize recyclerView
         recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
         recyclerViewProfile.setHasFixedSize(true);
