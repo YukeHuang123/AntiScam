@@ -61,9 +61,6 @@ public class CaseDetail extends AppCompatActivity {
 
         }
 
-
-
-
     }
 //    public void leave(View v){
 //        Intent intent=new Intent(CaseDetail.this, MainMenu.class);

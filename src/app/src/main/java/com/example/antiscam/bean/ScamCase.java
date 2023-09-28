@@ -2,10 +2,11 @@ package com.example.antiscam.bean;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @IgnoreExtraProperties
-public class ScamCase {
+public class ScamCase implements Serializable {
 
     private Date date;
 
