@@ -35,6 +35,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
+
     // Define the OnClickListener interface
     public interface OnClickListener {
         void onItemClick(int position, ScamCaseWithUser scamCaseWithUser);
@@ -55,6 +56,17 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         holder.scamTypeTextView.setText(scamCaseWithUser.getScamCase().getScam_type());
         holder.usernameView.setText(scamCaseWithUser.getUser().getUsername());
 
+        // Set an OnClickListener for the item view(ScamCaseCardAdapter)
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onClickListener != null) {
+                    int position1 = holder.getAdapterPosition();
+                    onClickListener.onItemClick(position1, scamCaseWithUser);
+                }
+            }
+        });
+
 
         // Get image path
         String imagePath = scamCaseWithUser.getUser().getAvatar();
@@ -68,16 +80,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
             e.printStackTrace();
         }
 
-        // Set an OnClickListener for the item view(ScamCaseCardAdapter)
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onClickListener != null) {
-                    int position1 = holder.getAdapterPosition();
-                    onClickListener.onItemClick(position1,scamCaseWithUser);
-                }
-            }
-        });
+
     }
 
     public void setData(List<ScamCaseWithUser> newDataList) {

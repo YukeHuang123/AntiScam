@@ -49,14 +49,7 @@ public class MainMenu extends AppCompatActivity {
 
         cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
         /*connect card to case detail*/
-        cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
-            @Override
-            public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
-                Intent intent=new Intent(MainMenu.this, CaseDetail.class);
-                intent.putExtra("scamCaseWithUser",scamCaseWithUser);
-                startActivity(intent);
-            }
-        });
+
 
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
@@ -66,6 +59,14 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 //        cardAdapter = new mainMenuCardAdapter(dataList);
+        cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
+            @Override
+            public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
+                Intent intent=new Intent(MainMenu.this, CaseDetail.class);
+                intent.putExtra("scamCaseWithUser",scamCaseWithUser);
+                startActivity(intent);
+            }
+        });
 
 
 
