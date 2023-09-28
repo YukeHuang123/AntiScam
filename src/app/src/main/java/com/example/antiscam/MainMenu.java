@@ -83,13 +83,17 @@ public class MainMenu extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.avatarImgView);
         UserInfoManager.getUserInfo(this, userNameView, imageView);
 
+        String authUserEmail = UserInfoManager.getAuthUserEmail();
+        String authUserName = UserInfoManager.getAuthUserName();
+        String authUserAvatarPath = UserInfoManager.getAuthUserAvatarPath();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // When click avatar, to profile page
                 Intent intentToProfile = new Intent(MainMenu.this, Profile.class);
-//                intentToProfile.putExtra("username", "UserFromMainMenu");
-//                intentToProfile.putExtra("email", "userA@example.com");
+                intentToProfile.putExtra("username", authUserName);
+                intentToProfile.putExtra("email", authUserEmail);
+                intentToProfile.putExtra("avatarPath", authUserAvatarPath);
                 startActivity(intentToProfile);
             }
         });
