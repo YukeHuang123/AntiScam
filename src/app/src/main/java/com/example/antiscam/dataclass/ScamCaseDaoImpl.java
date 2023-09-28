@@ -20,7 +20,8 @@ public class ScamCaseDaoImpl implements ScamCaseDao{
 
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
-        usersCollection.orderBy("title", Query.Direction.ASCENDING).limit(100).get()
+        usersCollection.orderBy("date", Query.Direction.DESCENDING).limit(100).get()
+//        usersCollection.limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
