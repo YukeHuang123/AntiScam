@@ -220,20 +220,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/leave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:contentDescription="leave page"
-        android:onClick="leave"
-        android:scaleX="-1"
-        app:layout_constraintBottom_toTopOf="@+id/scroll"
-        app:layout_constraintEnd_toStartOf="@+id/fixTitle"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="@+id/blueSpace"
-        app:srcCompat="@drawable/leave" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
