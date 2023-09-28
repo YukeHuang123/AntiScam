@@ -6,6 +6,18 @@
     android:layout_height="wrap_content"
     tools:context=".CaseDetail">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#308d46"
+        app:titleTextColor="@color/white"
+        app:title="EmployeeDetails"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ScrollView
         android:id="@+id/scroll"
