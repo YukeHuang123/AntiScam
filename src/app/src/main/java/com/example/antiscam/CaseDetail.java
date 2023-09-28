@@ -1,12 +1,10 @@
 package com.example.antiscam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
@@ -15,6 +13,7 @@ import com.example.antiscam.databinding.ActivityCaseDetailBinding;
 
 public class CaseDetail extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +42,7 @@ public class CaseDetail extends AppCompatActivity {
         if(originalCase!=null){
             //get scamCase and user
             ScamCase scamCase = originalCase.getScamCase();
-            User user = originalCase.getUser();
+            user = originalCase.getUser();
             // bind data on view
             binding.caseView.setText(scamCase.getDescription());
             binding.userName.setText(user.getUsername());
@@ -69,9 +68,13 @@ public class CaseDetail extends AppCompatActivity {
 //        Intent intent=new Intent(CaseDetail.this, MainMenu.class);
 //        startActivity(intent);
 //    }
+
     public void showProfile(View v){
-        Intent intent=new Intent(CaseDetail.this, Profile.class);
-        startActivity(intent);
+        Intent intentToProfile=new Intent(CaseDetail.this, Profile.class);
+        intentToProfile.putExtra("username", user.getUsername());
+        intentToProfile.putExtra("email", user.getEmail());
+        intentToProfile.putExtra("avatarPath", user.getAvatar());
+        startActivity(intentToProfile);
     }
 
 
