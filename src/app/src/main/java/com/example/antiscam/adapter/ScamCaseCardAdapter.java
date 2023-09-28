@@ -1,5 +1,7 @@
 package com.example.antiscam.adapter;
 
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.antiscam.CaseDetail;
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.databinding.MainmenuCardlistBinding;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
@@ -18,28 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapter.CardViewHolder> {
-    List<ScamCaseWithUser> dataList = new ArrayList<>();
+    private List<ScamCaseWithUser> dataList = new ArrayList<>();
     private int layoutResourceID;
-
-    int clickPosition;
+    private OnClickListener onClickListener;
 
     public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;
         this.layoutResourceID = layoutResourceID;
     }
 
-    // Define the OnClickListener interface
-    public interface OnClickListener {
-        void onItemClick(int position, ScamCaseWithUser scamCaseWithUser);
-    }
-
-    private OnClickListener onClickListener;
-
     // Method to set the OnClickListener
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
-
+    // Define the OnClickListener interface
+    public interface OnClickListener {
+        void onItemClick(int position, ScamCaseWithUser scamCaseWithUser);
+    }
 
     @NonNull
     @Override
@@ -56,6 +55,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         holder.scamTypeTextView.setText(scamCaseWithUser.getScamCase().getScam_type());
         holder.usernameView.setText(scamCaseWithUser.getUser().getUsername());
 
+
         // Get image path
         String imagePath = scamCaseWithUser.getUser().getAvatar();
         StorageReference imageRef;
@@ -71,12 +71,10 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         // Set an OnClickListener for the item view(ScamCaseCardAdapter)
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (onClickListener != null) {
-                    int adapterPosition = holder.getAdapterPosition();// if remove other error come
-                    if (adapterPosition != RecyclerView.NO_POSITION) {
-                        onClickListener.onItemClick(adapterPosition, scamCaseWithUser);
-                    }
+                    int position1 = holder.getAdapterPosition();
+                    onClickListener.onItemClick(position1,scamCaseWithUser);
                 }
             }
         });
@@ -94,6 +92,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
+
         public TextView titleTextView;
         public TextView descriptionTextView;
         public TextView scamTypeTextView;
@@ -110,4 +109,3 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         }
     }
 }
-
