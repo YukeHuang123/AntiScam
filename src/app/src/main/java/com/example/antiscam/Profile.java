@@ -17,6 +17,7 @@ import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,25 @@ public class Profile extends AppCompatActivity {
     protected void initProfile() {
         // Get user information
         TextView userNameView = findViewById(R.id.userNamePro);
-        ImageView imageView = findViewById(R.id.avatarImgViewPro);
-        UserInfoManager.getUserInfo(this, userNameView, imageView);
+        ImageView userAvatarView = findViewById(R.id.avatarImgViewPro);
+
+//        UserInfoManager.getUserInfo(this, userNameView, imageView);
+        Intent intent = getIntent();
+        if (intent != null) {
+            String username = intent.getStringExtra("username");
+            String email = intent.getStringExtra("email");
+            String userAvatarPath = intent.getStringExtra("avatarPath");
+
+            // Set user name
+            userNameView.setText(username);
+            // Get image reference and load to ImageView
+            try {
+                StorageReference useravatar = UserInfoManager.getUserAvatar(userAvatarPath);
+                UserInfoManager.loadUserAvatar(useravatar, userAvatarView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         // Sign out button
         signOutButton = (Button) findViewById(R.id.logoutBtn);

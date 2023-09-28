@@ -17,7 +17,9 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class UserInfoManager {
-
+    static String authUserEmail;
+    static String authUserName;
+    static String authUserAvatarPath;
     public static void getUserInfo(Context context, TextView userNameView, ImageView imageView) {
         // Get user information from Firebase
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -41,6 +43,33 @@ public class UserInfoManager {
             // load image
             loadUserAvatar(imageRef, imageView);
         }
+    }
+
+    public static String getAuthUserEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            authUserEmail = user.getEmail();
+        }
+        return authUserEmail;
+    }
+
+    public static String getAuthUserName() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            authUserName = user.getDisplayName();
+        }
+        return authUserName;
+    }
+
+    public static String getAuthUserAvatarPath() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Uri photoUrl = user.getPhotoUrl();
+
+            // Get image path
+            authUserAvatarPath = String.valueOf(photoUrl);
+        }
+        return authUserAvatarPath;
     }
 
     public static StorageReference getUserAvatar(String imagePath) {
