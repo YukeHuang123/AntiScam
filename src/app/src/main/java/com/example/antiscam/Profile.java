@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.tool.AuthUtils;
+import com.example.antiscam.tool.DataLoadCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +64,14 @@ public class Profile extends AppCompatActivity {
 //        List<ScamCaseWithUser> scamCaseWithUserList = ScamCaseUserCombine.loadScamCases();
         List<ScamCaseWithUser> scamCaseWithUserList = new ArrayList<>();
         cardAdapterProfile = new ScamCaseCardAdapter(scamCaseWithUserList, R.layout.mainmenu_cardlist);
+
+        ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
+            @Override
+            public void onDataLoaded(List<ScamCaseWithUser> scamCaseWithUserList) {
+
+                cardAdapterProfile.setData(scamCaseWithUserList);
+            }
+        });
 
         // Initialize recyclerView
         recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
