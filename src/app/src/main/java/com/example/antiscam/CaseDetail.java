@@ -91,20 +91,7 @@ public class CaseDetail extends AppCompatActivity {
         }
 
     }
-//    public void showProfile(View v){
-//        TextView userNameView = findViewById(R.id.userName);
-//        ImageView imageView = findViewById(R.id.avatarImgView);
-//        UserInfoManager.getUserInfo(this, userNameView, imageView);
-//
-//        //String authUserEmail = UserInfoManager.getAuthUserEmail();
-//        String authUserName = UserInfoManager.getAuthUserName();
-//
-//
-//        Intent intentToProfile = new Intent(CaseDetail.this, Profile.class);
-//        intentToProfile.putExtra("username", authUserName);
-//        //intentToProfile.putExtra("email", authUserEmail);
-//        startActivity(intentToProfile);
-//    }
+
 
 
 
