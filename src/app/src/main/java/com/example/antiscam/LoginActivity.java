@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         emailAddress= (EditText) findViewById(R.id.EmailAddressText);
         password= (EditText) findViewById(R.id.PasswordText);
         signInButton = (Button) findViewById(R.id.loginButton);
-//        firestoreButton = (Button) findViewById(R.id.firestoreButton);
+        firestoreButton = (Button) findViewById(R.id.firestoreButton);
         TextInputLayout emailInputLayout = findViewById(R.id.emailInputLayout);
         TextInputLayout passwordInputLayout = findViewById(R.id.passwordInputLayout);
 
