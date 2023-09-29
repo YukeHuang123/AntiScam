@@ -1,7 +1,5 @@
 package com.example.antiscam.adapter;
 
-import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.antiscam.CaseDetail;
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.databinding.MainmenuCardlistBinding;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
@@ -24,9 +20,9 @@ import java.util.List;
 
 
 public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapter.CardViewHolder> {
-    private List<ScamCaseWithUser> dataList = new ArrayList<>();
+    protected List<ScamCaseWithUser> dataList = new ArrayList<>();
     private int layoutResourceID;
-    private OnClickListener onClickListener;
+    protected OnClickListener onClickListener;
 
     public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;

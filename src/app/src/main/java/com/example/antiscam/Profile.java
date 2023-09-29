@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
+import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
@@ -24,8 +25,13 @@ import java.util.List;
 
 public class Profile extends AppCompatActivity {
     private RecyclerView recyclerViewProfile;
-    private ScamCaseCardAdapter cardAdapterProfile;
+    private ScamCaseCardProfileAdapter cardAdapterProfile;
     private Button signOutButton;
+    private String username;
+    private String email;
+    private String userAvatarPath;
+    private String authUserEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +48,9 @@ public class Profile extends AppCompatActivity {
 //        UserInfoManager.getUserInfo(this, userNameView, imageView);
         Intent intent = getIntent();
         if (intent != null) {
-            String username = intent.getStringExtra("username");
-            String email = intent.getStringExtra("email");
-            String userAvatarPath = intent.getStringExtra("avatarPath");
+            username = intent.getStringExtra("username");
+            email = intent.getStringExtra("email");
+            userAvatarPath = intent.getStringExtra("avatarPath");
 
             // Set user name
             userNameView.setText(username);
@@ -54,6 +60,16 @@ public class Profile extends AppCompatActivity {
                 UserInfoManager.loadUserAvatar(useravatar, userAvatarView);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+            // Message icon visible when browsing other user's profile
+            // Delete button invisible when browsing other user's profile
+            ImageView messageView = findViewById(R.id.message);
+            authUserEmail = UserInfoManager.getAuthUserEmail();
+            if (authUserEmail != null && authUserEmail.equals(email)) {
+                messageView.setVisibility(View.GONE);
+            } else {
+                messageView.setVisibility(View.VISIBLE);
             }
         }
 
@@ -81,12 +97,11 @@ public class Profile extends AppCompatActivity {
         // scam case list
 //        List<ScamCaseWithUser> scamCaseWithUserList = ScamCaseUserCombine.loadScamCases();
         List<ScamCaseWithUser> scamCaseWithUserList = new ArrayList<>();
-        cardAdapterProfile = new ScamCaseCardAdapter(scamCaseWithUserList, R.layout.profile_cardlist);
+        cardAdapterProfile = new ScamCaseCardProfileAdapter(scamCaseWithUserList, R.layout.profile_cardlist, email);
 
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> scamCaseWithUserList) {
-
                 cardAdapterProfile.setData(scamCaseWithUserList);
             }
         });
