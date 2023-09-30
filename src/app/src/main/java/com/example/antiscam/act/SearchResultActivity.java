@@ -1,22 +1,25 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.antiscam.adapter.mainMenuCardAdapter;
-import com.example.antiscam.dataclass.scamCaseList;
-import com.example.antiscam.dataclass.scamCaseListAccess;
+import com.example.antiscam.R;
+import com.example.antiscam.SearchTool;
+import com.example.antiscam.adapter.ScamCaseCardAdapter;
+import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.repository.DataRepository;
 
 import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private mainMenuCardAdapter cardAdapter;
+    private ScamCaseCardAdapter cardAdapter;
     private String searchContent;
 
     @Override
@@ -25,9 +28,12 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
         searchContent = getIntent().getStringExtra("search_content");
 
-        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
 
-        cardAdapter = new mainMenuCardAdapter(SearchParser.search(searchContent, dataList));
+        List<ScamCaseWithUser> datas = SearchTool.search(searchContent, DataRepository.getInstance().getScamCaseWithUsers());
+        if (datas.isEmpty()){
+            Toast.makeText(this,"Result is Empty,Please retry",Toast.LENGTH_LONG).show();
+        }
+        cardAdapter = new ScamCaseCardAdapter(datas,R.layout.mainmenu_cardlist);
 
         // Initialize recyclerView
         recyclerView = findViewById(R.id.recyclerView);

@@ -14,18 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiScam"
         tools:targetApi="31">
+        <activity android:name=".act.ChatActivity"/>
         <activity
             android:name=".CaseDetail"
             android:label="CaseDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".Profile"
+            android:name=".act.Profile"
             android:exported="true" />
         <activity
-            android:name=".MainMenu"
+            android:name=".act.MainMenu"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".act.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +37,7 @@
         <activity
             android:name=".AntiScam"
             android:exported="false" />
-        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".act.SearchResultActivity" />
     </application>
 
 </manifest>
