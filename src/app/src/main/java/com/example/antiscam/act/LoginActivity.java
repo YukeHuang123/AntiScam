@@ -1,4 +1,4 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

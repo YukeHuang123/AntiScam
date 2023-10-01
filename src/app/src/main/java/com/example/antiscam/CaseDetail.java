@@ -1,19 +1,22 @@
 package com.example.antiscam;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.antiscam.act.Profile;
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.bean.User;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
+import com.example.antiscam.dataclass.UserInfoManager;
+import com.google.firebase.storage.StorageReference;
 
 public class CaseDetail extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
-    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +45,11 @@ public class CaseDetail extends AppCompatActivity {
         if(originalCase!=null){
             //get scamCase and user
             ScamCase scamCase = originalCase.getScamCase();
-            user = originalCase.getUser();
+            User user = originalCase.getUser();
+            String name=user.getUsername();
             // bind data on view
             binding.caseView.setText(scamCase.getDescription());
-            binding.userName.setText(user.getUsername());
+            binding.userName.setText(name);
             binding.caseTitle.setText(scamCase.getTitle());
             binding.fixTitle.setText(scamCase.getTitle());
             binding.caseType.setText(scamCase.getScam_type());
@@ -57,25 +61,36 @@ public class CaseDetail extends AppCompatActivity {
             binding.amount.setText(String.valueOf(scamCase.getAmount()));
             //binding.userPicture.setImageDrawable();
 
+            String avatarPath = user.getAvatar();
+            String email=user.getEmail();
+
             //find image
-            //ImageView userAvatarView = findViewById(R.id.userPicture);
+            ImageView userAvatarView = findViewById(R.id.userPicture);
+            try {
+                StorageReference useravatar = UserInfoManager.getUserAvatar(avatarPath);
+                UserInfoManager.loadUserAvatar(useravatar, userAvatarView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            userAvatarView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(CaseDetail.this, Profile.class);
+                    intent.putExtra("name",name);
+                    intent.putExtra("email",email);
+                    intent.putExtra("avatarPath",avatarPath);
+                    startActivity(intent);
+
+                }
+            });
+
 
 
         }
 
     }
-//    public void leave(View v){
-//        Intent intent=new Intent(CaseDetail.this, MainMenu.class);
-//        startActivity(intent);
-//    }
 
-    public void showProfile(View v){
-        Intent intentToProfile=new Intent(CaseDetail.this, Profile.class);
-        intentToProfile.putExtra("username", user.getUsername());
-        intentToProfile.putExtra("email", user.getEmail());
-        intentToProfile.putExtra("avatarPath", user.getAvatar());
-        startActivity(intentToProfile);
-    }
 
 
 
