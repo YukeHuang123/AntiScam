@@ -1,4 +1,4 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,17 +7,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.antiscam.CaseDetail;
+import com.example.antiscam.R;
+import com.example.antiscam.SearchTool;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.databinding.ActivityMainMenuBinding;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.repository.DataRepository;
 import com.example.antiscam.tool.DataLoadCallback;
 
 import java.util.ArrayList;
@@ -38,7 +41,6 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
         initMainMenu();
     }
 
@@ -50,11 +52,11 @@ public class MainMenu extends AppCompatActivity {
         cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
         /*connect card to case detail*/
 
-
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
+
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> dataList) {
-
+                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
                 cardAdapter.setData(dataList);
             }
         });
@@ -62,12 +64,11 @@ public class MainMenu extends AppCompatActivity {
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
             public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
-                Intent intent=new Intent(MainMenu.this, CaseDetail.class);
-                intent.putExtra("scamCaseWithUser",scamCaseWithUser);
+                Intent intent = new Intent(MainMenu.this, CaseDetail.class);
+                intent.putExtra("scamCaseWithUser", scamCaseWithUser);
                 startActivity(intent);
             }
         });
-
 
 
         // Initialize recyclerView
@@ -102,7 +103,6 @@ public class MainMenu extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
 
 
-
 //        ConstraintLayout cardLayout = findViewById(R.id.cardLayout);
 //        cardLayout.setClickable(true);
 //        cardLayout.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +119,11 @@ public class MainMenu extends AppCompatActivity {
     void search() {
         String query = searchView.getQuery().toString();
         if (query.length() == 0) {
+            return;
+        }
+        List<ScamCaseWithUser> result = SearchTool.search(query, DataRepository.getInstance().getScamCaseWithUsers());
+        if (result.isEmpty()) {
+            Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
             return;
         }
         startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));

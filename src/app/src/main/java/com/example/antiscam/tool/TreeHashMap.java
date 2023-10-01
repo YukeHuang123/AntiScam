@@ -1,7 +1,9 @@
 package com.example.antiscam.tool;
 
-public class TreeHashMap<K extends Comparable<K>, V> {
-    private AVLTree<K, V>[] buckets;
+import java.io.Serializable;
+
+public class TreeHashMap<K extends Comparable<K>, V> implements Serializable {
+    private final AVLTree<K, V>[] buckets;
     private static final int DEFAULT_CAPACITY = 10;
 
     @SuppressWarnings("unchecked")
@@ -38,5 +40,23 @@ public class TreeHashMap<K extends Comparable<K>, V> {
             buckets[index].remove(new Tree.Node<>(key, value), key); // 使用AVLTree的删除方法
         }
     }
+
+    public boolean contains(K key) {
+        int index = hash(key);
+        if (buckets[index] != null) {
+            return buckets[index].contains(key); // 使用AVLTree的查询方法
+        }
+        return false;
+    }
+
+    public int size() {
+        int totalSize = 0;
+        for (AVLTree<K, V> bucket : buckets) {
+            totalSize += bucket.size;  // 使用AVLTree的size方法
+        }
+        return totalSize;
+    }
+
+
 }
 

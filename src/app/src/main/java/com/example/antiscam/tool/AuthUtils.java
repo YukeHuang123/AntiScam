@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.antiscam.LoginActivity;
+import com.example.antiscam.act.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AuthUtils {

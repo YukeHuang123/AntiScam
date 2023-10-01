@@ -1,4 +1,4 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.antiscam.CaseDetail;
+import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
@@ -18,6 +20,9 @@ import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -36,7 +41,6 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         initProfile();
     }
 
@@ -71,6 +75,12 @@ public class Profile extends AppCompatActivity {
             } else {
                 messageView.setVisibility(View.VISIBLE);
             }
+            messageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(Profile.this, ChatActivity.class).putExtra("email", email));
+                }
+            });
         }
 
         // Sign out button
@@ -111,8 +121,8 @@ public class Profile extends AppCompatActivity {
         cardAdapterProfile.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
             public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
-                Intent intentCaseDetail=new Intent(Profile.this, CaseDetail.class);
-                intentCaseDetail.putExtra("scamCaseWithUser",scamCaseWithUser);
+                Intent intentCaseDetail = new Intent(Profile.this, CaseDetail.class);
+                intentCaseDetail.putExtra("scamCaseWithUser", scamCaseWithUser);
                 startActivity(intentCaseDetail);
             }
         });
