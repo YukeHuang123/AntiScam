@@ -1,7 +1,11 @@
 package com.example.antiscam.tool;
 
-public abstract class Tree<K extends Comparable<K>, V> {
+import java.io.Serializable;
+
+public abstract class Tree<K extends Comparable<K>, V> implements Serializable {
     protected Node<K, V> root;
+
+    int size = 0;
 
     protected abstract Node<K, V> remove(Node<K, V> node, K key);
 

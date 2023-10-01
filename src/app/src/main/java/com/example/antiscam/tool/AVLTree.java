@@ -1,6 +1,8 @@
 package com.example.antiscam.tool;
 
-public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> {
+import java.io.Serializable;
+
+public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> implements Serializable {
 
     private int height(Node<K, V> node) {
         if (node == null) {
@@ -9,6 +11,11 @@ public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> {
             return node.height;
         }
     }
+
+    public boolean contains(K key) {
+        return find(key) != null;
+    }
+
 
     private int getBalance(Node<K, V> node) {
         if (node == null) {
@@ -24,6 +31,7 @@ public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> {
     protected Node<K, V> add(Node<K, V> node, K key, V value) {
         if (node == null) return new Node<>(key, value);
 
+        size++;
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
             node.left = add(node.left, key, value);
@@ -71,6 +79,7 @@ public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> {
     protected Node<K, V> remove(Node<K, V> node, K key) {
         if (node == null) return null;
 
+        size--;
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
             node.left = remove(node.left, key);

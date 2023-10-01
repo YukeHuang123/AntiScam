@@ -1,20 +1,26 @@
 package com.example.antiscam.tool;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class LRUCache<K, V> {
+public class LRUCache<K extends Comparable<K>, V> implements Serializable {
     private final int capacity;
-    private final HashMap<K, Node<K, V>> map;
+    private final TreeHashMap<K, Node<K, V>> map;
     private final DoublyLinkedList<K, V> list;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        this.map = new HashMap<>();
+        this.map = new TreeHashMap<>();
         this.list = new DoublyLinkedList<>();
     }
 
     public V get(K key) {
-        if (!map.containsKey(key)){
+        if (!map.contains(key)){
             return null;
         } else {
             Node<K, V> node = map.get(key);
@@ -24,14 +30,14 @@ public class LRUCache<K, V> {
     }
 
     public void put(K key, V value) {
-        if (map.containsKey(key)) {
+        if (map.contains(key)) {
             Node<K, V> node = map.get(key);
             node.value = value;
             list.moveToFront(node);
         } else {
             if (map.size() == capacity) {
                 Node<K, V> tail = list.removeTail();
-                map.remove(tail.key);
+                map.remove(tail.key, tail);
             }
             Node<K, V> newNode = new Node<>(key, value);
             map.put(key, newNode);
@@ -93,4 +99,5 @@ public class LRUCache<K, V> {
             this.value = value;
         }
     }
+
 }

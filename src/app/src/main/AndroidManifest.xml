@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiScam"
+        android:name=".CacheApplication"
         tools:targetApi="31">
         <activity
             android:name=".CaseDetail"
@@ -38,5 +39,6 @@
             android:exported="false" />
         <activity android:name=".SearchResultActivity" />
     </application>
+
 
 </manifest>
