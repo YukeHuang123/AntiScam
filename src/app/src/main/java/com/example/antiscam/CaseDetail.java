@@ -53,13 +53,12 @@ public class CaseDetail extends AppCompatActivity {
             binding.userName.setText(name);
             binding.caseTitle.setText(scamCase.getTitle());
             binding.fixTitle.setText(scamCase.getTitle());
-            binding.caseType.setText(scamCase.getScam_type());
-            binding.contact.setText(scamCase.getContactMethod());
-            binding.contact.setText(scamCase.getContactMethod());
-            binding.payment.setText(scamCase.getPaymentMethod());
-            binding.age.setText(String.valueOf(scamCase.getVictim_age()));
-            binding.location.setText(scamCase.getVictim_city());
-            binding.amount.setText(String.valueOf(scamCase.getAmount()));
+            binding.caseType.setText("Scam Type: "+scamCase.getScam_type());
+            binding.contact.setText("Contact Method: "+scamCase.getContactMethod());
+            binding.payment.setText("Payment Method: "+scamCase.getPaymentMethod());
+            binding.age.setText("Age: "+String.valueOf(scamCase.getVictim_age()));
+            binding.location.setText("Location: "+scamCase.getVictim_city());
+            binding.amount.setText(String.valueOf("Lost: "+scamCase.getAmount()));
             //binding.userPicture.setImageDrawable();
 
             String avatarPath = user.getAvatar();
@@ -85,15 +84,6 @@ public class CaseDetail extends AppCompatActivity {
 
                 }
             });
-
-
-
         }
-
     }
-
-
-
-
-
 }
