@@ -3,4 +3,19 @@
     <string name="search_hint">Start your search</string>
     <string name="log_out">Log out</string>
     <string name="delete">Delete</string>
+    <string name="new_post">New Post</string>
+    <string name="close_profile">close profile</string>
+    <string name="fixed_title">fixed title</string>
+    <string name="case_description">Case Description</string>
+    <string name="location">location</string>
+    <string name="age">age</string>
+    <string name="payment_method">payment method</string>
+    <string name="lost_amount">lost amount</string>
+    <string name="contact_method">contact method</string>
+    <string name="scam_type">scam type</string>
+    <string name="username">username</string>
+    <string name="title">title</string>
+    <string name="show_profile_page">show profile page</string>
+    <string name="amount">amount</string>
+    <string name="date">Date</string>
 </resources>

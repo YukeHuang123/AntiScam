@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".CacheApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,13 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AntiScam"
-        android:name=".CacheApplication"
         tools:targetApi="31">
-        <activity android:name=".act.ChatActivity"/>
+        <activity
+            android:name=".AddPostPage"
+            android:exported="false" />
+        <activity android:name=".act.ChatActivity" />
         <activity
             android:name=".CaseDetail"
-            android:label="CaseDetailActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="CaseDetailActivity" />
         <activity
             android:name=".act.Profile"
             android:exported="true" />
@@ -40,6 +43,5 @@
             android:exported="false" />
         <activity android:name=".act.SearchResultActivity" />
     </application>
-
 
 </manifest>

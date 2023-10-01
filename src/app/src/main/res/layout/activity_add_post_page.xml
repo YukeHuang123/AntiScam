@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPostPage">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="59sp"
+        android:background="#308d46"
+        app:titleTextColor="@color/white"
+        app:title="EmployeeDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/blueSpace2"
+        android:layout_width="411sp"
+        android:layout_height="59sp"
+        android:background="@color/appThemeC"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fixTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginEnd="46sp"
+        android:text="@string/new_post"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/close2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/close_profile"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/close" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blueSpace2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <TextView
+                android:id="@+id/chooseCaseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/title"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/title"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/chooseCaseTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/chooseAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/age"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chooseCaseTitle" />
+
+            <EditText
+                android:id="@+id/editAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/age"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/chooseAge"
+                app:layout_constraintTop_toBottomOf="@+id/editTitle"/>
+            <TextView
+                android:id="@+id/chooseAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/amount"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chooseAge" />
+
+            <EditText
+                android:id="@+id/editmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/amount"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/chooseAmount"
+                app:layout_constraintTop_toBottomOf="@+id/editAge"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/case_description"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chooseAmount" />
+
+            <EditText
+                android:id="@+id/editDescription"
+                android:layout_width="390sp"
+                android:layout_height="300sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="3sp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/case_description"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"/>
+
+
+            <TextView
+                android:id="@+id/chooseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/date"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editDescription" />
+
+            <EditText
+                android:id="@+id/DD"
+                android:layout_width="78dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="DD"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/chooseDate"
+                app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+            <EditText
+                android:id="@+id/MM"
+                android:layout_width="78dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="MM"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/DD"
+                app:layout_constraintBottom_toBottomOf="@+id/DD" />
+
+            <EditText
+                android:id="@+id/YYYY"
+                android:layout_width="78dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="YYYY"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/MM"
+                app:layout_constraintBottom_toBottomOf="@+id/DD" />
+
+            <TextView
+                android:id="@+id/chooseType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/scam_type"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chooseDate" />
+
+            <TextView
+                android:id="@+id/choosePayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/payment_method"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chooseType" />
+
+            <TextView
+                android:id="@+id/chooseCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp"
+                android:text="city"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/choosePayment" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
