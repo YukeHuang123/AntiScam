@@ -33,6 +33,7 @@ public class AddPostPage extends AppCompatActivity {
                 EditText day=findViewById(R.id.DD);
                 EditText month=findViewById(R.id.MM);
                 EditText year=findViewById(R.id.YYYY);
+                EditText title=findViewById(R.id.editTitle);
 
                 String age1 = age.getText().toString().trim();
                 String amount1 = amount.getText().toString().trim();
@@ -40,8 +41,9 @@ public class AddPostPage extends AppCompatActivity {
                 String day1 = day.getText().toString().trim();
                 String month1 = month.getText().toString().trim();
                 String year1 = year.getText().toString().trim();
+                String title1 = title.getText().toString().trim();
 
-                if (age1.isEmpty() || amount1.isEmpty()||description1.isEmpty()||day1.isEmpty()||month1.isEmpty()||year1.isEmpty()) {
+                if (age1.isEmpty() || amount1.isEmpty()||description1.isEmpty()||day1.isEmpty()||month1.isEmpty()||year1.isEmpty()||title1.isEmpty()) {
                     Toast.makeText(AddPostPage.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
                 } else if(!checkAge(age1)||!checkDay(day1)||!checkMonth(month1)||!checkYear(year1)){
                     Toast.makeText(AddPostPage.this, "Date or age is not valid!", Toast.LENGTH_SHORT).show();
