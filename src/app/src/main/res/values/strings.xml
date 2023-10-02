@@ -18,4 +18,138 @@
     <string name="show_profile_page">show profile page</string>
     <string name="amount">amount</string>
     <string name="date">Date</string>
+
+    <string-array name="city_array">
+        <item>Melbourne</item>
+        <item>Sydney</item>
+        <item>Brisbane</item>
+        <item>Perth</item>
+        <item>Adelaide</item>
+        <item>Gold Coast</item>
+        <item>Newcastle</item>
+        <item>Canberra</item>
+        <item>Sunshine Coast</item>
+        <item>Central Coast</item>
+        <item>Wollongong</item>
+        <item>Geelong</item>
+        <item>Hobart</item>
+        <item>Townsville</item>
+        <item>Cairns</item>
+        <item>Toowoomba</item>
+        <item>Darwin</item>
+        <item>Ballarat</item>
+        <item>Bendigo</item>
+        <item>Albury</item>
+        <item>Launceston</item>
+        <item>Mackay</item>
+        <item>Rockhampton</item>
+        <item>Bunbury</item>
+        <item>Bundaberg</item>
+        <item>Coffs Harbour</item>
+        <item>Hervey Bay</item>
+        <item>Wagga Wagga</item>
+        <item>Shepparton</item>
+        <item>Mildura</item>
+        <item>Port Macquarie</item>
+        <item>Ballina</item>
+        <item>Gladstone</item>
+        <item>Tamworth</item>
+        <item>Warragul</item>
+        <item>Traralgon</item>
+        <item>Busselton</item>
+        <item>Orange</item>
+        <item>Bowral</item>
+        <item>Dubbo</item>
+        <item>Geraldton</item>
+        <item>Nowra</item>
+        <item>Bathurst</item>
+        <item>Albany</item>
+        <item>Warrnambool</item>
+        <item>Devonport</item>
+        <item>Kalgoorlie</item>
+        <item>Mount Gambier</item>
+        <item>Victor Harbor</item>
+        <item>Alice Springs</item>
+        <item>Burnie</item>
+        <item>Lismore</item>
+        <item>Morisset</item>
+        <item>Nelson Bay</item>
+        <item>Maryborough</item>
+        <item>Taree</item>
+        <item>Bacchus Marsh</item>
+        <item>Goulburn</item>
+        <item>Armidale</item>
+        <item>Gympie</item>
+        <item>Echuca</item>
+        <item>Gisborne</item>
+        <item>Moe</item>
+        <item>Whyalla</item>
+        <item>Yeppoon</item>
+        <item>Forster</item>
+        <item>Griffith</item>
+        <item>St Georges Basin</item>
+        <item>Wangaratta</item>
+        <item>Grafton</item>
+        <item>Murray Bridge</item>
+        <item>Mount Isa</item>
+        <item>Camden Haven</item>
+        <item>Karratha</item>
+        <item>Batemans Bay</item>
+        <item>Broken Hill</item>
+        <item>Singleton</item>
+        <item>Ulladulla</item>
+        <item>Port Lincoln</item>
+        <item>Horsham</item>
+        <item>Port Hedland</item>
+        <item>Kempsey</item>
+        <item>Warwick</item>
+        <item>Broome</item>
+        <item>Bairnsdale</item>
+        <item>Medowie</item>
+        <item>Ulverstone</item>
+        <item>Sale</item>
+        <item>Airlie Beach</item>
+        <item>Emerald</item>
+        <item>Port Pirie</item>
+        <item>Port Augusta</item>
+        <item>Colac</item>
+        <item>Mudgee</item>
+        <item>Esperance</item>
+        <item>Muswellbrook</item>
+        <item>Lithgow</item>
+        <item>Castlemaine</item>
+        <item>Portland</item>
+        <item>Swan Hill</item>
+        <item>Byron Bay</item>
+        <item>Kingaroy</item>
+    </string-array>
+
+    <string-array name="type_array">
+        <item>romance scams</item>
+        <item>investment scams</item>
+        <item>product and service scams</item>
+        <item>threats and extortion scams</item>
+        <item>jobs and employment scams</item>
+        <item>unexpected money</item>
+        <item>impersonation scams</item>
+    </string-array>
+
+    <string-array name="contact_array">
+        <item>Text message</item>
+        <item>calls</item>
+        <item>email</item>
+        <item>Social media (app-based)</item>
+        <item>Website</item>
+        <item>Letter</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="payment_array">
+        <item>Bank transfer</item>
+        <item>cryptocurrency</item>
+        <item>credit card</item>
+        <item>Other</item>
+    </string-array>
+
+
 </resources>
