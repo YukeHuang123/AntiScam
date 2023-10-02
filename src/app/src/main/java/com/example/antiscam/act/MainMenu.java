@@ -1,9 +1,12 @@
 package com.example.antiscam.act;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
+import com.example.antiscam.AddPostPage;
 import com.example.antiscam.CaseDetail;
 import com.example.antiscam.R;
 import com.example.antiscam.SearchTool;
@@ -27,6 +31,7 @@ import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
 import com.example.antiscam.tool.LRUCache;
 import com.alibaba.fastjson.TypeReference;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +42,11 @@ public class MainMenu extends AppCompatActivity {
     private ScamCaseCardAdapter cardAdapter;
     private Button signOutButton;
     private SearchView searchView;
+    private float dX;
+
+    private float dY;
+
+
 
     private LRUCache<Integer, ScamCaseWithUser> cache;
 
@@ -51,6 +61,7 @@ public class MainMenu extends AppCompatActivity {
         initMainMenu();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initMainMenu() {
         // Data List for scam case card and set scam case data to adapter
 //        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
@@ -123,16 +134,53 @@ public class MainMenu extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
 
 
-//        ConstraintLayout cardLayout = findViewById(R.id.cardLayout);
-//        cardLayout.setClickable(true);
-//        cardLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent=new Intent(MainMenu.this, CaseDetail.class);
-//                startActivity(intent);
-//            }
-//        });
+        //set onClick and onTouch listener on fab (FloatingActionButton)
+        FloatingActionButton fab=findViewById(R.id.fab);
+
+        final boolean[] isDragging = {false};
+        fab.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN:
+                        dX = view.getX() - motionEvent.getRawX();
+                        dY = view.getY() - motionEvent.getRawY();
+                        isDragging[0] = false; // Reset the flag
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        float newX = motionEvent.getRawX() + dX;
+                        float newY = motionEvent.getRawY() + dY;
+
+                        // Limit the button's position within the parent layout
+                        View parentLayout = (View) view.getParent();
+                        if (newX < 0) {
+                            newX = 0;
+                        } else if (newX > parentLayout.getWidth() - view.getWidth()) {
+                            newX = parentLayout.getWidth() - view.getWidth();
+                        }
+                        if (newY < 0) {
+                            newY = 0;
+                        } else if (newY > parentLayout.getHeight() - view.getHeight()) {
+                            newY = parentLayout.getHeight() - view.getHeight();
+                        }
+
+                        view.setX(newX);
+                        view.setY(newY);
+                        isDragging[0] = true; // Drag is in progress
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (!isDragging[0]) {
+                            // if not drag, run click event
+                            Intent intent = new Intent(MainMenu.this, AddPostPage.class);
+                            startActivity(intent);
+                        }
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
 
     }
 

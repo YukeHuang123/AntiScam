@@ -3,29 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".CaseDetail">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="59sp"
-        android:background="#308d46"
-        app:titleTextColor="@color/white"
-        app:title="EmployeeDetails"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-
-        android:layout_marginTop="8sp"
+        android:layout_height="670dp"
+        android:layout_marginTop="0sp"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,9 +19,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
+            android:layout_height="wrap_content"
+            >
 
             <ImageView
                 android:id="@+id/userPicture"
@@ -59,8 +44,9 @@
                 android:layout_marginStart="1sp"
                 android:layout_marginTop="16sp"
                 android:text="@string/title"
+                android:textStyle="bold"
                 android:textColor="@color/appThemeC"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.091"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +59,9 @@
                 android:layout_marginStart="26sp"
                 android:layout_marginBottom="30sp"
                 android:text="@string/username"
+                android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/line"
                 app:layout_constraintStart_toEndOf="@+id/userPicture" />
 
@@ -90,6 +77,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SmallSp" />
 
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="12sp"
+                android:layout_marginEnd="24sp"
+                android:textColor="@color/appThemeC"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/basic_information"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line" />
+
 
             <TextView
                 android:id="@+id/caseType"
@@ -99,10 +101,11 @@
                 android:layout_marginTop="12sp"
                 android:layout_marginEnd="24sp"
                 android:text="@string/scam_type"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line" />
+                app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
             <TextView
                 android:id="@+id/contact"
@@ -111,6 +114,7 @@
                 android:layout_marginStart="24sp"
                 android:layout_marginEnd="24sp"
                 android:text="@string/contact_method"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +127,7 @@
                 android:layout_marginStart="24sp"
                 android:layout_marginEnd="24sp"
                 android:text="@string/lost_amount"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -135,6 +140,7 @@
                 android:layout_marginStart="24sp"
                 android:layout_marginEnd="24sp"
                 android:text="@string/payment_method"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -146,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
                 android:layout_marginEnd="24sp"
+                android:textSize="16sp"
                 android:text="@string/age"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -158,6 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
                 android:layout_marginEnd="24sp"
+                android:textSize="16sp"
                 android:text="@string/location"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -177,19 +185,35 @@
                 tools:ignore="SmallSp" />
 
             <TextView
-                android:id="@+id/caseView"
+                android:id="@+id/caseView2"
                 android:layout_width="363sp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24sp"
                 android:layout_marginTop="12sp"
                 android:layout_marginEnd="24sp"
+                android:textColor="@color/appThemeC"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="@string/case_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line2" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/caseView"
+                android:layout_width="363sp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24sp"
+                android:text="@string/case_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="16sp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/caseView2" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
@@ -207,13 +231,12 @@
         android:id="@+id/close"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="13dp"
         android:contentDescription="@string/close_profile"
         android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/blueSpace"
         app:srcCompat="@drawable/close" />
 
     <TextView
@@ -225,7 +248,7 @@
         android:layout_marginEnd="46sp"
         android:text="@string/fixed_title"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.528"

@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddPostPage">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="59sp"
-        android:background="#308d46"
-        app:titleTextColor="@color/white"
-        app:title="EmployeeDetails"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/blueSpace2"
         android:layout_width="411sp"
@@ -35,7 +24,7 @@
         android:layout_marginEnd="46sp"
         android:text="@string/new_post"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.528"
@@ -47,17 +36,17 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="13dp"
         android:contentDescription="@string/close_profile"
         android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/blueSpace2"
         app:srcCompat="@drawable/close" />
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="8sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -160,19 +149,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chooseCity" />
 
+
+            <View
+                android:id="@+id/backSpace"
+                android:layout_width="380sp"
+                android:layout_height="350sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/shape_rectangle"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
             <EditText
                 android:id="@+id/editDescription"
-                android:layout_width="390sp"
-                android:layout_height="300sp"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="3sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:inputType="text"
-                android:text="@string/case_description"
+                android:text="Type here!"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description"/>
-
+                app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <TextView
                 android:id="@+id/chooseDate"
@@ -291,11 +291,23 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="22dp"
-                android:text="city"
+                android:text="@string/city"
                 android:textColor="@color/appThemeC"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/choosePayment" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="1dp"
+                android:text="@string/submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/backSpace" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
