@@ -34,9 +34,6 @@ public class AddPostPage extends AppCompatActivity {
                 EditText month=findViewById(R.id.MM);
                 EditText year=findViewById(R.id.YYYY);
 
-
-
-
                 String age1 = age.getText().toString().trim();
                 String amount1 = amount.getText().toString().trim();
                 String description1 = description.getText().toString().trim();
@@ -45,9 +42,9 @@ public class AddPostPage extends AppCompatActivity {
                 String year1 = year.getText().toString().trim();
 
                 if (age1.isEmpty() || amount1.isEmpty()||description1.isEmpty()||day1.isEmpty()||month1.isEmpty()||year1.isEmpty()) {
-                    Toast.makeText(AddPostPage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else if(!checkInt(age1)||!checkInt(day1)||!checkInt(month1)||!checkInt(year1)){
-                    Toast.makeText(AddPostPage.this, "Date and age can only be filled with integer", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPostPage.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
+                } else if(!checkAge(age1)||!checkDay(day1)||!checkMonth(month1)||!checkYear(year1)){
+                    Toast.makeText(AddPostPage.this, "Date or age is not valid!", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent=new Intent(AddPostPage.this, SubmitSuccessPage.class);
                     startActivity(intent);
@@ -56,10 +53,32 @@ public class AddPostPage extends AppCompatActivity {
         });
     }
 
-    public boolean checkInt(String text){
-        if(text.matches("\\d+")){
-            return true;
+
+    public boolean checkDay(String s){
+        if(s.matches("^[0-9]{2}$")){
+            return Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 31;
         }
         return false;
     }
+    public boolean checkMonth(String s){
+        if(s.matches("^[0-9]{2}$")){
+            return Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 12;
+        }
+        return false;
+    }
+    public boolean checkYear(String s){
+        if(s.matches("^[0-9]{4}$")){
+            return Integer.parseInt(s) >= 1970 && Integer.parseInt(s) <= 2023;
+        }
+        return false;
+    }
+    public boolean checkAge(String s){
+        if(s.matches("^[0-9]{1}$")||s.matches("^[0-9]{2}$")){
+            int age=Integer.parseInt(s);
+            return age<100;
+        }
+        return false;
+
+    }
+
 }
