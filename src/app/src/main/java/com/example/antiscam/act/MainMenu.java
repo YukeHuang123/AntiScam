@@ -29,9 +29,13 @@ import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.repository.DataRepository;
 import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
 import com.example.antiscam.tool.LRUCache;
 import com.alibaba.fastjson.TypeReference;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +52,7 @@ public class MainMenu extends AppCompatActivity {
 
 
 
-    private LRUCache<Integer, ScamCaseWithUser> cache;
+    private LRUCache<String, ScamCaseWithUser> cache;
 
     //    private int visibleThreshold = 10;
 //    private boolean isLoading = false;
@@ -66,13 +70,13 @@ public class MainMenu extends AppCompatActivity {
         // Data List for scam case card and set scam case data to adapter
 //        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
         List<ScamCaseWithUser> dataList = new ArrayList<>();
-        cache = CacheToFile.loadCacheFromInternalStorage(this);
-
-        if (cache == null) {
-            Log.d("cache", "no cache find");
-            cache = new LRUCache<>(100);
-        }
-        Log.d("cache", cache.toString());
+//        cache = CacheToFile.loadCacheFromInternalStorage(this);
+//
+//        if (cache == null) {
+//            Log.d("cache", "no cache find");
+//            cache = new LRUCache<>(100);
+//        }
+//        Log.d("cache", cache.toString());
 
 
         cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
@@ -93,7 +97,14 @@ public class MainMenu extends AppCompatActivity {
                 Intent intent = new Intent(MainMenu.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
 
-                cache.put(scamCaseWithUser.getScamCase().getScam_id(), scamCaseWithUser);
+//                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
+//                Gson gson = new Gson();
+//                Gson gson = new GsonBuilder()
+//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
+//                        .create();
+//                String cacheString = gson.toJson(cache);
+//                LRUCache<Integer, ScamCaseWithUser> cache = gson.fromJson(cacheString,
+//                        new TypeToken<LRUCache<Integer, ScamCaseWithUser>>(){}.getType());
                 Log.d("cacheToStr", JSON.toJSONString(cache));
 //                CacheToFile.saveCacheToInternalStorage(MainMenu.this, cache);
 

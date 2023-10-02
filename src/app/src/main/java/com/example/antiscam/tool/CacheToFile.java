@@ -6,6 +6,8 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,13 +16,16 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
 public class CacheToFile {
-    public static void saveCacheToInternalStorage(Context context, LRUCache<Integer, ScamCaseWithUser> cache) {
-        String data = JSON.toJSONString(cache);
+    public static void saveCacheToInternalStorage(Context context, LRUCache<String, ScamCaseWithUser> cache) {
+        Gson gson = new Gson();
+
+        String data = gson.toJson(cache);
+//        String data = JSON.toJSONString(cache);
         saveStringToFile(data, context);
     }
 
-    public static LRUCache<Integer, ScamCaseWithUser> loadCacheFromInternalStorage(Context context) {
-        LRUCache<Integer, ScamCaseWithUser> cache = null;
+    public static LRUCache<String, ScamCaseWithUser> loadCacheFromInternalStorage(Context context) {
+        LRUCache<String, ScamCaseWithUser> cache = null;
 
         File cacheFile = new File(context.getFilesDir(), "cache.json");
 
@@ -31,7 +36,9 @@ public class CacheToFile {
         Log.d("cacheDir", cacheFile.getAbsolutePath());
 
         String cacheString = readStringFromFile(context);
-        cache = JSON.parseObject(cacheString, new TypeReference<LRUCache<Integer, ScamCaseWithUser>>() {});
+//        cache = JSON.parseObject(cacheString, new TypeReference<LRUCache<String, ScamCaseWithUser>>() {});
+        Gson gson = new Gson();
+        cache = gson.fromJson(cacheString, new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
 
 
         return cache;

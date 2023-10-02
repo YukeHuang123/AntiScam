@@ -1,14 +1,141 @@
 package com.example.antiscam.tool;
 
-import java.io.Serializable;
+public class AVLTree<K extends Comparable<K>, V> {
 
-public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V>{
+    public int size;
+    private Node<K, V> root;
+
+    public AVLTree() {
+        this.size = 0;
+    }
+
+    public V get(K key) {
+        Node<K, V> node = getNode(root, key);
+        return node == null ? null : node.value;
+    }
+
+    private Node<K, V> getNode(Node<K, V> node, K key) {
+        if (node == null) return null;
+
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) return getNode(node.left, key);
+        if (cmp > 0) return getNode(node.right, key);
+        return node; // cmp == 0
+    }
+
+    public void add(K key, V value) {
+        root = add(root, key, value);
+    }
+
+    private Node<K, V> add(Node<K, V> node, K key, V value) {
+        size++;
+        if (node == null) return new Node<>(key, value);
+
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            node.left = add(node.left, key, value);
+        } else if (cmp > 0) {
+            node.right = add(node.right, key, value);
+        } else {
+            node.value = value; // 更新已有的键值
+        }
+
+        node.height = 1 + Math.max(height(node.left), height(node.right));
+        return balance(node);
+    }
+
+    public void remove(K key) {
+        root = remove(root, key);
+    }
+
+    private Node<K, V> remove(Node<K, V> node, K key) {
+        if (node == null) return null;
+        size--;
+
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            node.left = remove(node.left, key);
+        } else if (cmp > 0) {
+            node.right = remove(node.right, key);
+        } else {
+            if (node.left == null) return node.right;
+            if (node.right == null) return node.left;
+            Node<K, V> temp = node;
+            node = min(temp.right);
+            node.right = deleteMin(temp.right);
+            node.left = temp.left;
+        }
+
+        node.height = 1 + Math.max(height(node.left), height(node.right));
+        return balance(node);
+    }
+
+    private Node<K, V> deleteMin(Node<K, V> node) {
+        if (node.left == null) return node.right;
+        node.left = deleteMin(node.left);
+        node.height = 1 + Math.max(height(node.left), height(node.right));
+        return balance(node);
+    }
+
+    private Node<K, V> min(Node<K, V> node) {
+        if (node.left == null) return node;
+        return min(node.left);
+    }
 
     private int height(Node<K, V> node) {
+        return node == null ? 0 : node.height;
+    }
+
+    private int balanceFactor(Node<K, V> node) {
+        return height(node.left) - height(node.right);
+    }
+
+    private Node<K, V> balance(Node<K, V> node) {
+        if (balanceFactor(node) > 1) {
+            if (balanceFactor(node.left) < 0) node.left = rotateLeft(node.left);
+            node = rotateRight(node);
+        }
+        if (balanceFactor(node) < -1) {
+            if (balanceFactor(node.right) > 0) node.right = rotateRight(node.right);
+            node = rotateLeft(node);
+        }
+        return node;
+    }
+
+    private Node<K, V> rotateRight(Node<K, V> y) {
+        Node<K, V> x = y.left;
+        y.left = x.right;
+        x.right = y;
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        return x;
+    }
+
+    private Node<K, V> rotateLeft(Node<K, V> x) {
+        Node<K, V> y = x.right;
+        x.right = y.left;
+        y.left = x;
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+        return y;
+    }
+
+    public Node<K, V> find(K key) {
+        return find(root, key);
+    }
+
+    private Node<K, V> find(Node<K, V> node, K key) {
         if (node == null) {
-            return -1;
+            return null; // 返回null表示没有找到
+        }
+
+        int cmp = key.compareTo(node.key);
+        if (cmp < 0) {
+            return find(node.left, key);
+        } else if (cmp > 0) {
+            return find(node.right, key);
         } else {
-            return node.height;
+            return node; // 找到对应的节点并返回
         }
     }
 
@@ -16,145 +143,19 @@ public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V>{
         return find(key) != null;
     }
 
-
-    private int getBalance(Node<K, V> node) {
-        if (node == null) {
-            return 0;
-        } else {
-            int leftHeight = height(node.left);
-            int rightHeight = height(node.right);
-            return leftHeight - rightHeight;
-        }
+    public int getSize() {
+        return size;
     }
 
-
-    protected Node<K, V> add(Node<K, V> node, K key, V value) {
-        if (node == null) return new Node<>(key, value);
-
-        size++;
-        int cmp = key.compareTo(node.key);
-        if (cmp < 0) {
-            node.left = add(node.left, key, value);
-        } else if (cmp > 0) {
-            node.right = add(node.right, key, value);
-        } else {
-            node.value = value; // overwrite existing value
-        }
-
-        node.height = 1 + Math.max(height(node.left), height(node.right));
-
-        int balance = getBalance(node);
-
-        // Left heavy
-        if (balance > 1) {
-            // Check for "Left-Right" case
-            if (key.compareTo(node.left.key) > 0) {
-                node.left = singleRotateWithLeft(node.left);
-                return singleRotateWithRight(node);
-            }
-            // "Left-Left" case
-            else {
-                return singleRotateWithRight(node);
-            }
-        }
-
-        // Right heavy
-        if (balance < -1) {
-            // Check for "Right-Left" case
-            if (key.compareTo(node.right.key) < 0) {
-                node.right = singleRotateWithRight(node.right);
-                return singleRotateWithLeft(node);
-            }
-            // "Right-Right" case
-            else {
-                return singleRotateWithLeft(node);
-            }
-        }
-
-        return node;
+    public void setSize(int size) {
+        this.size = size;
     }
 
-
-    @Override
-    protected Node<K, V> remove(Node<K, V> node, K key) {
-        if (node == null) return null;
-
-        size--;
-        int cmp = key.compareTo(node.key);
-        if (cmp < 0) {
-            node.left = remove(node.left, key);
-        } else if (cmp > 0) {
-            node.right = remove(node.right, key);
-        } else {
-            if (node.left == null || node.right == null) {
-                Node<K, V> temp = (node.left != null) ? node.left : node.right;
-                node = temp;
-            } else {
-                Node<K, V> temp = min(node.right);
-                node.key = temp.key;
-                node.value = temp.value;
-                node.right = remove(node.right, temp.key);
-            }
-        }
-
-        if (node == null) return null;
-
-        node.height = 1 + Math.max(height(node.left), height(node.right));
-
-        int balance = getBalance(node);
-
-        // Left heavy
-        if (balance > 1) {
-            // Check for "Left-Right" case
-            if (getBalance(node.left) < 0) {
-                node.left = singleRotateWithLeft(node.left);
-                return singleRotateWithRight(node);
-            }
-            // "Left-Left" case
-            else {
-                return singleRotateWithRight(node);
-            }
-        }
-
-        // Right heavy
-        if (balance < -1) {
-            // Check for "Right-Left" case
-            if (getBalance(node.right) > 0) {
-                node.right = singleRotateWithRight(node.right);
-                return singleRotateWithLeft(node);
-            }
-            // "Right-Right" case
-            else {
-                return singleRotateWithLeft(node);
-            }
-        }
-
-        return node;
+    public Node<K, V> getRoot() {
+        return root;
     }
 
-
-    private Node<K, V> singleRotateWithLeft(Node<K, V> k2) {
-        Node<K, V> k1 = k2.left;
-        k2.left = k1.right;
-        k1.right = k2;
-        k2.height = 1 + Math.max(height(k2.left), height(k2.right));
-        k1.height = 1 + Math.max(height(k1.left), k2.height);
-        return k1;
+    public void setRoot(Node<K, V> root) {
+        this.root = root;
     }
-
-    private Node<K, V> singleRotateWithRight(Node<K, V> k1) {
-        Node<K, V> k2 = k1.right;
-        k1.right = k2.left;
-        k2.left = k1;
-        k1.height = 1 + Math.max(height(k1.left), height(k1.right));
-        k2.height = 1 + Math.max(height(k2.right), k1.height);
-        return k2;
-    }
-
-    public AVLTree() {
-    }
-
-
-
-
 }
