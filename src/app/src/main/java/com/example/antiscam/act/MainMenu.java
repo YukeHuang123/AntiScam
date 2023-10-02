@@ -51,7 +51,6 @@ public class MainMenu extends AppCompatActivity {
     private float dY;
 
 
-
     private LRUCache<String, ScamCaseWithUser> cache;
 
     //    private int visibleThreshold = 10;
