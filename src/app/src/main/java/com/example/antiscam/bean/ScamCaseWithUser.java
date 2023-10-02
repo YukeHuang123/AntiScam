@@ -19,6 +19,13 @@ public class ScamCaseWithUser implements Parcelable {
         this.user = user;
     }
 
+    public void setScamCase(ScamCase scamCase) {
+        this.scamCase = scamCase;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     protected ScamCaseWithUser(Parcel in) {
         // Read data from Parcel and initialize object
