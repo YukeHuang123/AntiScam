@@ -2,7 +2,7 @@ package com.example.antiscam.tool;
 
 import java.io.Serializable;
 
-public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> implements Serializable {
+public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V>{
 
     private int height(Node<K, V> node) {
         if (node == null) {
@@ -150,4 +150,11 @@ public class AVLTree<K extends Comparable<K>, V> extends Tree<K, V> implements S
         k2.height = 1 + Math.max(height(k2.right), k1.height);
         return k2;
     }
+
+    public AVLTree() {
+    }
+
+
+
+
 }

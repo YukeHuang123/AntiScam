@@ -2,25 +2,14 @@ package com.example.antiscam.tool;
 
 import java.io.Serializable;
 
-public abstract class Tree<K extends Comparable<K>, V> implements Serializable {
-    protected Node<K, V> root;
+public abstract class Tree<K extends Comparable<K>, V>  {
+    private Node<K, V> root;
 
     int size = 0;
 
     protected abstract Node<K, V> remove(Node<K, V> node, K key);
 
-    protected static class Node<K, V> {
-        int height = 0;
-        K key;
-        V value;
-        Node<K, V> left;
-        Node<K, V> right;
 
-        Node(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
 
     public V find(K key) {
         Node<K, V> node = find(root, key);
@@ -46,5 +35,24 @@ public abstract class Tree<K extends Comparable<K>, V> implements Serializable {
             return node;
         }
         return min(node.left);
+    }
+
+    public Tree() {
+    }
+
+    public Node<K, V> getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node<K, V> root) {
+        this.root = root;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

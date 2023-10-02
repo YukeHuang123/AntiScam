@@ -1,103 +1,219 @@
 package com.example.antiscam.tool;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-
-public class LRUCache<K extends Comparable<K>, V> implements Serializable {
-    private final int capacity;
-    private final TreeHashMap<K, Node<K, V>> map;
-    private final DoublyLinkedList<K, V> list;
+public class LRUCache<K extends Comparable<K>, V> {
+    private int capacity;
+    private TreeHashMap<K, listNode<K, V>> map;
+    private DoublyLinkedList<K, V> list;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
         this.map = new TreeHashMap<>();
-        this.list = new DoublyLinkedList<>();
+        this.list = new DoublyLinkedList<>(capacity);
     }
 
     public V get(K key) {
         if (!map.contains(key)){
             return null;
         } else {
-            Node<K, V> node = map.get(key);
-            list.moveToFront(node);
-            return node.value;
+            listNode<K, V> listNode = map.get(key);
+            list.moveToFront(listNode);
+            return listNode.value;
         }
     }
 
     public void put(K key, V value) {
+        if (map == null) {
+            map = new TreeHashMap<>();
+        }
+        if (list == null) {
+            list = new DoublyLinkedList<>(capacity);
+        }
         if (map.contains(key)) {
-            Node<K, V> node = map.get(key);
-            node.value = value;
-            list.moveToFront(node);
+            listNode<K, V> listNode = map.get(key);
+            listNode.value = value;
+            list.moveToFront(listNode);
         } else {
             if (map.size() == capacity) {
-                Node<K, V> tail = list.removeTail();
-                map.remove(tail.key, tail);
+                listNode<K, V> tail = list.removeTail();
+                if (tail != null) {
+                    map.remove(tail.key, tail);
+                }
             }
-            Node<K, V> newNode = new Node<>(key, value);
-            map.put(key, newNode);
-            list.addToFront(newNode);
+            listNode<K, V> newListNode = new listNode<>(key, value);
+            map.put(key, newListNode);
+            list.addToFront(newListNode);
         }
     }
 
     private static class DoublyLinkedList<K, V> {
-        Node<K, V> head;
-        Node<K, V> tail;
+        listNode<K, V> head;
+        listNode<K, V> tail;
+        int size = 0;  // current size
+        int capacity;  // max length or capacity of the list
 
-        public void moveToFront(Node<K, V> node) {
-            if (node == head) return;
-            remove(node);
-            addToFront(node);
+        public DoublyLinkedList(int capacity) {
+            this.capacity = capacity;
         }
 
-        public void addToFront(Node<K, V> node) {
-            node.prev = null;
-            node.next = head;
-            if (head != null) {
-                head.prev = node;
-            }
-            head = node;
-            if (tail == null) {
-                tail = head;
-            }
+        public void moveToFront(listNode<K, V> listNode) {
+            if (listNode == null || listNode == head) return;
+            remove(listNode);
+            addToFront(listNode);
         }
 
-        public Node<K, V> removeTail() {
-            Node<K, V> res = tail;
+        public void addToFront(listNode<K, V> listNode) {
+            if (head == null) {
+                head = listNode;
+                tail = listNode;
+            } else {
+                listNode.prev = null;
+                listNode.next = head;
+                head.prev = listNode;
+                head = listNode;
+            }
+            size++;
+            ensureCapacity();
+        }
+
+        public listNode<K, V> removeTail() {
+            if (tail == null) return null;
+            listNode<K, V> res = tail;
             remove(tail);
             return res;
         }
 
-        public void remove(Node<K, V> node) {
-            if (node.prev != null) {
-                node.prev.next = node.next;
+        public void remove(listNode<K, V> listNode) {
+            if (listNode.prev != null) {
+                listNode.prev.next = listNode.next;
             } else {
-                head = node.next;
+                head = listNode.next;
             }
 
-            if (node.next != null) {
-                node.next.prev = node.prev;
+            if (listNode.next != null) {
+                listNode.next.prev = listNode.prev;
             } else {
-                tail = node.prev;
+                tail = listNode.prev;
             }
+
+            size--;
+
+            if (head == null) {
+                tail = null;
+            }
+        }
+
+        private void ensureCapacity() {
+            while (size > capacity) {
+                removeTail();
+            }
+        }
+
+        public listNode<K, V> getHead() {
+            return head;
+        }
+
+        public void setHead(listNode<K, V> head) {
+            this.head = head;
+        }
+
+        public listNode<K, V> getTail() {
+            return tail;
+        }
+
+        public void setTail(listNode<K, V> tail) {
+            this.tail = tail;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
+        }
+
+        public int getCapacity() {
+            return capacity;
+        }
+
+        public void setCapacity(int capacity) {
+            this.capacity = capacity;
         }
     }
 
-    private static class Node<K, V> {
+
+
+    private static class listNode<K, V> {
         K key;
         V value;
-        Node<K, V> prev;
-        Node<K, V> next;
+        listNode<K, V> prev;
+        listNode<K, V> next;
 
-        public Node(K key, V value) {
+        public listNode(K key, V value) {
             this.key = key;
             this.value = value;
         }
+
+        public listNode() {
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public void setKey(K key) {
+            this.key = key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+
+        public listNode<K, V> getPrev() {
+            return prev;
+        }
+
+        public void setPrev(listNode<K, V> prev) {
+            this.prev = prev;
+        }
+
+        public listNode<K, V> getNext() {
+            return next;
+        }
+
+        public void setNext(listNode<K, V> next) {
+            this.next = next;
+        }
     }
 
+    public LRUCache() {
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public TreeHashMap<K, listNode<K, V>> getMap() {
+        return map;
+    }
+
+    public void setMap(TreeHashMap<K, listNode<K, V>> map) {
+        this.map = map;
+    }
+
+    public DoublyLinkedList<K, V> getList() {
+        return list;
+    }
+
+    public void setList(DoublyLinkedList<K, V> list) {
+        this.list = list;
+    }
 }

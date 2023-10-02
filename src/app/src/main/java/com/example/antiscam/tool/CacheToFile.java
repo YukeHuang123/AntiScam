@@ -1,38 +1,71 @@
 package com.example.antiscam.tool;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.example.antiscam.bean.ScamCaseWithUser;
+
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStreamReader;
 
 public class CacheToFile {
-    public void saveCacheToInternalStorage(Context context, LRUCache<String, Integer> cache) {
+    public static void saveCacheToInternalStorage(Context context, LRUCache<Integer, ScamCaseWithUser> cache) {
+        String data = JSON.toJSONString(cache);
+        saveStringToFile(data, context);
+    }
+
+    public static LRUCache<Integer, ScamCaseWithUser> loadCacheFromInternalStorage(Context context) {
+        LRUCache<Integer, ScamCaseWithUser> cache = null;
+
+        File cacheFile = new File(context.getFilesDir(), "cache.json");
+
+        if (!cacheFile.exists()) {
+            return null;
+        }
+
+        Log.d("cacheDir", cacheFile.getAbsolutePath());
+
+        String cacheString = readStringFromFile(context);
+        cache = JSON.parseObject(cacheString, new TypeReference<LRUCache<Integer, ScamCaseWithUser>>() {});
+
+
+        return cache;
+    }
+
+    private static void saveStringToFile(String data, Context context) {
         try {
-            FileOutputStream fileOutputStream = context.openFileOutput("cache.ser", Context.MODE_PRIVATE);
-            ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-            oos.writeObject(cache);
-            oos.close();
+            // Save the string to a file in internal storage
+            FileOutputStream fileOutputStream = context.openFileOutput("cache.json", Context.MODE_PRIVATE);
+            fileOutputStream.write(data.getBytes());
             fileOutputStream.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public LRUCache<String, Integer> loadCacheFromInternalStorage(Context context) {
-        LRUCache<String, Integer> cache = null;
+    private static String readStringFromFile(Context context) {
         try {
-            FileInputStream fileInputStream = context.openFileInput("cache.ser");
-            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-            cache = (LRUCache<String, Integer>) ois.readObject();
-            ois.close();
-            fileInputStream.close();
-        } catch (IOException | ClassNotFoundException e) {
+            FileInputStream fileInputStream = context.openFileInput("cache.json");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            return stringBuilder.toString();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return cache;
+        return null;
     }
+
+
+
 
 }

@@ -27,7 +27,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao{
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData().get("post_user"));
+//                                Log.d(TAG, document.getId() + " => " + document.getData().get("post_user"));
                                 // get document data
                                 ScamCase scamCase = document.toObject(ScamCase.class);
                                 // pass user class to callback function

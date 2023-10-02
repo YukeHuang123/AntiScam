@@ -91,4 +91,6 @@ dependencies {
     implementation("com.google.auth:google-auth-library-oauth2-http:0.26.0")
 
     implementation("com.google.firebase:firebase-firestore-ktx:24.8.1")
+
+    implementation("com.alibaba:fastjson:2.0.28")
 }

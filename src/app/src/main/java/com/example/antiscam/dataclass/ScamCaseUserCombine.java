@@ -38,7 +38,7 @@ public class ScamCaseUserCombine {
                         // 从预加载的用户列表中查找匹配的用户
                         User matchedUser = null;
                         for (User user : allUsers) {
-                            System.out.println("user:" + user);
+//                            System.out.println("user:" + user);
                             if (user.getEmail().equals(post_user)) { // 假设你的User对象有一个getEmail()方法
                                 matchedUser = user;
                                 break;

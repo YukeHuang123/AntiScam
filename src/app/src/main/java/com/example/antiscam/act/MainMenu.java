@@ -2,6 +2,7 @@ package com.example.antiscam.act;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.antiscam.CaseDetail;
 import com.example.antiscam.R;
 import com.example.antiscam.SearchTool;
@@ -21,7 +23,10 @@ import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.repository.DataRepository;
+import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.example.antiscam.tool.LRUCache;
+import com.alibaba.fastjson.TypeReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +37,8 @@ public class MainMenu extends AppCompatActivity {
     private ScamCaseCardAdapter cardAdapter;
     private Button signOutButton;
     private SearchView searchView;
+
+    private LRUCache<Integer, ScamCaseWithUser> cache;
 
     //    private int visibleThreshold = 10;
 //    private boolean isLoading = false;
@@ -48,6 +55,14 @@ public class MainMenu extends AppCompatActivity {
         // Data List for scam case card and set scam case data to adapter
 //        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
         List<ScamCaseWithUser> dataList = new ArrayList<>();
+        cache = CacheToFile.loadCacheFromInternalStorage(this);
+
+        if (cache == null) {
+            Log.d("cache", "no cache find");
+            cache = new LRUCache<>(100);
+        }
+        Log.d("cache", cache.toString());
+
 
         cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
         /*connect card to case detail*/
@@ -66,6 +81,11 @@ public class MainMenu extends AppCompatActivity {
             public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
                 Intent intent = new Intent(MainMenu.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
+
+                cache.put(scamCaseWithUser.getScamCase().getScam_id(), scamCaseWithUser);
+                Log.d("cacheToStr", JSON.toJSONString(cache));
+//                CacheToFile.saveCacheToInternalStorage(MainMenu.this, cache);
+
                 startActivity(intent);
             }
         });
@@ -128,5 +148,7 @@ public class MainMenu extends AppCompatActivity {
         }
         startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
     }
+
+
 }
 

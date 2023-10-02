@@ -2,12 +2,12 @@ package com.example.antiscam.tool;
 
 import java.io.Serializable;
 
-public class TreeHashMap<K extends Comparable<K>, V> implements Serializable {
-    private final AVLTree<K, V>[] buckets;
-    private static final int DEFAULT_CAPACITY = 10;
+public class TreeHashMap<K extends Comparable<K>, V> {
+    private AVLTree<K, V>[] buckets;
 
     @SuppressWarnings("unchecked")
     public TreeHashMap() {
+        int DEFAULT_CAPACITY = 10;
         this.buckets = new AVLTree[DEFAULT_CAPACITY];
         for (int i = 0; i < DEFAULT_CAPACITY; i++) {
             this.buckets[i] = new AVLTree<>();
@@ -31,13 +31,13 @@ public class TreeHashMap<K extends Comparable<K>, V> implements Serializable {
         if (buckets[index] == null) {
             buckets[index] = new AVLTree<>();
         }
-        buckets[index].add(new Tree.Node<>(key, value), key, value); // 使用AVLTree的插入方法
+        buckets[index].add(new Node<>(key, value), key, value); // 使用AVLTree的插入方法
     }
 
     public void remove(K key, V value) {
         int index = hash(key);
         if (buckets[index] != null) {
-            buckets[index].remove(new Tree.Node<>(key, value), key); // 使用AVLTree的删除方法
+            buckets[index].remove(new Node<>(key, value), key); // 使用AVLTree的删除方法
         }
     }
 
@@ -57,6 +57,12 @@ public class TreeHashMap<K extends Comparable<K>, V> implements Serializable {
         return totalSize;
     }
 
+    public AVLTree<K, V>[] getBuckets() {
+        return buckets;
+    }
 
+    public void setBuckets(AVLTree<K, V>[] buckets) {
+        this.buckets = buckets;
+    }
 }
 
