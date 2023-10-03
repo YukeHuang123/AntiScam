@@ -37,15 +37,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         if (chatModel.getType() == ChatModel.SEND){
             holder.leftLayout.setVisibility(View.GONE);
             holder.rightLayout.setVisibility(View.VISIBLE);
-            holder.rightNickView.setText(chatModel.getName());
+            holder.rightNickView.setText(chatModel.getSendUserEmail());
             holder.rightContentView.setText(chatModel.getContent());
-            loadImage(chatModel.getImg(),holder.rightImgView);
+            loadImage(chatModel.getSendUserImg(),holder.rightImgView);
         }else {
             holder.rightLayout.setVisibility(View.GONE);
             holder.leftLayout.setVisibility(View.VISIBLE);
-            holder.leftNickView.setText(chatModel.getName());
+            holder.leftNickView.setText(chatModel.getReceiveUserEmail());
             holder.leftContentView.setText(chatModel.getContent());
-            loadImage(chatModel.getImg(),holder.leftImgView);
+            loadImage(chatModel.getReceiveUserImg(),holder.leftImgView);
         }
     }
 

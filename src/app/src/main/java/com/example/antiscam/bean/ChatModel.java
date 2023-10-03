@@ -8,67 +8,67 @@ import java.io.Serializable;
 import java.util.Date;
 
 @IgnoreExtraProperties
-public class ChatModel  {
+public class ChatModel {
 
     public static final int SEND = 0;
     public static final int RECEIVE = 1;
-    private String img;
-    private String name;
+
+    private String sendUserEmail;
+    private String sendUserImg;
+    private String sendUserName;
+    private String receiveUserEmail;
+    private String receiveUserImg;
+    private String receiveUserName;
+
     private String content;
-    private String email;
-    private Long timestamp;
+    private Long sendTime = System.currentTimeMillis();
     private int type;
 
 
-    public ChatModel(){}
+    public ChatModel() {
+    }
 
-    public ChatModel(String img, String name, String content, String email, Long timestamp, int type) {
-        this.img = img;
-        this.name = name;
+    public ChatModel(String sendUserEmail, String sendUserImg, String sendUserName, String receiveUserEmail, String receiveUserImg, String receiveUserName, String content, int type) {
+        this.sendUserEmail = sendUserEmail;
+        this.sendUserImg = sendUserImg;
+        this.sendUserName = sendUserName;
+        this.receiveUserEmail = receiveUserEmail;
+        this.receiveUserImg = receiveUserImg;
+        this.receiveUserName = receiveUserName;
         this.content = content;
-        this.email = email;
-        this.timestamp = timestamp;
         this.type = type;
     }
 
-    public String getImg() {
-        return img;
+    public String getSendUserEmail() {
+        return sendUserEmail;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public String getSendUserImg() {
+        return sendUserImg;
     }
 
-    public String getName() {
-        return name;
+    public String getSendUserName() {
+        return sendUserName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getReceiveUserEmail() {
+        return receiveUserEmail;
+    }
+
+    public String getReceiveUserImg() {
+        return receiveUserImg;
+    }
+
+    public String getReceiveUserName() {
+        return receiveUserName;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
+    public Long getSendTime() {
+        return sendTime;
     }
 
     public int getType() {
@@ -82,11 +82,14 @@ public class ChatModel  {
     @Override
     public String toString() {
         return "ChatModel{" +
-                "img='" + img + '\'' +
-                ", name='" + name + '\'' +
+                "sendUserEmail='" + sendUserEmail + '\'' +
+                ", sendUserImg='" + sendUserImg + '\'' +
+                ", sendUserName='" + sendUserName + '\'' +
+                ", receiveUserEmail='" + receiveUserEmail + '\'' +
+                ", receiveUserImg='" + receiveUserImg + '\'' +
+                ", receiveUserName='" + receiveUserName + '\'' +
                 ", content='" + content + '\'' +
-                ", email='" + email + '\'' +
-                ", timestamp=" + timestamp +
+                ", sendTime=" + sendTime +
                 ", type=" + type +
                 '}';
     }

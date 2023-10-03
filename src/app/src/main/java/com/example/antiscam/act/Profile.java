@@ -78,7 +78,11 @@ public class Profile extends AppCompatActivity {
             messageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Profile.this, ChatActivity.class).putExtra("email", email));
+                    Intent intent = new Intent(Profile.this, ChatActivity.class)
+                            .putExtra("img", userAvatarPath)
+                            .putExtra("nick", username)
+                            .putExtra("email", email);
+                    startActivity(intent);
                 }
             });
         }

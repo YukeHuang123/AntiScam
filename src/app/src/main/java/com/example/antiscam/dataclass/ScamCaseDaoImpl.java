@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.core.TokenHelper;
+import com.example.antiscam.core.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -13,9 +15,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class ScamCaseDaoImpl implements ScamCaseDao{
+import java.util.LinkedList;
+
+public class ScamCaseDaoImpl implements ScamCaseDao {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference usersCollection= db.collection("scam_cases");
+    private CollectionReference usersCollection = db.collection("scam_cases");
     private static final String TAG = "ScamCaseDaoImpl";
 
     @Override
@@ -38,5 +42,27 @@ public class ScamCaseDaoImpl implements ScamCaseDao{
                         }
                     }
                 });
+    }
+
+    @Override
+    public void getAllScamCases(Tokenizer tokenizer, ScamCasesCallback scamCasesCallback) {
+        Query query = TokenHelper.getInstance().genQuery(usersCollection, tokenizer);
+        query.limit(100).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            LinkedList<ScamCase> scamCases = new LinkedList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ScamCase scamCase = document.toObject(ScamCase.class);
+                                scamCases.add(scamCase);
+                            }
+                            scamCasesCallback.onScamCaseReceived(scamCases);
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
     }
 }

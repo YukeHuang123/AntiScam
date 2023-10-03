@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.example.antiscam.CaseDetail;
 import com.example.antiscam.R;
-import com.example.antiscam.SearchTool;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.core.Tokenizer;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.repository.DataRepository;
@@ -141,12 +141,15 @@ public class MainMenu extends AppCompatActivity {
         if (query.length() == 0) {
             return;
         }
-        List<ScamCaseWithUser> result = SearchTool.search(query, DataRepository.getInstance().getScamCaseWithUsers());
-        if (result.isEmpty()) {
-            Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
-            return;
-        }
-        startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
+        Tokenizer tokenizer = new Tokenizer(query);
+        ScamCaseUserCombine.loadScamCases(tokenizer, dataList -> {
+            if (dataList.isEmpty()) {
+                Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
+                return;
+            }
+            DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+             startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
+        });
     }
 
 

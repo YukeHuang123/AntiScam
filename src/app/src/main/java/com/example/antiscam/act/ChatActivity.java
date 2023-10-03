@@ -57,6 +57,8 @@ public class ChatActivity extends AppCompatActivity {
     CollectionReference ref;
     FirebaseUser user;
     String email;
+    String nick;
+    String img;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,9 +70,11 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initConfig() {
         email = getIntent().getStringExtra("email");
+        nick = getIntent().getStringExtra("nick");
+        img = getIntent().getStringExtra("img");
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ref = db.collection("users").document(email).collection("chats");
+        ref = db.collection("chat").document(email).collection("chats");
 
 
         // receiver msg
@@ -78,37 +82,48 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) return;
-
+                Log.i(TAG, "addSnapshotListener: " );
                 for (DocumentChange dc : value.getDocumentChanges()) {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
                         ChatModel chatModel = dc.getDocument().toObject(ChatModel.class);
-                        receiveMsg(chatModel);
-                    }
-                }
-            }
-        });
-        ref.orderBy("timestamp", Query.Direction.ASCENDING)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot snapshots = task.getResult();
-                            for (QueryDocumentSnapshot snapshot : snapshots) {
-                                ChatModel chatModel = snapshot.toObject(ChatModel.class);
-                                if (Objects.equals(chatModel.getEmail(), email)) {
-                                    // receive
-                                    chatModel.setType(ChatModel.RECEIVE);
-                                    chatModels.add(chatModel);
-                                } else if (Objects.equals(chatModel.getEmail(), user.getEmail())) {
-                                    // send
-                                    chatModel.setType(ChatModel.SEND);
-                                    chatModels.add(chatModel);
-                                }
-                            }
-                            refreshRecycleView();
+                        Log.i(TAG, "onEvent: "+chatModel);
+                        if (Objects.equals(chatModel.getSendUserEmail(), email)) {
+                            // receive
+                            chatModel.setType(ChatModel.RECEIVE);
+                            chatModels.add(chatModel);
+                        } else if (Objects.equals(chatModel.getSendUserEmail(), user.getEmail())) {
+                            // send
+                            chatModel.setType(ChatModel.SEND);
+                            chatModels.add(chatModel);
                         }
                     }
-                });
+                }
+                refreshRecycleView();
+            }
+        });
+//        ref.orderBy("timestamp", Query.Direction.ASCENDING)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            QuerySnapshot snapshots = task.getResult();
+//                            Log.i(TAG, "onComplete: ");
+//                            for (QueryDocumentSnapshot snapshot : snapshots) {
+//                                ChatModel chatModel = snapshot.toObject(ChatModel.class);
+//                                if (Objects.equals(chatModel.getSendUserEmail(), email)) {
+//                                    // receive
+//                                    chatModel.setType(ChatModel.RECEIVE);
+//                                    chatModels.add(chatModel);
+//                                } else if (Objects.equals(chatModel.getSendUserEmail(), user.getEmail())) {
+//                                    // send
+//                                    chatModel.setType(ChatModel.SEND);
+//                                    chatModels.add(chatModel);
+//                                }
+//                            }
+//                            refreshRecycleView();
+//                        }
+//                    }
+//                });
 
     }
 
@@ -139,17 +154,15 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private void sendMsg(String msg) {
-        ChatModel chatModel = new ChatModel(String.valueOf(user.getPhotoUrl()), user.getDisplayName(), msg, user.getEmail(), System.currentTimeMillis(), ChatModel.SEND);
-        chatModels.add(chatModel);
+        ChatModel chatModel = new ChatModel(user.getEmail(), String.valueOf(user.getPhotoUrl()), user.getDisplayName(),
+                email, img, nick, msg, ChatModel.SEND);
         ref.add(chatModel);
-        refreshRecycleView();
     }
 
     private void receiveMsg(ChatModel chatModel) {
-        if (!Objects.equals(chatModel.getEmail(), email)) return;
+        if (!Objects.equals(chatModel.getSendUserEmail(), email)) return;
         chatModel.setType(ChatModel.RECEIVE);
-        chatModels.add(chatModel);
-        refreshRecycleView();
+
     }
 
     private void refreshRecycleView() {

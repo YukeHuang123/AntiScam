@@ -2,7 +2,6 @@ package com.example.antiscam.act;
 
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,12 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
-import com.example.antiscam.SearchTool;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
-import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.repository.DataRepository;
-
-import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -29,11 +24,7 @@ public class SearchResultActivity extends AppCompatActivity {
         searchContent = getIntent().getStringExtra("search_content");
 
 
-        List<ScamCaseWithUser> datas = SearchTool.search(searchContent, DataRepository.getInstance().getScamCaseWithUsers());
-        if (datas.isEmpty()){
-            Toast.makeText(this,"Result is Empty,Please retry",Toast.LENGTH_LONG).show();
-        }
-        cardAdapter = new ScamCaseCardAdapter(datas,R.layout.mainmenu_cardlist);
+        cardAdapter = new ScamCaseCardAdapter(DataRepository.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
 
         // Initialize recyclerView
         recyclerView = findViewById(R.id.recyclerView);

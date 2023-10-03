@@ -24,6 +24,7 @@ public class DataRepository {
         scamCaseWithUsers.add(scamCaseWithUser);
     }
     public void addAllScamCaseWithUsers(Collection<ScamCaseWithUser> v){
+        scamCaseWithUsers.clear();
         scamCaseWithUsers.addAll(v);
     }
 }
