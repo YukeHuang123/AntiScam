@@ -28,15 +28,7 @@ public class CaseDetail extends AppCompatActivity {
         binding = ActivityCaseDetailBinding.inflate(getLayoutInflater());
         // Set the root view of the activity
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);//
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//
-        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
-
-        //step: find in cache first, if nor find then find in firebase
-
-        //2. find in firebase
-        //scamCaseWithUsers=new ArrayList<>();
-        //scamCaseWithUsers=ScamCaseUserCombine.loadScamCases();
+        binding.close.setOnClickListener(view -> onBackPressed());
         ScamCaseWithUser originalCase=null;
 
 
@@ -79,7 +71,7 @@ public class CaseDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent=new Intent(CaseDetail.this, Profile.class);
-                    intent.putExtra("name",name);
+                    intent.putExtra("username",name);
                     intent.putExtra("email",email);
                     intent.putExtra("avatarPath",avatarPath);
                     startActivity(intent);
