@@ -105,7 +105,7 @@ public class MainMenu extends AppCompatActivity {
                 LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
                         new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
                 Log.d("cacheToStr", JSON.toJSONString(cache));
-//                CacheToFile.saveCacheToInternalStorage(MainMenu.this, cache);
+                CacheToFile.saveCacheToInternalStorage(MainMenu.this, cache);
 
                 startActivity(intent);
             }

@@ -28,8 +28,10 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     private Node<K, V> add(Node<K, V> node, K key, V value) {
-        size++;
-        if (node == null) return new Node<>(key, value);
+        if (node == null) {
+            size++;
+            return new Node<>(key, value);
+        }
 
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
@@ -50,7 +52,6 @@ public class AVLTree<K extends Comparable<K>, V> {
 
     private Node<K, V> remove(Node<K, V> node, K key) {
         if (node == null) return null;
-        size--;
 
         int cmp = key.compareTo(node.key);
         if (cmp < 0) {
@@ -58,6 +59,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         } else if (cmp > 0) {
             node.right = remove(node.right, key);
         } else {
+            size--;
             if (node.left == null) return node.right;
             if (node.right == null) return node.left;
             Node<K, V> temp = node;
@@ -69,6 +71,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         node.height = 1 + Math.max(height(node.left), height(node.right));
         return balance(node);
     }
+
 
     private Node<K, V> deleteMin(Node<K, V> node) {
         if (node.left == null) return node.right;
