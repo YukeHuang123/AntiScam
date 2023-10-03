@@ -71,11 +71,21 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
 
         public void addToFront(ListNode<K, V> listNode) {
+            // If listNode was part of another list or the same list
+            // Ensure its relations are disconnected
+            if (listNode.prev != null) {
+                listNode.prev.next = listNode.next;
+            }
+            if (listNode.next != null) {
+                listNode.next.prev = listNode.prev;
+            }
+
             if (head == null) {
                 head = listNode;
                 tail = listNode;
+                listNode.prev = null;
+                listNode.next = null;
             } else {
-//                listNode.prev.next = listNode.next;
                 listNode.prev = null;
                 listNode.next = head;
                 head.prev = listNode;
@@ -84,6 +94,7 @@ public class LRUCache<K extends Comparable<K>, V> {
             size++;
             ensureCapacity();
         }
+
 
         public ListNode<K, V> removeTail() {
             if (tail == null) return null;

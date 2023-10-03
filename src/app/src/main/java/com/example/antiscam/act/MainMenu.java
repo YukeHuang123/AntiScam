@@ -59,13 +59,13 @@ public class MainMenu extends AppCompatActivity {
         // Data List for scam case card and set scam case data to adapter
 //        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
         List<ScamCaseWithUser> dataList = new ArrayList<>();
-//        cache = CacheToFile.loadCacheFromInternalStorage(this);
+        cache = CacheToFile.loadCacheFromInternalStorage(this);
 //
-//        if (cache == null) {
-//            Log.d("cache", "no cache find");
-//            cache = new LRUCache<>(100);
-//        }
-//        Log.d("cache", cache.toString());
+        if (cache == null) {
+            Log.d("cache", "no cache find");
+            cache = new LRUCache<>(100);
+        }
+        Log.d("cache", cache.toString());
 
 
         cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
@@ -86,14 +86,14 @@ public class MainMenu extends AppCompatActivity {
                 Intent intent = new Intent(MainMenu.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
 
-//                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
+                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
 //                Gson gson = new Gson();
-//                Gson gson = new GsonBuilder()
-//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
-//                        .create();
-//                String cacheString = gson.toJson(cache);
-//                LRUCache<Integer, ScamCaseWithUser> cache = gson.fromJson(cacheString,
-//                        new TypeToken<LRUCache<Integer, ScamCaseWithUser>>(){}.getType());
+                Gson gson = new GsonBuilder()
+                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
+                        .create();
+                String cacheString = gson.toJson(cache);
+                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
+                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
                 Log.d("cacheToStr", JSON.toJSONString(cache));
 //                CacheToFile.saveCacheToInternalStorage(MainMenu.this, cache);
 
