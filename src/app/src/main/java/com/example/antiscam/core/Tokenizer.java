@@ -34,23 +34,23 @@ public class Tokenizer {
         } else if (input.contains("!=")) {
             input = input.substring(2);
             token = new Token(input, Token.Type.NE);
-        } else if (input.contains("<")) {
-            input = input.substring(1);
-            token = new Token(input, Token.Type.LT);
         } else if (input.contains("<=")) {
             input = input.substring(2);
             token = new Token(input, Token.Type.LE);
-        } else if (input.contains(">")) {
-            input = input.substring(1);
-            token = new Token(input, Token.Type.GT);
         } else if (input.contains(">=")) {
             input = input.substring(2);
             token = new Token(input, Token.Type.GE);
-        } else if (input.contains("=")) {
-            input = input.substring(1);
-            token = new Token(input, Token.Type.EQ);
         } else if (input.contains("==")) {
             input = input.substring(2);
+            token = new Token(input, Token.Type.EQ);
+        } else if (input.contains(">")) {
+            input = input.substring(1);
+            token = new Token(input, Token.Type.GT);
+        } else if (input.contains("<")) {
+            input = input.substring(1);
+            token = new Token(input, Token.Type.LT);
+        } else if (input.contains("=")) {
+            input = input.substring(1);
             token = new Token(input, Token.Type.EQ);
         } else if (input.contains("|")) {
             token = new Token(input, Token.Type.OR);

@@ -77,12 +77,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void getAllUsers(Tokenizer tokenizer, UserDao.UserCallback usersCallback) {
-        Query query;
-        if (tokenizer.getNextToken().getType() == Token.Type.USERNAME) {
-            query = TokenHelper.getInstance().genQuery(usersCollection, tokenizer);
-        }else query = usersCollection.where(Filter.or());
-        System.out.println(query);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        usersCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

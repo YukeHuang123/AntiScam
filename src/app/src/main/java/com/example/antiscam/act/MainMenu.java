@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
+    private static final String TAG = "MainMenu";
     private RecyclerView recyclerView;
     //    private mainMenuCardAdapter cardAdapter;
     private ScamCaseCardAdapter cardAdapter;
@@ -201,6 +202,7 @@ public class MainMenu extends AppCompatActivity {
         }
         Tokenizer tokenizer = new Tokenizer(query);
         ScamCaseUserCombine.loadScamCases(tokenizer, dataList -> {
+
             if (dataList.isEmpty()) {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;

@@ -195,4 +195,22 @@ public class ScamCase implements Parcelable {
         parcel.writeString(scam_type);
         parcel.writeString(contactMethod);
     }
+
+    @Override
+    public String toString() {
+        return "ScamCase{" +
+                "date=" + date +
+                ", amount=" + amount +
+                ", victim_city='" + victim_city + '\'' +
+                ", victim_age=" + victim_age +
+                ", post_date=" + post_date +
+                ", scam_id=" + scam_id +
+                ", post_user='" + post_user + '\'' +
+                ", description='" + description + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", title='" + title + '\'' +
+                ", scam_type='" + scam_type + '\'' +
+                ", contactMethod='" + contactMethod + '\'' +
+                '}';
+    }
 }

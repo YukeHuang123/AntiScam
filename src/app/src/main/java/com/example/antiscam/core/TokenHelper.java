@@ -29,10 +29,7 @@ public class TokenHelper {
             String value = token.getValue();
             switch (token.getType()) {
                 case USERNAME:
-                    filter = Filter.or(
-                            Filter.equalTo("post_user", value),
-                            Filter.equalTo("username", value)
-                    );
+                    filter = Filter.equalTo("post_user", value);
                     break;
                 case TITLE:
                     filter = Filter.equalTo("title", value);
@@ -42,19 +39,19 @@ public class TokenHelper {
                     filter = getCommonAnd(token);
                     break;
                 case NE:
-                    filter = Filter.notEqualTo("amount", Double.parseDouble(value));
+                    filter = Filter.notEqualTo("amount", Integer.parseInt(value));
                     break;
                 case LT:
-                    filter = Filter.lessThan("amount", Double.parseDouble(value));
+                    filter = Filter.lessThan("amount", Integer.parseInt(value));
                     break;
                 case LE:
-                    filter = Filter.lessThanOrEqualTo("amount", Double.parseDouble(value));
+                    filter = Filter.lessThanOrEqualTo("amount", Integer.parseInt(value));
                     break;
                 case GT:
-                    filter = Filter.greaterThan("amount", Double.parseDouble(value));
+                    filter = Filter.greaterThan("amount", Integer.parseInt(value));
                     break;
                 case GE:
-                    filter = Filter.greaterThanOrEqualTo("amount", Double.parseDouble(value));
+                    filter = Filter.greaterThanOrEqualTo("amount", Integer.parseInt(value));
                     break;
                 case AND:
                     String[] strs1 = value.split("&");
@@ -91,7 +88,7 @@ public class TokenHelper {
     @NonNull
     private static Filter getCommonOr(Token token1) {
         return Filter.or(
-                Filter.equalTo("amount", token1.getValue()),
+                Filter.equalTo("amount", Integer.parseInt(token1.getValue())),
                 Filter.equalTo("title", token1.getValue()),
                 Filter.equalTo("post_user", token1.getValue())
         );
@@ -99,8 +96,9 @@ public class TokenHelper {
 
     @NonNull
     private static Filter getCommonAnd(Token token1) {
+//        return  Filter.equalTo("amount", Integer.parseInt(token1.getValue()));
         return Filter.or(
-                Filter.equalTo("amount", token1.getValue()),
+                Filter.equalTo("amount", Integer.parseInt(token1.getValue())),
                 Filter.equalTo("title", token1.getValue()),
                 Filter.equalTo("post_user", token1.getValue())
         );
