@@ -1,4 +1,4 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.antiscam.act.MainMenu;
+import com.example.antiscam.R;
 
 public class SubmitSuccessPage extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class SubmitSuccessPage extends AppCompatActivity {
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(SubmitSuccessPage.this,AddPostPage.class);
+                Intent intent=new Intent(SubmitSuccessPage.this, AddPostPage.class);
                 startActivity(intent);
             }
         });
