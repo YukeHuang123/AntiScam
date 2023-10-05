@@ -22,6 +22,7 @@
     <string name="addpost">addPost</string>
     <string name="city">city</string>
     <string name="submit">submit</string>
+    <string name="save">Save</string>
 
     <string-array name="city_array">
         <item>Melbourne</item>

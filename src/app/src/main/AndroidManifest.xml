@@ -15,6 +15,12 @@
         android:theme="@style/Theme.AntiScam"
         tools:targetApi="31">
         <activity
+            android:name=".act.UpdateProfile"
+            android:exported="false" />
+        <activity
+            android:name=".act.ImageCrop"
+            android:exported="false" />
+        <activity
             android:name=".SubmitSuccessPage"
             android:exported="false" />
         <activity
