@@ -18,9 +18,6 @@
             android:name=".act.UpdateProfile"
             android:exported="true" />
         <activity
-            android:name=".act.ImageCrop"
-            android:exported="false" />
-        <activity
             android:name=".act.SubmitSuccessPage"
             android:exported="false" />
         <activity
