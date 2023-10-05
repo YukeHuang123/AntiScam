@@ -9,6 +9,7 @@ import com.example.antiscam.core.TokenHelper;
 import com.example.antiscam.core.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -83,7 +84,8 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
     @Override
     public int getSizeOfScamCase() {
         try {
-            QuerySnapshot querySnapshot = usersCollection.get().getResult(); // Get the QuerySnapshot synchronously
+            Task<QuerySnapshot> task = usersCollection.get();
+            QuerySnapshot querySnapshot = Tasks.await(task);
             return querySnapshot.size(); // Get the size of the QuerySnapshot and return it
         } catch (Exception e) {
             Log.d(TAG, "Error getting documents: ", e);

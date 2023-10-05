@@ -38,12 +38,13 @@ public class AddPostPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //get user email
+                //get user's email
                 String user=null;
                 Intent intent = getIntent();
                 if(intent.hasExtra("user")){
                     user= intent.getStringExtra("user");
                 }
+
                 //get scam id
                 int size = scamCaseDaoImpl.getSizeOfScamCase();
                 int id=0;
@@ -52,7 +53,7 @@ public class AddPostPage extends AppCompatActivity {
                     Log.d(TAG,"get size");
                 }
 
-
+                //find editText and spinner by id
                 EditText age=findViewById(R.id.editAge);
                 EditText amount=findViewById(R.id.editAmount);
                 EditText description=findViewById(R.id.editDescription);
@@ -66,6 +67,7 @@ public class AddPostPage extends AppCompatActivity {
                 Spinner spinnerContact=findViewById(R.id.spinner_contact);
 
 
+                //get all the input details from add-Post page
                 String age1 = GetString.getTextString(age);
                 String amount1 = GetString.getTextString(amount);
                 String description1 = GetString.getTextString(description);
@@ -79,27 +81,34 @@ public class AddPostPage extends AppCompatActivity {
                 String contact=GetString.getSpinnerString(spinnerContact);
 
 
+                /**
+                 * Builder design pattern
+                 * create instance of ScamCase and change String input to correct type within makeScamCase method
+                 */
                 ScamCaseBuilder scamCaseBuilder=new ScamCaseBuilder();
                 WholeScamCase wholeScamCase=new WholeScamCase();
                 wholeScamCase.setScamCaseBuilder(scamCaseBuilder);
                 ScamCase scamCase = wholeScamCase.makeScamCase(amount1, contact, day1, month1, year1, description1, payment, user, id, type, title1, age1, city);
 
 
+                /**
+                 * check whether all the fields are filled.
+                 * check the format of user's input on the EditText
+                 * check the validation of input date
+                 */
                 if (age1.isEmpty() || amount1.isEmpty()||description1.isEmpty()||day1.isEmpty()||month1.isEmpty()||year1.isEmpty()||title1.isEmpty()) {
                     Toast.makeText(AddPostPage.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
                 } else if(!CheckInput.checkAge(age1)||!CheckInput.checkDay(day1)||!CheckInput.checkMonth(month1)||!CheckInput.checkYear(year1)){
                     Toast.makeText(AddPostPage.this, "Date or age is not valid!", Toast.LENGTH_SHORT).show();
                 } else {
-                    scamCaseDaoImpl.addScamCase(new ScamCase());
-                    Intent intent2=new Intent(AddPostPage.this, SubmitSuccessPage.class);
+                    //store new case in firebase
                     scamCaseDaoImpl.addScamCase(scamCase);
+
+                    //go to SubmitSuccessPage
+                    Intent intent2=new Intent(AddPostPage.this, SubmitSuccessPage.class);
                     startActivity(intent2);
                 }
             }
         });
     }
-
-
-
-
 }
