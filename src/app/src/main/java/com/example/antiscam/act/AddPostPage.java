@@ -1,4 +1,4 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.antiscam.databinding.ActivityAddPostPageBinding;
+import com.example.antiscam.R;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
 
 public class AddPostPage extends AppCompatActivity {
@@ -34,14 +35,22 @@ public class AddPostPage extends AppCompatActivity {
                 EditText month=findViewById(R.id.MM);
                 EditText year=findViewById(R.id.YYYY);
                 EditText title=findViewById(R.id.editTitle);
+                Spinner spinnerType=findViewById(R.id.spinner_type);
+                Spinner spinnerPayment=findViewById(R.id.spinner_payment);
+                Spinner spinnerCity=findViewById(R.id.spinner_city);
 
-                String age1 = age.getText().toString().trim();
-                String amount1 = amount.getText().toString().trim();
-                String description1 = description.getText().toString().trim();
-                String day1 = day.getText().toString().trim();
-                String month1 = month.getText().toString().trim();
-                String year1 = year.getText().toString().trim();
-                String title1 = title.getText().toString().trim();
+
+                String age1 = getTextString(age);
+                String amount1 = getTextString(amount);
+                String description1 = getTextString(description);
+                String day1 = getTextString(day);
+                String month1 = getTextString(month);
+                String year1 = getTextString(year);
+                String title1 = getTextString(title);
+                String type=getSpinnerString(spinnerType);
+                String payment=getSpinnerString(spinnerPayment);
+                String city=getSpinnerString(spinnerCity);
+
 
                 if (age1.isEmpty() || amount1.isEmpty()||description1.isEmpty()||day1.isEmpty()||month1.isEmpty()||year1.isEmpty()||title1.isEmpty()) {
                     Toast.makeText(AddPostPage.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
@@ -80,7 +89,12 @@ public class AddPostPage extends AppCompatActivity {
             return age<100;
         }
         return false;
-
+    }
+    public String getTextString(EditText editText){
+        return editText.getText().toString().trim();
+    }
+    public String getSpinnerString(Spinner spinner){
+        return spinner.getSelectedItem().toString().trim();
     }
 
 }

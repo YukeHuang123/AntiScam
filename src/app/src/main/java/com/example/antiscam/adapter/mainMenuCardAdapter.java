@@ -1,6 +1,5 @@
 package com.example.antiscam.adapter;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
-import com.example.antiscam.CaseDetail;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.dataclass.scamCaseList;
 import com.google.firebase.storage.StorageReference;

@@ -22,13 +22,14 @@
             android:exported="false" />
         <activity
             android:name=".SubmitSuccessPage"
+            android:name=".act.SubmitSuccessPage"
             android:exported="false" />
         <activity
-            android:name=".AddPostPage"
+            android:name=".act.AddPostPage"
             android:exported="false" />
         <activity android:name=".act.ChatActivity" />
         <activity
-            android:name=".CaseDetail"
+            android:name=".act.CaseDetail"
             android:exported="true"
             android:label="CaseDetailActivity" />
         <activity

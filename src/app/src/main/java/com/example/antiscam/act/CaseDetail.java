@@ -1,4 +1,4 @@
-package com.example.antiscam;
+package com.example.antiscam.act;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,17 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.antiscam.act.Profile;
+import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.bean.User;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
-
-import org.checkerframework.common.subtyping.qual.Bottom;
 
 public class CaseDetail extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
