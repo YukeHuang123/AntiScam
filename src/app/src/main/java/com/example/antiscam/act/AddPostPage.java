@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +13,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.antiscam.R;
+import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.builder.ScamCaseBuilder;
+import com.example.antiscam.builder.WholeScamCase;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
+import com.example.antiscam.dataclass.ScamCaseDaoImpl;
+import com.example.antiscam.tool.CheckInput;
+import com.example.antiscam.tool.GetString;
 
 public class AddPostPage extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
+    ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+    private static final String TAG = "AddPostPage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,22 @@ public class AddPostPage extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //get user email
+                String user=null;
+                Intent intent = getIntent();
+                if(intent.hasExtra("user")){
+                    user= intent.getStringExtra("user");
+                }
+                //get scam id
+                int size = scamCaseDaoImpl.getSizeOfScamCase();
+                int id=0;
+                if(size!=-1){
+                    id=size+1;
+                    Log.d(TAG,"get size");
+                }
+
+
                 EditText age=findViewById(R.id.editAge);
                 EditText amount=findViewById(R.id.editAmount);
                 EditText description=findViewById(R.id.editDescription);
@@ -38,63 +63,43 @@ public class AddPostPage extends AppCompatActivity {
                 Spinner spinnerType=findViewById(R.id.spinner_type);
                 Spinner spinnerPayment=findViewById(R.id.spinner_payment);
                 Spinner spinnerCity=findViewById(R.id.spinner_city);
+                Spinner spinnerContact=findViewById(R.id.spinner_contact);
 
 
-                String age1 = getTextString(age);
-                String amount1 = getTextString(amount);
-                String description1 = getTextString(description);
-                String day1 = getTextString(day);
-                String month1 = getTextString(month);
-                String year1 = getTextString(year);
-                String title1 = getTextString(title);
-                String type=getSpinnerString(spinnerType);
-                String payment=getSpinnerString(spinnerPayment);
-                String city=getSpinnerString(spinnerCity);
+                String age1 = GetString.getTextString(age);
+                String amount1 = GetString.getTextString(amount);
+                String description1 = GetString.getTextString(description);
+                String day1 = GetString.getTextString(day);
+                String month1 = GetString.getTextString(month);
+                String year1 = GetString.getTextString(year);
+                String title1 = GetString.getTextString(title);
+                String type=GetString.getSpinnerString(spinnerType);
+                String payment=GetString.getSpinnerString(spinnerPayment);
+                String city=GetString.getSpinnerString(spinnerCity);
+                String contact=GetString.getSpinnerString(spinnerContact);
+
+
+                ScamCaseBuilder scamCaseBuilder=new ScamCaseBuilder();
+                WholeScamCase wholeScamCase=new WholeScamCase();
+                wholeScamCase.setScamCaseBuilder(scamCaseBuilder);
+                ScamCase scamCase = wholeScamCase.makeScamCase(amount1, contact, day1, month1, year1, description1, payment, user, id, type, title1, age1, city);
 
 
                 if (age1.isEmpty() || amount1.isEmpty()||description1.isEmpty()||day1.isEmpty()||month1.isEmpty()||year1.isEmpty()||title1.isEmpty()) {
                     Toast.makeText(AddPostPage.this, "Please fill in all fields!", Toast.LENGTH_SHORT).show();
-                } else if(!checkAge(age1)||!checkDay(day1)||!checkMonth(month1)||!checkYear(year1)){
+                } else if(!CheckInput.checkAge(age1)||!CheckInput.checkDay(day1)||!CheckInput.checkMonth(month1)||!CheckInput.checkYear(year1)){
                     Toast.makeText(AddPostPage.this, "Date or age is not valid!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent=new Intent(AddPostPage.this, SubmitSuccessPage.class);
-                    startActivity(intent);
+                    scamCaseDaoImpl.addScamCase(new ScamCase());
+                    Intent intent2=new Intent(AddPostPage.this, SubmitSuccessPage.class);
+                    scamCaseDaoImpl.addScamCase(scamCase);
+                    startActivity(intent2);
                 }
             }
         });
     }
 
 
-    public boolean checkDay(String s){
-        if(s.matches("^[0-9]{2}$")){
-            return Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 31;
-        }
-        return false;
-    }
-    public boolean checkMonth(String s){
-        if(s.matches("^[0-9]{2}$")){
-            return Integer.parseInt(s) >= 1 && Integer.parseInt(s) <= 12;
-        }
-        return false;
-    }
-    public boolean checkYear(String s){
-        if(s.matches("^[0-9]{4}$")){
-            return Integer.parseInt(s) >= 1970 && Integer.parseInt(s) <= 2023;
-        }
-        return false;
-    }
-    public boolean checkAge(String s){
-        if(s.matches("^[0-9]{1}$")||s.matches("^[0-9]{2}$")){
-            int age=Integer.parseInt(s);
-            return age<100;
-        }
-        return false;
-    }
-    public String getTextString(EditText editText){
-        return editText.getText().toString().trim();
-    }
-    public String getSpinnerString(Spinner spinner){
-        return spinner.getSelectedItem().toString().trim();
-    }
+
 
 }

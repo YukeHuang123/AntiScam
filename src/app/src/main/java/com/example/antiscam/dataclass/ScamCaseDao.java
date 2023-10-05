@@ -14,4 +14,6 @@ public interface ScamCaseDao {
     interface ScamCasesCallback {
         void onScamCaseReceived(List<ScamCase> scamcase);
     }
+    void addScamCase(ScamCase scamcase);
+    int getSizeOfScamCase();
 }

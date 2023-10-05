@@ -179,6 +179,7 @@ public class MainMenu extends AppCompatActivity {
                         if (!isDragging[0]) {
                             // if not drag, run click event
                             Intent intent = new Intent(MainMenu.this, AddPostPage.class);
+                            intent.putExtra("user", authUserEmail);
                             startActivity(intent);
                         }
                         break;

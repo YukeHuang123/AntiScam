@@ -257,22 +257,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48sp"
                 android:layout_marginStart="24sp"
-                android:layout_marginTop="0sp"
+                android:layout_marginTop="2sp"
                 android:layout_weight="1"
                 android:entries="@array/payment_array"
                 app:layout_constraintStart_toEndOf="@+id/choosePayment"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_type" />
+
+            <TextView
+                android:id="@+id/chooseContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="22sp"
+                android:text="@string/contact_method"
+                android:textColor="@color/appThemeC"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/choosePayment" />
+
+            <Spinner
+                android:id="@+id/spinner_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="48sp"
+                android:layout_marginStart="24sp"
+                android:layout_marginTop="2sp"
+                android:layout_weight="1"
+                android:entries="@array/contact_array"
+                app:layout_constraintStart_toEndOf="@+id/chooseContact"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_payment" />
 
             <Spinner
                 android:id="@+id/spinner_city"
                 android:layout_width="wrap_content"
                 android:layout_height="48sp"
                 android:layout_marginStart="24sp"
-                android:layout_marginTop="0sp"
+                android:layout_marginTop="1sp"
                 android:layout_weight="1"
                 android:entries="@array/city_array"
                 app:layout_constraintStart_toEndOf="@+id/chooseCity"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_payment" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_contact" />
 
             <TextView
                 android:id="@+id/chooseCity"
@@ -285,7 +309,7 @@
                 android:textColor="@color/appThemeC"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/choosePayment" />
+                app:layout_constraintTop_toBottomOf="@id/chooseContact" />
 
             <Button
                 android:id="@+id/submit"

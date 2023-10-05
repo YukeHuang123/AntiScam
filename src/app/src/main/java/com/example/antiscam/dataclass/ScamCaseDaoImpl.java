@@ -65,4 +65,29 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                 });
 
     }
+
+    @Override
+    public void addScamCase(ScamCase scamcase) {
+        usersCollection
+                .add(scamcase)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "ScamCase added successfully");
+                    } else {
+                        Log.e(TAG, "Error adding ScamCase", task.getException());
+                    }
+                });
+
+    }
+
+    @Override
+    public int getSizeOfScamCase() {
+        try {
+            QuerySnapshot querySnapshot = usersCollection.get().getResult(); // Get the QuerySnapshot synchronously
+            return querySnapshot.size(); // Get the size of the QuerySnapshot and return it
+        } catch (Exception e) {
+            Log.d(TAG, "Error getting documents: ", e);
+            return -1;
+        }
+    }
 }
