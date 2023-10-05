@@ -32,7 +32,8 @@ public class Profile extends AppCompatActivity {
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
-
+    // 自定义的图像选择请求码
+    private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +128,6 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
         // Initialize recyclerView
         recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
         recyclerViewProfile.setHasFixedSize(true);
@@ -137,5 +137,20 @@ public class Profile extends AppCompatActivity {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewProfile.setLayoutManager(layoutManager);
         recyclerViewProfile.setAdapter(cardAdapterProfile);
+
+        // Click Avatar, update profile
+        userAvatarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToUpdateProfile = new Intent(Profile.this, UpdateProfile.class);
+                intentToUpdateProfile.putExtra("username", username);
+                intentToUpdateProfile.putExtra("email", email);
+                intentToUpdateProfile.putExtra("avatarPath", userAvatarPath);
+                startActivity(intentToUpdateProfile);
+            }
+        });
     }
+
+
+
 }
