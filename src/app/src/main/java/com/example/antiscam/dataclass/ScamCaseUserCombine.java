@@ -1,5 +1,7 @@
 package com.example.antiscam.dataclass;
 
+import android.util.Log;
+
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.bean.User;
@@ -13,6 +15,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ScamCaseUserCombine {
+
+    private static String TAG = "ScamCaseUserCombine";
 
     public ScamCaseUserCombine() {
     }
@@ -51,6 +55,7 @@ public class ScamCaseUserCombine {
 
                         if (matchedUser != null) {
                             ScamCaseWithUser scamCaseWithUser = new ScamCaseWithUser(scamcase, matchedUser);
+                            Log.i(TAG, "onScamCaseReceived: "+scamCaseWithUser);
                             dataList.add(scamCaseWithUser);
 
                             // 你可以继续使用你的判断逻辑，或者调整它以适应你的需求
@@ -89,6 +94,7 @@ public class ScamCaseUserCombine {
                                             dataList.add(new ScamCaseWithUser(scamCase, user));
                                     }
                                 }
+                                Log.i(TAG, "search: "+dataList);
                                 callback.onDataLoaded(dataList);
                             }
                         });

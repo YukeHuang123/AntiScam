@@ -63,4 +63,12 @@ public class ScamCaseWithUser implements Parcelable {
         parcel.writeParcelable((Parcelable) scamCase, i);
         parcel.writeParcelable((Parcelable) user, i);
     }
+
+    @Override
+    public String toString() {
+        return "ScamCaseWithUser{" +
+                "scamCase=" + scamCase +
+                ", user=" + user +
+                '}';
+    }
 }
