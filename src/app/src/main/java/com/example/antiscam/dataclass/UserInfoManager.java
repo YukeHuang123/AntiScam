@@ -1,4 +1,5 @@
 package com.example.antiscam.dataclass;
+
 import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.R;
+import com.example.antiscam.bean.User;
 import com.example.antiscam.tool.CircleImageTransformer;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,6 +18,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class UserInfoManager {
     static String authUserEmail;
     static String authUserName;
@@ -24,6 +28,7 @@ public class UserInfoManager {
         // Get user information from Firebase
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+
             String username = user.getDisplayName();
             Uri photoUrl = user.getPhotoUrl();
 
@@ -53,7 +58,31 @@ public class UserInfoManager {
         return authUserEmail;
     }
 
-    public static String getAuthUserName() {
+    public static void getAuthUserName(AuthUserNameCallback callback) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            authUserEmail = currentUser.getEmail();
+            UserDaoImpl userDaoimpl = new UserDaoImpl();
+            userDaoimpl.getUserByEmail(authUserEmail, new UserDao.UserCallback() {
+                @Override
+                public void onUserReceived(User user) {
+                    authUserName = user.getUsername();
+                    callback.onAuthUserNameReceived(authUserName);
+                }
+
+                @Override
+                public void onUsersReceived(List<User> users) {
+
+                }
+            });
+        }
+    }
+
+    public interface AuthUserNameCallback {
+        void onAuthUserNameReceived(String authUserName);
+    }
+    public static String getAuthUserDisplayName() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             authUserName = user.getDisplayName();
