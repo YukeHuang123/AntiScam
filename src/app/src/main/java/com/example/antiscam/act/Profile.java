@@ -217,6 +217,8 @@ public class Profile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
+                        reloadScamCase();
+//                        AndroidUtil.showToast(getApplicationContext(), "Successfully reloaded posts");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener(){
@@ -226,5 +228,20 @@ public class Profile extends AppCompatActivity {
                         AndroidUtil.showToast(getApplicationContext(), "post deletion failed");
                     }
                 });
+    }
+
+    void reloadScamCase() {
+        ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
+            @Override
+            public void onDataLoaded(List<ScamCaseWithUser> scamCaseWithUserList) {
+                List<ScamCaseWithUser> authUserScamCases = new ArrayList<>();
+                for (ScamCaseWithUser scamCaseWithUser : scamCaseWithUserList) {
+                    if (email.equals(scamCaseWithUser.getUser().getEmail())) {
+                        authUserScamCases.add(scamCaseWithUser);
+                    }
+                }
+                cardAdapterProfile.setData(authUserScamCases);
+            }
+        });
     }
 }
