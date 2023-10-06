@@ -87,17 +87,11 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     }
 
+
+
     @Override
-    public void updateNextId(NextIdCallback callback) {
-        nextIdDocument.update("nextID", FieldValue.increment(1))
-                .addOnSuccessListener(aVoid -> {
-                    Log.d(TAG, "Next ID incremented successfully");
-                    // Fetch the updated nextID value and pass it to the callback
-                    getNextId(callback);
-                })
-                .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error incrementing nextID", e);
-                });
+    public void getDocumentId(int scam_id, OnDocumentIdCallback onDocumentIdCallback) {
+
     }
 
     public void getNextId(NextIdCallback callback) {
@@ -122,6 +116,18 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                 }
             }
         });
+    }
+    @Override
+    public void updateNextId(NextIdCallback callback) {
+        nextIdDocument.update("nextID", FieldValue.increment(1))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Next ID incremented successfully");
+                    // Fetch the updated nextID value and pass it to the callback
+                    getNextId(callback);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error incrementing nextID", e);
+                });
     }
 
 }
