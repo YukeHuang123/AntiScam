@@ -1,11 +1,11 @@
 package com.example.antiscam.act;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
@@ -17,6 +17,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class CaseDetail extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
+    Boolean showProfile = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,11 @@ public class CaseDetail extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.hasExtra("scamCaseWithUser")){
             originalCase= intent.getParcelableExtra("scamCaseWithUser");
+        }
+        if (intent.hasExtra("fromPage")) {
+            if (intent.getStringExtra("fromPage").equals("userProfile")) {
+                showProfile = false;
+            }
         }
         if(originalCase!=null){
             //get scamCase and user
@@ -67,12 +73,15 @@ public class CaseDetail extends AppCompatActivity {
             userAvatarView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(CaseDetail.this, Profile.class);
-                    intent.putExtra("username",name);
-                    intent.putExtra("email",email);
-                    intent.putExtra("avatarPath",avatarPath);
-                    startActivity(intent);
-
+                    if (showProfile) {
+                        Intent intent=new Intent(CaseDetail.this, Profile.class);
+                        intent.putExtra("username",name);
+                        intent.putExtra("email",email);
+                        intent.putExtra("avatarPath",avatarPath);
+                        startActivity(intent);
+                    } else {
+                        onBackPressed();
+                    }
                 }
             });
         }

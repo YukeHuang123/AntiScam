@@ -64,14 +64,25 @@ public class Profile extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            // Sign out button
+            signOutButton = (Button) findViewById(R.id.logoutBtn);
+            signOutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AuthUtils.logout(Profile.this);
+                }
+            });
+
             // Message icon visible when browsing other user's profile
             // Delete button invisible when browsing other user's profile
             ImageView messageView = findViewById(R.id.message);
             authUserEmail = UserInfoManager.getAuthUserEmail();
             if (authUserEmail != null && authUserEmail.equals(email)) {
                 messageView.setVisibility(View.GONE);
+                signOutButton.setVisibility(View.VISIBLE);
             } else {
                 messageView.setVisibility(View.VISIBLE);
+                signOutButton.setVisibility(View.GONE);
             }
             messageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,14 +96,6 @@ public class Profile extends AppCompatActivity {
             });
         }
 
-        // Sign out button
-        signOutButton = (Button) findViewById(R.id.logoutBtn);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AuthUtils.logout(Profile.this);
-            }
-        });
 
         // close profile
         ImageView closeProfileButton = findViewById(R.id.closeProfile);
@@ -114,7 +117,13 @@ public class Profile extends AppCompatActivity {
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> scamCaseWithUserList) {
-                cardAdapterProfile.setData(scamCaseWithUserList);
+                List<ScamCaseWithUser> authUserScamCases = new ArrayList<>();
+                for (ScamCaseWithUser scamCaseWithUser : scamCaseWithUserList){
+                    if (email.equals(scamCaseWithUser.getUser().getEmail())){
+                        authUserScamCases.add(scamCaseWithUser);
+                    }
+                }
+                cardAdapterProfile.setData(authUserScamCases);
             }
         });
 
@@ -125,6 +134,7 @@ public class Profile extends AppCompatActivity {
             public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
                 Intent intentCaseDetail = new Intent(Profile.this, CaseDetail.class);
                 intentCaseDetail.putExtra("scamCaseWithUser", scamCaseWithUser);
+                intentCaseDetail.putExtra("fromPage","userProfile");
                 startActivity(intentCaseDetail);
             }
         });
