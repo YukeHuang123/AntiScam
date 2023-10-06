@@ -1,6 +1,7 @@
 package com.example.antiscam.tool;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,8 +14,10 @@ public class NewDate {
         try {
             String dateString = year + "-" + month + "-" + day;
              date= dateFormat.parse(dateString);
+            Log.d("NewDate","scam date get!!!!!!");
         } catch (ParseException e) {
             e.printStackTrace();
+            Log.d("NewDate","can not get new date");
         }
         return date;
     }

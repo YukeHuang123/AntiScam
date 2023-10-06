@@ -31,7 +31,7 @@ public class ScamCaseBuilder extends Builder{
 
     @Override
     public void putPostDate(Date postDate) {
-        scamCase.setDate(postDate);
+        scamCase.setPost_date(postDate);
     }
 
     @Override

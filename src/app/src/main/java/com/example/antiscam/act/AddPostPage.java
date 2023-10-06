@@ -1,5 +1,6 @@
 package com.example.antiscam.act;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,9 +18,16 @@ import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.builder.ScamCaseBuilder;
 import com.example.antiscam.builder.WholeScamCase;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
+import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.tool.CheckInput;
 import com.example.antiscam.tool.GetString;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.SQLOutput;
 
@@ -27,6 +35,8 @@ public class AddPostPage extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
     ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
     private static final String TAG = "AddPostPage";
+    ScamCase scamCase;
+    ScamCaseDao.NextIdCallback callback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +60,8 @@ public class AddPostPage extends AppCompatActivity {
                 if(intent.hasExtra("user")){
                     user= intent.getStringExtra("user");
                 }
+                //set scam id
 
-                //get scam id
-                int size = scamCaseDaoImpl.getSizeOfScamCase();
-                int id=0;
-                if(size!=-1){
-                    id=size+1;
-                    Log.d(TAG,"get size");
-                }else {
-                    Log.d(TAG,"can not get size");
-                }
 
                 //find editText and spinner by id
                 EditText age=findViewById(R.id.editAge);
@@ -96,7 +98,14 @@ public class AddPostPage extends AppCompatActivity {
                 ScamCaseBuilder scamCaseBuilder=new ScamCaseBuilder();
                 WholeScamCase wholeScamCase=new WholeScamCase();
                 wholeScamCase.setScamCaseBuilder(scamCaseBuilder);
-                ScamCase scamCase = wholeScamCase.makeScamCase(amount1, contact, day1, month1, year1, description1, payment, user, id, type, title1, age1, city);
+                scamCase = wholeScamCase.makeScamCase(amount1, contact, day1, month1, year1, description1, payment, user, type, title1, age1, city);
+                scamCaseDaoImpl.getNextId(new ScamCaseDao.NextIdCallback() {
+                    @Override
+                    public void onNextId(int nextId) {
+                        scamCase.setScam_id(nextId);
+                        Log.d(TAG,"get next id successfully");
+                    }
+                });
 
 
                 /**
@@ -111,6 +120,7 @@ public class AddPostPage extends AppCompatActivity {
                 } else {
                     //store new case in firebase
                     scamCaseDaoImpl.addScamCase(scamCase);
+                    //scamCaseDaoImpl.updateNextId(callback);
                     //go to SubmitSuccessPage
                     Intent intent2=new Intent(AddPostPage.this, SubmitSuccessPage.class);
                     startActivity(intent2);
@@ -118,4 +128,7 @@ public class AddPostPage extends AppCompatActivity {
             }
         });
     }
+
+
+//
 }

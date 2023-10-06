@@ -12,7 +12,7 @@ public class WholeScamCase {
         this.scamCaseBuilder = scamCaseBuilder;
     }
 
-    public ScamCase makeScamCase(String amount,String contact,String day, String month, String year,String description,String payment, String user, int id,String type, String title, String age, String city){
+    public ScamCase makeScamCase(String amount,String contact,String day, String month, String year,String description,String payment, String user,String type, String title, String age, String city){
         double amount1 = Double.parseDouble(amount);
         scamCaseBuilder.putAmount(amount1);
         scamCaseBuilder.putContactMethod(contact);
@@ -22,7 +22,7 @@ public class WholeScamCase {
         scamCaseBuilder.putDescription(description);
         scamCaseBuilder.putPaymentMethod(payment);
         scamCaseBuilder.putUser(user);
-        scamCaseBuilder.putScamId(id);
+        //scamCaseBuilder.putScamId(id);
         scamCaseBuilder.putType(type);
         scamCaseBuilder.putTitle(title);
 
@@ -32,7 +32,6 @@ public class WholeScamCase {
 
         Date postDate=new Date();
         scamCaseBuilder.putPostDate(postDate);
-
 
         //Date postDay=
         return scamCaseBuilder.getScamCase();

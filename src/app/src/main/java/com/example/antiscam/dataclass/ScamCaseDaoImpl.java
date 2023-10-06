@@ -10,7 +10,11 @@ import com.example.antiscam.core.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -20,12 +24,15 @@ import java.util.LinkedList;
 
 public class ScamCaseDaoImpl implements ScamCaseDao {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference usersCollection = db.collection("scam_cases");
+    private CollectionReference casesCollection = db.collection("scam_cases");
+    private CollectionReference counter = db.collection("counter");
+    DocumentReference nextIdDocument = counter.document("caseID");
+
     private static final String TAG = "ScamCaseDaoImpl";
 
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
-        usersCollection.orderBy("date", Query.Direction.DESCENDING).limit(100).get()
+        casesCollection.orderBy("date", Query.Direction.DESCENDING).limit(100).get()
 //        usersCollection.limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -47,7 +54,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     @Override
     public void getAllScamCases(Tokenizer tokenizer, ScamCasesCallback scamCasesCallback) {
-        Query query = TokenHelper.getInstance().genQuery(usersCollection, tokenizer);
+        Query query = TokenHelper.getInstance().genQuery(casesCollection, tokenizer);
         query.limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -69,7 +76,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     @Override
     public void addScamCase(ScamCase scamcase) {
-        usersCollection
+        casesCollection
                 .add(scamcase)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -84,7 +91,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
     @Override
     public int getSizeOfScamCase() {
         try {
-            Task<QuerySnapshot> task = usersCollection.get();
+            Task<QuerySnapshot> task = casesCollection.get();
             QuerySnapshot querySnapshot = Tasks.await(task);
             return querySnapshot.size(); // Get the size of the QuerySnapshot and return it
         } catch (Exception e) {
@@ -92,4 +99,67 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
             return -1;
         }
     }
+
+    @Override
+    public void updateNextId(NextIdCallback callback) {
+        nextIdDocument.update("nextID", FieldValue.increment(1))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Next ID incremented successfully");
+                    // Fetch the updated nextID value and pass it to the callback
+                    getNextId(callback);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error incrementing nextID", e);
+                    // Handle the error here
+                });
+
+
+
+    }
+
+    public void getNextId(NextIdCallback callback) {
+        nextIdDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Get the value of the "nextID" field as an integer
+                        int nextId = document.getLong("nextID").intValue();
+                        Log.d(TAG, "Next ID: " + nextId);
+                        // Pass the result back to the caller using the callback
+                        callback.onNextId(nextId);
+                    } else {
+                        Log.d(TAG, "do not find nextId");
+                    }
+                } else {
+                    Log.e(TAG, "Error getting document", task.getException());
+                }
+            }
+        });
+    }
+
+//    @Override
+//    public int getNextId() {
+//        int id=0;
+//        DocumentReference nextIdDocument = counter.document("caseID");
+//        nextIdDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        // Get the value of the "nextID" field as an integer
+//                        int nextId= document.getLong("nextID").intValue();
+//                        Log.d(TAG, "Next ID: " + nextId);
+//                    } else {
+//                        Log.d(TAG, "do not find nextId");
+//                    }
+//                } else {
+//                    Log.e(TAG, "Error getting document", task.getException());
+//                }
+//            }
+//        });
+//    }
+
 }

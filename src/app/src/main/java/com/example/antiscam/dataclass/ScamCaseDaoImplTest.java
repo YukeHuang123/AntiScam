@@ -17,7 +17,7 @@ public class ScamCaseDaoImplTest {
         wholeScamCase.setScamCaseBuilder(scamCaseBuilder);
         ScamCase scamCase = wholeScamCase.makeScamCase("200","calls","27","05","2023",
                 "I received an irresistible investment offer promising high returns. Greed got the best of me, and I invested a substantial sum. The company vanished, and so did my money. I learned the hard way that if it sounds too good to be true, it probably is.",
-                "credit card","comp2100@anu.edu.au",2501,"investment scams","Beware of This Investment Scam!","30","Canberra");
+                "credit card","comp2100@anu.edu.au","investment scams","Beware of This Investment Scam!","30","Canberra");
 
         // Create an instance of ScamCaseDaoImpl
         ScamCaseDaoImpl dao = new ScamCaseDaoImpl();
