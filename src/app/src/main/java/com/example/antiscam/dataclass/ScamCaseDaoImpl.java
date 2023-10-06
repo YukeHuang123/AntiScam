@@ -87,36 +87,10 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     }
 
-    @Override
-    public int getSizeOfScamCase() {
-        try {
-            Task<QuerySnapshot> task = casesCollection.get();
-            QuerySnapshot querySnapshot = Tasks.await(task);
-            return querySnapshot.size(); // Get the size of the QuerySnapshot and return it
-        } catch (Exception e) {
-            Log.d(TAG, "Error getting documents: ", e);
-            return -1;
-        }
-    }
 
-    @Override
-    public void updateNextId(NextIdCallback callback) {
-        nextIdDocument.update("nextID", FieldValue.increment(1))
-                .addOnSuccessListener(aVoid -> {
-                    Log.d(TAG, "Next ID incremented successfully");
-                    // Fetch the updated nextID value and pass it to the callback
-                    getNextId(callback);
-                })
-                .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error incrementing nextID", e);
-                    // Handle the error here
-                });
-
-
-
-    }
 
     public void getNextId(NextIdCallback callback) {
+        //callback is a interface
         nextIdDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -127,6 +101,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                         int nextId = document.getLong("nextID").intValue();
                         Log.d(TAG, "Next ID: " + nextId);
                         // Pass the result back to the caller using the callback
+                        //onNextId method will be implemented when calling scamCaseDaoImpl.getNextId
                         callback.onNextId(nextId);
                     } else {
                         Log.d(TAG, "do not find nextId");
@@ -137,49 +112,42 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
             }
         });
     }
+    @Override
+    public void updateNextId(NextIdCallback callback) {
+        nextIdDocument.update("nextID", FieldValue.increment(1))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "Next ID incremented successfully");
+                    // Fetch the updated nextID value and pass it to the callback
+                    getNextId(callback);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error incrementing nextID", e);
+                });
+    }
 
-//    @Override
-//    public int getNextId() {
-//        int id=0;
-//        DocumentReference nextIdDocument = counter.document("caseID");
-//        nextIdDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        // Get the value of the "nextID" field as an integer
-//                        int nextId= document.getLong("nextID").intValue();
-//                        Log.d(TAG, "Next ID: " + nextId);
-//                    } else {
-//                        Log.d(TAG, "do not find nextId");
-//                    }
-//                } else {
-//                    Log.e(TAG, "Error getting document", task.getException());
-//                }
-//            }
-//        });
-//    }
+    @Override
     public void getDocumentId(int scam_id, OnDocumentIdCallback callback) {
-    casesCollection
-            .whereEqualTo("scam_id", scam_id)
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String documentId = document.getId();
-                            if (!documentId.isEmpty()) {
-                                callback.onDocumentIdReceived(documentId);
-                                return; // Exit the loop if a valid documentId is found.
+        casesCollection
+                .whereEqualTo("scam_id", scam_id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String documentId = document.getId();
+                                if (!documentId.isEmpty()) {
+                                    callback.onDocumentIdReceived(documentId);
+                                    return; // Exit the loop if a valid documentId is found.
+                                }
                             }
+                            callback.onDocumentIdNotFound(); // Handle the case where no matching document is found.
+                        } else {
+                            Log.d(TAG, "Get DocumentId Failed");
                         }
-                        callback.onDocumentIdNotFound(); // Handle the case where no matching document is found.
-                    } else {
-                        Log.d(TAG, "Get DocumentId Failed");
                     }
-                }
-            });
-}
+                });
+    }
+
+
 }
