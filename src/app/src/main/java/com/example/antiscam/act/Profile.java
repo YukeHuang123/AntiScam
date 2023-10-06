@@ -55,6 +55,7 @@ public class Profile extends AppCompatActivity {
 
             // Set user name
             userNameView.setText(username);
+
             // Get image reference and load to ImageView
             try {
                 StorageReference useravatar = UserInfoManager.getUserAvatar(userAvatarPath);
