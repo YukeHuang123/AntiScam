@@ -207,7 +207,7 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    void deletePost(String DocumentId){
+    void deletePost(String documentId){
         FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
