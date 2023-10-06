@@ -21,4 +21,9 @@ public interface ScamCaseDao {
         void onNextId(int nextId);
     }
     public void updateNextId(NextIdCallback callback);
+    void getDocumentId(int scam_id, OnDocumentIdCallback onDocumentIdCallback);
+    interface OnDocumentIdCallback {
+        void onDocumentIdReceived(String documentId);
+        void onDocumentIdNotFound();
+    }
 }

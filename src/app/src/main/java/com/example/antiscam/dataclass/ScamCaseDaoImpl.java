@@ -10,7 +10,6 @@ import com.example.antiscam.core.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -161,5 +160,26 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 //            }
 //        });
 //    }
-
+    public void getDocumentId(int scam_id, OnDocumentIdCallback callback) {
+    casesCollection
+            .whereEqualTo("scam_id", scam_id)
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String documentId = document.getId();
+                            if (!documentId.isEmpty()) {
+                                callback.onDocumentIdReceived(documentId);
+                                return; // Exit the loop if a valid documentId is found.
+                            }
+                        }
+                        callback.onDocumentIdNotFound(); // Handle the case where no matching document is found.
+                    } else {
+                        Log.d(TAG, "Get DocumentId Failed");
+                    }
+                }
+            });
+}
 }
