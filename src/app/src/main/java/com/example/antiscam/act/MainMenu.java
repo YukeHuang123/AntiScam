@@ -39,26 +39,23 @@ import java.util.List;
 public class MainMenu extends AppCompatActivity {
     private static final String TAG = "MainMenu";
     private RecyclerView recyclerView;
-    //    private mainMenuCardAdapter cardAdapter;
     private ScamCaseCardAdapter cardAdapter;
     private Button signOutButton;
     private SearchView searchView;
     private float dX;
-
     private float dY;
-
     String authUserName;
+    String authUserEmail;
+    String authUserAvatarPath;
     private LRUCache<String, ScamCaseWithUser> cache;
 
-    //    private int visibleThreshold = 10;
-//    private boolean isLoading = false;
-//    private boolean isLastPage = false;
-//    private int currentPage = 1; // Current page count
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        initProfile();
         initMainMenu();
+        initFltBtn();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -132,11 +129,92 @@ public class MainMenu extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cardAdapter);
 
+//        TextView userNameView = findViewById(R.id.userName);
+//        ImageView imageView = findViewById(R.id.avatarImgView);
+//        UserInfoManager.getUserInfo(this, userNameView, imageView);
+//
+//        authUserEmail = UserInfoManager.getAuthUserEmail();
+//        UserInfoManager.getAuthUserName(new UserInfoManager.AuthUserNameCallback() {
+//            @Override
+//            public void onAuthUserNameReceived(String userName) {
+//                authUserName = userName;
+//                userNameView.setText(authUserName);
+//            }
+//        });
+//
+//        authUserAvatarPath = UserInfoManager.getAuthUserAvatarPath();
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // When click avatar, to profile page
+//                Intent intentToProfile = new Intent(MainMenu.this, Profile.class);
+//                intentToProfile.putExtra("username", authUserName);
+//                intentToProfile.putExtra("email", authUserEmail);
+//                intentToProfile.putExtra("avatarPath", authUserAvatarPath);
+//                startActivity(intentToProfile);
+//            }
+//        });
+
+        findViewById(R.id.btn_search).setOnClickListener(v -> search());
+        searchView = findViewById(R.id.searchView);
+
+
+//        //set onClick and onTouch listener on fab (FloatingActionButton)
+//        FloatingActionButton fab=findViewById(R.id.fab);
+//
+//        final boolean[] isDragging = {false};
+//        fab.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                switch (motionEvent.getActionMasked()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        dX = view.getX() - motionEvent.getRawX();
+//                        dY = view.getY() - motionEvent.getRawY();
+//                        isDragging[0] = false; // Reset the flag
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        float newX = motionEvent.getRawX() + dX;
+//                        float newY = motionEvent.getRawY() + dY;
+//
+//                        // Limit the button's position within the parent layout
+//                        View parentLayout = (View) view.getParent();
+//                        if (newX < 0) {
+//                            newX = 0;
+//                        } else if (newX > parentLayout.getWidth() - view.getWidth()) {
+//                            newX = parentLayout.getWidth() - view.getWidth();
+//                        }
+//                        if (newY < 0) {
+//                            newY = 0;
+//                        } else if (newY > parentLayout.getHeight() - view.getHeight()) {
+//                            newY = parentLayout.getHeight() - view.getHeight();
+//                        }
+//
+//                        view.setX(newX);
+//                        view.setY(newY);
+//                        isDragging[0] = true; // Drag is in progress
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        if (!isDragging[0]) {
+//                            // if not drag, run click event
+//                            Intent intent = new Intent(MainMenu.this, AddPostPage.class);
+//                            intent.putExtra("user", authUserEmail);
+//                            startActivity(intent);
+//                        }
+//                        break;
+//                    default:
+//                        return false;
+//                }
+//                return true;
+//            }
+//        });
+    }
+
+    void initProfile(){
         TextView userNameView = findViewById(R.id.userName);
         ImageView imageView = findViewById(R.id.avatarImgView);
         UserInfoManager.getUserInfo(this, userNameView, imageView);
 
-        String authUserEmail = UserInfoManager.getAuthUserEmail();
+        authUserEmail = UserInfoManager.getAuthUserEmail();
         UserInfoManager.getAuthUserName(new UserInfoManager.AuthUserNameCallback() {
             @Override
             public void onAuthUserNameReceived(String userName) {
@@ -145,7 +223,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        String authUserAvatarPath = UserInfoManager.getAuthUserAvatarPath();
+        authUserAvatarPath = UserInfoManager.getAuthUserAvatarPath();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,11 +235,10 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(intentToProfile);
             }
         });
+    }
 
-        findViewById(R.id.btn_search).setOnClickListener(v -> search());
-        searchView = findViewById(R.id.searchView);
-
-
+    @SuppressLint("ClickableViewAccessibility")
+    void initFltBtn(){
         //set onClick and onTouch listener on fab (FloatingActionButton)
         FloatingActionButton fab=findViewById(R.id.fab);
 
@@ -210,7 +287,6 @@ public class MainMenu extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     void search() {
