@@ -23,10 +23,20 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
     protected List<ScamCaseWithUser> dataList = new ArrayList<>();
     private int layoutResourceID;
     protected OnClickListener onClickListener;
+    private OnAvatarClickListener onAvatarClickListener;
+
 
     public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;
         this.layoutResourceID = layoutResourceID;
+    }
+
+    public void setOnAvatarClickListener(OnAvatarClickListener listener) {
+        this.onAvatarClickListener = listener;
+    }
+
+    public interface OnAvatarClickListener {
+        void onAvatarClick(int position, ScamCaseWithUser scamCaseWithUser);
     }
 
     // Method to set the OnClickListener
@@ -65,6 +75,16 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
             }
         });
 
+        holder.avatarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 处理点击头像事件并跳转到个人资料页面
+                if (onAvatarClickListener != null) {
+                    int position1 = holder.getAdapterPosition();
+                    onAvatarClickListener.onAvatarClick(position1, scamCaseWithUser);
+                }
+            }
+        });
 
         // Get image path
         String imagePath = scamCaseWithUser.getUser().getAvatar();
