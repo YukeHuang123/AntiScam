@@ -150,8 +150,17 @@ public class Profile extends AppCompatActivity {
                 startActivity(intentToUpdateProfile);
             }
         });
+
+        // Click Avatar, update profile
+        userNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToUpdateProfile = new Intent(Profile.this, UpdateProfile.class);
+                intentToUpdateProfile.putExtra("username", username);
+                intentToUpdateProfile.putExtra("email", email);
+                intentToUpdateProfile.putExtra("avatarPath", userAvatarPath);
+                startActivity(intentToUpdateProfile);
+            }
+        });
     }
-
-
-
 }
