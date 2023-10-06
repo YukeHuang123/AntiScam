@@ -1,6 +1,5 @@
 package com.example.antiscam.act;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,20 +15,11 @@ import android.widget.Toast;
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.builder.ScamCaseBuilder;
-import com.example.antiscam.builder.WholeScamCase;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
 import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.tool.CheckInput;
 import com.example.antiscam.tool.GetString;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.sql.SQLOutput;
 
 public class AddPostPage extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
@@ -40,9 +30,6 @@ public class AddPostPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-//        int initialSize = scamCaseDaoImpl.getSizeOfScamCase();
-//        System.out.println(initialSize);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post_page);
@@ -92,20 +79,10 @@ public class AddPostPage extends AppCompatActivity {
 
 
                 /**
-                 * Builder design pattern
                  * create instance of ScamCase and change String input to correct type within makeScamCase method
                  */
-                ScamCaseBuilder scamCaseBuilder=new ScamCaseBuilder();
-                WholeScamCase wholeScamCase=new WholeScamCase();
-                wholeScamCase.setScamCaseBuilder(scamCaseBuilder);
-                scamCase = wholeScamCase.makeScamCase(amount1, contact, day1, month1, year1, description1, payment, user, type, title1, age1, city);
-                scamCaseDaoImpl.getNextId(new ScamCaseDao.NextIdCallback() {
-                    @Override
-                    public void onNextId(int nextId) {
-                        scamCase.setScam_id(nextId);
-                        Log.d(TAG,"get next id successfully");
-                    }
-                });
+                String finalUser = user;
+
 
 
                 /**
@@ -118,17 +95,33 @@ public class AddPostPage extends AppCompatActivity {
                 } else if(!CheckInput.checkAge(age1)||!CheckInput.checkDay(day1)||!CheckInput.checkMonth(month1)||!CheckInput.checkYear(year1)){
                     Toast.makeText(AddPostPage.this, "Date or age is not valid!", Toast.LENGTH_SHORT).show();
                 } else {
-                    //store new case in firebase
-                    scamCaseDaoImpl.addScamCase(scamCase);
-                    //scamCaseDaoImpl.updateNextId(callback);
-                    //go to SubmitSuccessPage
-                    Intent intent2=new Intent(AddPostPage.this, SubmitSuccessPage.class);
-                    startActivity(intent2);
+                    // Retrieve the nextId value
+                    String finalUser1 = user;
+                    scamCaseDaoImpl.getNextId(new ScamCaseDao.NextIdCallback() {
+                        @Override
+                        public void onNextId(int nextId) {
+                            // Create the ScamCase object with the retrieved nextId
+                            ScamCase scamCase = ScamCaseBuilder.makeScamCase(nextId, amount1, contact, day1, month1, year1, description1, payment, finalUser1, type, title1, age1, city);
+                            Log.d(TAG, "set id successfully: " + nextId);
+
+                            // Store the new case in Firebase
+                            scamCaseDaoImpl.addScamCase(scamCase);
+
+                            // Update the NextID
+                            scamCaseDaoImpl.updateNextId(new ScamCaseDao.NextIdCallback() {
+                                @Override
+                                public void onNextId(int updatedNextId) {
+                                    Log.d(TAG, "Updated NextID: " + updatedNextId);
+                                }
+                            });
+
+                            Log.d(TAG, "add data + update NextID");
+
+                            //go to SubmitSuccessPage
+                            Intent intent2 = new Intent(AddPostPage.this, SubmitSuccessPage.class);
+                            startActivity(intent2);
+                        }
+                    });
                 }
             }
-        });
-    }
-
-
-//
-}
+        });}}
