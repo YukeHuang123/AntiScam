@@ -21,6 +21,8 @@ import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.tool.CheckInput;
 import com.example.antiscam.tool.GetString;
 
+import java.sql.SQLOutput;
+
 public class AddPostPage extends AppCompatActivity {
     ActivityCaseDetailBinding binding;
     ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
@@ -28,6 +30,10 @@ public class AddPostPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+//        int initialSize = scamCaseDaoImpl.getSizeOfScamCase();
+//        System.out.println(initialSize);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post_page);
         ImageView close=findViewById(R.id.close2);
@@ -51,6 +57,8 @@ public class AddPostPage extends AppCompatActivity {
                 if(size!=-1){
                     id=size+1;
                     Log.d(TAG,"get size");
+                }else {
+                    Log.d(TAG,"can not get size");
                 }
 
                 //find editText and spinner by id
@@ -103,7 +111,6 @@ public class AddPostPage extends AppCompatActivity {
                 } else {
                     //store new case in firebase
                     scamCaseDaoImpl.addScamCase(scamCase);
-
                     //go to SubmitSuccessPage
                     Intent intent2=new Intent(AddPostPage.this, SubmitSuccessPage.class);
                     startActivity(intent2);
