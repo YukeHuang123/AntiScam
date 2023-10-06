@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
-import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.core.Tokenizer;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
@@ -110,7 +109,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         // Click avatar in scam list, go to profile page
-        cardAdapter.setOnAvatarClickListener(new ScamCaseCardProfileAdapter.OnAvatarClickListener() {
+        cardAdapter.setOnAvatarClickListener(new ScamCaseCardAdapter.OnAvatarClickListener() {
             @Override
             public void onAvatarClick(int position, ScamCaseWithUser scamCaseWithUser) {
                 // 创建 Intent 来启动个人资料页面
@@ -227,7 +226,7 @@ public class MainMenu extends AppCompatActivity {
                 return;
             }
             DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
-             startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
+            startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
         });
     }
 
