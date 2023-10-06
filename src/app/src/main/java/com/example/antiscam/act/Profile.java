@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,8 @@ public class Profile extends AppCompatActivity {
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
-    String documentId;
+//    String documentId;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +88,9 @@ public class Profile extends AppCompatActivity {
         cardAdapterProfile.setOnDelBtnClickListener(new ScamCaseCardProfileAdapter.OnDelBtnClickListener() {
             @Override
             public void onDelBtnClick(int position, ScamCaseWithUser scamCaseWithUser) {
-                AndroidUtil.showToast(getApplicationContext(), "delete button clicked");
+                setInProgress(true);
+//                AndroidUtil.showToast(getApplicationContext(), "delete button clicked");
                 int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
-//                documentId = getDocumentId(scamCaseId);
 
                 ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
                 scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
@@ -218,6 +220,8 @@ public class Profile extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
                         reloadScamCase();
+                        setInProgress(false);
+
 //                        AndroidUtil.showToast(getApplicationContext(), "Successfully reloaded posts");
                     }
                 })
@@ -243,5 +247,18 @@ public class Profile extends AppCompatActivity {
                 cardAdapterProfile.setData(authUserScamCases);
             }
         });
+
+        // Set adapter for recyclerView to display scam list cards
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerViewProfile.setLayoutManager(layoutManager);
+        recyclerViewProfile.setAdapter(cardAdapterProfile);
+    }
+
+    void setInProgress(boolean inProgress) {
+        if(inProgress){
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
