@@ -13,11 +13,20 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 public class ScamCaseCardProfileAdapter extends ScamCaseCardAdapter {
-
+    private OnDelBtnClickListener onDelBtnClickListener;
     private String userEmail;
+
     public ScamCaseCardProfileAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID, String userEmail) {
         super(dataList, layoutResourceID);
         this.userEmail = userEmail;
+    }
+
+    public void setOnDelBtnClickListener(OnDelBtnClickListener listener) {
+        this.onDelBtnClickListener = listener;
+    }
+
+    public interface OnDelBtnClickListener {
+        void onDelBtnClick(int position, ScamCaseWithUser scamCaseWithUser);
     }
 
     @Override
@@ -40,6 +49,16 @@ public class ScamCaseCardProfileAdapter extends ScamCaseCardAdapter {
             }
         });
 
+        holder.itemView.findViewById(R.id.delBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 处理点击头像事件并跳转到个人资料页面
+                if (onDelBtnClickListener != null) {
+                    int position1 = holder.getAdapterPosition();
+                    onDelBtnClickListener.onDelBtnClick(position1, scamCaseWithUser);
+                }
+            }
+        });
 
         // Get image path
         String imagePath = scamCaseWithUser.getUser().getAvatar();

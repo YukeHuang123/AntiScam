@@ -1,12 +1,16 @@
 package com.example.antiscam.act;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,10 +19,16 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.dataclass.ScamCaseDao;
+import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -32,6 +42,7 @@ public class Profile extends AppCompatActivity {
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
+    String documentId;
     // 自定义的图像选择请求码
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
@@ -139,6 +150,28 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        cardAdapterProfile.setOnDelBtnClickListener(new ScamCaseCardProfileAdapter.OnDelBtnClickListener() {
+            @Override
+            public void onDelBtnClick(int position, ScamCaseWithUser scamCaseWithUser) {
+                AndroidUtil.showToast(getApplicationContext(), "delete button clicked");
+                int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
+//                documentId = getDocumentId(scamCaseId);
+
+                ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+                scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
+                    @Override
+                    public void onDocumentIdReceived(String documentId) {
+                        deletePost(documentId);
+                    }
+
+                    @Override
+                    public void onDocumentIdNotFound() {
+                        AndroidUtil.showToast(getApplicationContext(), "No such post");
+                    }
+                });
+            }
+        });
+
         // Initialize recyclerView
         recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
         recyclerViewProfile.setHasFixedSize(true);
@@ -161,7 +194,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        // Click Avatar, update profile
+        // Click username, update profile
         userNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,4 +206,45 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
+
+    void deletePost(String DocumentId){
+        FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                        AndroidUtil.showToast(getApplicationContext(), "post deletion failed");
+                    }
+                });
+    }
+
+//    String getDocumentId(int scamCaseId) {
+//        FirebaseFirestore.getInstance().collection("scam_cases")
+////                .whereEqualTo("scam_id", scamCaseId)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                documentId = document.getId();
+//                                if (documentId.isEmpty()) {
+//                                    AndroidUtil.showToast(getApplicationContext(), "No such post");
+//                                }
+//                            break;
+//                            }
+//                        } else {
+//                            AndroidUtil.showToast(getApplicationContext(), "Deletion Failed");
+//                        }
+//                    }
+//                });
+//        return documentId;
+//    }
 }
