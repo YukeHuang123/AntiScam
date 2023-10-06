@@ -17,6 +17,7 @@ import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
 import com.google.firebase.storage.StorageReference;
@@ -139,6 +140,20 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        cardAdapterProfile.setOnDelBtnClickListener(new ScamCaseCardProfileAdapter.OnDelBtnClickListener() {
+            @Override
+            public void onDelBtnClick(int position, ScamCaseWithUser scamCaseWithUser) {
+                AndroidUtil.showToast(getApplicationContext(), "delete button clicked");
+                // 创建 Intent 来启动个人资料页面
+//                Intent intentToProfile = new Intent(Profile.this, Profile.class);
+                // 在 Intent 中传递用户数据，例如用户的 ID 或其他标识符
+//                intentToProfile.putExtra("username", scamCaseWithUser.getUser().getUsername());
+//                intentToProfile.putExtra("email", scamCaseWithUser.getUser().getEmail());
+//                intentToProfile.putExtra("avatarPath", scamCaseWithUser.getUser().getAvatar());
+//                startActivity(intentToProfile);
+            }
+        });
+
         // Initialize recyclerView
         recyclerViewProfile = findViewById(R.id.recyclerViewProfile);
         recyclerViewProfile.setHasFixedSize(true);
@@ -161,7 +176,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        // Click Avatar, update profile
+        // Click username, update profile
         userNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
