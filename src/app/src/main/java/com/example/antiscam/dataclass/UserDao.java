@@ -2,6 +2,7 @@ package com.example.antiscam.dataclass;
 
 import com.example.antiscam.bean.User;
 import com.example.antiscam.core.Tokenizer;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface UserDao {
 
     }
     void getAllUsers(Tokenizer tokenizer,UserDao.UserCallback usersCallback);
+    DocumentReference userDetails(String documentID);
+
 }

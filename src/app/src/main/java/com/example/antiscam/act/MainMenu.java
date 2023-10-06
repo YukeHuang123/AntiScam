@@ -47,7 +47,7 @@ public class MainMenu extends AppCompatActivity {
 
     private float dY;
 
-
+    String authUserName;
     private LRUCache<String, ScamCaseWithUser> cache;
 
     //    private int visibleThreshold = 10;
@@ -123,7 +123,14 @@ public class MainMenu extends AppCompatActivity {
         UserInfoManager.getUserInfo(this, userNameView, imageView);
 
         String authUserEmail = UserInfoManager.getAuthUserEmail();
-        String authUserName = UserInfoManager.getAuthUserName();
+        UserInfoManager.getAuthUserName(new UserInfoManager.AuthUserNameCallback() {
+            @Override
+            public void onAuthUserNameReceived(String userName) {
+                authUserName = userName;
+                userNameView.setText(authUserName);
+            }
+        });
+
         String authUserAvatarPath = UserInfoManager.getAuthUserAvatarPath();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
