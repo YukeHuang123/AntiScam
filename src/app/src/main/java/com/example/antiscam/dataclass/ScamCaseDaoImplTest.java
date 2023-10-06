@@ -26,17 +26,4 @@ public class ScamCaseDaoImplTest {
         //int finalSize = dao.getSizeOfScamCase();
         //assertEquals(initialSize + 1, finalSize);
     }
-
-
-   // @Test
-//    public void testAddScamCaseFailure() {
-//        // Create a ScamCase object with invalid data (for testing failure scenario)
-//
-//        // Create an instance of ScamCaseDaoImpl
-//        ScamCaseDaoImpl dao = new ScamCaseDaoImpl();
-//
-//        // Call addScamCase and assert that it fails as expected
-//
-//        // You can add assertions or further checks here
-//    }
 }
