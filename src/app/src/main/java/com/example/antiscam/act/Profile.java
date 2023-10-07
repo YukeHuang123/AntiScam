@@ -2,6 +2,7 @@ package com.example.antiscam.act;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -90,20 +92,33 @@ public class Profile extends AppCompatActivity {
             public void onDelBtnClick(int position, ScamCaseWithUser scamCaseWithUser) {
 //                setInProgress(true);
 //                AndroidUtil.showToast(getApplicationContext(), "delete button clicked");
-                int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
-
-                ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
-                scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
+                builder.setMessage("Are you sure to delete post?").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDocumentIdReceived(String documentId) {
-                        deletePost(documentId);
+                    public void onClick(DialogInterface dialog, int which) {
+                        // According to scam_id, search for document id and then delete the document
+                        int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
+
+                        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+                        scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
+                            @Override
+                            public void onDocumentIdReceived(String documentId) {
+                                deletePost(documentId);
+                            }
+                            @Override
+                            public void onDocumentIdNotFound() {
+                                AndroidUtil.showToast(getApplicationContext(), "No such post");
+                            }
+                        });
                     }
-
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDocumentIdNotFound() {
-                        AndroidUtil.showToast(getApplicationContext(), "No such post");
+                    public void onClick(DialogInterface dialog, int which) {
+                        //
                     }
                 });
+                AlertDialog mDialog = builder.create();
+                mDialog.show();
             }
         });
 
