@@ -96,4 +96,12 @@ dependencies {
     implementation("com.alibaba:fastjson:2.0.28")
 
     implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }

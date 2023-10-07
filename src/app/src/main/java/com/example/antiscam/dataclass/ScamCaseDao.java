@@ -15,5 +15,14 @@ public interface ScamCaseDao {
         void onScamCaseReceived(List<ScamCase> scamcase);
     }
     void addScamCase(ScamCase scamcase);
-    int getSizeOfScamCase();
+
+    public interface NextIdCallback {
+        void onNextId(int nextId);
+    }
+    public void updateNextId(NextIdCallback callback);
+    void getDocumentId(int scam_id, OnDocumentIdCallback onDocumentIdCallback);
+    interface OnDocumentIdCallback {
+        void onDocumentIdReceived(String documentId);
+        void onDocumentIdNotFound();
+    }
 }

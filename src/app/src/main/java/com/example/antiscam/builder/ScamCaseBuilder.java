@@ -1,80 +1,40 @@
 package com.example.antiscam.builder;
 
 import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.tool.NewDate;
 
 import java.util.Date;
 
-public class ScamCaseBuilder extends Builder{
-    private ScamCase scamCase=new ScamCase();
+public class ScamCaseBuilder {
 
 
-    @Override
-    public void putDate(Date date) {
-        scamCase.setDate(date);
-    }
+    public static ScamCase makeScamCase(int id,String amount,String contact,String day, String month, String year,String description,String payment, String user,String type, String title, String age, String city){
+        ScamCase scamCase=new ScamCase();
+        double amount1 = Double.parseDouble(amount);
+        scamCase.setAmount(amount1);
+        scamCase.setContactMethod(contact);
+        scamCase.setScam_id(id);
 
-    @Override
-    public void putAmount(double amount) {
-        scamCase.setAmount(amount);
-    }
 
-    @Override
-    public void putCity(String city) {
-        scamCase.setVictim_city(city);
+        Date scamDate = NewDate.createNewDate(day, month, year);
+        scamCase.setDate(scamDate);
 
-    }
 
-    @Override
-    public void putAge(int age) {
-        scamCase.setVictim_age(age);
-    }
-
-    @Override
-    public void putPostDate(Date postDate) {
-        scamCase.setDate(postDate);
-    }
-
-    @Override
-    public void putScamId(int scamId) {
-        scamCase.setScam_id(scamId);
-    }
-
-    @Override
-    public void putUser(String user) {
-        scamCase.setPost_user(user);
-    }
-
-    @Override
-    public void putDescription(String description) {
         scamCase.setDescription(description);
-    }
-
-    @Override
-    public void putPaymentMethod(String paymentMethod) {
-        scamCase.setPaymentMethod(paymentMethod);
-
-    }
-
-    @Override
-    public void putTitle(String title) {
+        scamCase.setPaymentMethod(payment);
+        scamCase.setPost_user(user);
+        scamCase.setScam_type(type);
         scamCase.setTitle(title);
 
-    }
 
-    @Override
-    public void putType(String type) {
-        scamCase.setScam_type(type);
+        int age1 = Integer.parseInt(age);
+        scamCase.setVictim_age(age1);
+        Date postDate=new Date();
 
-    }
+        scamCase.setVictim_city(city);
+        scamCase.setPost_date(postDate);
 
-    @Override
-    public void putContactMethod(String contactMethod) {
-        scamCase.setContactMethod(contactMethod);
-
-    }
-
-    @Override
-    public ScamCase getScamCase() {
         return scamCase;
     }
+
 }

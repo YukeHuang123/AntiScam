@@ -32,7 +32,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
@@ -46,7 +45,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
 
             <TextView
@@ -99,7 +97,8 @@
                 android:text=""
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseAge"
-                app:layout_constraintTop_toBottomOf="@+id/editTitle"/>
+                app:layout_constraintTop_toBottomOf="@+id/editTitle" />
+
             <TextView
                 android:id="@+id/chooseAmount"
                 android:layout_width="wrap_content"
@@ -124,7 +123,7 @@
                 android:text=""
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseAmount"
-                app:layout_constraintTop_toBottomOf="@+id/editAge"/>
+                app:layout_constraintTop_toBottomOf="@+id/editAge" />
 
             <TextView
                 android:id="@+id/description"
@@ -145,22 +144,9 @@
                 android:layout_width="380sp"
                 android:layout_height="350sp"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/shape_rectangle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
-                app:layout_constraintStart_toStartOf="parent"
-                android:background="@drawable/shape_rectangle"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
-
-            <EditText
-                android:id="@+id/editDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="36sp"
-                android:layout_marginTop="8sp"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Type here!"
-                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -189,6 +175,7 @@
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseDate"
                 app:layout_constraintTop_toBottomOf="@+id/editAmount" />
+
             <EditText
                 android:id="@+id/MM"
                 android:layout_width="78sp"
@@ -199,8 +186,8 @@
                 android:inputType="text"
                 android:text="MM"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/DD"
-                app:layout_constraintBottom_toBottomOf="@+id/DD" />
+                app:layout_constraintBottom_toBottomOf="@+id/DD"
+                app:layout_constraintStart_toEndOf="@+id/DD" />
 
             <EditText
                 android:id="@+id/YYYY"
@@ -212,8 +199,8 @@
                 android:inputType="text"
                 android:text="YYYY"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/MM"
-                app:layout_constraintBottom_toBottomOf="@+id/DD" />
+                app:layout_constraintBottom_toBottomOf="@+id/DD"
+                app:layout_constraintStart_toEndOf="@+id/MM" />
 
             <TextView
                 android:id="@+id/chooseType"
@@ -323,6 +310,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/backSpace" />
 
+            <EditText
+                android:id="@+id/editDescription"
+                android:layout_width="370dp"
+                android:layout_height="342dp"
+                android:layout_margin="4sp"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:text="Type here!"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/backSpace"
+                app:layout_constraintHorizontal_bias="2"
+                app:layout_constraintStart_toStartOf="@+id/backSpace"
+                app:layout_constraintTop_toTopOf="@+id/backSpace" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -340,8 +342,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/blueSpace2"
         app:srcCompat="@drawable/close" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
