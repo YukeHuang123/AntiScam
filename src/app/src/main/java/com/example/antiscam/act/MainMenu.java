@@ -56,6 +56,7 @@ public class MainMenu extends AppCompatActivity {
         initProfile();
         initMainMenu();
         initFltBtn();
+        testRefresh();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -207,6 +208,32 @@ public class MainMenu extends AppCompatActivity {
 //                return true;
 //            }
 //        });
+    }
+
+    void testRefresh(){
+        //
+        Button testUpdate = findViewById(R.id.testUpdate);
+        testUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // When click update button, reload data from firestore
+                reloadMainmenuScamCase();
+            }
+        });
+    }
+    void reloadMainmenuScamCase() {
+        ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
+            @Override
+            public void onDataLoaded(List<ScamCaseWithUser> dataList) {
+                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+                cardAdapter.setData(dataList);
+            }
+        });
+
+        // Set adapter for recyclerView to display scam list cards
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(cardAdapter);
     }
 
     void initProfile(){

@@ -88,7 +88,7 @@ public class Profile extends AppCompatActivity {
         cardAdapterProfile.setOnDelBtnClickListener(new ScamCaseCardProfileAdapter.OnDelBtnClickListener() {
             @Override
             public void onDelBtnClick(int position, ScamCaseWithUser scamCaseWithUser) {
-                setInProgress(true);
+//                setInProgress(true);
 //                AndroidUtil.showToast(getApplicationContext(), "delete button clicked");
                 int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
 
@@ -220,7 +220,7 @@ public class Profile extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
                         reloadScamCase();
-                        setInProgress(false);
+//                        setInProgress(false);
 
 //                        AndroidUtil.showToast(getApplicationContext(), "Successfully reloaded posts");
                     }
