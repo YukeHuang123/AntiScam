@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
@@ -38,6 +39,7 @@ import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
     private static final String TAG = "MainMenu";
+    SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private ScamCaseCardAdapter cardAdapter;
     private Button signOutButton;
@@ -56,7 +58,7 @@ public class MainMenu extends AppCompatActivity {
         initProfile();
         initMainMenu();
         initFltBtn();
-        testRefresh();
+        swipeRefresh();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -210,13 +212,13 @@ public class MainMenu extends AppCompatActivity {
 //        });
     }
 
-    void testRefresh(){
-        //
-        Button testUpdate = findViewById(R.id.testUpdate);
-        testUpdate.setOnClickListener(new View.OnClickListener() {
+    void swipeRefresh(){
+        swipeRefreshLayout = findViewById(R.id.swipeContainer);
+        // SetOnRefreshListener on SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View v) {
-                // When click update button, reload data from firestore
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
                 reloadMainmenuScamCase();
             }
         });
