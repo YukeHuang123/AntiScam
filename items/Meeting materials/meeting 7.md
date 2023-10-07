@@ -1,6 +1,6 @@
 # G32
 
-## Team Meeting 7 - week9  - 2023-10-06 14:30-15:30
+## Team Meeting 7 - week 9  - 2023-10-06 14:30-15:30
 
 
 **Lead/scribe:** Zhaoyun Xu/Yuke Huang
