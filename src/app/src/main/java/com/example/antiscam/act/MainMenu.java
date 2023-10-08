@@ -229,13 +229,14 @@ public class MainMenu extends AppCompatActivity {
             public void onDataLoaded(List<ScamCaseWithUser> dataList) {
                 DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
                 cardAdapter.setData(dataList);
+                cardAdapter.notifyDataSetChanged();
             }
         });
 
         // Set adapter for recyclerView to display scam list cards
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(cardAdapter);
+//        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setAdapter(cardAdapter);
     }
 
     void initProfile(){

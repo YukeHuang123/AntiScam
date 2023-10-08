@@ -260,13 +260,14 @@ public class Profile extends AppCompatActivity {
                     }
                 }
                 cardAdapterProfile.setData(authUserScamCases);
+                cardAdapterProfile.notifyDataSetChanged();
             }
         });
 
         // Set adapter for recyclerView to display scam list cards
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerViewProfile.setLayoutManager(layoutManager);
-        recyclerViewProfile.setAdapter(cardAdapterProfile);
+//        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerViewProfile.setLayoutManager(layoutManager);
+//        recyclerViewProfile.setAdapter(cardAdapterProfile);
     }
 
     void setInProgress(boolean inProgress) {
