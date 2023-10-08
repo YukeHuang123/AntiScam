@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -205,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
             SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            FirebaseFirestore db = FirestoreSingleton.getInstance();
             WriteBatch batch = db.batch();
 
             for (int i = 2000; i < 2500; i++) {

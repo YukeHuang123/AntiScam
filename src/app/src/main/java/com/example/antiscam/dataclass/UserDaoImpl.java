@@ -8,6 +8,7 @@ import com.example.antiscam.bean.User;
 import com.example.antiscam.core.Token;
 import com.example.antiscam.core.TokenHelper;
 import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirestoreSingleton.getInstance();
     private CollectionReference usersCollection = db.collection("users");
 
     private static final String TAG = "UserDaoImpl";

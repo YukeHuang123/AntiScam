@@ -58,7 +58,7 @@ public class LRUCache<K extends Comparable<K>, V> {
         ListNode<K, V> head;
         ListNode<K, V> tail;
         int size = 0;  // current size
-        int capacity;  // max length or capacity of the list
+        int capacity;  // max length of the list
 
         public DoublyLinkedList(int capacity) {
             this.capacity = capacity;
@@ -71,8 +71,7 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
 
         public void addToFront(ListNode<K, V> listNode) {
-            // If listNode was part of another list or the same list
-            // Ensure its relations are disconnected
+            // If listNode was part of list
             if (listNode.prev != null) {
                 listNode.prev.next = listNode.next;
             }

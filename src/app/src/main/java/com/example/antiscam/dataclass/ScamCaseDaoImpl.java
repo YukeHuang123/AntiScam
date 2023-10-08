@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.core.TokenHelper;
 import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -18,7 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.LinkedList;
 
 public class ScamCaseDaoImpl implements ScamCaseDao {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirestoreSingleton.getInstance();
     private CollectionReference usersCollection = db.collection("scam_cases");
     private static final String TAG = "ScamCaseDaoImpl";
 
