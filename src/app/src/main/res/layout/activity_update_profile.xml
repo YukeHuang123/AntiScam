@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="8dp"
+    android:orientation="vertical"
+    tools:context=".act.UpdateProfile"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/closeUpdateProfile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:contentDescription="close update profile"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/close_blue" />
+
+    <ImageView
+        android:id="@+id/avatarUpdate"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/circular_bg"
+        android:backgroundTint="@color/appThemeC"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:src="@drawable/default_avatar" />
+
+    <EditText
+        android:id="@+id/userNameUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_rounded_corner"
+        android:elevation="5dp"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:padding="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/saveProfileUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="@color/appThemeC"
+            android:text="@string/save"
+            android:textColor="@color/white" />
+
+        <ProgressBar
+            android:id="@+id/updateProgressBar"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/appThemeC"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</LinearLayout>

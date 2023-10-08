@@ -5,16 +5,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.User;
-import com.example.antiscam.core.Token;
-import com.example.antiscam.core.TokenHelper;
 import com.example.antiscam.core.Tokenizer;
 import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -96,5 +93,10 @@ public class UserDaoImpl implements UserDao {
             }
         });
     }
+
+    public DocumentReference userDetails(String DocumentID) {
+        return FirebaseFirestore.getInstance().collection("users").document(DocumentID);
+    }
+
 }
 
