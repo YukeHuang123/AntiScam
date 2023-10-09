@@ -2,15 +2,18 @@ package com.example.antiscam.act;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,6 +55,8 @@ public class ChatActivity extends AppCompatActivity {
     private LinkedList<ChatModel> chatModels = new LinkedList<>();
     RecyclerView recyclerView;
     ChatAdapter chatAdapter;
+    TextView titleView;
+    Toolbar toolbar;
     EditText et;
     Button bt;
     CollectionReference ref;
@@ -64,8 +69,8 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        initConfig();
         initView();
+        initConfig();
     }
 
     private void initConfig() {
@@ -74,19 +79,20 @@ public class ChatActivity extends AppCompatActivity {
         img = getIntent().getStringExtra("img");
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ref = db.collection("chat").document(email).collection("chats");
+        ref = db.collection("chats");
 
+        titleView.setText(email);
 
         // receiver msg
         ref.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) return;
-                Log.i(TAG, "addSnapshotListener: " );
+                Log.i(TAG, "addSnapshotListener: ");
                 for (DocumentChange dc : value.getDocumentChanges()) {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
                         ChatModel chatModel = dc.getDocument().toObject(ChatModel.class);
-                        Log.i(TAG, "onEvent: "+chatModel);
+                        Log.i(TAG, "onEvent: " + chatModel);
                         if (Objects.equals(chatModel.getSendUserEmail(), email)) {
                             // receive
                             chatModel.setType(ChatModel.RECEIVE);
@@ -131,7 +137,11 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.chat_recycler);
         et = findViewById(R.id.chat_et);
         bt = findViewById(R.id.chat_bt);
-
+        toolbar = findViewById(R.id.chat_toolbar);
+        titleView = findViewById(R.id.chat_title);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         LinearLayoutManager linearLayout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         linearLayout.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayout);
@@ -150,8 +160,21 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void sendMsg(String msg) {
         ChatModel chatModel = new ChatModel(user.getEmail(), String.valueOf(user.getPhotoUrl()), user.getDisplayName(),
