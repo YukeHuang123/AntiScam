@@ -58,7 +58,7 @@ public class UserDaoImpl implements UserDao {
                         User user = document.toObject(User.class);
                         users.add(user);
                     }
-                    usersCallback.onUsersReceived(users);  // 使用回调返回查询到的所有用户
+                    usersCallback.onUsersReceived(users);
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
                         User user = document.toObject(User.class);
                         users.add(user);
                     }
-                    usersCallback.onUsersReceived(users);  // 使用回调返回查询到的所有用户
+                    usersCallback.onUsersReceived(users);
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }

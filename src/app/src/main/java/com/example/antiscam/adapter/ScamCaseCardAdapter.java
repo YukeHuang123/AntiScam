@@ -78,7 +78,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         holder.avatarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 处理点击头像事件并跳转到个人资料页面
+                // Click avatar and go to profile
                 if (onAvatarClickListener != null) {
                     int position1 = holder.getAdapterPosition();
                     onAvatarClickListener.onAvatarClick(position1, scamCaseWithUser);
