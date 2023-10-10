@@ -1,4 +1,4 @@
-package com.example.antiscam.dataclass;
+package com.example.antiscam;
 
 import static org.junit.Assert.assertEquals;
 
