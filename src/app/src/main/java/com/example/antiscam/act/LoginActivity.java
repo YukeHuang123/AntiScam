@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.singleton.FirestoreSingleton;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -133,6 +133,19 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signIn(String email, String password) {
         // [START sign_in_with_email]
+//        FirebaseAuthManager.signIn(email, password, new FirebaseAuthManager.SignInCallback() {
+//            @Override
+//            public void onSuccess(FirebaseUser user) {
+//                updateUI(user);
+//            }
+//
+//            @Override
+//            public void onFailure(Exception exception) {
+//                Toast.makeText(LoginActivity.this, "Login failed, please check your email and your password!", Toast.LENGTH_SHORT).show();
+//                updateUI(null);
+//            }
+//        });
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -206,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
             SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            FirebaseFirestore db = FirestoreSingleton.getInstance();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
             WriteBatch batch = db.batch();
 
             for (int i = 2000; i < 2500; i++) {

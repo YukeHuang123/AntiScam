@@ -45,7 +45,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.leftNickView.setText(chatModel.getReceiveUserEmail());
             holder.leftContentView.setText(chatModel.getContent());
-            loadImage(chatModel.getReceiveUserImg(),holder.leftImgView);
+            loadImage(chatModel.getSendUserImg(),holder.leftImgView);
         }
     }
 

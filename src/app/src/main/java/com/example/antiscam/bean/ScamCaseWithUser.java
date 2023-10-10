@@ -19,6 +19,9 @@ public class ScamCaseWithUser implements Parcelable {
         this.user = user;
     }
 
+    public ScamCaseWithUser() {
+    }
+
     public void setScamCase(ScamCase scamCase) {
         this.scamCase = scamCase;
     }

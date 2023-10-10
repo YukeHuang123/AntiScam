@@ -132,32 +132,6 @@ public class MainMenu extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cardAdapter);
 
-//        TextView userNameView = findViewById(R.id.userName);
-//        ImageView imageView = findViewById(R.id.avatarImgView);
-//        UserInfoManager.getUserInfo(this, userNameView, imageView);
-//
-//        authUserEmail = UserInfoManager.getAuthUserEmail();
-//        UserInfoManager.getAuthUserName(new UserInfoManager.AuthUserNameCallback() {
-//            @Override
-//            public void onAuthUserNameReceived(String userName) {
-//                authUserName = userName;
-//                userNameView.setText(authUserName);
-//            }
-//        });
-//
-//        authUserAvatarPath = UserInfoManager.getAuthUserAvatarPath();
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // When click avatar, to profile page
-//                Intent intentToProfile = new Intent(MainMenu.this, Profile.class);
-//                intentToProfile.putExtra("username", authUserName);
-//                intentToProfile.putExtra("email", authUserEmail);
-//                intentToProfile.putExtra("avatarPath", authUserAvatarPath);
-//                startActivity(intentToProfile);
-//            }
-//        });
-
         findViewById(R.id.btn_search).setOnClickListener(v -> search());
         searchView = findViewById(R.id.searchView);
 
