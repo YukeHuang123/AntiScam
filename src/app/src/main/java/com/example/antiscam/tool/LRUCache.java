@@ -54,6 +54,15 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
     }
 
+    public void remove(K key, V value) {
+        ListNode<K, V> listNode= list.find(key);
+        if  (listNode != null){
+            list.remove(listNode);
+            map.remove(key, value);
+        }
+
+    }
+
     private static class DoublyLinkedList<K, V> {
         ListNode<K, V> head;
         ListNode<K, V> tail;

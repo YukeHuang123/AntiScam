@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
+import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
@@ -28,7 +29,9 @@ import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
+import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.example.antiscam.tool.LRUCache;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,6 +50,7 @@ public class Profile extends AppCompatActivity {
     private String authUserEmail;
 //    String documentId;
     ProgressBar progressBar;
+    private LRUCache<String, ScamCaseWithUser> cache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,12 +232,14 @@ public class Profile extends AppCompatActivity {
     }
 
     void deletePost(String documentId){
+        cache = CacheToFile.loadCacheFromInternalStorage(this);
         FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
+                        cache.remove(documentId, new ScamCaseWithUser());
                         reloadScamCase();
 //                        setInProgress(false);
 
