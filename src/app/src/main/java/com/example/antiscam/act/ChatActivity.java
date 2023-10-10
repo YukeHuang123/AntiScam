@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ChatAdapter;
 import com.example.antiscam.bean.ChatModel;
-import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -74,7 +73,7 @@ public class ChatActivity extends AppCompatActivity {
         nick = getIntent().getStringExtra("nick");
         img = getIntent().getStringExtra("img");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirestoreSingleton.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         ref = db.collection("chat").document(email).collection("chats");
 
 
