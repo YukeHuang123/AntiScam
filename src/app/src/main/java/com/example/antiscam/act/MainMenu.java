@@ -134,54 +134,6 @@ public class MainMenu extends AppCompatActivity {
 
         findViewById(R.id.btn_search).setOnClickListener(v -> search());
         searchView = findViewById(R.id.searchView);
-
-
-        //set onClick and onTouch listener on fab (FloatingActionButton)
-        FloatingActionButton fab=findViewById(R.id.fab);
-
-        final boolean[] isDragging = {false};
-        fab.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        dX = view.getX() - motionEvent.getRawX();
-                        dY = view.getY() - motionEvent.getRawY();
-                        isDragging[0] = false; // Reset the flag
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        float newY = motionEvent.getRawY() + dY;
-
-                        // Limit the button's position within the parent layout
-                        View parentLayout = (View) view.getParent();
-
-                        if (newY < 0) {
-                            newY = 0;
-                        } else if (newY > parentLayout.getHeight() - view.getHeight()) {
-                            newY = parentLayout.getHeight() - view.getHeight();
-                        }
-
-                        // Keep the button fixed on the right side
-                        float newX = parentLayout.getWidth() - view.getWidth();
-
-                        view.setX(newX);
-                        view.setY(newY);
-                        isDragging[0] = true; // Drag is in progress
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if (!isDragging[0]) {
-                            // if not drag, run click event
-                            Intent intent = new Intent(MainMenu.this, AddPostPage.class);
-                            intent.putExtra("user", authUserEmail);
-                            startActivity(intent);
-                        }
-                        break;
-                    default:
-                        return false;
-                }
-                return true;
-            }
-        });
     }
 
     void swipeRefresh(){
@@ -255,21 +207,19 @@ public class MainMenu extends AppCompatActivity {
                         isDragging[0] = false; // Reset the flag
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        float newX = motionEvent.getRawX() + dX;
                         float newY = motionEvent.getRawY() + dY;
 
                         // Limit the button's position within the parent layout
                         View parentLayout = (View) view.getParent();
-                        if (newX < 0) {
-                            newX = 0;
-                        } else if (newX > parentLayout.getWidth() - view.getWidth()) {
-                            newX = parentLayout.getWidth() - view.getWidth();
-                        }
+
                         if (newY < 0) {
                             newY = 0;
                         } else if (newY > parentLayout.getHeight() - view.getHeight()) {
                             newY = parentLayout.getHeight() - view.getHeight();
                         }
+
+                        // Keep the button fixed on the right side
+                        float newX = parentLayout.getWidth() - view.getWidth();
 
                         view.setX(newX);
                         view.setY(newY);
