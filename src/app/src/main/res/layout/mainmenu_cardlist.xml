@@ -67,6 +67,8 @@
             android:layout_marginBottom="35dp"
             android:textColor="@color/CardListDescC"
             android:textSize="14sp"
+            android:maxLines="3"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
