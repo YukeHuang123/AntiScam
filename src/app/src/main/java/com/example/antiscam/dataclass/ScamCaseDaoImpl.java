@@ -77,8 +77,6 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     @Override
     public void addScamCase(ScamCase scamcase) {
-       // Gson gson = new Gson();
-        //String data = gson.toJson(scamcase);
         casesCollection
                 .add(scamcase)
                 .addOnCompleteListener(task -> {
