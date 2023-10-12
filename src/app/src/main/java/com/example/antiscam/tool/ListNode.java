@@ -1,14 +1,12 @@
 package com.example.antiscam.tool;
 
-public class ListNode<K, V> {
+public class ListNode<K> {
         K key;
-        V value;
-        ListNode<K, V> prev;
-        ListNode<K, V> next;
+        ListNode<K> prev;
+        ListNode<K> next;
 
-        public ListNode(K key, V value) {
+        public ListNode(K key) {
             this.key = key;
-            this.value = value;
         }
 
         public ListNode() {
@@ -22,27 +20,19 @@ public class ListNode<K, V> {
             this.key = key;
         }
 
-        public V getValue() {
-            return value;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
-        }
-
-        public ListNode<K, V> getPrev() {
+        public ListNode<K> getPrev() {
             return prev;
         }
 
-        public void setPrev(ListNode<K, V> prev) {
+        public void setPrev(ListNode<K> prev) {
             this.prev = prev;
         }
 
-        public ListNode<K, V> getNext() {
+        public ListNode<K> getNext() {
             return next;
         }
 
-        public void setNext(ListNode<K, V> next) {
+        public void setNext(ListNode<K> next) {
             this.next = next;
         }
     }

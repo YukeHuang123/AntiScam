@@ -47,7 +47,7 @@ public class CacheToFile {
     private static void saveStringToFile(String data, Context context) {
         try {
             // Save the string to a file in internal storage
-            FileOutputStream fileOutputStream = context.openFileOutput("cache.json", Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = context.openFileOutput("newCache.json", Context.MODE_PRIVATE);
             fileOutputStream.write(data.getBytes());
             fileOutputStream.close();
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class CacheToFile {
 
     private static String readStringFromFile(Context context) {
         try {
-            FileInputStream fileInputStream = context.openFileInput("cache.json");
+            FileInputStream fileInputStream = context.openFileInput("newCache.json");
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
