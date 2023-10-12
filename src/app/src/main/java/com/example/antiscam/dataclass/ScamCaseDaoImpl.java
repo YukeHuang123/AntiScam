@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.LinkedList;
 
@@ -76,6 +77,8 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     @Override
     public void addScamCase(ScamCase scamcase) {
+       // Gson gson = new Gson();
+        //String data = gson.toJson(scamcase);
         casesCollection
                 .add(scamcase)
                 .addOnCompleteListener(task -> {
@@ -87,8 +90,6 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                 });
 
     }
-
-
 
     public void getNextId(NextIdCallback callback) {
         //callback is a interface

@@ -25,6 +25,7 @@
     <string name="save">Save</string>
     <string name="block">Block</string>
     <string name="unblock">Unblock</string>
+    <string name="type_here">TYPE HERE</string>
 
     <string-array name="city_array">
         <item>Melbourne</item>

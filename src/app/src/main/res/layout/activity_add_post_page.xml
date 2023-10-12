@@ -68,7 +68,7 @@
                 android:layout_marginTop="68sp"
                 android:ems="10"
                 android:inputType="text"
-                android:text=""
+                android:hint="@string/title"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseCaseTitle"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
                 android:layout_marginTop="3sp"
                 android:ems="10"
                 android:inputType="text"
-                android:text=""
+                android:hint="@string/age"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseAge"
                 app:layout_constraintTop_toBottomOf="@+id/editTitle" />
@@ -120,7 +120,7 @@
                 android:layout_marginTop="3sp"
                 android:ems="10"
                 android:inputType="text"
-                android:text=""
+                android:hint="@string/amount"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseAmount"
                 app:layout_constraintTop_toBottomOf="@+id/editAge" />
@@ -171,7 +171,7 @@
                 android:layout_marginTop="3sp"
                 android:ems="10"
                 android:inputType="text"
-                android:text="DD"
+                android:hint="DD"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/chooseDate"
                 app:layout_constraintTop_toBottomOf="@+id/editAmount" />
@@ -184,7 +184,7 @@
                 android:layout_marginTop="8sp"
                 android:ems="10"
                 android:inputType="text"
-                android:text="MM"
+                android:hint="MM"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/DD"
                 app:layout_constraintStart_toEndOf="@+id/DD" />
@@ -197,7 +197,7 @@
                 android:layout_marginTop="8sp"
                 android:ems="10"
                 android:inputType="text"
-                android:text="YYYY"
+                android:hint="YYYY"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/DD"
                 app:layout_constraintStart_toEndOf="@+id/MM" />
@@ -318,7 +318,7 @@
                 android:background="@android:color/transparent"
                 android:gravity="top|start"
                 android:inputType="textMultiLine"
-                android:text="Type here!"
+                android:hint="@string/type_here"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/backSpace"
                 app:layout_constraintHorizontal_bias="2"
