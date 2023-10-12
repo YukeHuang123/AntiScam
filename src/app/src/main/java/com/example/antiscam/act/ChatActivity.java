@@ -51,7 +51,7 @@ import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String TAG = "ChatActivity";
+    public static final String TAG = "ChatActivity";
     private LinkedList<ChatModel> chatModels = new LinkedList<>();
     RecyclerView recyclerView;
     ChatAdapter chatAdapter;

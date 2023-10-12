@@ -3,8 +3,6 @@ package com.example.antiscam.tool;
 import android.content.Context;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,9 +25,10 @@ public class CacheToFile {
     public static LRUCache<String, ScamCaseWithUser> loadCacheFromInternalStorage(Context context) {
         LRUCache<String, ScamCaseWithUser> cache = null;
 
-        File cacheFile = new File(context.getFilesDir(), "cache.json");
+        File cacheFile = new File(context.getFilesDir(), "newCache.json");
 
         if (!cacheFile.exists()) {
+
             return null;
         }
 
@@ -47,7 +46,7 @@ public class CacheToFile {
     private static void saveStringToFile(String data, Context context) {
         try {
             // Save the string to a file in internal storage
-            FileOutputStream fileOutputStream = context.openFileOutput("cache.json", Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = context.openFileOutput("newCache.json", Context.MODE_PRIVATE);
             fileOutputStream.write(data.getBytes());
             fileOutputStream.close();
         } catch (Exception e) {
@@ -57,7 +56,7 @@ public class CacheToFile {
 
     private static String readStringFromFile(Context context) {
         try {
-            FileInputStream fileInputStream = context.openFileInput("cache.json");
+            FileInputStream fileInputStream = context.openFileInput("newCache.json");
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
