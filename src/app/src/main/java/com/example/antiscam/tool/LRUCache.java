@@ -16,10 +16,10 @@ public class LRUCache<K extends Comparable<K>, V> {
             return null;
         } else {
             Node<K, V> node = map.get(key);
-            ListNode<K, V> listNode = list.find(key);
-            if (listNode != null) {
-                listNode.value = node.getValue();
-            }
+            ListNode<K> listNode = list.find(key);
+//            if (listNode != null) {
+//                listNode.value = node.getValue();
+//            }
             list.moveToFront(listNode);
             return node.getValue();
         }
