@@ -1,5 +1,8 @@
 package com.example.antiscam.tool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LRUCache<K extends Comparable<K>, V> {
     private int capacity;
     private TreeHashMap<K, V> map;
@@ -23,6 +26,22 @@ public class LRUCache<K extends Comparable<K>, V> {
             list.moveToFront(listNode);
             return node.getValue();
         }
+    }
+
+    public List<V> getAll() {
+        List<V> values = new ArrayList<>();
+        ListNode<K> current = list.head;
+
+        while (current != null) {
+            K key = current.key;
+            V value = map.get(key).getValue();
+            if (value != null) {
+                values.add(value);
+            }
+            current = current.next;
+        }
+
+        return values;
     }
 
     public void put(K key, V value) {

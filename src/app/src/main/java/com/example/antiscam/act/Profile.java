@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.antiscam.History;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
@@ -282,5 +283,10 @@ public class Profile extends AppCompatActivity {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    public void goToHistory(View view) {
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
     }
 }
