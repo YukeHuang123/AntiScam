@@ -33,6 +33,8 @@ public class TokenHelper {
                 return genFilter("title", token.getCtype2(), token.getValue1());
             case AMOUNT:
                 return genFilter("amount", token.getCtype2(), Integer.parseInt(token.getValue1()));
+            case SCAMTYPE:
+                return genFilter("scam_type", token.getCtype2(), token.getValue1());
             case AND:
                 Filter filter = genAndFilter(token.getValue1(), token.getValue2());
                 return filter;

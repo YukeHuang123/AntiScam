@@ -45,6 +45,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -82,7 +83,6 @@ public class ChatActivity extends AppCompatActivity {
         ref = db.collection("chats");
 
         titleView.setText(email);
-
         // receiver msg
         ref.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -96,41 +96,20 @@ public class ChatActivity extends AppCompatActivity {
                         if (Objects.equals(chatModel.getSendUserEmail(), email)) {
                             // receive
                             chatModel.setType(ChatModel.RECEIVE);
+                            chatModel.setReceiveUserName(nick);
                             chatModels.add(chatModel);
+                            sortChat(chatModels);
                         } else if (Objects.equals(chatModel.getSendUserEmail(), user.getEmail())) {
                             // send
                             chatModel.setType(ChatModel.SEND);
                             chatModels.add(chatModel);
+                            sortChat(chatModels);
                         }
                     }
                 }
                 refreshRecycleView();
             }
         });
-//        ref.orderBy("timestamp", Query.Direction.ASCENDING)
-//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            QuerySnapshot snapshots = task.getResult();
-//                            Log.i(TAG, "onComplete: ");
-//                            for (QueryDocumentSnapshot snapshot : snapshots) {
-//                                ChatModel chatModel = snapshot.toObject(ChatModel.class);
-//                                if (Objects.equals(chatModel.getSendUserEmail(), email)) {
-//                                    // receive
-//                                    chatModel.setType(ChatModel.RECEIVE);
-//                                    chatModels.add(chatModel);
-//                                } else if (Objects.equals(chatModel.getSendUserEmail(), user.getEmail())) {
-//                                    // send
-//                                    chatModel.setType(ChatModel.SEND);
-//                                    chatModels.add(chatModel);
-//                                }
-//                            }
-//                            refreshRecycleView();
-//                        }
-//                    }
-//                });
-
     }
 
     private void initView() {
@@ -151,7 +130,7 @@ public class ChatActivity extends AppCompatActivity {
         // Find block and unblock button
         Button blockBtnView = findViewById(R.id.blockBtn);
         Button unblockBtnView = findViewById(R.id.unblockBtn);
-        if (isBlocked()){
+        if (isBlocked()) {
             //
             blockBtnView.setVisibility(View.GONE);
             unblockBtnView.setVisibility(View.VISIBLE);
@@ -179,6 +158,15 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    private void sortChat(List<ChatModel> chatModels) {
+        Collections.sort(chatModels, new Comparator<ChatModel>() {
+            @Override
+            public int compare(ChatModel o1, ChatModel o2) {
+                return Long.compare(o1.getSendTime(), o2.getSendTime());
+            }
+        });
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -193,19 +181,13 @@ public class ChatActivity extends AppCompatActivity {
         ref.add(chatModel);
     }
 
-    private void receiveMsg(ChatModel chatModel) {
-        if (!Objects.equals(chatModel.getSendUserEmail(), email)) return;
-        chatModel.setType(ChatModel.RECEIVE);
-
-    }
-
     private void refreshRecycleView() {
         if (chatModels.size() < 1) return;
         chatAdapter.notifyItemInserted(chatModels.size() - 1);
         recyclerView.scrollToPosition(chatModels.size() - 1);
     }
 
-    private Boolean isBlocked(){
+    private Boolean isBlocked() {
         return false;
     }
 }

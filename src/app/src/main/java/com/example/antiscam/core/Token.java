@@ -9,6 +9,7 @@ public class Token {
         USERNAME,
         TITLE,
         AMOUNT,
+        SCAMTYPE,
         EQ,
         NE,
         LT,

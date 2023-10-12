@@ -25,7 +25,7 @@ public class Tokenizer {
 
         if (input.contains("|") || input.contains("&")) {
             return parser3(input);
-        } else if (input.startsWith("@") || input.startsWith("#") || input.startsWith("%")) {
+        } else if (input.startsWith("@") || input.startsWith("#") || input.startsWith("%")|| input.startsWith("$")) {
             return parser1(input);
         } else {
             return new Token(input, null, Token.Type.STR, null);
@@ -33,7 +33,7 @@ public class Tokenizer {
     }
 
     /**
-     * parser @#%
+     * parser @#%$
      *
      * @return
      */
@@ -47,6 +47,9 @@ public class Tokenizer {
         } else if (input.startsWith("%")) {
             input = input.substring(1);
             return parser2(input, Token.Type.AMOUNT);
+        } else if (input.startsWith("$")) {
+            input = input.substring(1);
+            return parser2(input, Token.Type.SCAMTYPE);
         } else {
             return null;
         }

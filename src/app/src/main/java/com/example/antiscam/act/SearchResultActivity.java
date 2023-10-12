@@ -3,7 +3,9 @@ package com.example.antiscam.act;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.repository.DataRepository;
 import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
@@ -27,6 +31,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private ScamCaseCardAdapter cardAdapter;
     private String searchContent;
     private LRUCache<String, ScamCaseWithUser> cache;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,8 +59,9 @@ public class SearchResultActivity extends AppCompatActivity {
                         .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
                         .create();
                 String cacheString = gson.toJson(cache);
-                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
-                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
+                LRUCache<String, ScamCaseWithUser> cache = gson.fromJson(cacheString,
+                        new TypeToken<LRUCache<String, ScamCaseWithUser>>() {
+                        }.getType());
                 Log.d("cacheToStr", JSON.toJSONString(cache));
                 CacheToFile.saveCacheToInternalStorage(SearchResultActivity.this, cache);
 
@@ -71,8 +77,26 @@ public class SearchResultActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cardAdapter);
 
-        TextView textView = findViewById(R.id.tv_result);
-        textView.setText(searchContent);
+        searchView = findViewById(R.id.searchView);
+        searchView.setQueryHint(searchContent);
         findViewById(R.id.btn_back).setOnClickListener(v -> onBackPressed());
+        findViewById(R.id.btn_search).setOnClickListener(v -> search());
+    }
+
+    private void search() {
+        String query = searchView.getQuery().toString();
+        if (query.length() == 0) {
+            return;
+        }
+        Tokenizer tokenizer = new Tokenizer(query);
+        ScamCaseUserCombine.loadScamCases(tokenizer, dataList -> {
+
+            if (dataList.isEmpty()) {
+                Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
+                return;
+            }
+            DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+            cardAdapter.setData(dataList);
+        });
     }
 }

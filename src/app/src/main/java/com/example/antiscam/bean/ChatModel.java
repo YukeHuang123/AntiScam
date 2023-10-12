@@ -58,6 +58,9 @@ public class ChatModel {
     public String getReceiveUserImg() {
         return receiveUserImg;
     }
+    public void setReceiveUserName(String userName){
+        this.receiveUserName = userName;
+    }
 
     public String getReceiveUserName() {
         return receiveUserName;
