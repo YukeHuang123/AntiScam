@@ -148,6 +148,17 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter(chatModels);
         recyclerView.setAdapter(chatAdapter);
 
+        // Find block and unblock button
+        Button blockBtnView = findViewById(R.id.blockBtn);
+        Button unblockBtnView = findViewById(R.id.unblockBtn);
+        if (isBlocked()){
+            //
+            blockBtnView.setVisibility(View.GONE);
+            unblockBtnView.setVisibility(View.VISIBLE);
+        } else {
+            blockBtnView.setVisibility(View.VISIBLE);
+            unblockBtnView.setVisibility(View.GONE);
+        }
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,5 +203,9 @@ public class ChatActivity extends AppCompatActivity {
         if (chatModels.size() < 1) return;
         chatAdapter.notifyItemInserted(chatModels.size() - 1);
         recyclerView.scrollToPosition(chatModels.size() - 1);
+    }
+
+    private Boolean isBlocked(){
+        return false;
     }
 }
