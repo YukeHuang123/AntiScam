@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".History">
+    tools:context=".act.History">
 
     <View
         android:id="@+id/blueSpace4"
@@ -19,7 +19,7 @@
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="66dp"
         android:layout_marginEnd="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,37 +32,37 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/colorBlock"
             tools:ignore="MissingConstraints" />
+
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageView
-        android:id="@+id/close3"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
-        android:layout_marginStart="10sp"
+        android:id="@+id/goback_History"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:contentDescription="@string/close_profile"
-        android:focusable="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/blueSpace4"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/close" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="136dp"
         android:layout_height="34dp"
-        android:layout_marginTop="20dp"
-        android:text="History"
-        android:textSize="22sp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
+        android:text="History"
         android:textColor="@android:color/white"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/blueSpace4"
         app:layout_constraintStart_toStartOf="@+id/blueSpace4"
-        app:layout_constraintTop_toTopOf="@+id/blueSpace4" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

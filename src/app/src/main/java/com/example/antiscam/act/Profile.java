@@ -18,25 +18,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.antiscam.History;
+import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
-import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.singleton.CacheSingleton;
 import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
 import com.example.antiscam.tool.LRUCache;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +49,14 @@ public class Profile extends AppCompatActivity {
     private RecyclerView recyclerViewProfile;
     private ScamCaseCardProfileAdapter cardAdapterProfile;
     private Button signOutButton;
+    private Button historyButton;
     private String username;
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
 //    String documentId;
     ProgressBar progressBar;
+    private CacheSingleton cacheSingleton;
     private LRUCache<String, ScamCaseWithUser> cache;
 
     @Override
@@ -67,6 +73,16 @@ public class Profile extends AppCompatActivity {
         // scam case list
         List<ScamCaseWithUser> scamCaseWithUserList = new ArrayList<>();
         cardAdapterProfile = new ScamCaseCardProfileAdapter(scamCaseWithUserList, R.layout.profile_cardlist, email);
+
+        cacheSingleton = CacheSingleton.getInstance();
+        cache = cacheSingleton.getCache(this);
+//
+        if (cache == null) {
+            Log.d("cache", "no cache find");
+            cache = new LRUCache<>(100);
+            cacheSingleton.setCache(this, cache);
+        }
+        Log.d("cache", cache.toString());
 
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
@@ -88,6 +104,19 @@ public class Profile extends AppCompatActivity {
                 Intent intentCaseDetail = new Intent(Profile.this, CaseDetail.class);
                 intentCaseDetail.putExtra("scamCaseWithUser", scamCaseWithUser);
                 intentCaseDetail.putExtra("fromPage","userProfile");
+
+                cache = cacheSingleton.getCache(Profile.this);
+                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
+//                Gson gson = new Gson();
+//                Gson gson = new GsonBuilder()
+//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
+//                        .create();
+//                String cacheString = gson.toJson(cache);
+//                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
+//                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
+//                Log.d("cacheToStr", JSON.toJSONString(cache));
+                cacheSingleton.setCache(Profile.this, cache);
+
                 startActivity(intentCaseDetail);
             }
         });
@@ -191,6 +220,7 @@ public class Profile extends AppCompatActivity {
     void initBtn(){
         // Sign out button
         signOutButton = (Button) findViewById(R.id.logoutBtn);
+        historyButton = (Button) findViewById(R.id.historyButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,6 +237,19 @@ public class Profile extends AppCompatActivity {
         } else {
             messageView.setVisibility(View.VISIBLE);
             signOutButton.setVisibility(View.GONE);
+        }
+
+        cache = cacheSingleton.getCache(this);
+        if (cache == null || cache.getSize() == 0) {
+            historyButton.setVisibility(View.GONE);
+        } else {
+            historyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profile.this, History.class);
+                    startActivity(intent);
+                }
+            });
         }
         messageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,7 +276,7 @@ public class Profile extends AppCompatActivity {
     }
 
     void deletePost(String documentId){
-        cache = CacheToFile.loadCacheFromInternalStorage(this);
+        cache = cacheSingleton.getCache(this);
         FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -241,6 +284,7 @@ public class Profile extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
                         cache.remove(documentId, new ScamCaseWithUser());
+                        cacheSingleton.setCache(Profile.this, cache);
                         reloadScamCase();
 //                        setInProgress(false);
 

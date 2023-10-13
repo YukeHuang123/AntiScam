@@ -44,6 +44,10 @@ public class LRUCache<K extends Comparable<K>, V> {
         return values;
     }
 
+    public int getSize() {
+        return list.getSize();
+    }
+
     public void put(K key, V value) {
         if (map == null) {
             map = new TreeHashMap<>();
@@ -99,12 +103,13 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
 
         public void addToFront(ListNode<K> listNode) {
+            ListNode<K> prevNode = findPreviousNode(listNode.key);
             // If listNode was part of list
-            if (listNode.prev != null) {
-                listNode.prev.next = listNode.next;
+            if (prevNode != null) {
+                prevNode.next = listNode.next;
             }
             if (listNode.next != null) {
-                listNode.next.prev = listNode.prev;
+                listNode.next.prev = prevNode;
             }
 
             if (head == null) {
@@ -131,16 +136,18 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
 
         public void remove(ListNode<K> listNode) {
-            if (listNode.prev != null) {
-                listNode.prev.next = listNode.next;
+            ListNode<K> prevNode = findPreviousNode(listNode.key);
+
+            if (prevNode != null) {
+                prevNode.next = listNode.next;
             } else {
                 head = listNode.next;
             }
 
             if (listNode.next != null) {
-                listNode.next.prev = listNode.prev;
+                listNode.next.prev = prevNode;
             } else {
-                tail = listNode.prev;
+                tail = prevNode;
             }
 
             size--;
@@ -160,6 +167,17 @@ public class LRUCache<K extends Comparable<K>, V> {
             ListNode<K> currentNode = head;
             while (currentNode != null) {
                 if (currentNode.key.equals(key)) {
+                    return currentNode;
+                }
+                currentNode = currentNode.next;
+            }
+            return null;
+        }
+
+        public ListNode<K> findPreviousNode(K key) {
+            ListNode<K> currentNode = head;
+            while (currentNode != null && currentNode.next != null) {
+                if (currentNode.next.key.equals(key)) {
                     return currentNode;
                 }
                 currentNode = currentNode.next;
