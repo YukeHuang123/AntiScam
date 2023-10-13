@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
@@ -15,7 +16,9 @@ import java.io.InputStreamReader;
 
 public class CacheToFile {
     public static void saveCacheToInternalStorage(Context context, LRUCache<String, ScamCaseWithUser> cache) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
+                        .create();
 
         String data = gson.toJson(cache);
 //        String data = JSON.toJSONString(cache);

@@ -19,6 +19,7 @@ import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.core.Tokenizer;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.repository.DataRepository;
+import com.example.antiscam.singleton.CacheSingleton;
 import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
 import com.example.antiscam.tool.LRUCache;
@@ -30,6 +31,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ScamCaseCardAdapter cardAdapter;
     private String searchContent;
+    private CacheSingleton cacheSingleton;
     private LRUCache<String, ScamCaseWithUser> cache;
     private SearchView searchView;
 
@@ -39,11 +41,13 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
         searchContent = getIntent().getStringExtra("search_content");
 
-        cache = CacheToFile.loadCacheFromInternalStorage(this);
+        cacheSingleton = CacheSingleton.getInstance();
+        cache = cacheSingleton.getCache(this);
 //
         if (cache == null) {
             Log.d("cache", "no cache find");
             cache = new LRUCache<>(100);
+            cacheSingleton.setCache(this, cache);
         }
 
         cardAdapter = new ScamCaseCardAdapter(DataRepository.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
@@ -54,16 +58,17 @@ public class SearchResultActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchResultActivity.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
 
+                cache = cacheSingleton.getCache(SearchResultActivity.this);
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
-                Gson gson = new GsonBuilder()
-                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
-                        .create();
-                String cacheString = gson.toJson(cache);
-                LRUCache<String, ScamCaseWithUser> cache = gson.fromJson(cacheString,
-                        new TypeToken<LRUCache<String, ScamCaseWithUser>>() {
-                        }.getType());
-                Log.d("cacheToStr", JSON.toJSONString(cache));
-                CacheToFile.saveCacheToInternalStorage(SearchResultActivity.this, cache);
+//                Gson gson = new GsonBuilder()
+//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
+//                        .create();
+//                String cacheString = gson.toJson(cache);
+//                LRUCache<String, ScamCaseWithUser> cache = gson.fromJson(cacheString,
+//                        new TypeToken<LRUCache<String, ScamCaseWithUser>>() {
+//                        }.getType());
+//                Log.d("cacheToStr", JSON.toJSONString(cache));
+                cacheSingleton.setCache(SearchResultActivity.this, cache);
 
                 startActivity(intent);
             }
