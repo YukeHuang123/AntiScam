@@ -22,11 +22,9 @@ import com.example.antiscam.tool.CheckInput;
 import com.example.antiscam.tool.GetString;
 
 public class AddPostPage extends AppCompatActivity {
-    ActivityCaseDetailBinding binding;
+
     ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
     private static final String TAG = "AddPostPage";
-    ScamCase scamCase;
-    ScamCaseDao.NextIdCallback callback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
