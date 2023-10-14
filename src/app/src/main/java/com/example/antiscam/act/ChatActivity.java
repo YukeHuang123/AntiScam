@@ -144,8 +144,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = et.getText().toString();
-                boolean isBlocked = getIntent().getBooleanExtra("isBlockedByAuthUser", false);
-                if (isBlocked){
+                boolean isBlockingAuthUser = getIntent().getBooleanExtra("isBlockingAuthUser", false);
+                if (isBlockingAuthUser){
                     AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
                     builder.setMessage("You have been blocked by the other party and cannot send messages.").setPositiveButton("Understood", new DialogInterface.OnClickListener() {
                         @Override
