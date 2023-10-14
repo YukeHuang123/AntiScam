@@ -23,7 +23,7 @@ import com.example.antiscam.tool.GetString;
 
 public class AddPostPage extends AppCompatActivity {
 
-    ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+    ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
     private static final String TAG = "AddPostPage";
 
     @Override

@@ -144,7 +144,7 @@ public class Profile extends AppCompatActivity {
                         // According to scam_id, search for document id and then delete the document
                         int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
 
-                        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+                        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
                         scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
                             @Override
                             public void onDocumentIdReceived(String documentId) {

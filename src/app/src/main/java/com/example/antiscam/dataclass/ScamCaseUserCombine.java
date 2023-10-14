@@ -24,9 +24,8 @@ public class ScamCaseUserCombine {
     public static void loadScamCases(DataLoadCallback callback) {
         List<ScamCaseWithUser> dataList = new ArrayList<>();
         List<User> allUsers = new ArrayList<>();
-        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
-        UserDaoImpl userDaoImpl = new UserDaoImpl();
-
+        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
+        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
         userDaoImpl.getAllUsers(new UserDao.UserCallback() {
             @Override
             public void onUserReceived(User user) {
@@ -70,8 +69,8 @@ public class ScamCaseUserCombine {
 
     public static void loadScamCases(Tokenizer tokenizer, DataLoadCallback callback) {
         List<ScamCaseWithUser> dataList = new ArrayList<>();
-        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
-        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
+        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
 
         userDaoImpl.getAllUsers(tokenizer, new UserDao.UserCallback() { // 注意：你需要为这个方法定义一个新的回调接口
             @Override

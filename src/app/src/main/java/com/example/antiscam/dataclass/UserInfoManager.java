@@ -64,7 +64,7 @@ public class UserInfoManager {
     public static void getAuthUserName(AuthUserNameCallback callback) {
         if (user != null) {
             authUserEmail = user.getEmail();
-            UserDaoImpl userDaoimpl = new UserDaoImpl();
+            UserDaoImpl userDaoimpl = UserDaoImpl.getInstance();
             userDaoimpl.getUserByEmail(authUserEmail, new UserDao.UserCallback() {
                 @Override
                 public void onUserReceived(User user) {
