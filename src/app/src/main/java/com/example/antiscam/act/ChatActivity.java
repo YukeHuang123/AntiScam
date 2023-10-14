@@ -29,6 +29,7 @@ import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.BlockManager;
 import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -64,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText et;
     Button bt;
     CollectionReference ref;
+    FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
     FirebaseUser user;
     String email;
     String nick;
@@ -86,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         nick = getIntent().getStringExtra("nick");
         img = getIntent().getStringExtra("img");
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = firebaseAuthManager.getUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         ref = db.collection("chats");
 

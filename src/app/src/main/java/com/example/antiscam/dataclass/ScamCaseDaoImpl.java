@@ -23,13 +23,24 @@ import com.google.gson.Gson;
 import java.util.LinkedList;
 
 public class ScamCaseDaoImpl implements ScamCaseDao {
-    private FirebaseFirestore db = FirestoreSingleton.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();;
+    private static ScamCaseDaoImpl scamCaseDao;
     private CollectionReference usersCollection = db.collection("scam_cases");
     private CollectionReference casesCollection = db.collection("scam_cases");
     private CollectionReference counter = db.collection("counter");
     DocumentReference nextIdDocument = counter.document("caseID");
 
     private static final String TAG = "ScamCaseDaoImpl";
+
+    private ScamCaseDaoImpl() {
+    }
+
+    public static ScamCaseDaoImpl getInstance() {
+        if (scamCaseDao == null) {
+            scamCaseDao = new ScamCaseDaoImpl();
+        }
+        return scamCaseDao;
+    }
 
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {

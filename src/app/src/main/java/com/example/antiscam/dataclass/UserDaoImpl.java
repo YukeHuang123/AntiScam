@@ -24,6 +24,18 @@ public class UserDaoImpl implements UserDao {
 
     private static final String TAG = "UserDaoImpl";
 
+    private static UserDaoImpl userDao;
+
+    private UserDaoImpl() {
+    }
+
+    public static UserDaoImpl getInstance() {
+        if (userDao == null) {
+            userDao = new UserDaoImpl();
+        }
+        return userDao;
+    }
+
     // Get user by email
     @Override
     public void getUserByEmail(String targetEmail, UserDao.UserCallback userCallback) {

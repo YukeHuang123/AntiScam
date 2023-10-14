@@ -28,6 +28,7 @@ import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.singleton.CacheSingleton;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
@@ -55,9 +56,11 @@ public class Profile extends AppCompatActivity {
     ProgressBar progressBar;
     private CacheSingleton cacheSingleton;
     private LRUCache<String, ScamCaseWithUser> cache;
-    List<String> blockedUserEmails;
-    List<String> blockerEmails;
-    FirebaseUser user;
+    private List<String> blockedUserEmails;
+    private List<String> blockerEmails;
+    private FirebaseUser user;
+
+    private FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
 
 
     @Override
@@ -134,7 +137,7 @@ public class Profile extends AppCompatActivity {
                         // According to scam_id, search for document id and then delete the document
                         int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
 
-                        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+                        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
                         scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
                             @Override
                             public void onDocumentIdReceived(String documentId) {
@@ -178,7 +181,7 @@ public class Profile extends AppCompatActivity {
     }
 
     void initPersonalInfo(){
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = firebaseAuthManager.getUser();
 
 
         // Get user information
@@ -232,7 +235,7 @@ public class Profile extends AppCompatActivity {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AuthUtils.logout(Profile.this);
+                firebaseAuthManager.logout(Profile.this);
             }
         });
 
