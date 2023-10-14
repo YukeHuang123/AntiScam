@@ -29,6 +29,7 @@ import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.singleton.CacheSingleton;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.CacheToFile;
@@ -61,9 +62,11 @@ public class Profile extends AppCompatActivity {
     ProgressBar progressBar;
     private CacheSingleton cacheSingleton;
     private LRUCache<String, ScamCaseWithUser> cache;
-    List<String> blockedUserEmails;
-    List<String> blockerEmails;
-    FirebaseUser user;
+    private List<String> blockedUserEmails;
+    private List<String> blockerEmails;
+    private FirebaseUser user;
+
+    private FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
 
 
 
@@ -185,7 +188,7 @@ public class Profile extends AppCompatActivity {
     }
 
     void initPersonalInfo(){
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = firebaseAuthManager.getUser();
 
 
         // Get user information
@@ -239,7 +242,7 @@ public class Profile extends AppCompatActivity {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AuthUtils.logout(Profile.this);
+                firebaseAuthManager.logout(Profile.this);
             }
         });
 
