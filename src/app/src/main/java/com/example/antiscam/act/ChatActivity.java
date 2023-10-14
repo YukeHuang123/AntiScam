@@ -260,6 +260,7 @@ public class ChatActivity extends AppCompatActivity {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully blocked");
                         blockBtnView.setVisibility(View.GONE);
                         unblockBtnView.setVisibility(View.VISIBLE);
+                        documentIds = BlockManager.getDocumentId("blocked", email);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
