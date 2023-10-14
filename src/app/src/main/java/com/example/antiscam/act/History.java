@@ -125,6 +125,10 @@ public class History extends AppCompatActivity {
 
     void deleteCache() {
         ImageView deleteIcon = findViewById(R.id.deleteIcon);
+
+        if (cache.getSize() == 0) {
+            deleteIcon.setVisibility(View.GONE);
+        }
         deleteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
