@@ -4,6 +4,7 @@ package com.example.antiscam.act;
 import static android.content.ContentValues.TAG;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -65,6 +66,8 @@ public class ChatActivity extends AppCompatActivity {
     EditText et;
     Button bt;
     CollectionReference ref;
+
+    CollectionReference ref_blocked;
     FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
     FirebaseUser user;
     String email;
@@ -74,6 +77,7 @@ public class ChatActivity extends AppCompatActivity {
     List<String> documentIds;
     Button blockBtnView;
     Button unblockBtnView;
+    boolean isBlockingAuthUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +127,29 @@ public class ChatActivity extends AppCompatActivity {
                 refreshRecycleView();
             }
         });
+        ref_blocked = db.collection("block");
+
+        ref_blocked.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) return;
+                for (DocumentChange dc : value.getDocumentChanges()) {
+                    if (dc.getType() == DocumentChange.Type.ADDED) {
+                        BlockModel blockModel = dc.getDocument().toObject(BlockModel.class);
+                        if (blockModel.getBlocked().equals(user.getEmail())
+                                && blockModel.getBlocker().equals(email)) {
+                            isBlockingAuthUser = true;
+                        }
+                    } else if (dc.getType() == DocumentChange.Type.REMOVED) {
+                        BlockModel blockModel = dc.getDocument().toObject(BlockModel.class);
+                        if (blockModel.getBlocked().equals(user.getEmail())
+                                && blockModel.getBlocker().equals(email)) {
+                            isBlockingAuthUser = false;
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -144,7 +171,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = et.getText().toString();
-                boolean isBlockingAuthUser = getIntent().getBooleanExtra("isBlockingAuthUser", false);
+                isBlockingAuthUser = getIntent().getBooleanExtra("isBlockingAuthUser", false);
                 if (isBlockingAuthUser){
                     AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
                     builder.setMessage("You have been blocked by the other party and cannot send messages.").setPositiveButton("Understood", new DialogInterface.OnClickListener() {

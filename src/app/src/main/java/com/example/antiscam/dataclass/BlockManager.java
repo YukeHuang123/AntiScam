@@ -48,7 +48,10 @@ public class BlockManager {
     // Get blockers
     public static List<String> getBlockedUsers(String blockerEmail) {
         //
-        FirebaseFirestore.getInstance().collection("block").whereEqualTo("blocker", blockerEmail)
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.clearPersistence();
+        blockedUsers.clear();
+        firestore.collection("block").whereEqualTo("blocker", blockerEmail)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -57,6 +60,7 @@ public class BlockManager {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 //                                documentId = document.getId();
                                 blockedData = document.toObject(BlockModel.class);
+
                                 blockedUsers.add(blockedData.getBlocked());
                                 Log.e("getBlock", "block retrieve!");
                             }
@@ -68,7 +72,12 @@ public class BlockManager {
 
     // Get blocked users
     public static List<String> getBlockers(String blockedUserEmail) {
-        FirebaseFirestore.getInstance().collection("block").whereEqualTo("blocked", blockedUserEmail)
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.clearPersistence();
+        Log.d("getBlock", "start search");
+        blockers.clear();
+
+        firestore.collection("block").whereEqualTo("blocked", blockedUserEmail)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -78,6 +87,7 @@ public class BlockManager {
 //                                documentId = document.getId();
                                 blockingData = document.toObject(BlockModel.class);
                                 blockers.add(blockingData.getBlocker());
+                                Log.d("getBlock", "add Block log!");
                             }
                         }
                     }
