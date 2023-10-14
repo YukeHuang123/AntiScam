@@ -1,5 +1,7 @@
 package com.example.antiscam.core;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.firestore.CollectionReference;
@@ -20,8 +22,18 @@ public class TokenHelper {
     }
 
     public Query genQuery(CollectionReference db, Tokenizer tokenizer) {
-        Filter filter = genFilter(tokenizer);
-        return db.where(filter);
+        try {
+            Filter filter = genFilter(tokenizer);
+            if (filter != null) {
+                return db.where(filter);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Firestore Query Error", "Error generating query: " + e.getMessage());
+            return db.whereEqualTo("nonExistentField", "nonExistentValue");
+        }
     }
 
     private Filter genFilter(Tokenizer tokenizer) {

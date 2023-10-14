@@ -10,6 +10,7 @@ import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
 import java.util.List;
 
 public class ScamCaseCardProfileAdapter extends ScamCaseCardAdapter {
@@ -31,12 +32,16 @@ public class ScamCaseCardProfileAdapter extends ScamCaseCardAdapter {
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+
         ScamCaseWithUser scamCaseWithUser = dataList.get(position);
 
         holder.titleTextView.setText(scamCaseWithUser.getScamCase().getTitle());
         holder.descriptionTextView.setText(scamCaseWithUser.getScamCase().getDescription());
         holder.scamTypeTextView.setText(scamCaseWithUser.getScamCase().getScam_type());
         holder.usernameView.setText(scamCaseWithUser.getUser().getUsername());
+        holder.postDateView.setText(dateFormat.format(scamCaseWithUser.getScamCase().getPost_date()));
+
 
         // Set an OnClickListener for the item view(ScamCaseCardAdapter)
         holder.itemView.setOnClickListener(new View.OnClickListener() {

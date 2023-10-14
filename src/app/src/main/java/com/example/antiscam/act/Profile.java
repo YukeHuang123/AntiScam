@@ -145,7 +145,7 @@ public class Profile extends AppCompatActivity {
                         scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
                             @Override
                             public void onDocumentIdReceived(String documentId) {
-                                deletePost(documentId);
+                                deletePost(documentId, String.valueOf(scamCaseId));
                             }
                             @Override
                             public void onDocumentIdNotFound() {
@@ -255,7 +255,7 @@ public class Profile extends AppCompatActivity {
         }
 
         cache = cacheSingleton.getCache(this);
-        if (cache == null || cache.getSize() == 0) {
+        if (cache == null || authUserEmail == null || !authUserEmail.equals(email)) {
             historyButton.setVisibility(View.GONE);
         } else {
             historyButton.setOnClickListener(new View.OnClickListener() {
@@ -296,7 +296,7 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    void deletePost(String documentId){
+    void deletePost(String documentId, String scamcaseID){
         cache = cacheSingleton.getCache(this);
         FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
                 .delete()
@@ -304,7 +304,7 @@ public class Profile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
-                        cache.remove(documentId, new ScamCaseWithUser());
+                        cache.remove(scamcaseID, new ScamCaseWithUser());
                         cacheSingleton.setCache(Profile.this, cache);
                         reloadScamCase();
 //                        setInProgress(false);
