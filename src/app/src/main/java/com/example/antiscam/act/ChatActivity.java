@@ -38,6 +38,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -47,8 +48,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
@@ -65,6 +68,10 @@ public class ChatActivity extends AppCompatActivity {
     String email;
     String nick;
     String img;
+    String documentId;
+    List<String> documentIds;
+    Button blockBtnView;
+    Button unblockBtnView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,6 +116,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
 
+                documentIds = BlockManager.getDocumentId("blocked", email);
 
                 refreshRecycleView();
             }
@@ -134,8 +142,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = et.getText().toString();
-                String receiverEmail = getIntent().getStringExtra("nick");
-                boolean isBlocked = getIntent().getBooleanExtra("isBlocked", false);
+                boolean isBlocked = getIntent().getBooleanExtra("isBlockedByAuthUser", false);
                 if (isBlocked){
                     AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
                     builder.setMessage("You have been blocked by the other party and cannot send messages.").setPositiveButton("Understood", new DialogInterface.OnClickListener() {
@@ -193,10 +200,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initBlock() {
         // Find block and unblock button
-        Button blockBtnView = findViewById(R.id.blockBtn);
-        Button unblockBtnView = findViewById(R.id.unblockBtn);
-        boolean isBlocking = getIntent().getBooleanExtra("isBlocking", false);
-        if (isBlocking) {
+        blockBtnView = findViewById(R.id.blockBtn);
+        unblockBtnView = findViewById(R.id.unblockBtn);
+        boolean isBlockedByAuthUser = getIntent().getBooleanExtra("isBlockedByAuthUser", false);
+        if (isBlockedByAuthUser) {
             //
             blockBtnView.setVisibility(View.GONE);
             unblockBtnView.setVisibility(View.VISIBLE);
@@ -208,12 +215,16 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //
-                String documentId = BlockManager.getDocumentId("blocked", email);
+                if (!documentIds.isEmpty()) {
+                    documentId = documentIds.get(0);
+                }
                 FirebaseFirestore.getInstance().collection("block").document(documentId)
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                unblockBtnView.setVisibility(View.GONE);
+                                blockBtnView.setVisibility(View.VISIBLE);
                                 AndroidUtil.showToast(getApplicationContext(), "Successfully unblocked");
                             }
                         })
@@ -226,29 +237,34 @@ public class ChatActivity extends AppCompatActivity {
                         });
             }
         });
+        blockBtnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                blockUser();
+            }
+        });
     }
 
-    // If blocked by receiver
-
-
-//    List<String> getBlockedUsers(String blockerEmail) {
-//        List<String> blockedUsers = new ArrayList<>();
-//            //
-//        FirebaseFirestore.getInstance().collection("block").whereEqualTo("blocker", blockerEmail)
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-////                                documentId = document.getId();
-//                                BlockModel blockedData = document.toObject(BlockModel.class);
-//                                blockedUsers.add(blockedData.getBlockedEmail());
-//                            }
-//                        }
-//                    }
-//                });
-//            return blockedUsers;
-//
-//    }
+    void blockUser() {
+//        BlockModel blockModel = new BlockModel(user.getEmail(), email);
+        Map<String, Object> blockRecords = new HashMap<>();
+        blockRecords.put("blocker", user.getEmail());
+        blockRecords.put("blocked", email);
+        FirebaseFirestore.getInstance().collection("block")
+                .add(blockRecords)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        AndroidUtil.showToast(getApplicationContext(), "Successfully blocked");
+                        blockBtnView.setVisibility(View.GONE);
+                        unblockBtnView.setVisibility(View.VISIBLE);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        AndroidUtil.showToast(getApplicationContext(), "Block failed");
+                    }
+                });
+    }
 }

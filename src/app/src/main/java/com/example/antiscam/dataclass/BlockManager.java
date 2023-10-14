@@ -24,7 +24,7 @@ public class BlockManager {
     static BlockModel blockedData;
     static BlockModel blockingData;
 
-    public static String getDocumentId(String field, String email) {
+    public static List<String> getDocumentId(String field, String email) {
         FirebaseFirestore.getInstance().collection("block")
                 .whereEqualTo(field, email)
                 .get()
@@ -36,7 +36,6 @@ public class BlockManager {
                                 String documentId = document.getId();
                                 if (!documentId.isEmpty()) {
                                     documentIdList.add(documentId);
-                                    break;
                                 }
                             }
                         } else {
@@ -44,7 +43,7 @@ public class BlockManager {
                         }
                     }
                 });
-        return documentIdList.get(0);
+        return documentIdList;
     }
     // Get blockers
     public static List<String> getBlockedUsers(String blockerEmail) {

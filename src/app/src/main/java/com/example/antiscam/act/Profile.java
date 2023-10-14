@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
@@ -31,9 +30,7 @@ import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.singleton.CacheSingleton;
 import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.AuthUtils;
-import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
-import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
 import com.example.antiscam.tool.LRUCache;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,9 +38,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +58,6 @@ public class Profile extends AppCompatActivity {
     List<String> blockedUserEmails;
     List<String> blockerEmails;
     FirebaseUser user;
-
 
 
     @Override
@@ -196,8 +189,8 @@ public class Profile extends AppCompatActivity {
         // Set user name
         userNameView.setText(username);
 
-        blockerEmails = BlockManager.getBlockers(email);
-        blockedUserEmails = BlockManager.getBlockedUsers(user.getEmail());
+        blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
+        blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 
         // Get image reference and load to ImageView
         try {
@@ -269,16 +262,18 @@ public class Profile extends AppCompatActivity {
         messageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
+                //    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 
-                boolean isBlocking = isBlocking(email);
-                boolean isBlocked = isBlocked(email);
+                boolean isBlockedByAuthUser = isBlockedByAuthUser(authUserEmail); // Is auth user blocked by profile user
+                boolean isBlockingAuthUser = isBlockingAuthUser(authUserEmail); // Is auth user blocking profile user
 
                 Intent intent = new Intent(Profile.this, ChatActivity.class)
                         .putExtra("img", userAvatarPath)
                         .putExtra("nick", username)
                         .putExtra("email", email)
-                        .putExtra("isBlocking", isBlocking)
-                        .putExtra("isBlocked", isBlocked);
+                        .putExtra("isBlockingAuthUser", isBlockingAuthUser)
+                        .putExtra("isBlockedByAuthUser", isBlockedByAuthUser);
                 startActivity(intent);
             }
         });
@@ -354,20 +349,22 @@ public class Profile extends AppCompatActivity {
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
+//    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
+//    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 
-    Boolean isBlocked(String receiverEmail){
+    Boolean isBlockedByAuthUser(String authUserEmail){
 //        blockerEmails = BlockManager.getBlockers(receiverEmail);
 
-        if (!blockerEmails.isEmpty() && blockerEmails.contains(user.getEmail())) {
+        if (!blockerEmails.isEmpty() && blockerEmails.contains(authUserEmail)) {
             return true;
         }
         return false;
     }
 
     // If blocking receiver
-    Boolean isBlocking(String receiverEmail){
+    Boolean isBlockingAuthUser(String authUserEmail){
 //        blockedUserEmails = BlockManager.getBlockedUsers(user.getEmail());
-        if (!blockedUserEmails.isEmpty() && blockedUserEmails.contains(receiverEmail)) {
+        if (!blockedUserEmails.isEmpty() && blockedUserEmails.contains(authUserEmail)) {
             return true;
         }
         return false;
