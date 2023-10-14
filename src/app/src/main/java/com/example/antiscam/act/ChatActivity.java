@@ -1,17 +1,21 @@
 package com.example.antiscam.act;
 
+
+import static android.content.ContentValues.TAG;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,31 +23,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ChatAdapter;
+import com.example.antiscam.bean.BlockModel;
 import com.example.antiscam.bean.ChatModel;
+import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.dataclass.BlockManager;
+import com.example.antiscam.dataclass.ScamCaseDao;
+import com.example.antiscam.dataclass.ScamCaseDaoImpl;
+import com.example.antiscam.tool.AndroidUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -51,7 +52,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
-
     public static final String TAG = "ChatActivity";
     private LinkedList<ChatModel> chatModels = new LinkedList<>();
     RecyclerView recyclerView;
@@ -72,6 +72,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         initView();
         initConfig();
+        initBlock();
     }
 
     private void initConfig() {
@@ -107,6 +108,8 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     }
                 }
+
+
                 refreshRecycleView();
             }
         });
@@ -127,22 +130,23 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter(chatModels);
         recyclerView.setAdapter(chatAdapter);
 
-        // Find block and unblock button
-        Button blockBtnView = findViewById(R.id.blockBtn);
-        Button unblockBtnView = findViewById(R.id.unblockBtn);
-        if (isBlocked()) {
-            //
-            blockBtnView.setVisibility(View.GONE);
-            unblockBtnView.setVisibility(View.VISIBLE);
-        } else {
-            blockBtnView.setVisibility(View.VISIBLE);
-            unblockBtnView.setVisibility(View.GONE);
-        }
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String msg = et.getText().toString();
-                if (!msg.isEmpty()) {
+                String receiverEmail = getIntent().getStringExtra("nick");
+                boolean isBlocked = getIntent().getBooleanExtra("isBlocked", false);
+                if (isBlocked){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+                    builder.setMessage("You have been blocked by the other party and cannot send messages.").setPositiveButton("Understood", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // According to scam_id, search for document id and then delete the document
+                        }
+                    });
+                    AlertDialog mDialog = builder.create();
+                    mDialog.show();
+                } else if (!msg.isEmpty()) {
                     sendMsg(msg);
                     et.getText().clear();
                 } else {
@@ -187,7 +191,64 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.scrollToPosition(chatModels.size() - 1);
     }
 
-    private Boolean isBlocked() {
-        return false;
+    private void initBlock() {
+        // Find block and unblock button
+        Button blockBtnView = findViewById(R.id.blockBtn);
+        Button unblockBtnView = findViewById(R.id.unblockBtn);
+        boolean isBlocking = getIntent().getBooleanExtra("isBlocking", false);
+        if (isBlocking) {
+            //
+            blockBtnView.setVisibility(View.GONE);
+            unblockBtnView.setVisibility(View.VISIBLE);
+        } else {
+            blockBtnView.setVisibility(View.VISIBLE);
+            unblockBtnView.setVisibility(View.GONE);
+        }
+        unblockBtnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+                String documentId = BlockManager.getDocumentId("blocked", email);
+                FirebaseFirestore.getInstance().collection("block").document(documentId)
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                AndroidUtil.showToast(getApplicationContext(), "Successfully unblocked");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error deleting document", e);
+                                AndroidUtil.showToast(getApplicationContext(), "Unblock failed");
+                            }
+                        });
+            }
+        });
     }
+
+    // If blocked by receiver
+
+
+//    List<String> getBlockedUsers(String blockerEmail) {
+//        List<String> blockedUsers = new ArrayList<>();
+//            //
+//        FirebaseFirestore.getInstance().collection("block").whereEqualTo("blocker", blockerEmail)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+////                                documentId = document.getId();
+//                                BlockModel blockedData = document.toObject(BlockModel.class);
+//                                blockedUsers.add(blockedData.getBlockedEmail());
+//                            }
+//                        }
+//                    }
+//                });
+//            return blockedUsers;
+//
+//    }
 }

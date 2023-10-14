@@ -23,6 +23,7 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.dataclass.BlockManager;
 import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
@@ -36,6 +37,8 @@ import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
 import com.example.antiscam.tool.LRUCache;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
@@ -58,6 +61,11 @@ public class Profile extends AppCompatActivity {
     ProgressBar progressBar;
     private CacheSingleton cacheSingleton;
     private LRUCache<String, ScamCaseWithUser> cache;
+    List<String> blockedUserEmails;
+    List<String> blockerEmails;
+    FirebaseUser user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +185,9 @@ public class Profile extends AppCompatActivity {
     }
 
     void initPersonalInfo(){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
         // Get user information
         TextView userNameView = findViewById(R.id.userNamePro);
         ImageView userAvatarView = findViewById(R.id.avatarImgViewPro);
@@ -184,6 +195,9 @@ public class Profile extends AppCompatActivity {
 
         // Set user name
         userNameView.setText(username);
+
+        blockerEmails = BlockManager.getBlockers(email);
+        blockedUserEmails = BlockManager.getBlockedUsers(user.getEmail());
 
         // Get image reference and load to ImageView
         try {
@@ -218,6 +232,7 @@ public class Profile extends AppCompatActivity {
     }
 
     void initBtn(){
+
         // Sign out button
         signOutButton = (Button) findViewById(R.id.logoutBtn);
         historyButton = (Button) findViewById(R.id.historyButton);
@@ -254,10 +269,16 @@ public class Profile extends AppCompatActivity {
         messageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                boolean isBlocking = isBlocking(email);
+                boolean isBlocked = isBlocked(email);
+
                 Intent intent = new Intent(Profile.this, ChatActivity.class)
                         .putExtra("img", userAvatarPath)
                         .putExtra("nick", username)
-                        .putExtra("email", email);
+                        .putExtra("email", email)
+                        .putExtra("isBlocking", isBlocking)
+                        .putExtra("isBlocked", isBlocked);
                 startActivity(intent);
             }
         });
@@ -332,5 +353,23 @@ public class Profile extends AppCompatActivity {
     public void goToHistory(View view) {
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
+    }
+
+    Boolean isBlocked(String receiverEmail){
+//        blockerEmails = BlockManager.getBlockers(receiverEmail);
+
+        if (!blockerEmails.isEmpty() && blockerEmails.contains(user.getEmail())) {
+            return true;
+        }
+        return false;
+    }
+
+    // If blocking receiver
+    Boolean isBlocking(String receiverEmail){
+//        blockedUserEmails = BlockManager.getBlockedUsers(user.getEmail());
+        if (!blockedUserEmails.isEmpty() && blockedUserEmails.contains(receiverEmail)) {
+            return true;
+        }
+        return false;
     }
 }

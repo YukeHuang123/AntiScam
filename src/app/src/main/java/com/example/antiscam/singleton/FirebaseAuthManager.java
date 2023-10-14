@@ -21,7 +21,7 @@ public class FirebaseAuthManager {
         return FirebaseAuth.getInstance();
     }
 
-    public static void signIn(String email, String password, SignInCallback callback) {
+    public static void logIn(String email, String password, SignInCallback callback) {
         String TAG = "EmailPassword";
         auth = FirebaseAuth.getInstance();
         auth.signInWithEmailAndPassword(email, password)

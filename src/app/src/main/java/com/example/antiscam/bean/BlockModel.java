@@ -1,20 +1,30 @@
 package com.example.antiscam.bean;
 
 public class BlockModel {
-    private String email;
+    private String blocker;
+    private String blocked;
 
     public BlockModel() {
     }
 
-    public BlockModel(String email) {
-        this.email = email;
+    public BlockModel(String blocker, String blocked) {
+        this.blocker = blocker;
+        this.blocked = blocked;
     }
 
-    public String getEmail() {
-        return email;
+    public String getBlocker() {
+        return blocker;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBlocker(String blocker) {
+        this.blocker = blocker;
+    }
+
+    public String getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(String blocked) {
+        this.blocked = blocked;
     }
 }
