@@ -1,14 +1,19 @@
 package com.example.antiscam.act;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
@@ -44,6 +49,7 @@ public class History extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         initHistory();
         swipeRefresh();
+        deleteCache();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -115,5 +121,44 @@ public class History extends AppCompatActivity {
 //        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 //        recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setAdapter(cardAdapter);
+    }
+
+    void deleteCache() {
+        ImageView deleteIcon = findViewById(R.id.deleteIcon);
+        deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 创建并显示删除确认对话框
+                AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                builder.setTitle("Delete All History"); // 对话框标题
+                builder.setMessage("Are you sure you want to delete all history records?"); // 对话框消息
+
+                // 添加 "Yes" 按钮，用户确认删除
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteAllHistoryRecords();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 用户取消删除操作，不执行任何操作
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+    }
+
+    void deleteAllHistoryRecords() {
+        cache = new LRUCache<>(100);
+        cacheSingleton.setCache(this, cache);
+        Toast.makeText(History.this, "Delete all history, go back to profile!", Toast.LENGTH_SHORT).show();
+        onBackPressed();
     }
 }
