@@ -43,7 +43,6 @@ public class MainMenu extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private ScamCaseCardAdapter cardAdapter;
-    private Button signOutButton;
     private SearchView searchView;
     private float dX;
     private float dY;
@@ -226,7 +225,6 @@ public class MainMenu extends AppCompatActivity {
 
                         // Keep the button fixed on the right side
                         float newX = parentLayout.getWidth() - view.getWidth();
-
                         view.setX(newX);
                         view.setY(newY);
                         isDragging[0] = true; // Drag is in progress
