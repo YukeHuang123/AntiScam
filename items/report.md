@@ -237,23 +237,102 @@ Production Rules:
 
 <br>
 <hr>
+| No   | 待确认点/待办                                           |
+| :--- | ------------------------------------------------------- |
+| 1    | Class FirebaseAuthManage是否需要写进Log in的feature？？ |
+| 2    | DataFile需要将comp21006442@gmail.com加为Developer       |
+| 3    | Login中的updateFirestore是用来做什么的？？              |
+| 4    | LoadShowData是否还需要接收notifications？               |
+|      |                                                         |
+|      |                                                         |
+|      |                                                         |
+|      |                                                         |
+|      |                                                         |
+
+
 
 ## Implemented Features
+
 *[What features have you implemented? where, how, and why?]* <br>
 *List all features you have completed in their separate categories with their featureId. THe features must be one of the basic/custom features, or an approved feature from Voice Four Feature.*
 
 ### Basic Features
-1. [LogIn]. Description of the feature ... (easy)
-   * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-   * Description of feature: ... <br>
-   * Description of your implementation: ... <br>
+1. [LogIn]. Log in refers to the process where users enter their username and password on a login page to verify their identity and grant them access privileges. User information is stored in Firebase. If the username and password entered on the login page are correct, the user logs in successfully and is redirected to the app's main page. Otherwise, a toast message pops up, indicating that the username or password is incorrect.
 
-2. [DataFiles]. Description  ... ... (...)
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+   Two pre-existing accounts have been added to Firebase: 
 
-3. ...
-   <br>
+   Username: [comp6442@anu.edu.au](mailto:comp6442@anu.edu.au), Password: comp6442 
+
+   Username: [comp2100@anu.edu.au](mailto:comp2100@anu.edu.au), Password: comp2100  (easy)<br>
+
+   * Code: 
+
+     Class [LoginActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L1-225) 
+
+     **????** Class [FirebaseAuthManage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/singleton/FirebaseAuthManager.java#L1-72)
+
+2. [DataFiles].2,500 scam cases were created, including information such as post user, post date, scam type, title, description, etc. The data files were stored in JSON format and then batch-imported into Firebase as a collection. (easy)
+
+   * Code
+
+     Data File [scamCase.json](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/assets/scamCase.json), 
+
+     Class [LoginActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L1-225) [updateFirestore](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L164-224)
+
+   * Link to the Firebase repo: [scam_cases](https://console.firebase.google.com/project/antiscam-5b447/firestore/data/~2Fscam_cases)
+
+3. [LoadShowData]. When a user is logged in and redirected to the main menu, scam cases listed on the main menu will be loaded from Firebase every 10 seconds. Since each scam case contains both scam case information and user information, we load and combine them together, presenting them as a single scam case card. If a new post is added, upon returning to the main page, the data on the main page will also be refreshed. If a user clicks on a scam case card, they will be directed to the detailed information page for that scam case. Additionally, the user's avatar will also be loaded from Firebase. (Medium)
+
+   - Code
+
+     Class [act/MainMenu](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java)
+
+     Class [act/CaseDetail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/CaseDetail.java)
+
+     Class [adapter/ScamCaseCardAdapter](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java)
+
+     Class [dataclass/ScamCaseDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java)
+
+     Class [dataclass/ScamCaseUserCombine](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseUserCombine.java)
+
+     Class [dataclass/UserDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/UserDao.java)
+
+     Class [dataclass/UserDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/UserDaoImpl.java)
+
+     Class [dataclass/UserInfoManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/UserInfoManager.java)
+
+     Class [bean/ScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCase.java)
+
+     Class [bean/ScamCaseWithUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java)
+
+     Class [bean/User](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/User.java)
+
+4. [Search] Users are able to search for scam case information on app. Search feature utilises the Tokenizer and Parser. Combined searches are supported. (medium)
+
+   - Search token, combine symbol and compare symbol
+
+     | Token | Search target |
+     | :---- | ------------- |
+     | @     | user email    |
+     | #     | title         |
+     | %     | amount        |
+     | $     | scam type     |
+
+     The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>' and so on. 
+
+   - Code
+
+     Class [act/SearchResultActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java)
+
+     Class [core/Token](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/Token.java)
+
+     Class [core/TokenHelper](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/TokenHelper.java)
+
+     Class [core/Tokenizer](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/Tokenizer.java)
+
+     Class [repository/DataRepository](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/repository/DataRepository.java)
+
+     <br>
 
 ### Custom Features
 Feature Category: Privacy <br>
@@ -276,10 +355,9 @@ Feature Category: Firebase Integration <br>
 
 ### Surprised Features
 
-- If implemented, explain how your solution addresses the task (any detail requirements will be released with the surprised feature specifications).
-- State that "Suprised feature is not implemented" otherwise.
+- Suprised feature is not implemented
 
-<br> <hr>
+  <br> <hr>
 
 ## Summary of Known Errors and Bugs
 

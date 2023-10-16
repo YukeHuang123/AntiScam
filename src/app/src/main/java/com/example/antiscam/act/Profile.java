@@ -30,12 +30,10 @@ import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.singleton.CacheSingleton;
 import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
-import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
 import com.example.antiscam.tool.LRUCache;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
@@ -265,9 +263,6 @@ public class Profile extends AppCompatActivity {
         messageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
-                //    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
-
                 boolean isBlockedByAuthUser = isBlockedByAuthUser(authUserEmail); // Is auth user blocked by profile user
                 boolean isBlockingAuthUser = isBlockingAuthUser(authUserEmail); // Is auth user blocking profile user
 
@@ -305,9 +300,6 @@ public class Profile extends AppCompatActivity {
                         cache.remove(scamcaseID, new ScamCaseWithUser());
                         cacheSingleton.setCache(Profile.this, cache);
                         reloadScamCase();
-//                        setInProgress(false);
-
-//                        AndroidUtil.showToast(getApplicationContext(), "Successfully reloaded posts");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener(){
@@ -333,14 +325,6 @@ public class Profile extends AppCompatActivity {
                 cardAdapterProfile.notifyDataSetChanged();
             }
         });
-    }
-
-    void setInProgress(boolean inProgress) {
-        if(inProgress){
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
     }
 
     public void goToHistory(View view) {
