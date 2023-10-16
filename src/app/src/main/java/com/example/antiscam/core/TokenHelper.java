@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TokenHelper {
+    private static final String TAG = "TokenHelper";
     private static TokenHelper instance = new TokenHelper();
 
     private TokenHelper() {
@@ -38,6 +39,7 @@ public class TokenHelper {
 
     private Filter genFilter(Tokenizer tokenizer) {
         Token token = tokenizer.getTokens();
+        Log.i(TAG, "genFilter: " + token);
         switch (token.getCtype1()) {
             case USERNAME:
                 return genFilter("post_user", token.getCtype2(), token.getValue1());
@@ -49,9 +51,12 @@ public class TokenHelper {
                 return genFilter("scam_type", token.getCtype2(), token.getValue1());
             case AND:
                 Filter filter = genAndFilter(token.getValue1(), token.getValue2());
-                return filter;
+                if (filter == null) return Filter.and();
+                else return filter;
             case OR:
-                return genOrFilter(token.getValue1(), token.getValue2());
+                Filter orFilter = genOrFilter(token.getValue1(), token.getValue2());
+                if (orFilter == null) return Filter.or();
+                else return orFilter;
             case STR:
                 break;
         }
@@ -80,13 +85,16 @@ public class TokenHelper {
     private static Filter genAndFilter(String exp1, String exp2) {
         Tokenizer tokenizer1 = new Tokenizer(exp1);
         Tokenizer tokenizer2 = new Tokenizer(exp2);
-
+        if (tokenizer1.getTokens().getCtype2() == Token.Type.STR || tokenizer2.getTokens().getCtype2() == Token.Type.STR)
+            return null;
         return Filter.and(instance.genFilter(tokenizer1), instance.genFilter(tokenizer2));
     }
 
     private static Filter genOrFilter(String exp1, String exp2) {
         Tokenizer tokenizer1 = new Tokenizer(exp1);
         Tokenizer tokenizer2 = new Tokenizer(exp2);
+        if (tokenizer1.getTokens().getCtype2() == Token.Type.STR || tokenizer2.getTokens().getCtype2() == Token.Type.STR)
+            return null;
         return Filter.or(instance.genFilter(tokenizer1), instance.genFilter(tokenizer2));
     }
 
