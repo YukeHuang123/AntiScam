@@ -3,10 +3,10 @@ package com.example.antiscam.act;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
@@ -26,14 +25,9 @@ import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.example.antiscam.repository.DataRepository;
 import com.example.antiscam.singleton.CacheSingleton;
-import com.example.antiscam.tool.CacheToFile;
 import com.example.antiscam.tool.DataLoadCallback;
-import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
 import com.example.antiscam.tool.LRUCache;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +45,9 @@ public class MainMenu extends AppCompatActivity {
     String authUserAvatarPath;
     private CacheSingleton cacheSingleton;
     private LRUCache<String, ScamCaseWithUser> cache;
-
+    private Handler handler;
+    private Runnable refreshRunnable;
+    private final long REFRESH_INTERVAL = 10000; // 10 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +57,20 @@ public class MainMenu extends AppCompatActivity {
         initMainMenu();
         initFltBtn();
         swipeRefresh();
+        // Initialise Handler and Runnable
+        handler = new Handler();
+        refreshRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // refresh
+                reloadMainmenuScamCase();
+                // schedule next refresh
+                Log.d("refresh", "start refresh every 10 seconds");
+                handler.postDelayed(this, REFRESH_INTERVAL);
+            }
+        };
+        // start refresh at a certain interval
+        handler.postDelayed(refreshRunnable, REFRESH_INTERVAL);
     }
 
     @SuppressLint("ClickableViewAccessibility")
