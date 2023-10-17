@@ -1,5 +1,6 @@
 package com.example.antiscam.core;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
@@ -67,5 +68,15 @@ public class Token {
     @Override
     public int hashCode() {
         return Objects.hash(value1, value2, ctype1, ctype2);
+    }
+
+    @Override
+    public String toString() {
+        return "Token{" +
+                "value1='" + value1 + '\'' +
+                ", value2='" + value2 + '\'' +
+                ", ctype1=" + ctype1 +
+                ", ctype2=" + ctype2 +
+                '}';
     }
 }
