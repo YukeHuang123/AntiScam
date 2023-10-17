@@ -78,13 +78,6 @@ public class UserDaoImpl implements UserDao {
         });
     }
 
-    // 回调接口，用于将获取的用户数据传递出去
-    public interface UserCallback {
-        void onUserReceived(User user);
-
-        void onUsersReceived(List<User> users);
-    }
-
     @Override
     public void getAllUsers(Tokenizer tokenizer, UserDao.UserCallback usersCallback) {
         usersCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
