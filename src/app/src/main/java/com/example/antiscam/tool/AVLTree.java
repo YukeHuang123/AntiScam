@@ -123,6 +123,24 @@ public class AVLTree<K extends Comparable<K>, V> {
         return y;
     }
 
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node<K, V> node) {
+        if (node == null) {
+            return true;
+        }
+
+        int balanceFactor = height(node.left) - height(node.right);
+        if (balanceFactor < -1 || balanceFactor > 1) {
+            return false;
+        }
+
+        return isBalanced(node.left) && isBalanced(node.right);
+    }
+
+
     public Node<K, V> find(K key) {
         return find(root, key);
     }

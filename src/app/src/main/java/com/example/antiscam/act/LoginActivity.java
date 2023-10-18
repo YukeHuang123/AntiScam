@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -39,9 +40,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailAddress;
     private EditText password;
     private FirebaseAuth mAuth;
-    private Button signInButton;
+    private Button logInButton;
     private Button firestoreButton;
     private static final String TAG = "EmailPassword";
+    private FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();;
 //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         emailAddress= (EditText) findViewById(R.id.EmailAddressText);
         password= (EditText) findViewById(R.id.PasswordText);
-        signInButton = (Button) findViewById(R.id.loginButton);
+        logInButton = (Button) findViewById(R.id.loginButton);
         firestoreButton = (Button) findViewById(R.id.firestoreButton);
         TextInputLayout emailInputLayout = findViewById(R.id.emailInputLayout);
         TextInputLayout passwordInputLayout = findViewById(R.id.passwordInputLayout);
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email_text = emailAddress.getText().toString().trim();
@@ -106,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    signIn(email_text, password_text);
+                    logIn(email_text, password_text);
                 }
             }
         });
@@ -130,48 +132,20 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void signIn(String email, String password) {
-        // [START sign_in_with_email]
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+    private void logIn(String email, String password) {
 
-                            // UPDATE Start
-//                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                                    .setDisplayName("Emma")
-//                                    .setPhotoUri(Uri.parse("userAvatar/user01_avatar.png"))
-//                                    .build();
-//
-//                            user.updateProfile(profileUpdates)
-//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//                                            if (task.isSuccessful()) {
-//                                                Log.d(TAG, "User profile updated.");
-//                                            } else {
-//                                                Log.d(TAG, "User profile update failed.");
-//                                            }
-//                                        }
-//                                    });
-                            // UPDATE End
+        firebaseAuthManager.logIn(email, password, new FirebaseAuthManager.SignInCallback() {
+            @Override
+            public void onSuccess(FirebaseUser user) {
+                updateUI(user);
+            }
 
-                            updateUI(user);
+            @Override
+            public void onFailure(Exception exception) {
+                updateUI(null);
+            }
+        });
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Login failed, please check your email and your password!",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-        // [END sign_in_with_email]
     }
 //
 //    private void reload() { }

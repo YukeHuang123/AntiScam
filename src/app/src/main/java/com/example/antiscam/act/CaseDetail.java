@@ -16,8 +16,8 @@ import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
 public class CaseDetail extends AppCompatActivity {
-    ActivityCaseDetailBinding binding;
-    Boolean showProfile = true;
+    private ActivityCaseDetailBinding binding;
+    private Boolean showProfile = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

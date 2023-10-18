@@ -24,10 +24,9 @@ public class ScamCaseUserCombine {
     public static void loadScamCases(DataLoadCallback callback) {
         List<ScamCaseWithUser> dataList = new ArrayList<>();
         List<User> allUsers = new ArrayList<>();
-        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
-        UserDaoImpl userDaoImpl = new UserDaoImpl();
-
-        userDaoImpl.getAllUsers(new UserDao.UserCallback() { // 注意：你需要为这个方法定义一个新的回调接口
+        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
+        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
+        userDaoImpl.getAllUsers(new UserDao.UserCallback() {
             @Override
             public void onUserReceived(User user) {
 
@@ -37,13 +36,11 @@ public class ScamCaseUserCombine {
             public void onUsersReceived(List<User> users) {
                 allUsers.addAll(users);
 
-                // 然后，当所有的用户都被加载后，获取ScamCases
                 scamCaseDaoImpl.getAllScamCase(new ScamCaseDao.ScamCaseCallback() {
                     @Override
                     public void onScamCaseReceived(ScamCase scamcase) {
                         String post_user = scamcase.getPost_user();
 
-                        // 从预加载的用户列表中查找匹配的用户
                         User matchedUser = null;
                         for (User user : allUsers) {
 //                            System.out.println("user:" + user);
@@ -72,8 +69,8 @@ public class ScamCaseUserCombine {
 
     public static void loadScamCases(Tokenizer tokenizer, DataLoadCallback callback) {
         List<ScamCaseWithUser> dataList = new ArrayList<>();
-        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
-        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
+        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
 
         userDaoImpl.getAllUsers(tokenizer, new UserDao.UserCallback() { // 注意：你需要为这个方法定义一个新的回调接口
             @Override

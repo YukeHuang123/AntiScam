@@ -1,9 +1,12 @@
 package com.example.antiscam.tool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LRUCache<K extends Comparable<K>, V> {
     private int capacity;
     private TreeHashMap<K, V> map;
-    private DoublyLinkedList<K, V> list;
+    private DoublyLinkedList<K> list;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
@@ -16,13 +19,33 @@ public class LRUCache<K extends Comparable<K>, V> {
             return null;
         } else {
             Node<K, V> node = map.get(key);
-            ListNode<K, V> listNode = list.find(key);
-            if (listNode != null) {
-                listNode.value = node.getValue();
-            }
+            ListNode<K> listNode = list.find(key);
+//            if (listNode != null) {
+//                listNode.value = node.getValue();
+//            }
             list.moveToFront(listNode);
             return node.getValue();
         }
+    }
+
+    public List<V> getAll() {
+        List<V> values = new ArrayList<>();
+        ListNode<K> current = list.head;
+
+        while (current != null) {
+            K key = current.key;
+            V value = map.get(key).getValue();
+            if (value != null) {
+                values.add(value);
+            }
+            current = current.next;
+        }
+
+        return values;
+    }
+
+    public int getSize() {
+        return list.getSize();
     }
 
     public void put(K key, V value) {
@@ -36,48 +59,57 @@ public class LRUCache<K extends Comparable<K>, V> {
             Node<K, V> node = map.get(key);
             node.setValue(value);
 
-            ListNode<K, V> listNode = list.find(key);
-            if (listNode != null) {
-                listNode.value = value;
-            }
+            ListNode<K> listNode = list.find(key);
+//            if (listNode != null) {
+//                listNode.value = value;
+//            }
             list.moveToFront(listNode);
         } else {
             if (map.size() == capacity) {
-                ListNode<K, V> tail = list.removeTail();
+                ListNode<K> tail = list.removeTail();
                 if (tail != null) {
-                    map.remove(tail.key, tail.value);
+                    map.remove(tail.key);
                 }
             }
-            ListNode<K, V> newNode = new ListNode<>(key, value);
+            ListNode<K> newNode = new ListNode<>(key);
             map.put(key, value);
             list.addToFront(newNode);
         }
     }
 
-    private static class DoublyLinkedList<K, V> {
-        ListNode<K, V> head;
-        ListNode<K, V> tail;
+    public void remove(K key, V value) {
+        ListNode<K> listNode= list.find(key);
+        if  (listNode != null){
+            list.remove(listNode);
+            map.remove(key);
+        }
+
+    }
+
+    private static class DoublyLinkedList<K> {
+        ListNode<K> head;
+        ListNode<K> tail;
         int size = 0;  // current size
-        int capacity;  // max length or capacity of the list
+        int capacity;  // max length of the list
 
         public DoublyLinkedList(int capacity) {
             this.capacity = capacity;
         }
 
-        public void moveToFront(ListNode<K, V> listNode) {
+        public void moveToFront(ListNode<K> listNode) {
             if (listNode == null || listNode == head) return;
             remove(listNode);
             addToFront(listNode);
         }
 
-        public void addToFront(ListNode<K, V> listNode) {
-            // If listNode was part of another list or the same list
-            // Ensure its relations are disconnected
-            if (listNode.prev != null) {
-                listNode.prev.next = listNode.next;
+        public void addToFront(ListNode<K> listNode) {
+            ListNode<K> prevNode = findPreviousNode(listNode.key);
+            // If listNode was part of list
+            if (prevNode != null) {
+                prevNode.next = listNode.next;
             }
             if (listNode.next != null) {
-                listNode.next.prev = listNode.prev;
+                listNode.next.prev = prevNode;
             }
 
             if (head == null) {
@@ -96,24 +128,26 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
 
 
-        public ListNode<K, V> removeTail() {
+        public ListNode<K> removeTail() {
             if (tail == null) return null;
-            ListNode<K, V> res = tail;
+            ListNode<K> res = tail;
             remove(tail);
             return res;
         }
 
-        public void remove(ListNode<K, V> listNode) {
-            if (listNode.prev != null) {
-                listNode.prev.next = listNode.next;
+        public void remove(ListNode<K> listNode) {
+            ListNode<K> prevNode = findPreviousNode(listNode.key);
+
+            if (prevNode != null) {
+                prevNode.next = listNode.next;
             } else {
                 head = listNode.next;
             }
 
             if (listNode.next != null) {
-                listNode.next.prev = listNode.prev;
+                listNode.next.prev = prevNode;
             } else {
-                tail = listNode.prev;
+                tail = prevNode;
             }
 
             size--;
@@ -129,8 +163,8 @@ public class LRUCache<K extends Comparable<K>, V> {
             }
         }
 
-        public ListNode<K, V> find(K key) {
-            ListNode<K, V> currentNode = head;
+        public ListNode<K> find(K key) {
+            ListNode<K> currentNode = head;
             while (currentNode != null) {
                 if (currentNode.key.equals(key)) {
                     return currentNode;
@@ -140,20 +174,31 @@ public class LRUCache<K extends Comparable<K>, V> {
             return null;
         }
 
+        public ListNode<K> findPreviousNode(K key) {
+            ListNode<K> currentNode = head;
+            while (currentNode != null && currentNode.next != null) {
+                if (currentNode.next.key.equals(key)) {
+                    return currentNode;
+                }
+                currentNode = currentNode.next;
+            }
+            return null;
+        }
 
-        public ListNode<K, V> getHead() {
+
+        public ListNode<K> getHead() {
             return head;
         }
 
-        public void setHead(ListNode<K, V> head) {
+        public void setHead(ListNode<K> head) {
             this.head = head;
         }
 
-        public ListNode<K, V> getTail() {
+        public ListNode<K> getTail() {
             return tail;
         }
 
-        public void setTail(ListNode<K, V> tail) {
+        public void setTail(ListNode<K> tail) {
             this.tail = tail;
         }
 
@@ -197,11 +242,11 @@ public class LRUCache<K extends Comparable<K>, V> {
         this.map = map;
     }
 
-    public DoublyLinkedList<K, V> getList() {
+    public DoublyLinkedList<K> getList() {
         return list;
     }
 
-    public void setList(DoublyLinkedList<K, V> list) {
+    public void setList(DoublyLinkedList<K> list) {
         this.list = list;
     }
 }

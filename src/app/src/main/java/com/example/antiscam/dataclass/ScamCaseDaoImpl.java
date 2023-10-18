@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.core.TokenHelper;
 import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,20 +18,32 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.LinkedList;
 
 public class ScamCaseDaoImpl implements ScamCaseDao {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();;
+    private static ScamCaseDaoImpl scamCaseDao;
     private CollectionReference casesCollection = db.collection("scam_cases");
     private CollectionReference counter = db.collection("counter");
     DocumentReference nextIdDocument = counter.document("caseID");
 
     private static final String TAG = "ScamCaseDaoImpl";
 
+    private ScamCaseDaoImpl() {
+    }
+
+    public static ScamCaseDaoImpl getInstance() {
+        if (scamCaseDao == null) {
+            scamCaseDao = new ScamCaseDaoImpl();
+        }
+        return scamCaseDao;
+    }
+
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
-        casesCollection.orderBy("date", Query.Direction.DESCENDING).limit(100).get()
+        casesCollection.orderBy("post_date", Query.Direction.DESCENDING).limit(100).get()
 //        usersCollection.limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -70,8 +82,12 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                         }
                     }
                 });
-
     }
+
+    /**
+     * Add data to Firestore database
+     * @param scamcase:
+     */
 
     @Override
     public void addScamCase(ScamCase scamcase) {
@@ -84,13 +100,14 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                         Log.e(TAG, "Error adding ScamCase", task.getException());
                     }
                 });
-
     }
 
-
+    /**
+     * find the field called nextID
+     * @param callback: is a interface
+     */
 
     public void getNextId(NextIdCallback callback) {
-        //callback is a interface
         nextIdDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -112,6 +129,11 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
             }
         });
     }
+
+    /**
+     * nextID plus 1 when customer add a new post
+     * @param callback: interface use to call other method
+     */
     @Override
     public void updateNextId(NextIdCallback callback) {
         nextIdDocument.update("nextID", FieldValue.increment(1))

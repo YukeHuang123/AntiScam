@@ -31,6 +31,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
@@ -54,6 +55,8 @@
                     android:id="@+id/left_layout_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textIsSelectable="true"
                     tools:text="this is a message" />
             </LinearLayout>
         </LinearLayout>
@@ -71,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:gravity="right"
             android:orientation="vertical">
 
@@ -94,6 +98,9 @@
                     android:id="@+id/right_layout_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:textIsSelectable="true"
                     tools:text="this is a message" />
             </LinearLayout>
         </LinearLayout>

@@ -14,6 +14,8 @@ import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.dataclass.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +60,14 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT);
+
         ScamCaseWithUser scamCaseWithUser = dataList.get(position);
         holder.titleTextView.setText(scamCaseWithUser.getScamCase().getTitle());
         holder.descriptionTextView.setText(scamCaseWithUser.getScamCase().getDescription());
         holder.scamTypeTextView.setText(scamCaseWithUser.getScamCase().getScam_type());
         holder.usernameView.setText(scamCaseWithUser.getUser().getUsername());
+        holder.postDateView.setText(dateFormat.format(scamCaseWithUser.getScamCase().getPost_date()));
 
         // Set an OnClickListener for the item view(ScamCaseCardAdapter)
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +83,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         holder.avatarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 处理点击头像事件并跳转到个人资料页面
+                // Click avatar and go to profile
                 if (onAvatarClickListener != null) {
                     int position1 = holder.getAdapterPosition();
                     onAvatarClickListener.onAvatarClick(position1, scamCaseWithUser);
@@ -118,6 +123,8 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         public TextView descriptionTextView;
         public TextView scamTypeTextView;
         public TextView usernameView;
+
+        public TextView postDateView;
         public ImageView avatarView;
 
         public CardViewHolder(View itemView) {
@@ -126,6 +133,7 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
             descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
             scamTypeTextView = itemView.findViewById(R.id.scamTypeTextView);
             usernameView = itemView.findViewById(R.id.userName);
+            postDateView = itemView.findViewById(R.id.postDate);
             avatarView = itemView.findViewById(R.id.avatarImgViewCard);
         }
     }

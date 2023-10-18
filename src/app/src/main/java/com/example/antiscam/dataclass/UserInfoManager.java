@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.User;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.example.antiscam.tool.CircleImageTransformer;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,12 +22,14 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class UserInfoManager {
-    static String authUserEmail;
-    static String authUserName;
-    static String authUserAvatarPath;
+    private static String authUserEmail;
+    private static String authUserName;
+    private static String authUserAvatarPath;
+    private static FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
+    private static FirebaseUser user;
     public static void getUserInfo(Context context, TextView userNameView, ImageView imageView) {
         // Get user information from Firebase
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = firebaseAuthManager.getUser();
         if (user != null) {
 
             String username = user.getDisplayName();
@@ -51,7 +54,7 @@ public class UserInfoManager {
     }
 
     public static String getAuthUserEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user != null) {
             authUserEmail = user.getEmail();
         }
@@ -59,11 +62,9 @@ public class UserInfoManager {
     }
 
     public static void getAuthUserName(AuthUserNameCallback callback) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (currentUser != null) {
-            authUserEmail = currentUser.getEmail();
-            UserDaoImpl userDaoimpl = new UserDaoImpl();
+        if (user != null) {
+            authUserEmail = user.getEmail();
+            UserDaoImpl userDaoimpl = UserDaoImpl.getInstance();
             userDaoimpl.getUserByEmail(authUserEmail, new UserDao.UserCallback() {
                 @Override
                 public void onUserReceived(User user) {
@@ -83,7 +84,6 @@ public class UserInfoManager {
         void onAuthUserNameReceived(String authUserName);
     }
     public static String getAuthUserDisplayName() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             authUserName = user.getDisplayName();
         }
@@ -91,7 +91,6 @@ public class UserInfoManager {
     }
 
     public static String getAuthUserAvatarPath() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             Uri photoUrl = user.getPhotoUrl();
 

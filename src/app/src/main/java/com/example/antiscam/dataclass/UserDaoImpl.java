@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.User;
 import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.singleton.FirestoreSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -18,10 +19,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirestoreSingleton.getInstance();
     private CollectionReference usersCollection = db.collection("users");
 
     private static final String TAG = "UserDaoImpl";
+
+    private static UserDaoImpl userDao;
+
+    private UserDaoImpl() {
+    }
+
+    public static UserDaoImpl getInstance() {
+        if (userDao == null) {
+            userDao = new UserDaoImpl();
+        }
+        return userDao;
+    }
 
     // Get user by email
     @Override
@@ -57,19 +70,12 @@ public class UserDaoImpl implements UserDao {
                         User user = document.toObject(User.class);
                         users.add(user);
                     }
-                    usersCallback.onUsersReceived(users);  // 使用回调返回查询到的所有用户
+                    usersCallback.onUsersReceived(users);
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }
             }
         });
-    }
-
-    // 回调接口，用于将获取的用户数据传递出去
-    public interface UserCallback {
-        void onUserReceived(User user);
-
-        void onUsersReceived(List<User> users);
     }
 
     @Override
@@ -85,7 +91,7 @@ public class UserDaoImpl implements UserDao {
                         User user = document.toObject(User.class);
                         users.add(user);
                     }
-                    usersCallback.onUsersReceived(users);  // 使用回调返回查询到的所有用户
+                    usersCallback.onUsersReceived(users);
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }

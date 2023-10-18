@@ -16,10 +16,10 @@ public interface ScamCaseDao {
     }
     void addScamCase(ScamCase scamcase);
 
-    public interface NextIdCallback {
+    interface NextIdCallback {
         void onNextId(int nextId);
     }
-    public void updateNextId(NextIdCallback callback);
+    void updateNextId(NextIdCallback callback);
     void getDocumentId(int scam_id, OnDocumentIdCallback onDocumentIdCallback);
     interface OnDocumentIdCallback {
         void onDocumentIdReceived(String documentId);

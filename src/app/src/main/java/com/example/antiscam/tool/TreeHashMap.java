@@ -31,20 +31,20 @@ public class TreeHashMap<K extends Comparable<K>, V> {
         if (buckets[index] == null) {
             buckets[index] = new AVLTree<>();
         }
-        buckets[index].add(key, value); // 使用AVLTree的插入方法
+        buckets[index].add(key, value);
     }
 
-    public void remove(K key, V value) {
+    public void remove(K key) {
         int index = hash(key);
         if (buckets[index] != null) {
-            buckets[index].remove(key); // 使用AVLTree的删除方法
+            buckets[index].remove(key);
         }
     }
 
     public boolean contains(K key) {
         int index = hash(key);
         if (buckets[index] != null) {
-            return buckets[index].contains(key); // 使用AVLTree的查询方法
+            return buckets[index].contains(key);
         }
         return false;
     }
@@ -52,10 +52,12 @@ public class TreeHashMap<K extends Comparable<K>, V> {
     public int size() {
         int totalSize = 0;
         for (AVLTree<K, V> bucket : buckets) {
-            totalSize += bucket.size;  // 使用AVLTree的size方法
+            totalSize += bucket.size;
         }
         return totalSize;
     }
+
+
 
     public AVLTree<K, V>[] getBuckets() {
         return buckets;

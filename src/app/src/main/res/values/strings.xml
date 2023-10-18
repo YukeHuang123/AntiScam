@@ -23,6 +23,9 @@
     <string name="city">city</string>
     <string name="submit">submit</string>
     <string name="save">Save</string>
+    <string name="block">Block</string>
+    <string name="unblock">Unblock</string>
+    <string name="type_here">TYPE HERE</string>
 
     <string-array name="city_array">
         <item>Melbourne</item>
@@ -155,7 +158,6 @@
         <item>credit card</item>
         <item>Other</item>
     </string-array>
-
 
 
 </resources>

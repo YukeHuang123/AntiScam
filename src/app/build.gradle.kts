@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+
+    id("jacoco")
 }
 
 android {
@@ -104,4 +106,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.1.0")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    testImplementation ("junit:junit:4.+")
 }

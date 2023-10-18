@@ -126,7 +126,7 @@ public class UpdateProfile extends AppCompatActivity {
 
     void updateToFirestore(){
         //
-        UserDaoImpl userDaoimpl = new UserDaoImpl();
+        UserDaoImpl userDaoimpl = UserDaoImpl.getInstance();
         userDaoimpl.userDetails(documentId).set(currentUser)
                 .addOnCompleteListener(task -> {
                     setInProgress(false);

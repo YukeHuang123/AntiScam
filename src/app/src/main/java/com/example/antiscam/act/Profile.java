@@ -22,15 +22,19 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
+import com.example.antiscam.dataclass.BlockManager;
 import com.example.antiscam.dataclass.ScamCaseDao;
 import com.example.antiscam.dataclass.ScamCaseDaoImpl;
 import com.example.antiscam.dataclass.ScamCaseUserCombine;
 import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.singleton.CacheSingleton;
+import com.example.antiscam.singleton.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
-import com.example.antiscam.tool.AuthUtils;
 import com.example.antiscam.tool.DataLoadCallback;
+import com.example.antiscam.tool.LRUCache;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 
@@ -41,12 +45,21 @@ public class Profile extends AppCompatActivity {
     private RecyclerView recyclerViewProfile;
     private ScamCaseCardProfileAdapter cardAdapterProfile;
     private Button signOutButton;
+    private Button historyButton;
     private String username;
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
 //    String documentId;
     ProgressBar progressBar;
+    private CacheSingleton cacheSingleton;
+    private LRUCache<String, ScamCaseWithUser> cache;
+    private List<String> blockedUserEmails;
+    private List<String> blockerEmails;
+    private FirebaseUser user;
+
+    private FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +75,16 @@ public class Profile extends AppCompatActivity {
         // scam case list
         List<ScamCaseWithUser> scamCaseWithUserList = new ArrayList<>();
         cardAdapterProfile = new ScamCaseCardProfileAdapter(scamCaseWithUserList, R.layout.profile_cardlist, email);
+
+        cacheSingleton = CacheSingleton.getInstance();
+        cache = cacheSingleton.getCache(this);
+//
+        if (cache == null) {
+            Log.d("cache", "no cache find");
+            cache = new LRUCache<>(100);
+            cacheSingleton.setCache(this, cache);
+        }
+        Log.d("cache", cache.toString());
 
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
@@ -83,6 +106,19 @@ public class Profile extends AppCompatActivity {
                 Intent intentCaseDetail = new Intent(Profile.this, CaseDetail.class);
                 intentCaseDetail.putExtra("scamCaseWithUser", scamCaseWithUser);
                 intentCaseDetail.putExtra("fromPage","userProfile");
+
+                cache = cacheSingleton.getCache(Profile.this);
+                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
+//                Gson gson = new Gson();
+//                Gson gson = new GsonBuilder()
+//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
+//                        .create();
+//                String cacheString = gson.toJson(cache);
+//                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
+//                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
+//                Log.d("cacheToStr", JSON.toJSONString(cache));
+                cacheSingleton.setCache(Profile.this, cache);
+
                 startActivity(intentCaseDetail);
             }
         });
@@ -99,11 +135,11 @@ public class Profile extends AppCompatActivity {
                         // According to scam_id, search for document id and then delete the document
                         int scamCaseId = scamCaseWithUser.getScamCase().getScam_id();
 
-                        ScamCaseDaoImpl scamCaseDaoImpl = new ScamCaseDaoImpl();
+                        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
                         scamCaseDaoImpl.getDocumentId(scamCaseId, new ScamCaseDao.OnDocumentIdCallback() {
                             @Override
                             public void onDocumentIdReceived(String documentId) {
-                                deletePost(documentId);
+                                deletePost(documentId, String.valueOf(scamCaseId));
                             }
                             @Override
                             public void onDocumentIdNotFound() {
@@ -143,6 +179,9 @@ public class Profile extends AppCompatActivity {
     }
 
     void initPersonalInfo(){
+        user = firebaseAuthManager.getUser();
+
+
         // Get user information
         TextView userNameView = findViewById(R.id.userNamePro);
         ImageView userAvatarView = findViewById(R.id.avatarImgViewPro);
@@ -150,6 +189,9 @@ public class Profile extends AppCompatActivity {
 
         // Set user name
         userNameView.setText(username);
+
+        blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
+        blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 
         // Get image reference and load to ImageView
         try {
@@ -184,12 +226,14 @@ public class Profile extends AppCompatActivity {
     }
 
     void initBtn(){
+
         // Sign out button
         signOutButton = (Button) findViewById(R.id.logoutBtn);
+        historyButton = (Button) findViewById(R.id.historyButton);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AuthUtils.logout(Profile.this);
+                firebaseAuthManager.logout(Profile.this);
             }
         });
 
@@ -203,13 +247,31 @@ public class Profile extends AppCompatActivity {
             messageView.setVisibility(View.VISIBLE);
             signOutButton.setVisibility(View.GONE);
         }
+
+        cache = cacheSingleton.getCache(this);
+        if (cache == null || authUserEmail == null || !authUserEmail.equals(email)) {
+            historyButton.setVisibility(View.GONE);
+        } else {
+            historyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profile.this, History.class);
+                    startActivity(intent);
+                }
+            });
+        }
         messageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean isBlockedByAuthUser = isBlockedByAuthUser(authUserEmail); // Is auth user blocked by profile user
+                boolean isBlockingAuthUser = isBlockingAuthUser(authUserEmail); // Is auth user blocking profile user
+
                 Intent intent = new Intent(Profile.this, ChatActivity.class)
                         .putExtra("img", userAvatarPath)
                         .putExtra("nick", username)
-                        .putExtra("email", email);
+                        .putExtra("email", email)
+                        .putExtra("isBlockingAuthUser", isBlockingAuthUser)
+                        .putExtra("isBlockedByAuthUser", isBlockedByAuthUser);
                 startActivity(intent);
             }
         });
@@ -227,17 +289,17 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    void deletePost(String documentId){
+    void deletePost(String documentId, String scamcaseID){
+        cache = cacheSingleton.getCache(this);
         FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
+                        cache.remove(scamcaseID, new ScamCaseWithUser());
+                        cacheSingleton.setCache(Profile.this, cache);
                         reloadScamCase();
-//                        setInProgress(false);
-
-//                        AndroidUtil.showToast(getApplicationContext(), "Successfully reloaded posts");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener(){
@@ -260,20 +322,33 @@ public class Profile extends AppCompatActivity {
                     }
                 }
                 cardAdapterProfile.setData(authUserScamCases);
+                cardAdapterProfile.notifyDataSetChanged();
             }
         });
-
-        // Set adapter for recyclerView to display scam list cards
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerViewProfile.setLayoutManager(layoutManager);
-        recyclerViewProfile.setAdapter(cardAdapterProfile);
     }
 
-    void setInProgress(boolean inProgress) {
-        if(inProgress){
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
+    public void goToHistory(View view) {
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+    }
+//    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
+//    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
+
+    Boolean isBlockedByAuthUser(String authUserEmail){
+//        blockerEmails = BlockManager.getBlockers(receiverEmail);
+
+        if (!blockerEmails.isEmpty() && blockerEmails.contains(authUserEmail)) {
+            return true;
         }
+        return false;
+    }
+
+    // If blocking receiver
+    Boolean isBlockingAuthUser(String authUserEmail){
+//        blockedUserEmails = BlockManager.getBlockedUsers(user.getEmail());
+        if (!blockedUserEmails.isEmpty() && blockedUserEmails.contains(authUserEmail)) {
+            return true;
+        }
+        return false;
     }
 }

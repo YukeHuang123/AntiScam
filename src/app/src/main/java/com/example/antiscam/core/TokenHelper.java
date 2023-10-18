@@ -1,5 +1,7 @@
 package com.example.antiscam.core;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.firestore.CollectionReference;
@@ -7,8 +9,10 @@ import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TokenHelper {
+    private static final String TAG = "TokenHelper";
     private static TokenHelper instance = new TokenHelper();
 
     private TokenHelper() {
@@ -19,99 +23,79 @@ public class TokenHelper {
     }
 
     public Query genQuery(CollectionReference db, Tokenizer tokenizer) {
-        return db.where(genFilter(tokenizer));
+        try {
+            Filter filter = genFilter(tokenizer);
+            if (filter != null) {
+                return db.where(filter);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Firestore Query Error", "Error generating query: " + e.getMessage());
+            return db.whereEqualTo("nonExistentField", "nonExistentValue");
+        }
     }
 
     private Filter genFilter(Tokenizer tokenizer) {
-        Filter filter = null;
-        Token token = tokenizer.getNextToken();
-        if (token != null) {
-            String value = token.getValue();
-            switch (token.getType()) {
-                case USERNAME:
-                    filter = Filter.equalTo("post_user", value);
-                    break;
-                case TITLE:
-                    filter = Filter.equalTo("title", value);
-                    break;
-                case AMOUNT:
-                case EQ:
-                    filter = getCommonAnd(token);
-                    break;
-                case NE:
-                    filter = Filter.notEqualTo("amount", Integer.parseInt(value));
-                    break;
-                case LT:
-                    filter = Filter.lessThan("amount", Integer.parseInt(value));
-                    break;
-                case LE:
-                    filter = Filter.lessThanOrEqualTo("amount", Integer.parseInt(value));
-                    break;
-                case GT:
-                    filter = Filter.greaterThan("amount", Integer.parseInt(value));
-                    break;
-                case GE:
-                    filter = Filter.greaterThanOrEqualTo("amount", Integer.parseInt(value));
-                    break;
-                case AND:
-                    String[] strs1 = value.split("&");
-                    ArrayList<Filter> filters = new ArrayList<>();
-                    for (String str : strs1) {
-                        Tokenizer tokenizer1 = new Tokenizer(str);
-                        filters.add(genFilter(tokenizer1));
-                    }
-                    Filter[] f = new Filter[filters.size()];
-                    filters.toArray(f);
-                    filter = Filter.and(f);
-                    break;
-                case OR:
-                    String[] strs2 = value.split("|");
-                    ArrayList<Filter> filters2 = new ArrayList<>();
-                    for (String s2 : strs2) {
-                        Tokenizer tokenizer2 = new Tokenizer(s2);
-                        filters2.add(genFilter(tokenizer2));
-                    }
-                    Filter[] f2 = new Filter[filters2.size()];
-                    filters2.toArray(f2);
-                    filter = Filter.or(f2);
-                    break;
-                case COMPOUND:
-                    filter = Filter.and(Filter.or());
-                    break;
-                default:
-                    break;
-            }
+        Token token = tokenizer.getTokens();
+        Log.i(TAG, "genFilter: " + token);
+        switch (token.getCtype1()) {
+            case USERNAME:
+                return genFilter("post_user", token.getCtype2(), token.getValue1());
+            case TITLE:
+                return genFilter("title", token.getCtype2(), token.getValue1());
+            case AMOUNT:
+                return genFilter("amount", token.getCtype2(), Integer.parseInt(token.getValue1()));
+            case SCAMTYPE:
+                return genFilter("scam_type", token.getCtype2(), token.getValue1());
+            case AND:
+                Filter filter = genAndFilter(token.getValue1(), token.getValue2());
+                if (filter == null) return Filter.and();
+                else return filter;
+            case OR:
+                Filter orFilter = genOrFilter(token.getValue1(), token.getValue2());
+                if (orFilter == null) return Filter.or();
+                else return orFilter;
+            case STR:
+                break;
         }
-        return filter;
+        return null;
     }
 
-    @NonNull
-    private static Filter getCommonOr(Token token1) {
-        return Filter.or(
-                Filter.equalTo("amount", Integer.parseInt(token1.getValue())),
-                Filter.equalTo("title", token1.getValue()),
-                Filter.equalTo("post_user", token1.getValue())
-        );
-    }
 
-    @NonNull
-    private static Filter getCommonAnd(Token token1) {
-//        return  Filter.equalTo("amount", Integer.parseInt(token1.getValue()));
-        return Filter.or(
-                Filter.equalTo("amount", Integer.parseInt(token1.getValue())),
-                Filter.equalTo("title", token1.getValue()),
-                Filter.equalTo("post_user", token1.getValue())
-        );
-    }
-
-    @NonNull
-    private static void expAnd(String input) {
-        String[] strs1 = input.split("&");
-        for (String str : strs1) {
-            Tokenizer tokenizer1 = new Tokenizer(str);
-            Token token1 = tokenizer1.getNextToken();
-
+    private static Filter genFilter(String field, Token.Type type2, Object value) {
+        switch (type2) {
+            case EQ: // == or =
+                return Filter.equalTo(field, value);
+            case NE:  // !=
+                return Filter.notEqualTo(field, value);
+            case LT: // <
+                return Filter.lessThan(field, value);
+            case LE: // <=
+                return Filter.lessThanOrEqualTo(field, value);
+            case GT: // >
+                return Filter.greaterThan(field, value);
+            case GE: // >=
+                return Filter.greaterThanOrEqualTo(field, value);
         }
+        return null;
+    }
+
+    private static Filter genAndFilter(String exp1, String exp2) {
+        Tokenizer tokenizer1 = new Tokenizer(exp1);
+        Tokenizer tokenizer2 = new Tokenizer(exp2);
+        if (tokenizer1.getTokens().getCtype2() == Token.Type.STR || tokenizer2.getTokens().getCtype2() == Token.Type.STR)
+            return null;
+        return Filter.and(instance.genFilter(tokenizer1), instance.genFilter(tokenizer2));
+    }
+
+    private static Filter genOrFilter(String exp1, String exp2) {
+        Tokenizer tokenizer1 = new Tokenizer(exp1);
+        Tokenizer tokenizer2 = new Tokenizer(exp2);
+        if (tokenizer1.getTokens().getCtype2() == Token.Type.STR || tokenizer2.getTokens().getCtype2() == Token.Type.STR)
+            return null;
+        return Filter.or(instance.genFilter(tokenizer1), instance.genFilter(tokenizer2));
     }
 
 }
