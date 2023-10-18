@@ -1,0 +1,219 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CaseDetail</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.act</a>
+</div>
+
+<h1>Coverage Summary for Class: CaseDetail (com.example.antiscam.act)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CaseDetail</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CaseDetail$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.act;
+&nbsp;
+&nbsp;import android.content.Intent;
+&nbsp;import android.os.Bundle;
+&nbsp;import android.view.View;
+&nbsp;import android.widget.ImageView;
+&nbsp;
+&nbsp;import androidx.appcompat.app.AppCompatActivity;
+&nbsp;
+&nbsp;import com.example.antiscam.R;
+&nbsp;import com.example.antiscam.bean.ScamCase;
+&nbsp;import com.example.antiscam.bean.ScamCaseWithUser;
+&nbsp;import com.example.antiscam.bean.User;
+&nbsp;import com.example.antiscam.databinding.ActivityCaseDetailBinding;
+&nbsp;import com.example.antiscam.dataclass.UserInfoManager;
+&nbsp;import com.google.firebase.storage.StorageReference;
+&nbsp;
+<b class="nc">&nbsp;public class CaseDetail extends AppCompatActivity {</b>
+&nbsp;    private ActivityCaseDetailBinding binding;
+<b class="nc">&nbsp;    private Boolean showProfile = true;</b>
+&nbsp;    @Override
+&nbsp;    protected void onCreate(Bundle savedInstanceState) {
+<b class="nc">&nbsp;        super.onCreate(savedInstanceState);</b>
+<b class="nc">&nbsp;        setContentView(R.layout.activity_case_detail);</b>
+&nbsp;        // Initialize the binding object
+<b class="nc">&nbsp;        binding = ActivityCaseDetailBinding.inflate(getLayoutInflater());</b>
+&nbsp;        // Set the root view of the activity
+<b class="nc">&nbsp;        setContentView(binding.getRoot());</b>
+<b class="nc">&nbsp;        binding.close.setOnClickListener(view -&gt; onBackPressed());</b>
+<b class="nc">&nbsp;        ScamCaseWithUser originalCase=null;</b>
+&nbsp;
+&nbsp;
+&nbsp;        //receive the ScamCaseWithUser pass from main menu
+<b class="nc">&nbsp;        Intent intent = getIntent();</b>
+<b class="nc">&nbsp;        if(intent.hasExtra(&quot;scamCaseWithUser&quot;)){</b>
+<b class="nc">&nbsp;            originalCase= intent.getParcelableExtra(&quot;scamCaseWithUser&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (intent.hasExtra(&quot;fromPage&quot;)) {</b>
+<b class="nc">&nbsp;            if (intent.getStringExtra(&quot;fromPage&quot;).equals(&quot;userProfile&quot;)) {</b>
+<b class="nc">&nbsp;                showProfile = false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if(originalCase!=null){</b>
+&nbsp;            //get scamCase and user
+<b class="nc">&nbsp;            ScamCase scamCase = originalCase.getScamCase();</b>
+<b class="nc">&nbsp;            User user = originalCase.getUser();</b>
+<b class="nc">&nbsp;            String name=user.getUsername();</b>
+&nbsp;            // bind data on view
+<b class="nc">&nbsp;            binding.caseView.setText(scamCase.getDescription());</b>
+<b class="nc">&nbsp;            binding.userName.setText(name);</b>
+<b class="nc">&nbsp;            binding.caseTitle.setText(scamCase.getTitle());</b>
+<b class="nc">&nbsp;            binding.fixTitle.setText(scamCase.getTitle());</b>
+<b class="nc">&nbsp;            binding.caseType.setText(&quot;Scam Type: &quot;+scamCase.getScam_type());</b>
+<b class="nc">&nbsp;            binding.contact.setText(&quot;Contact Method: &quot;+scamCase.getContactMethod());</b>
+<b class="nc">&nbsp;            binding.payment.setText(&quot;Payment Method: &quot;+scamCase.getPaymentMethod());</b>
+<b class="nc">&nbsp;            binding.age.setText(&quot;Age: &quot;+String.valueOf(scamCase.getVictim_age()));</b>
+<b class="nc">&nbsp;            binding.location.setText(&quot;Location: &quot;+scamCase.getVictim_city());</b>
+<b class="nc">&nbsp;            binding.amount.setText(String.valueOf(&quot;Lost: &quot;+scamCase.getAmount()));</b>
+&nbsp;            //binding.userPicture.setImageDrawable();
+&nbsp;
+<b class="nc">&nbsp;            String avatarPath = user.getAvatar();</b>
+<b class="nc">&nbsp;            String email=user.getEmail();</b>
+&nbsp;
+&nbsp;            //find image
+<b class="nc">&nbsp;            ImageView userAvatarView = findViewById(R.id.userPicture);</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                StorageReference useravatar = UserInfoManager.getUserAvatar(avatarPath);</b>
+<b class="nc">&nbsp;                UserInfoManager.loadUserAvatar(useravatar, userAvatarView);</b>
+<b class="nc">&nbsp;            } catch (Exception e) {</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;            userAvatarView.setOnClickListener(new View.OnClickListener() {</b>
+&nbsp;                @Override
+&nbsp;                public void onClick(View view) {
+<b class="nc">&nbsp;                    if (showProfile) {</b>
+<b class="nc">&nbsp;                        Intent intent=new Intent(CaseDetail.this, Profile.class);</b>
+<b class="nc">&nbsp;                        intent.putExtra(&quot;username&quot;,name);</b>
+<b class="nc">&nbsp;                        intent.putExtra(&quot;email&quot;,email);</b>
+<b class="nc">&nbsp;                        intent.putExtra(&quot;avatarPath&quot;,avatarPath);</b>
+<b class="nc">&nbsp;                        startActivity(intent);</b>
+<b class="nc">&nbsp;                    } else {</b>
+<b class="nc">&nbsp;                        onBackPressed();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            });
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 16:55</div>
+</div>
+</body>
+</html>

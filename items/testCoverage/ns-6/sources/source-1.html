@@ -1,0 +1,269 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BlockManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.dataclass</a>
+</div>
+
+<h1>Coverage Summary for Class: BlockManager (com.example.antiscam.dataclass)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BlockManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BlockManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlockManager$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BlockManager$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.dataclass;
+&nbsp;
+&nbsp;import static com.example.antiscam.act.ChatActivity.TAG;
+&nbsp;
+&nbsp;import android.util.Log;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;
+&nbsp;import com.example.antiscam.bean.BlockModel;
+&nbsp;import com.google.android.gms.tasks.OnCompleteListener;
+&nbsp;import com.google.android.gms.tasks.Task;
+&nbsp;import com.google.firebase.firestore.FirebaseFirestore;
+&nbsp;import com.google.firebase.firestore.QueryDocumentSnapshot;
+&nbsp;import com.google.firebase.firestore.QuerySnapshot;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class BlockManager {</b>
+<b class="nc">&nbsp;    static List&lt;String&gt; blockedUsers = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;    static List&lt;String&gt; blockers = new ArrayList&lt;&gt;();</b>
+&nbsp;    static String documentId;
+<b class="nc">&nbsp;    static List&lt;String&gt; documentIdList = new ArrayList&lt;&gt;();</b>
+&nbsp;    static BlockModel blockedData;
+&nbsp;    static BlockModel blockingData;
+&nbsp;
+&nbsp;    public static List&lt;String&gt; getDocumentId(String field, String email) {
+<b class="nc">&nbsp;        FirebaseFirestore.getInstance().collection(&quot;block&quot;)</b>
+<b class="nc">&nbsp;                .whereEqualTo(field, email)</b>
+<b class="nc">&nbsp;                .get()</b>
+<b class="nc">&nbsp;                .addOnCompleteListener(new OnCompleteListener&lt;QuerySnapshot&gt;() {</b>
+&nbsp;                    @Override
+&nbsp;                    public void onComplete(@NonNull Task&lt;QuerySnapshot&gt; task) {
+<b class="nc">&nbsp;                        if (task.isSuccessful()) {</b>
+<b class="nc">&nbsp;                            for (QueryDocumentSnapshot document : task.getResult()) {</b>
+<b class="nc">&nbsp;                                String documentId = document.getId();</b>
+<b class="nc">&nbsp;                                if (!documentId.isEmpty()) {</b>
+<b class="nc">&nbsp;                                    documentIdList.add(documentId);</b>
+&nbsp;                                }
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            Log.d(TAG, &quot;Failed to get documentId&quot;);</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                });
+<b class="nc">&nbsp;        return documentIdList;</b>
+&nbsp;    }
+&nbsp;    // Get blockers
+&nbsp;    public static List&lt;String&gt; getBlockedUsers(String blockerEmail) {
+&nbsp;        //
+<b class="nc">&nbsp;        FirebaseFirestore firestore = FirebaseFirestore.getInstance();</b>
+<b class="nc">&nbsp;        firestore.clearPersistence();</b>
+<b class="nc">&nbsp;        blockedUsers.clear();</b>
+<b class="nc">&nbsp;        firestore.collection(&quot;block&quot;).whereEqualTo(&quot;blocker&quot;, blockerEmail)</b>
+<b class="nc">&nbsp;                .get()</b>
+<b class="nc">&nbsp;                .addOnCompleteListener(new OnCompleteListener&lt;QuerySnapshot&gt;() {</b>
+&nbsp;                    @Override
+&nbsp;                    public void onComplete(@NonNull Task&lt;QuerySnapshot&gt; task) {
+<b class="nc">&nbsp;                        if (task.isSuccessful()) {</b>
+<b class="nc">&nbsp;                            for (QueryDocumentSnapshot document : task.getResult()) {</b>
+&nbsp;//                                documentId = document.getId();
+<b class="nc">&nbsp;                                blockedData = document.toObject(BlockModel.class);</b>
+&nbsp;
+<b class="nc">&nbsp;                                blockedUsers.add(blockedData.getBlocked());</b>
+<b class="nc">&nbsp;                                Log.e(&quot;getBlock&quot;, &quot;block retrieve!&quot;);</b>
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;        });
+<b class="nc">&nbsp;        return blockedUsers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Get blocked users
+&nbsp;    public static List&lt;String&gt; getBlockers(String blockedUserEmail) {
+<b class="nc">&nbsp;        FirebaseFirestore firestore = FirebaseFirestore.getInstance();</b>
+<b class="nc">&nbsp;        firestore.clearPersistence();</b>
+<b class="nc">&nbsp;        Log.d(&quot;getBlock&quot;, &quot;start search&quot;);</b>
+<b class="nc">&nbsp;        blockers.clear();</b>
+&nbsp;
+<b class="nc">&nbsp;        firestore.collection(&quot;block&quot;).whereEqualTo(&quot;blocked&quot;, blockedUserEmail)</b>
+<b class="nc">&nbsp;                .get()</b>
+<b class="nc">&nbsp;                .addOnCompleteListener(new OnCompleteListener&lt;QuerySnapshot&gt;() {</b>
+&nbsp;                    @Override
+&nbsp;                    public void onComplete(@NonNull Task&lt;QuerySnapshot&gt; task) {
+<b class="nc">&nbsp;                        if (task.isSuccessful()) {</b>
+<b class="nc">&nbsp;                            for (QueryDocumentSnapshot document : task.getResult()) {</b>
+&nbsp;//                                documentId = document.getId();
+<b class="nc">&nbsp;                                blockingData = document.toObject(BlockModel.class);</b>
+<b class="nc">&nbsp;                                blockers.add(blockingData.getBlocker());</b>
+<b class="nc">&nbsp;                                Log.d(&quot;getBlock&quot;, &quot;add Block log!&quot;);</b>
+<b class="nc">&nbsp;                            }</b>
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                });
+<b class="nc">&nbsp;        return blockers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void unblock(String blockedUserEmail) {
+&nbsp;        //
+&nbsp;
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 16:55</div>
+</div>
+</body>
+</html>

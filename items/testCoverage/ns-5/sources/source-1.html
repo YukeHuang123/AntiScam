@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Token</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.core</a>
+</div>
+
+<h1>Coverage Summary for Class: Token (com.example.antiscam.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Token</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (10/20)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Token$Type</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.6%
+  </span>
+  <span class="absValue">
+    (24/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.core;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;import androidx.annotation.Nullable;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;public class Token {
+<b class="fc">&nbsp;    public enum Type {</b>
+<b class="fc">&nbsp;        USERNAME,</b>
+<b class="fc">&nbsp;        TITLE,</b>
+<b class="fc">&nbsp;        AMOUNT,</b>
+<b class="fc">&nbsp;        SCAMTYPE,</b>
+<b class="fc">&nbsp;        EQ,</b>
+<b class="fc">&nbsp;        NE,</b>
+<b class="fc">&nbsp;        LT,</b>
+<b class="fc">&nbsp;        LE,</b>
+<b class="fc">&nbsp;        GT,</b>
+<b class="fc">&nbsp;        GE,</b>
+<b class="fc">&nbsp;        STR,</b>
+<b class="fc">&nbsp;        AND,</b>
+<b class="fc">&nbsp;        OR,</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    ;
+&nbsp;    private final String value1;
+&nbsp;    private String value2;
+&nbsp;    private final Type ctype1;  // category
+&nbsp;    private final Type ctype2;  // compare
+&nbsp;
+<b class="fc">&nbsp;    public Token(String value1, String value2, Type type1, Type type2) {</b>
+<b class="fc">&nbsp;        this.value1 = value1;</b>
+<b class="fc">&nbsp;        this.value2 = value2;</b>
+<b class="fc">&nbsp;        this.ctype1 = type1;</b>
+<b class="fc">&nbsp;        this.ctype2 = type2;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public String getValue1() {
+<b class="fc">&nbsp;        return value1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getValue2() {
+<b class="fc">&nbsp;        return value2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Type getCtype1() {
+<b class="fc">&nbsp;        return ctype1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Type getCtype2() {
+<b class="fc">&nbsp;        return ctype2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setValue2(String value) {
+<b class="nc">&nbsp;        this.value2 = value;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(@Nullable Object obj) {
+<b class="nc">&nbsp;        if (this == obj) return true;</b>
+<b class="nc">&nbsp;        if (!(obj instanceof Token)) return false;</b>
+<b class="nc">&nbsp;        return this.ctype1 == (((Token) obj).getCtype1()) &amp;&amp;</b>
+<b class="nc">&nbsp;                this.ctype2 == (((Token) obj).getCtype2()) &amp;&amp;</b>
+<b class="nc">&nbsp;                this.value1.equals(((Token) obj).getValue1()) &amp;&amp;</b>
+<b class="nc">&nbsp;                this.value2.equals(((Token) obj).getValue2());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(value1, value2, ctype1, ctype2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;Token{&quot; +</b>
+&nbsp;                &quot;value1=&#39;&quot; + value1 + &#39;\&#39;&#39; +
+&nbsp;                &quot;, value2=&#39;&quot; + value2 + &#39;\&#39;&#39; +
+&nbsp;                &quot;, ctype1=&quot; + ctype1 +
+&nbsp;                &quot;, ctype2=&quot; + ctype2 +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 16:55</div>
+</div>
+</body>
+</html>

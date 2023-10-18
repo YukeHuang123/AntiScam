@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ScamCaseWithUser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.bean</a>
+</div>
+
+<h1>Coverage Summary for Class: ScamCaseWithUser (com.example.antiscam.bean)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScamCaseWithUser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ScamCaseWithUser$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.bean;
+&nbsp;
+&nbsp;import android.os.Parcel;
+&nbsp;import android.os.Parcelable;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;
+&nbsp;import com.example.antiscam.bean.ScamCase;
+&nbsp;import com.example.antiscam.bean.User;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;public class ScamCaseWithUser implements Parcelable {
+&nbsp;    private ScamCase scamCase;
+&nbsp;    private User user;
+&nbsp;
+<b class="nc">&nbsp;    public ScamCaseWithUser(ScamCase scamCase, User user) {</b>
+<b class="nc">&nbsp;        this.scamCase = scamCase;</b>
+<b class="nc">&nbsp;        this.user = user;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ScamCaseWithUser() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setScamCase(ScamCase scamCase) {
+<b class="nc">&nbsp;        this.scamCase = scamCase;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUser(User user) {
+<b class="nc">&nbsp;        this.user = user;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected ScamCaseWithUser(Parcel in) {</b>
+&nbsp;        // Read data from Parcel and initialize object
+<b class="nc">&nbsp;        scamCase = in.readParcelable(ScamCase.class.getClassLoader());</b>
+<b class="nc">&nbsp;        user = in.readParcelable(User.class.getClassLoader());</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static final Creator&lt;ScamCaseWithUser&gt; CREATOR = new Creator&lt;ScamCaseWithUser&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        public ScamCaseWithUser createFromParcel(Parcel in) {
+<b class="nc">&nbsp;            return new ScamCaseWithUser(in);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ScamCaseWithUser[] newArray(int size) {
+<b class="nc">&nbsp;            return new ScamCaseWithUser[size];</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+&nbsp;    public ScamCase getScamCase() {
+<b class="nc">&nbsp;        return scamCase;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public User getUser() {
+<b class="nc">&nbsp;        return user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int describeContents() {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeToParcel(@NonNull Parcel parcel, int i) {
+<b class="nc">&nbsp;        parcel.writeParcelable((Parcelable) scamCase, i);</b>
+<b class="nc">&nbsp;        parcel.writeParcelable((Parcelable) user, i);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;ScamCaseWithUser{&quot; +</b>
+&nbsp;                &quot;scamCase=&quot; + scamCase +
+&nbsp;                &quot;, user=&quot; + user +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 16:55</div>
+</div>
+</body>
+</html>

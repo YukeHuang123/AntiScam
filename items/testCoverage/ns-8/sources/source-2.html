@@ -1,0 +1,184 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FirebaseAuthManager</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.singleton</a>
+</div>
+
+<h1>Coverage Summary for Class: FirebaseAuthManager (com.example.antiscam.singleton)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FirebaseAuthManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FirebaseAuthManager$SignInCallback</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/25)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.singleton;
+&nbsp;
+&nbsp;import android.app.Activity;
+&nbsp;import android.content.Context;
+&nbsp;import android.content.Intent;
+&nbsp;import android.util.Log;
+&nbsp;import android.widget.Toast;
+&nbsp;
+&nbsp;import com.example.antiscam.act.LoginActivity;
+&nbsp;import com.google.firebase.auth.FirebaseAuth;
+&nbsp;import com.google.firebase.auth.FirebaseUser;
+&nbsp;
+&nbsp;public class FirebaseAuthManager {
+&nbsp;
+&nbsp;    private static FirebaseAuthManager firebaseAuthManager;
+&nbsp;    private static FirebaseAuth auth;
+&nbsp;
+&nbsp;    private static FirebaseUser user;
+&nbsp;
+<b class="nc">&nbsp;    private FirebaseAuthManager() {</b>
+<b class="nc">&nbsp;        auth = FirebaseAuth.getInstance();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static FirebaseAuthManager getInstance() {
+<b class="nc">&nbsp;        if (firebaseAuthManager == null) {</b>
+<b class="nc">&nbsp;            firebaseAuthManager = new FirebaseAuthManager(); // 如果实例不存在，则创建一个新实例</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return firebaseAuthManager;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void logIn(String email, String password, SignInCallback callback) {
+<b class="nc">&nbsp;        String TAG = &quot;EmailPassword&quot;;</b>
+<b class="nc">&nbsp;        auth = FirebaseAuth.getInstance();</b>
+<b class="nc">&nbsp;        auth.signInWithEmailAndPassword(email, password)</b>
+<b class="nc">&nbsp;                .addOnCompleteListener(task -&gt; {</b>
+<b class="nc">&nbsp;                    if (task.isSuccessful()) {</b>
+<b class="nc">&nbsp;                        Log.d(TAG, &quot;signInWithEmail:success&quot;);</b>
+<b class="nc">&nbsp;                        FirebaseAuthManager.user = auth.getCurrentUser();;</b>
+<b class="nc">&nbsp;                        callback.onSuccess(user);</b>
+&nbsp;                    } else {
+<b class="nc">&nbsp;                        Log.w(TAG, &quot;signInWithEmail:failure&quot;, task.getException());</b>
+<b class="nc">&nbsp;                        callback.onFailure(task.getException());</b>
+&nbsp;                    }
+&nbsp;                });
+&nbsp;    }
+&nbsp;
+&nbsp;    public void logout(Context context) {
+<b class="nc">&nbsp;        FirebaseAuth.getInstance().signOut();</b>
+&nbsp;
+<b class="nc">&nbsp;        user = null;</b>
+<b class="nc">&nbsp;        Intent intent = new Intent(context, LoginActivity.class);</b>
+<b class="nc">&nbsp;        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);</b>
+<b class="nc">&nbsp;        context.startActivity(intent);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (context instanceof Activity) {</b>
+<b class="nc">&nbsp;            ((Activity) context).finish();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public FirebaseUser getUser() {
+<b class="nc">&nbsp;        if (user == null) {</b>
+<b class="nc">&nbsp;            user = auth.getCurrentUser();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface SignInCallback {
+&nbsp;        void onSuccess(FirebaseUser user);
+&nbsp;        void onFailure(Exception exception);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 16:55</div>
+</div>
+</body>
+</html>
