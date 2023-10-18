@@ -82,8 +82,12 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                         }
                     }
                 });
-
     }
+
+    /**
+     * Add data to Firestore database
+     * @param scamcase:
+     */
 
     @Override
     public void addScamCase(ScamCase scamcase) {
@@ -96,11 +100,14 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                         Log.e(TAG, "Error adding ScamCase", task.getException());
                     }
                 });
-
     }
 
+    /**
+     * find the field called nextID
+     * @param callback: is a interface
+     */
+
     public void getNextId(NextIdCallback callback) {
-        //callback is a interface
         nextIdDocument.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -122,6 +129,11 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
             }
         });
     }
+
+    /**
+     * nextID plus 1 when customer add a new post
+     * @param callback: interface use to call other method
+     */
     @Override
     public void updateNextId(NextIdCallback callback) {
         nextIdDocument.update("nextID", FieldValue.increment(1))
