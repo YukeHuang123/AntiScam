@@ -40,18 +40,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">LRUCache</td>
 <td class="coverageStat">
   <span class="percent">
-    30.8%
+    46.2%
   </span>
   <span class="absValue">
-    (4/13)
+    (6/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    76.8%
   </span>
   <span class="absValue">
-    (28/56)
+    (43/56)
   </span>
 </td>
 </tr>
@@ -67,10 +67,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.1%
+    77.6%
   </span>
   <span class="absValue">
-    (51/67)
+    (52/67)
   </span>
 </td>
   </tr>
@@ -78,18 +78,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    44.8%
+    51.7%
   </span>
   <span class="absValue">
-    (13/29)
+    (15/29)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    64.2%
+    77.2%
   </span>
   <span class="absValue">
-    (79/123)
+    (95/123)
   </span>
 </td>
 </tr>
@@ -131,19 +131,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;V&gt; getAll() {
-<b class="nc">&nbsp;        List&lt;V&gt; values = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        ListNode&lt;K&gt; current = list.head;</b>
+<b class="fc">&nbsp;        List&lt;V&gt; values = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        ListNode&lt;K&gt; current = list.head;</b>
 &nbsp;
-<b class="nc">&nbsp;        while (current != null) {</b>
-<b class="nc">&nbsp;            K key = current.key;</b>
-<b class="nc">&nbsp;            V value = map.get(key).getValue();</b>
-<b class="nc">&nbsp;            if (value != null) {</b>
-<b class="nc">&nbsp;                values.add(value);</b>
+<b class="fc">&nbsp;        while (current != null) {</b>
+<b class="fc">&nbsp;            K key = current.key;</b>
+<b class="fc">&nbsp;            V value = map.get(key).getValue();</b>
+<b class="fc">&nbsp;            if (value != null) {</b>
+<b class="fc">&nbsp;                values.add(value);</b>
 &nbsp;            }
-<b class="nc">&nbsp;            current = current.next;</b>
-<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;            current = current.next;</b>
+<b class="fc">&nbsp;        }</b>
 &nbsp;
-<b class="nc">&nbsp;        return values;</b>
+<b class="fc">&nbsp;        return values;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public int getSize() {
@@ -180,13 +180,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;    }</b>
 &nbsp;
 &nbsp;    public void remove(K key, V value) {
-<b class="nc">&nbsp;        ListNode&lt;K&gt; listNode= list.find(key);</b>
-<b class="nc">&nbsp;        if  (listNode != null){</b>
-<b class="nc">&nbsp;            list.remove(listNode);</b>
-<b class="nc">&nbsp;            map.remove(key);</b>
+<b class="fc">&nbsp;        ListNode&lt;K&gt; listNode= list.find(key);</b>
+<b class="fc">&nbsp;        if  (listNode != null){</b>
+<b class="fc">&nbsp;            list.remove(listNode);</b>
+<b class="fc">&nbsp;            map.remove(key);</b>
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;    }</b>
+<b class="fc">&nbsp;    }</b>
 &nbsp;
 &nbsp;    private static class DoublyLinkedList&lt;K&gt; {
 &nbsp;        ListNode&lt;K&gt; head;
@@ -243,7 +243,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;            if (prevNode != null) {</b>
 <b class="fc">&nbsp;                prevNode.next = listNode.next;</b>
 &nbsp;            } else {
-<b class="nc">&nbsp;                head = listNode.next;</b>
+<b class="fc">&nbsp;                head = listNode.next;</b>
 &nbsp;            }
 &nbsp;
 <b class="fc">&nbsp;            if (listNode.next != null) {</b>
@@ -375,7 +375,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-18 16:55</div>
+    <div style="float:right;">generated on 2023-10-18 17:30</div>
 </div>
 </body>
 </html>
