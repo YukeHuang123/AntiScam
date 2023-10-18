@@ -487,18 +487,6 @@ Feature Category: Peer to Peer Messaging
 
 ## Testing Summary
 
-*[What features have you tested? What is your testing coverage?]*
-*Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
-
-*Here is an example:*
-
-1. Tests for Search
-   - Code: [TokenizerTest Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) for the [Tokenizer Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43)
-   - *Number of test cases: ...*
-   - *Code coverage: ...*
-   - *Types of tests created and descriptions: ...*
-2. xxx
-
 We've done testing through two ways: white box, black box testing. And we've found bugs and solved some of them by debugging or logging to the console.
 
 - White box testing
@@ -509,10 +497,42 @@ We've done testing through two ways: white box, black box testing. And we've fou
 
 - Black box testing:
 
-  - We wrote some black box testing by Junit to ensure our tokenizer, parser functions are implemented correctly.
+  - We wrote some black box testing by Junit to ensure our tokenizer, parser functions are implemented correctly. The codes we tested are as follows:
+    - [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AVLTree.java)
+    - [LRUCache.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java)
+    - [TreeHashMap.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/TreeHashMap.java)
+    - Token.java
+    - Tokenizer.java
 
+  - The test we wrote is to test most of the functions we are using and track their outputs. For example, in the LRUCache class, we wrote several tests to meet our application requirements:
 
-<br> <hr>
+    ```java
+    testBasicFunction()  // Tests the fundamental operations of the cache
+    testEmptyCache()	// Ensures the cache behaves correctly when it's empty.
+    testCacheSizeLimit()	// Checks that the cache does not exceed its predefined size limit.
+    testAddWhenFull()	 // Validates that when the cache is full and a new item is added, the least recently used item is correctly added.	
+    testGetAll() 	// Tests the ability to retrieve all items in the cache.
+    testRemove()	 // Ensures that items can be manually removed from the cache
+    testEvictionOrder()	    // Validates the order in which items are added
+    testRecentUsage()		 // Checks that accessing an item updates its usage.
+    testOverwriteExistingKey()	 // Ensures that if a key already exists in the cache 
+    testNullValue()	 // Tests the cache's behavior when null values are added.
+    ```
+
+- Test Coverage
+
+  We didn't write any tests for the interfaces, UI classes or database connections, and we have done a test coverage report. The testing classes and functions are in the image:
+
+  - In the package tool:(一些类可能要移进来)
+  - 
+
+- Debugging and Logging
+
+  In Android Studio, we set breakpoints in our code, which means when the app runs, it will 'pause' at these breakpoints. This allows us to inspect the current state of the app and examine the values of variables. For example, if we want to see the content of a list of scam cases at a particular point in our code, we can set a breakpoint and the debugger will show us the content of that list when it hits the breakpoint.
+
+  Another way we understand what's happening in our app is by using log statements, like `Log.d()`. Think of these as little notes or messages we leave for ourselves. When a piece of code runs, it leaves these messages in the Logcat, a console in Android Studio. For example, after fetching data from the database, we might leave a message saying 'Data got from database'. Later, we can look at Logcat and see this message, helping us confirm that our data fetching code ran successfully. When dealing with firestore database, understanding the sequence in which data is fetched or saved is crucial and hard, as they may asynchronously load. We can use log statements right after database operations. By checking the sequence of log messages, we will understand the order of our database operations.
+
+<br><hr>
 
 
 ## Team Management
