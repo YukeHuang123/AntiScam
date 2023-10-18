@@ -1,0 +1,91 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserDao</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.dataclass</a>
+</div>
+
+<h1>Coverage Summary for Class: UserDao (com.example.antiscam.dataclass)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">UserDao$UserCallback</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.dataclass;
+&nbsp;
+&nbsp;import com.example.antiscam.bean.User;
+&nbsp;import com.example.antiscam.core.Tokenizer;
+&nbsp;import com.google.firebase.firestore.DocumentReference;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface UserDao {
+&nbsp;    void getUserByEmail(String targetEmail, UserCallback userCallback);
+&nbsp;    void getAllUsers(UserDao.UserCallback usersCallback);
+&nbsp;    void getAllUsers(Tokenizer tokenizer,UserDao.UserCallback usersCallback);
+&nbsp;    interface UserCallback {
+&nbsp;        void onUserReceived(User user);
+&nbsp;        void onUsersReceived(List&lt;User&gt; users);
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    DocumentReference userDetails(String documentID);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

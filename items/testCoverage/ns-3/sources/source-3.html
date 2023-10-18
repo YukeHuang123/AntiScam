@@ -1,0 +1,345 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ScamCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.bean</a>
+</div>
+
+<h1>Coverage Summary for Class: ScamCase (com.example.antiscam.bean)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScamCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/62)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ScamCase$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.bean;
+&nbsp;
+&nbsp;import android.os.Parcel;
+&nbsp;import android.os.Parcelable;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;
+&nbsp;import com.google.firebase.database.IgnoreExtraProperties;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;@IgnoreExtraProperties
+&nbsp;public class ScamCase implements Parcelable {
+&nbsp;
+&nbsp;    private Date date;
+&nbsp;
+&nbsp;    private double amount;
+&nbsp;
+&nbsp;    private String victim_city;
+&nbsp;
+&nbsp;    private int victim_age;
+&nbsp;
+&nbsp;    private Date post_date;
+&nbsp;
+&nbsp;    private int scam_id;
+&nbsp;
+&nbsp;    private String post_user;
+&nbsp;
+&nbsp;    private String description;
+&nbsp;
+&nbsp;    private String paymentMethod;
+&nbsp;
+&nbsp;    private String title;
+&nbsp;
+&nbsp;    private String scam_type;
+&nbsp;
+&nbsp;    private String contactMethod;
+&nbsp;
+<b class="nc">&nbsp;    public ScamCase() {</b>
+&nbsp;        // Default constructor required for calls to DataSnapshot.getValue(ScamCase.class)
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ScamCase(Date date, double amount, String victim_city, int victim_age, Date post_date, int scam_id, String post_user, String description, String paymentMethod, String title, String scam_type, String contactMethod) {</b>
+<b class="nc">&nbsp;        this.date = date;</b>
+<b class="nc">&nbsp;        this.amount = amount;</b>
+<b class="nc">&nbsp;        this.victim_city = victim_city;</b>
+<b class="nc">&nbsp;        this.victim_age = victim_age;</b>
+<b class="nc">&nbsp;        this.post_date = post_date;</b>
+<b class="nc">&nbsp;        this.scam_id = scam_id;</b>
+<b class="nc">&nbsp;        this.post_user = post_user;</b>
+<b class="nc">&nbsp;        this.description = description;</b>
+<b class="nc">&nbsp;        this.paymentMethod = paymentMethod;</b>
+<b class="nc">&nbsp;        this.title = title;</b>
+<b class="nc">&nbsp;        this.scam_type = scam_type;</b>
+<b class="nc">&nbsp;        this.contactMethod = contactMethod;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    protected ScamCase(Parcel in) {</b>
+<b class="nc">&nbsp;        amount = in.readDouble();</b>
+<b class="nc">&nbsp;        victim_city = in.readString();</b>
+<b class="nc">&nbsp;        victim_age = in.readInt();</b>
+<b class="nc">&nbsp;        scam_id = in.readInt();</b>
+<b class="nc">&nbsp;        post_user = in.readString();</b>
+<b class="nc">&nbsp;        description = in.readString();</b>
+<b class="nc">&nbsp;        paymentMethod = in.readString();</b>
+<b class="nc">&nbsp;        title = in.readString();</b>
+<b class="nc">&nbsp;        scam_type = in.readString();</b>
+<b class="nc">&nbsp;        contactMethod = in.readString();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static final Creator&lt;ScamCase&gt; CREATOR = new Creator&lt;ScamCase&gt;() {</b>
+&nbsp;        @Override
+&nbsp;        public ScamCase createFromParcel(Parcel in) {
+<b class="nc">&nbsp;            return new ScamCase(in);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Override
+&nbsp;        public ScamCase[] newArray(int size) {
+<b class="nc">&nbsp;            return new ScamCase[size];</b>
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+&nbsp;    public Date getDate() {
+<b class="nc">&nbsp;        return date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDate(Date date) {
+<b class="nc">&nbsp;        this.date = date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public double getAmount() {
+<b class="nc">&nbsp;        return amount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAmount(double amount) {
+<b class="nc">&nbsp;        this.amount = amount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getVictim_city() {
+<b class="nc">&nbsp;        return victim_city;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setVictim_city(String victim_city) {
+<b class="nc">&nbsp;        this.victim_city = victim_city;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getVictim_age() {
+<b class="nc">&nbsp;        return victim_age;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setVictim_age(int victim_age) {
+<b class="nc">&nbsp;        this.victim_age = victim_age;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Date getPost_date() {
+<b class="nc">&nbsp;        return post_date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPost_date(Date post_date) {
+<b class="nc">&nbsp;        this.post_date = post_date;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getScam_id() {
+<b class="nc">&nbsp;        return scam_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setScam_id(int scam_id) {
+<b class="nc">&nbsp;        this.scam_id = scam_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPost_user() {
+<b class="nc">&nbsp;        return post_user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPost_user(String post_user) {
+<b class="nc">&nbsp;        this.post_user = post_user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDescription() {
+<b class="nc">&nbsp;        return description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDescription(String description) {
+<b class="nc">&nbsp;        this.description = description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPaymentMethod() {
+<b class="nc">&nbsp;        return paymentMethod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPaymentMethod(String paymentMethod) {
+<b class="nc">&nbsp;        this.paymentMethod = paymentMethod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getTitle() {
+<b class="nc">&nbsp;        return title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTitle(String title) {
+<b class="nc">&nbsp;        this.title = title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getScam_type() {
+<b class="nc">&nbsp;        return scam_type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setScam_type(String scam_type) {
+<b class="nc">&nbsp;        this.scam_type = scam_type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getContactMethod() {
+<b class="nc">&nbsp;        return contactMethod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setContactMethod(String contactMethod) {
+<b class="nc">&nbsp;        this.contactMethod = contactMethod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int describeContents() {
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void writeToParcel(@NonNull Parcel parcel, int i) {
+<b class="nc">&nbsp;        parcel.writeDouble(amount);</b>
+<b class="nc">&nbsp;        parcel.writeString(victim_city);</b>
+<b class="nc">&nbsp;        parcel.writeInt(victim_age);</b>
+<b class="nc">&nbsp;        parcel.writeInt(scam_id);</b>
+<b class="nc">&nbsp;        parcel.writeString(post_user);</b>
+<b class="nc">&nbsp;        parcel.writeString(description);</b>
+<b class="nc">&nbsp;        parcel.writeString(paymentMethod);</b>
+<b class="nc">&nbsp;        parcel.writeString(title);</b>
+<b class="nc">&nbsp;        parcel.writeString(scam_type);</b>
+<b class="nc">&nbsp;        parcel.writeString(contactMethod);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;ScamCase{&quot; +</b>
+&nbsp;                &quot;date=&quot; + date +
+&nbsp;                &quot;, amount=&quot; + amount +
+&nbsp;                &quot;, victim_city=&#39;&quot; + victim_city + &#39;\&#39;&#39; +
+&nbsp;                &quot;, victim_age=&quot; + victim_age +
+&nbsp;                &quot;, post_date=&quot; + post_date +
+&nbsp;                &quot;, scam_id=&quot; + scam_id +
+&nbsp;                &quot;, post_user=&#39;&quot; + post_user + &#39;\&#39;&#39; +
+&nbsp;                &quot;, description=&#39;&quot; + description + &#39;\&#39;&#39; +
+&nbsp;                &quot;, paymentMethod=&#39;&quot; + paymentMethod + &#39;\&#39;&#39; +
+&nbsp;                &quot;, title=&#39;&quot; + title + &#39;\&#39;&#39; +
+&nbsp;                &quot;, scam_type=&#39;&quot; + scam_type + &#39;\&#39;&#39; +
+&nbsp;                &quot;, contactMethod=&#39;&quot; + contactMethod + &#39;\&#39;&#39; +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

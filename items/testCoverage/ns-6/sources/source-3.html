@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ScamCaseUserCombine</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.dataclass</a>
+</div>
+
+<h1>Coverage Summary for Class: ScamCaseUserCombine (com.example.antiscam.dataclass)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScamCaseUserCombine</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ScamCaseUserCombine$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ScamCaseUserCombine$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ScamCaseUserCombine$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ScamCaseUserCombine$2$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/42)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.dataclass;
+&nbsp;
+&nbsp;import android.util.Log;
+&nbsp;
+&nbsp;import com.example.antiscam.bean.ScamCase;
+&nbsp;import com.example.antiscam.bean.ScamCaseWithUser;
+&nbsp;import com.example.antiscam.bean.User;
+&nbsp;import com.example.antiscam.core.Tokenizer;
+&nbsp;import com.example.antiscam.tool.DataLoadCallback;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.function.Predicate;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+<b class="nc">&nbsp;public class ScamCaseUserCombine {</b>
+&nbsp;
+<b class="nc">&nbsp;    private static String TAG = &quot;ScamCaseUserCombine&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;    public ScamCaseUserCombine() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void loadScamCases(DataLoadCallback callback) {
+<b class="nc">&nbsp;        List&lt;ScamCaseWithUser&gt; dataList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        List&lt;User&gt; allUsers = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();</b>
+<b class="nc">&nbsp;        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();</b>
+<b class="nc">&nbsp;        userDaoImpl.getAllUsers(new UserDao.UserCallback() {</b>
+&nbsp;            @Override
+&nbsp;            public void onUserReceived(User user) {
+&nbsp;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void onUsersReceived(List&lt;User&gt; users) {
+<b class="nc">&nbsp;                allUsers.addAll(users);</b>
+&nbsp;
+<b class="nc">&nbsp;                scamCaseDaoImpl.getAllScamCase(new ScamCaseDao.ScamCaseCallback() {</b>
+&nbsp;                    @Override
+&nbsp;                    public void onScamCaseReceived(ScamCase scamcase) {
+<b class="nc">&nbsp;                        String post_user = scamcase.getPost_user();</b>
+&nbsp;
+<b class="nc">&nbsp;                        User matchedUser = null;</b>
+<b class="nc">&nbsp;                        for (User user : allUsers) {</b>
+&nbsp;//                            System.out.println(&quot;user:&quot; + user);
+<b class="nc">&nbsp;                            if (user.getEmail().equals(post_user)) { // 假设你的User对象有一个getEmail()方法</b>
+<b class="nc">&nbsp;                                matchedUser = user;</b>
+<b class="nc">&nbsp;                                break;</b>
+&nbsp;                            }
+<b class="nc">&nbsp;                        }</b>
+&nbsp;
+<b class="nc">&nbsp;                        if (matchedUser != null) {</b>
+<b class="nc">&nbsp;                            ScamCaseWithUser scamCaseWithUser = new ScamCaseWithUser(scamcase, matchedUser);</b>
+<b class="nc">&nbsp;                            Log.i(TAG, &quot;onScamCaseReceived: &quot;+scamCaseWithUser);</b>
+<b class="nc">&nbsp;                            dataList.add(scamCaseWithUser);</b>
+&nbsp;
+&nbsp;                            // 你可以继续使用你的判断逻辑，或者调整它以适应你的需求
+<b class="nc">&nbsp;                            if (dataList.size() == 100) {</b>
+<b class="nc">&nbsp;                                callback.onDataLoaded(dataList);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                });
+&nbsp;            }
+&nbsp;        });
+&nbsp;//        return dataList;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void loadScamCases(Tokenizer tokenizer, DataLoadCallback callback) {
+<b class="nc">&nbsp;        List&lt;ScamCaseWithUser&gt; dataList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();</b>
+<b class="nc">&nbsp;        UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();</b>
+&nbsp;
+<b class="nc">&nbsp;        userDaoImpl.getAllUsers(tokenizer, new UserDao.UserCallback() { // 注意：你需要为这个方法定义一个新的回调接口</b>
+&nbsp;            @Override
+&nbsp;            public void onUserReceived(User user) {
+&nbsp;
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            @Override
+&nbsp;            public void onUsersReceived(List&lt;User&gt; users) {
+&nbsp;                // 然后，当所有的用户都被加载后，获取ScamCases
+<b class="nc">&nbsp;                scamCaseDaoImpl.getAllScamCases(tokenizer,</b>
+<b class="nc">&nbsp;                        new ScamCaseDao.ScamCasesCallback() {</b>
+&nbsp;                            @Override
+&nbsp;                            public void onScamCaseReceived(List&lt;ScamCase&gt; scamcase) {
+<b class="nc">&nbsp;                                for (User user : users) {</b>
+<b class="nc">&nbsp;                                    for (ScamCase scamCase : scamcase) {</b>
+<b class="nc">&nbsp;                                        if (Objects.equals(scamCase.getPost_user(), user.getEmail()))</b>
+<b class="nc">&nbsp;                                            dataList.add(new ScamCaseWithUser(scamCase, user));</b>
+<b class="nc">&nbsp;                                    }</b>
+<b class="nc">&nbsp;                                }</b>
+<b class="nc">&nbsp;                                Log.i(TAG, &quot;search: &quot;+dataList);</b>
+<b class="nc">&nbsp;                                callback.onDataLoaded(dataList);</b>
+&nbsp;                            }
+&nbsp;                        });
+&nbsp;
+&nbsp;            }
+&nbsp;        });
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

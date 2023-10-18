@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TreeHashMap</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.tool</a>
+</div>
+
+<h1>Coverage Summary for Class: TreeHashMap (com.example.antiscam.tool)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TreeHashMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.6%
+  </span>
+  <span class="absValue">
+    (25/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.tool;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;
+&nbsp;public class TreeHashMap&lt;K extends Comparable&lt;K&gt;, V&gt; {
+&nbsp;    private AVLTree&lt;K, V&gt;[] buckets;
+&nbsp;
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc">&nbsp;    public TreeHashMap() {</b>
+<b class="fc">&nbsp;        int DEFAULT_CAPACITY = 10;</b>
+<b class="fc">&nbsp;        this.buckets = new AVLTree[DEFAULT_CAPACITY];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; DEFAULT_CAPACITY; i++) {</b>
+<b class="fc">&nbsp;            this.buckets[i] = new AVLTree&lt;&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private int hash(K key) {
+<b class="fc">&nbsp;        return (key.hashCode() &amp; 0x7fffffff) % buckets.length; // Ensure non-negative hash value</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Node&lt;K, V&gt; get(K key) {
+<b class="fc">&nbsp;        int index = hash(key);</b>
+<b class="fc">&nbsp;        if (buckets[index] != null) {</b>
+<b class="fc">&nbsp;            return buckets[index].find(key);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void put(K key, V value) {
+<b class="fc">&nbsp;        int index = hash(key);</b>
+<b class="fc">&nbsp;        if (buckets[index] == null) {</b>
+<b class="nc">&nbsp;            buckets[index] = new AVLTree&lt;&gt;();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        buckets[index].add(key, value);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void remove(K key) {
+<b class="fc">&nbsp;        int index = hash(key);</b>
+<b class="fc">&nbsp;        if (buckets[index] != null) {</b>
+<b class="fc">&nbsp;            buckets[index].remove(key);</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean contains(K key) {
+<b class="fc">&nbsp;        int index = hash(key);</b>
+<b class="fc">&nbsp;        if (buckets[index] != null) {</b>
+<b class="fc">&nbsp;            return buckets[index].contains(key);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int size() {
+<b class="fc">&nbsp;        int totalSize = 0;</b>
+<b class="fc">&nbsp;        for (AVLTree&lt;K, V&gt; bucket : buckets) {</b>
+<b class="fc">&nbsp;            totalSize += bucket.size;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return totalSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public AVLTree&lt;K, V&gt;[] getBuckets() {
+<b class="nc">&nbsp;        return buckets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBuckets(AVLTree&lt;K, V&gt;[] buckets) {
+<b class="nc">&nbsp;        this.buckets = buckets;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>
