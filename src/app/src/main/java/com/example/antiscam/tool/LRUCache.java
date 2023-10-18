@@ -68,7 +68,7 @@ public class LRUCache<K extends Comparable<K>, V> {
             if (map.size() == capacity) {
                 ListNode<K> tail = list.removeTail();
                 if (tail != null) {
-                    map.remove(key, value);
+                    map.remove(tail.key);
                 }
             }
             ListNode<K> newNode = new ListNode<>(key);
@@ -81,7 +81,7 @@ public class LRUCache<K extends Comparable<K>, V> {
         ListNode<K> listNode= list.find(key);
         if  (listNode != null){
             list.remove(listNode);
-            map.remove(key, value);
+            map.remove(key);
         }
 
     }

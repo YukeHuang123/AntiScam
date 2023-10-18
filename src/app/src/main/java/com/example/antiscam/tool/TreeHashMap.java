@@ -34,7 +34,7 @@ public class TreeHashMap<K extends Comparable<K>, V> {
         buckets[index].add(key, value);
     }
 
-    public void remove(K key, V value) {
+    public void remove(K key) {
         int index = hash(key);
         if (buckets[index] != null) {
             buckets[index].remove(key);
@@ -56,6 +56,8 @@ public class TreeHashMap<K extends Comparable<K>, V> {
         }
         return totalSize;
     }
+
+
 
     public AVLTree<K, V>[] getBuckets() {
         return buckets;

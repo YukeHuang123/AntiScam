@@ -104,4 +104,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.1.0")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    testImplementation ("junit:junit:4.+")
 }
