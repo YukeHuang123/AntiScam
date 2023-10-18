@@ -127,9 +127,9 @@ public class MainMenu extends AppCompatActivity {
         cardAdapter.setOnAvatarClickListener(new ScamCaseCardAdapter.OnAvatarClickListener() {
             @Override
             public void onAvatarClick(int position, ScamCaseWithUser scamCaseWithUser) {
-                // 创建 Intent 来启动个人资料页面
+                // create intent to go to other page
                 Intent intentToProfile = new Intent(MainMenu.this, Profile.class);
-                // 在 Intent 中传递用户数据，例如用户的 ID 或其他标识符
+                // pass data to other page
                 intentToProfile.putExtra("username", scamCaseWithUser.getUser().getUsername());
                 intentToProfile.putExtra("email", scamCaseWithUser.getUser().getEmail());
                 intentToProfile.putExtra("avatarPath", scamCaseWithUser.getUser().getAvatar());
