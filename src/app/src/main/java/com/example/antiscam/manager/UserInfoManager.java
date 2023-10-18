@@ -1,4 +1,4 @@
-package com.example.antiscam.dataclass;
+package com.example.antiscam.manager;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.User;
-import com.example.antiscam.singleton.FirebaseAuthManager;
+import com.example.antiscam.dao.UserDao;
+import com.example.antiscam.dao.UserDaoImpl;
 import com.example.antiscam.tool.CircleImageTransformer;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;

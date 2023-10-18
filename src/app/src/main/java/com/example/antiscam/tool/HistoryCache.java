@@ -1,21 +1,18 @@
-package com.example.antiscam.singleton;
+package com.example.antiscam.tool;
 
 import android.content.Context;
 
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.tool.CacheToFile;
-import com.example.antiscam.tool.LRUCache;
 
-public class CacheSingleton {
-    private static CacheSingleton instance;
+public class HistoryCache {
+    private static HistoryCache instance;
 
-    private CacheSingleton() {
-        // 私有构造函数，防止外部实例化
+    private HistoryCache() {
     }
 
-    public static CacheSingleton getInstance() {
+    public static HistoryCache getInstance() {
         if (instance == null) {
-            instance = new CacheSingleton();
+            instance = new HistoryCache();
         }
         return instance;
     }

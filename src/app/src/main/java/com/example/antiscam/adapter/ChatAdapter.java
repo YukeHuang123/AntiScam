@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ChatModel;
-import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.manager.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.LinkedList;

@@ -68,6 +68,17 @@ public class AVLTreeTest {
     }
 
     @Test
+    public void testDeleteMin() {
+        AVLTree<Integer, Integer> avl = new AVLTree<>();
+
+        for (int i = 0; i <= 100; i++) {
+            avl.add(1 + i, i);
+        }
+        avl.remove(56);
+        assertTrue(tree.isBalanced());
+    }
+
+    @Test
     public void testInsertAndRetrieve() {
         tree.add(1, 1);
         assertEquals(Integer.valueOf(1), tree.get(1));

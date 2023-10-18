@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -12,26 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.core.Tokenizer;
-import com.example.antiscam.dataclass.ScamCaseUserCombine;
+import com.example.antiscam.dao.ScamCaseUserCombine;
 import com.example.antiscam.repository.DataRepository;
-import com.example.antiscam.singleton.CacheSingleton;
-import com.example.antiscam.tool.CacheToFile;
-import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
+import com.example.antiscam.tool.HistoryCache;
 import com.example.antiscam.tool.LRUCache;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ScamCaseCardAdapter cardAdapter;
     private String searchContent;
-    private CacheSingleton cacheSingleton;
+    private HistoryCache historyCache;
     private LRUCache<String, ScamCaseWithUser> cache;
     private SearchView searchView;
 
@@ -41,13 +34,13 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
         searchContent = getIntent().getStringExtra("search_content");
 
-        cacheSingleton = CacheSingleton.getInstance();
-        cache = cacheSingleton.getCache(this);
+        historyCache = HistoryCache.getInstance();
+        cache = historyCache.getCache(this);
 //
         if (cache == null) {
             Log.d("cache", "no cache find");
             cache = new LRUCache<>(100);
-            cacheSingleton.setCache(this, cache);
+            historyCache.setCache(this, cache);
         }
 
         cardAdapter = new ScamCaseCardAdapter(DataRepository.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
@@ -58,7 +51,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchResultActivity.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
 
-                cache = cacheSingleton.getCache(SearchResultActivity.this);
+                cache = historyCache.getCache(SearchResultActivity.this);
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
 //                Gson gson = new GsonBuilder()
 //                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
@@ -68,7 +61,7 @@ public class SearchResultActivity extends AppCompatActivity {
 //                        new TypeToken<LRUCache<String, ScamCaseWithUser>>() {
 //                        }.getType());
 //                Log.d("cacheToStr", JSON.toJSONString(cache));
-                cacheSingleton.setCache(SearchResultActivity.this, cache);
+                historyCache.setCache(SearchResultActivity.this, cache);
 
                 startActivity(intent);
             }

@@ -1,4 +1,4 @@
-package com.example.antiscam.dataclass;
+package com.example.antiscam.dao;
 
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.core.Tokenizer;

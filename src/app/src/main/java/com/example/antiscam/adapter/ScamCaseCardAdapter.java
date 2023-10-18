@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.manager.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

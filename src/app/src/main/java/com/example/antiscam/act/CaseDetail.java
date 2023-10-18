@@ -12,7 +12,7 @@ import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.bean.User;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
-import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.manager.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
 
 public class CaseDetail extends AppCompatActivity {

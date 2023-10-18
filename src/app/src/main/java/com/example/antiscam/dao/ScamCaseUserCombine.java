@@ -1,4 +1,4 @@
-package com.example.antiscam.dataclass;
+package com.example.antiscam.dao;
 
 import android.util.Log;
 
@@ -11,8 +11,6 @@ import com.example.antiscam.tool.DataLoadCallback;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class ScamCaseUserCombine {
 

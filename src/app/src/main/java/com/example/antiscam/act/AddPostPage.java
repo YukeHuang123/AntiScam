@@ -14,12 +14,13 @@ import android.widget.Toast;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.builder.ScamCaseBuilder;
-import com.example.antiscam.databinding.ActivityCaseDetailBinding;
-import com.example.antiscam.dataclass.ScamCaseDao;
-import com.example.antiscam.dataclass.ScamCaseDaoImpl;
+import com.example.antiscam.dao.ScamCaseDao;
+import com.example.antiscam.dao.ScamCaseDaoImpl;
 import com.example.antiscam.tool.CheckInput;
 import com.example.antiscam.tool.GetString;
+import com.example.antiscam.tool.NewDate;
+
+import java.util.Date;
 
 public class AddPostPage extends AppCompatActivity {
 
@@ -98,7 +99,7 @@ public class AddPostPage extends AppCompatActivity {
                         @Override
                         public void onNextId(int nextId) {
                             // Create the ScamCase object with the retrieved nextId
-                            ScamCase scamCase = ScamCaseBuilder.makeScamCase(nextId, amount1, contact, day1, month1, year1, description1, payment, finalUser1, type, title1, age1, city);
+                            ScamCase scamCase = makeScamCase(nextId, amount1, contact, day1, month1, year1, description1, payment, finalUser1, type, title1, age1, city);
                             Log.d(TAG, "set id successfully: " + nextId);
 
                             // Store the new case in Firebase
@@ -122,5 +123,34 @@ public class AddPostPage extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public ScamCase makeScamCase(int id,String amount,String contact,String day, String month, String year,String description,String payment, String user,String type, String title, String age, String city){
+        ScamCase scamCase=new ScamCase();
+        double amount1 = Double.parseDouble(amount);
+        scamCase.setAmount(amount1);
+        scamCase.setContactMethod(contact);
+        scamCase.setScam_id(id);
+
+
+        Date scamDate = NewDate.createNewDate(day, month, year);
+        scamCase.setDate(scamDate);
+
+
+        scamCase.setDescription(description);
+        scamCase.setPaymentMethod(payment);
+        scamCase.setPost_user(user);
+        scamCase.setScam_type(type);
+        scamCase.setTitle(title);
+
+
+        int age1 = Integer.parseInt(age);
+        scamCase.setVictim_age(age1);
+        Date postDate=new Date();
+
+        scamCase.setVictim_city(city);
+        scamCase.setPost_date(postDate);
+
+        return scamCase;
     }
 }

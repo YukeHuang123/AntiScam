@@ -16,11 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.singleton.FirebaseAuthManager;
+import com.example.antiscam.manager.FirebaseAuthManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;

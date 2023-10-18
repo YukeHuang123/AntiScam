@@ -15,22 +15,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.example.antiscam.R;
-import com.example.antiscam.act.CaseDetail;
-import com.example.antiscam.act.SearchResultActivity;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.dataclass.ScamCaseUserCombine;
-import com.example.antiscam.repository.DataRepository;
-import com.example.antiscam.singleton.CacheSingleton;
-import com.example.antiscam.tool.CacheToFile;
-import com.example.antiscam.tool.DataLoadCallback;
-import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
+import com.example.antiscam.tool.HistoryCache;
 import com.example.antiscam.tool.LRUCache;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +28,7 @@ public class History extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ScamCaseCardAdapter cardAdapter;
-    private CacheSingleton cacheSingleton;
+    private HistoryCache historyCache;
     private LRUCache<String, ScamCaseWithUser> cache;
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -54,13 +43,13 @@ public class History extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void initHistory() {
-        cacheSingleton = CacheSingleton.getInstance();
-        cache = cacheSingleton.getCache(this);
+        historyCache = HistoryCache.getInstance();
+        cache = historyCache.getCache(this);
 //
         if (cache == null) {
             Log.d("cache", "no cache find");
             cache = new LRUCache<>(100);
-            cacheSingleton.setCache(this, cache);
+            historyCache.setCache(this, cache);
 
         }
         Log.d("cache", cache.toString());
@@ -75,11 +64,11 @@ public class History extends AppCompatActivity {
                 Intent intent = new Intent(History.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
 
-                cache = cacheSingleton.getCache(History.this);
+                cache = historyCache.getCache(History.this);
 
 
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
-                cacheSingleton.setCache(History.this, cache);
+                historyCache.setCache(History.this, cache);
 
                 startActivity(intent);
             }
@@ -110,7 +99,7 @@ public class History extends AppCompatActivity {
     }
 
     void reloadHistoryPage() {
-        cache = cacheSingleton.getCache(this);
+        cache = historyCache.getCache(this);
 
         List<ScamCaseWithUser> dataList = new ArrayList<>(cache.getAll());
 
@@ -161,7 +150,7 @@ public class History extends AppCompatActivity {
 
     void deleteAllHistoryRecords() {
         cache = new LRUCache<>(100);
-        cacheSingleton.setCache(this, cache);
+        historyCache.setCache(this, cache);
         Toast.makeText(History.this, "Delete all history, go back to profile!", Toast.LENGTH_SHORT).show();
         onBackPressed();
     }

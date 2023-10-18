@@ -1,4 +1,4 @@
-package com.example.antiscam.dataclass;
+package com.example.antiscam.dao;
 
 import static com.example.antiscam.act.ChatActivity.TAG;
 

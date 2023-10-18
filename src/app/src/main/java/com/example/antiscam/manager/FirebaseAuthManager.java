@@ -1,10 +1,9 @@
-package com.example.antiscam.singleton;
+package com.example.antiscam.manager;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.antiscam.act.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
