@@ -1,4 +1,4 @@
-# [G0 - Team Name] Report
+# [G32] Report
 
 The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
 
@@ -38,11 +38,11 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 The key area(s) of responsibilities for each member
 
 | UID        |        Name        |                               Role |
-|:-----------|:------------------:|-----------------------------------:|
-| u7558707   |     Zhaoyun Xu     |         Project Manager, Developer |
-| u7618794   |     Yuke Huang     |             UI Designer, Developer |
-| u7566045   |     Yijing Jia     |             UI Designer, Developer |
-| u7551551   |    Junzhe Huang    |                  Developer, Tester |
+|:-----------|:------------------:|:-----------------------------------|
+| u7558707   |     Zhaoyun Xu     |  Project Manager, Developer |
+| u7618794   |     Yuke Huang     |  UI Designer, Developer |
+| u7566045   |     Yijing Jia     |  UI Designer, Developer |
+| u7551551   |    Junzhe Huang    |  Developer, Tester |
 
 
 ## Summary of Individual Contributions
@@ -82,10 +82,12 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Custom Feature - FB-Persist: Extension: 
         - [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
         - [ScamCaseDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L66-148)
-        **UI**
+       
+    **UI**
     - Add post activity: 
       - [AddPostPage.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/AddPostPage.java)
       - [activity_add_post_page.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml)
+      - [items in each Spinner](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/strings.xml#L30-160)
     - Case details activity: 
        - [CaseDetail.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/CaseDetail.java)
        - [activity_case_detail.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_case_detail.xml)
@@ -105,11 +107,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - implements Parcelable to ScamCaseWithUser class:
         - [CREATOR](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L33-49)
         - [describeContents() and writeToParcel()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L59-76)
-    - other code
-       - [ScamCaseBuilder.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/builder/ScamCaseBuilder.java)
-       - [CheckInput.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CheckInput.java)
-       - [GetString.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/GetString.java)
-       - [NewDate.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/NewDate.java)
+    - other 
        - [setOnClickListener()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L44-52)
        - [OnClickListener for the item view](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L72-81)
     
@@ -118,9 +116,10 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - I designed the [case detail page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_case_detail.xml), [add post page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml), [submit successfully page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_submit_success_page.xml) and [floating action button](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml#L116-126) in main menu.
 
   - **Others**: 
-    - responsible for all the meeting minutes writing.
-    - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and change the icon.
+    - responsible for 8 meeting minutes writing.
+    - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and implement the adaptive icons: [ic_launcher_foreground.webp](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp), [ic_launcher_background.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/ic_launcher_background.xml)
     - create the UML class diagram independently
+    - report: responsible for Application Description, Team management, and conflict Resolution Protocol.
 
 3. **UID1, Name1**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
@@ -162,39 +161,57 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 ### Application Use Cases and or Examples
 
-*[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
+**Target Users: General Public**
+- **Use Case 1: Searching for Scam Case**
+   - **User:** John
+   - **Scenario:** John receives a suspicious email advertising a product at an unbelievably low price, significantly lower than the market price. He is unsure whether this is a scam or a genuine bargain.
+   - **Action:** John opens the AntiScam app and uses the search feature to look for product and service scams.
+  - **Result:** John finds some posts that exactly match his scenario, which confirms that this is a scam, and he saves $150.
 
-*Here is a pet training application example*
+- **Use Case 2: Reporting a Scam Case**
+   - **User:** Amy
+   - **Scenario:**  After identifying that she has encountered an social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
+   - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script. 
+   - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
 
-*Molly wants to inquiry about her cat, McPurr's recent troublesome behaviour*
-1. *Molly notices that McPurr has been hostile since...*
-2. *She makes a post about... with the tag...*
-3. *Lachlan, a vet, writes a reply to Molly's post...*
-4. ...
-5. *Molly gives Lachlan's reply a 'tick' response*
+- **Use Case 3: Reporting a Scam Case**
 
-*Here is a map navigation application example*
+   - **Scenario:** Emily is about to make an online purchase and wants to check if the seller is reliable.
+   - **Action:** She enters the seller's information into the app's search bar.
+  - **Result:** The app displays scam alerts related to the seller, helping Emily make an informed decision.
 
-*Targets Users: Drivers*
+**Target Users: Anti-Scam Community**
+Use Case 3: Discussing Scam Tactics
 
-* *Users can use it to navigate in order to reach the destinations.*
-* *Users can learn the traffic conditions*
-* ...
+User: Sarah
+Scenario: Sarah is curious about the latest scam tactics.
+Action: She accesses the app's discussion forum.
+Result: Sarah joins a conversation about scams, shares her insights, and learns from others in the community.
+Use Case 4: Alerting Others About a New Scam
 
-*Target Users: Those who want to find some good restaurants*
+User: Michael
+Scenario: Michael falls victim to a new scam and wants to warn others.
+Action: He creates a scam alert post and adds a detailed description.
+Result: The post is published, and other users can see it and avoid falling for the same scam.
+Target Users: Moderators
+Use Case 5: Reviewing and Moderating Posts
 
-* *Users can find nearby restaurants and the application can give recommendations*
-* ...
+User: Moderator
+Scenario: The moderator logs into the AntiScam app.
+Action: They review recent posts and comments to ensure they adhere to community guidelines.
+Result: Inappropriate content is removed, and users are notified of the action taken.
+Use Case 6: Supporting Users
 
-*List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
+User: Moderator
+Scenario: A user reports an issue with the app.
+Action: The moderator responds to the user's request for assistance.
+Result: The user's issue is resolved, ensuring a positive user experience.
 
 <hr> 
 
 ### Application UML
 
-![ClassDiagramExample](media/_examples/ClassDiagramExample.png) <br>
-*[Replace the above with a class diagram. You can look at how we have linked an image here as an example of how you can do it too.]*
-
+![UML ClassDiagram](media/UML-6442.png) <br>
 <hr>
 
 ## Code Design and Decisions
