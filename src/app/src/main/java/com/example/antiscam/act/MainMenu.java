@@ -23,7 +23,7 @@ import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.core.Tokenizer;
 import com.example.antiscam.dao.ScamCaseUserCombine;
 import com.example.antiscam.manager.UserInfoManager;
-import com.example.antiscam.repository.DataRepository;
+import com.example.antiscam.manager.SearchDataManager;
 import com.example.antiscam.tool.HistoryCache;
 import com.example.antiscam.tool.DataLoadCallback;
 import com.example.antiscam.tool.LRUCache;
@@ -96,7 +96,7 @@ public class MainMenu extends AppCompatActivity {
 
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> dataList) {
-                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+                SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
                 cardAdapter.setData(dataList);
             }
         });
@@ -166,7 +166,7 @@ public class MainMenu extends AppCompatActivity {
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> dataList) {
-                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+                SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
                 cardAdapter.setData(dataList);
                 cardAdapter.notifyDataSetChanged();
             }
@@ -267,7 +267,7 @@ public class MainMenu extends AppCompatActivity {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;
             }
-            DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+            SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
             startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
         });
     }

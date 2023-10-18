@@ -1,4 +1,4 @@
-package com.example.antiscam.repository;
+package com.example.antiscam.manager;
 
 import com.example.antiscam.bean.ScamCaseWithUser;
 
@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class DataRepository {
-    private static final DataRepository instance = new DataRepository();
-    private DataRepository(){}
-    public static DataRepository getInstance(){
+public class SearchDataManager {
+    private static final SearchDataManager instance = new SearchDataManager();
+    private SearchDataManager(){}
+    public static SearchDataManager getInstance(){
         return instance;
     }
     /////////////////////  data

@@ -16,7 +16,7 @@ import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.core.Tokenizer;
 import com.example.antiscam.dao.ScamCaseUserCombine;
-import com.example.antiscam.repository.DataRepository;
+import com.example.antiscam.manager.SearchDataManager;
 import com.example.antiscam.tool.HistoryCache;
 import com.example.antiscam.tool.LRUCache;
 
@@ -43,7 +43,7 @@ public class SearchResultActivity extends AppCompatActivity {
             historyCache.setCache(this, cache);
         }
 
-        cardAdapter = new ScamCaseCardAdapter(DataRepository.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
+        cardAdapter = new ScamCaseCardAdapter(SearchDataManager.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
 
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;
             }
-            DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+            SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
             cardAdapter.setData(dataList);
         });
     }

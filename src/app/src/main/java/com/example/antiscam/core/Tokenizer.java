@@ -1,12 +1,6 @@
 package com.example.antiscam.core;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class Tokenizer {
 
@@ -40,7 +34,7 @@ public class Tokenizer {
     private Token parser1(String input) {
         if (input.startsWith("@")) {
             input = input.substring(1);
-            return parser2(input, Token.Type.USERNAME);
+            return parser2(input, Token.Type.USEREMAIL);
         } else if (input.startsWith("#")) {
             input = input.substring(1);
             return parser2(input, Token.Type.TITLE);

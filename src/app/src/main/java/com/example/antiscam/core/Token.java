@@ -1,13 +1,12 @@
 package com.example.antiscam.core;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
 public class Token {
     public enum Type {
-        USERNAME,
+        USEREMAIL,
         TITLE,
         AMOUNT,
         SCAMTYPE,

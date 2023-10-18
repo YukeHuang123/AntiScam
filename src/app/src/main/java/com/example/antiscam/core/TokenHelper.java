@@ -2,14 +2,9 @@ package com.example.antiscam.core;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TokenHelper {
     private static final String TAG = "TokenHelper";
@@ -41,7 +36,7 @@ public class TokenHelper {
         Token token = tokenizer.getTokens();
         Log.i(TAG, "genFilter: " + token);
         switch (token.getCtype1()) {
-            case USERNAME:
+            case USEREMAIL:
                 return genFilter("post_user", token.getCtype2(), token.getValue1());
             case TITLE:
                 return genFilter("title", token.getCtype2(), token.getValue1());

@@ -16,7 +16,7 @@ public class TokenizerTest {
 
         // expected get token @#%
         assertCategory(Token.Type.AMOUNT, amount);
-        assertCategory(Token.Type.USERNAME, username);
+        assertCategory(Token.Type.USEREMAIL, username);
         assertCategory(Token.Type.TITLE, title);
         // expected get value
         assertValue("2000", amount);
@@ -80,7 +80,7 @@ public class TokenizerTest {
         Token token = tokenizer.getTokens();
         // expected get token @#%
         assertCategory(Token.Type.AMOUNT,token.getValue1());
-        assertCategory(Token.Type.USERNAME,token.getValue2());
+        assertCategory(Token.Type.USEREMAIL,token.getValue2());
         // expected get value
         assertValue("2000",token.getValue1());
         assertValue("test@gmail.com",token.getValue2());
