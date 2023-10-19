@@ -59,7 +59,7 @@ public class History extends AppCompatActivity {
 
         List<ScamCaseWithUser> dataList = new ArrayList<>(cache.getAll());
 
-        cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);
+        cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.history_cardlist);
 
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override

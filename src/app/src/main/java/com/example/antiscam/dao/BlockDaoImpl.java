@@ -16,6 +16,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class BlockDaoImpl implements BlockDao {
     private List<String> blockedUsers = new ArrayList<>();
     private List<String> blockers = new ArrayList<>();

@@ -274,11 +274,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.example.antiscam.R;
 &nbsp;import com.example.antiscam.adapter.ScamCaseCardAdapter;
 &nbsp;import com.example.antiscam.bean.ScamCaseWithUser;
-&nbsp;import com.example.antiscam.core.Tokenizer;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseUserCombine;
-&nbsp;import com.example.antiscam.dataclass.UserInfoManager;
-&nbsp;import com.example.antiscam.repository.DataRepository;
-&nbsp;import com.example.antiscam.singleton.CacheSingleton;
+&nbsp;import com.example.antiscam.searchCore.Tokenizer;
+&nbsp;import com.example.antiscam.dao.ScamCaseUserCombine;
+&nbsp;import com.example.antiscam.manager.UserInfoManager;
+&nbsp;import com.example.antiscam.manager.SearchDataManager;
+&nbsp;import com.example.antiscam.tool.HistoryCache;
 &nbsp;import com.example.antiscam.tool.DataLoadCallback;
 &nbsp;import com.example.antiscam.tool.LRUCache;
 &nbsp;import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -297,7 +297,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    String authUserName;
 &nbsp;    String authUserEmail;
 &nbsp;    String authUserAvatarPath;
-&nbsp;    private CacheSingleton cacheSingleton;
+&nbsp;    private HistoryCache historyCache;
 &nbsp;    private LRUCache&lt;String, ScamCaseWithUser&gt; cache;
 &nbsp;    private Handler handler;
 &nbsp;    private Runnable refreshRunnable;
@@ -332,13 +332,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;        // Data List for scam case card and set scam case data to adapter
 &nbsp;//        List&lt;scamCaseList&gt; dataList = scamCaseListAccess.loadJsonData(this, &quot;scamCase.json&quot;);
 <b class="nc">&nbsp;        List&lt;ScamCaseWithUser&gt; dataList = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        cacheSingleton = CacheSingleton.getInstance();</b>
-<b class="nc">&nbsp;        cache = cacheSingleton.getCache(this);</b>
+<b class="nc">&nbsp;        historyCache = HistoryCache.getInstance();</b>
+<b class="nc">&nbsp;        cache = historyCache.getCache(this);</b>
 &nbsp;//
 <b class="nc">&nbsp;        if (cache == null) {</b>
 <b class="nc">&nbsp;            Log.d(&quot;cache&quot;, &quot;no cache find&quot;);</b>
 <b class="nc">&nbsp;            cache = new LRUCache&lt;&gt;(100);</b>
-<b class="nc">&nbsp;            cacheSingleton.setCache(this, cache);</b>
+<b class="nc">&nbsp;            historyCache.setCache(this, cache);</b>
 &nbsp;        }
 <b class="nc">&nbsp;        Log.d(&quot;cache&quot;, cache.toString());</b>
 &nbsp;
@@ -350,7 +350,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;            @Override
 &nbsp;            public void onDataLoaded(List&lt;ScamCaseWithUser&gt; dataList) {
-<b class="nc">&nbsp;                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);</b>
+<b class="nc">&nbsp;                SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);</b>
 <b class="nc">&nbsp;                cardAdapter.setData(dataList);</b>
 &nbsp;            }
 &nbsp;        });
@@ -361,7 +361,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;                Intent intent = new Intent(MainMenu.this, CaseDetail.class);</b>
 <b class="nc">&nbsp;                intent.putExtra(&quot;scamCaseWithUser&quot;, scamCaseWithUser);</b>
 &nbsp;
-<b class="nc">&nbsp;                cache = cacheSingleton.getCache(MainMenu.this);</b>
+<b class="nc">&nbsp;                cache = historyCache.getCache(MainMenu.this);</b>
 <b class="nc">&nbsp;                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);</b>
 &nbsp;//                Gson gson = new Gson();
 &nbsp;//                Gson gson = new GsonBuilder()
@@ -371,7 +371,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;//                LRUCache&lt;String , ScamCaseWithUser&gt; cache = gson.fromJson(cacheString,
 &nbsp;//                        new TypeToken&lt;LRUCache&lt;String, ScamCaseWithUser&gt;&gt;(){}.getType());
 &nbsp;//                Log.d(&quot;cacheToStr&quot;, JSON.toJSONString(cache));
-<b class="nc">&nbsp;                cacheSingleton.setCache(MainMenu.this, cache);</b>
+<b class="nc">&nbsp;                historyCache.setCache(MainMenu.this, cache);</b>
 &nbsp;
 <b class="nc">&nbsp;                startActivity(intent);</b>
 &nbsp;            }
@@ -420,7 +420,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {</b>
 &nbsp;            @Override
 &nbsp;            public void onDataLoaded(List&lt;ScamCaseWithUser&gt; dataList) {
-<b class="nc">&nbsp;                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);</b>
+<b class="nc">&nbsp;                SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);</b>
 <b class="nc">&nbsp;                cardAdapter.setData(dataList);</b>
 <b class="nc">&nbsp;                cardAdapter.notifyDataSetChanged();</b>
 &nbsp;            }
@@ -521,7 +521,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;                Toast.makeText(this, &quot;Result is Empty,Please retry&quot;, Toast.LENGTH_LONG).show();</b>
 &nbsp;                return;
 &nbsp;            }
-<b class="nc">&nbsp;            DataRepository.getInstance().addAllScamCaseWithUsers(dataList);</b>
+<b class="nc">&nbsp;            SearchDataManager.getInstance().addAllSearchDatas(dataList);</b>
 <b class="nc">&nbsp;            startActivity(new Intent(this, SearchResultActivity.class).putExtra(&quot;search_content&quot;, query));</b>
 &nbsp;        });
 &nbsp;    }
@@ -552,7 +552,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-18 18:59</div>
+    <div style="float:right;">generated on 2023-10-19 21:06</div>
 </div>
 </body>
 </html>

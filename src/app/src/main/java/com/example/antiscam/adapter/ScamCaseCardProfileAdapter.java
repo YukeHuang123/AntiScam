@@ -13,6 +13,9 @@ import com.google.firebase.storage.StorageReference;
 import java.text.DateFormat;
 import java.util.List;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class ScamCaseCardProfileAdapter extends ScamCaseCardAdapter {
     private OnDelBtnClickListener onDelBtnClickListener;
     private String userEmail;

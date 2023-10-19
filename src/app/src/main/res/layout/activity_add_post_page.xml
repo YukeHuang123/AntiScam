@@ -8,7 +8,7 @@
 
     <View
         android:id="@+id/blueSpace2"
-        android:layout_width="411sp"
+        android:layout_width="match_parent"
         android:layout_height="59sp"
         android:background="@color/appThemeC"
         app:layout_constraintEnd_toEndOf="parent"

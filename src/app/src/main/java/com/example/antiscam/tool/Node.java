@@ -12,7 +12,7 @@ public class Node<K, V> {
     Node<K, V> left, right;
     int height;
 
-    Node(K key, V value) {
+    public Node(K key, V value) {
         this.key = key;
         this.value = value;
         height = 1; // 新节点的高度为1

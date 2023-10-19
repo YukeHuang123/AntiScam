@@ -108,4 +108,22 @@ public class CodeTest {
         System.out.println("条件 " + lastCondition + " 没有关系符");
     }
 
+    @Test
+    public void codeTest4() {
+        String input = "#=Products that Disappoint&$=product and service scams&@=comp2100@anu.edu.au|#=Products that Disappoint&$=product and service scams&@=comp2100@anu.edu.au";
+        String[] strings = input.split("([&|])");
+        for (String string : strings) {
+            System.out.println(string);
+        }
+        String endstr = strings[strings.length - 1];
+        System.out.println(endstr);
+        String s = input.substring(0, input.length() - endstr.length() - 1);
+        System.out.println(input.charAt(input.length() - endstr.length() - 1) + "::::" + s);
+    }
+
+    @Test
+    public void codeTest5(){
+        String input = "";
+    }
+
 }

@@ -193,22 +193,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import android.widget.ImageView;
 &nbsp;import android.widget.Toast;
 &nbsp;
-&nbsp;import com.alibaba.fastjson.JSON;
 &nbsp;import com.example.antiscam.R;
-&nbsp;import com.example.antiscam.act.CaseDetail;
-&nbsp;import com.example.antiscam.act.SearchResultActivity;
 &nbsp;import com.example.antiscam.adapter.ScamCaseCardAdapter;
 &nbsp;import com.example.antiscam.bean.ScamCaseWithUser;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseUserCombine;
-&nbsp;import com.example.antiscam.repository.DataRepository;
-&nbsp;import com.example.antiscam.singleton.CacheSingleton;
-&nbsp;import com.example.antiscam.tool.CacheToFile;
-&nbsp;import com.example.antiscam.tool.DataLoadCallback;
-&nbsp;import com.example.antiscam.tool.DoublyLinkedListExclusionStrategy;
+&nbsp;import com.example.antiscam.tool.HistoryCache;
 &nbsp;import com.example.antiscam.tool.LRUCache;
-&nbsp;import com.google.gson.Gson;
-&nbsp;import com.google.gson.GsonBuilder;
-&nbsp;import com.google.gson.reflect.TypeToken;
 &nbsp;
 &nbsp;import java.util.ArrayList;
 &nbsp;import java.util.List;
@@ -217,7 +206,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    private RecyclerView recyclerView;
 &nbsp;    private ScamCaseCardAdapter cardAdapter;
-&nbsp;    private CacheSingleton cacheSingleton;
+&nbsp;    private HistoryCache historyCache;
 &nbsp;    private LRUCache&lt;String, ScamCaseWithUser&gt; cache;
 &nbsp;    SwipeRefreshLayout swipeRefreshLayout;
 &nbsp;
@@ -232,20 +221,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @SuppressLint(&quot;ClickableViewAccessibility&quot;)
 &nbsp;    private void initHistory() {
-<b class="nc">&nbsp;        cacheSingleton = CacheSingleton.getInstance();</b>
-<b class="nc">&nbsp;        cache = cacheSingleton.getCache(this);</b>
+<b class="nc">&nbsp;        historyCache = HistoryCache.getInstance();</b>
+<b class="nc">&nbsp;        cache = historyCache.getCache(this);</b>
 &nbsp;//
 <b class="nc">&nbsp;        if (cache == null) {</b>
 <b class="nc">&nbsp;            Log.d(&quot;cache&quot;, &quot;no cache find&quot;);</b>
 <b class="nc">&nbsp;            cache = new LRUCache&lt;&gt;(100);</b>
-<b class="nc">&nbsp;            cacheSingleton.setCache(this, cache);</b>
+<b class="nc">&nbsp;            historyCache.setCache(this, cache);</b>
 &nbsp;
 &nbsp;        }
 <b class="nc">&nbsp;        Log.d(&quot;cache&quot;, cache.toString());</b>
 &nbsp;
 <b class="nc">&nbsp;        List&lt;ScamCaseWithUser&gt; dataList = new ArrayList&lt;&gt;(cache.getAll());</b>
 &nbsp;
-<b class="nc">&nbsp;        cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.mainmenu_cardlist);</b>
+<b class="nc">&nbsp;        cardAdapter = new ScamCaseCardAdapter(dataList, R.layout.history_cardlist);</b>
 &nbsp;
 <b class="nc">&nbsp;        cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {</b>
 &nbsp;            @Override
@@ -253,11 +242,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;                Intent intent = new Intent(History.this, CaseDetail.class);</b>
 <b class="nc">&nbsp;                intent.putExtra(&quot;scamCaseWithUser&quot;, scamCaseWithUser);</b>
 &nbsp;
-<b class="nc">&nbsp;                cache = cacheSingleton.getCache(History.this);</b>
+<b class="nc">&nbsp;                cache = historyCache.getCache(History.this);</b>
 &nbsp;
 &nbsp;
 <b class="nc">&nbsp;                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);</b>
-<b class="nc">&nbsp;                cacheSingleton.setCache(History.this, cache);</b>
+<b class="nc">&nbsp;                historyCache.setCache(History.this, cache);</b>
 &nbsp;
 <b class="nc">&nbsp;                startActivity(intent);</b>
 &nbsp;            }
@@ -288,7 +277,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    void reloadHistoryPage() {
-<b class="nc">&nbsp;        cache = cacheSingleton.getCache(this);</b>
+<b class="nc">&nbsp;        cache = historyCache.getCache(this);</b>
 &nbsp;
 <b class="nc">&nbsp;        List&lt;ScamCaseWithUser&gt; dataList = new ArrayList&lt;&gt;(cache.getAll());</b>
 &nbsp;
@@ -310,12 +299,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        deleteIcon.setOnClickListener(new View.OnClickListener() {</b>
 &nbsp;            @Override
 &nbsp;            public void onClick(View view) {
-&nbsp;                // 创建并显示删除确认对话框
+&nbsp;                // Create and display alert dialog
 <b class="nc">&nbsp;                AlertDialog.Builder builder = new AlertDialog.Builder(History.this);</b>
-<b class="nc">&nbsp;                builder.setTitle(&quot;Delete All History&quot;); // 对话框标题</b>
-<b class="nc">&nbsp;                builder.setMessage(&quot;Are you sure you want to delete all history records?&quot;); // 对话框消息</b>
+<b class="nc">&nbsp;                builder.setTitle(&quot;Delete All History&quot;);</b>
+<b class="nc">&nbsp;                builder.setMessage(&quot;Are you sure you want to delete all history records?&quot;);</b>
 &nbsp;
-&nbsp;                // 添加 &quot;Yes&quot; 按钮，用户确认删除
+&nbsp;                // Add &#39;Yes&#39; button
 <b class="nc">&nbsp;                builder.setPositiveButton(&quot;Yes&quot;, new DialogInterface.OnClickListener() {</b>
 &nbsp;                    @Override
 &nbsp;                    public void onClick(DialogInterface dialog, int which) {
@@ -326,7 +315,6 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;                builder.setNegativeButton(&quot;No&quot;, new DialogInterface.OnClickListener() {</b>
 &nbsp;                    @Override
 &nbsp;                    public void onClick(DialogInterface dialog, int which) {
-&nbsp;                        // 用户取消删除操作，不执行任何操作
 <b class="nc">&nbsp;                    }</b>
 &nbsp;                });
 &nbsp;
@@ -339,7 +327,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    void deleteAllHistoryRecords() {
 <b class="nc">&nbsp;        cache = new LRUCache&lt;&gt;(100);</b>
-<b class="nc">&nbsp;        cacheSingleton.setCache(this, cache);</b>
+<b class="nc">&nbsp;        historyCache.setCache(this, cache);</b>
 <b class="nc">&nbsp;        Toast.makeText(History.this, &quot;Delete all history, go back to profile!&quot;, Toast.LENGTH_SHORT).show();</b>
 <b class="nc">&nbsp;        onBackPressed();</b>
 &nbsp;    }
@@ -367,7 +355,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-18 18:59</div>
+    <div style="float:right;">generated on 2023-10-19 21:06</div>
 </div>
 </body>
 </html>

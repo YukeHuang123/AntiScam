@@ -79,11 +79,11 @@ public class TokenizerTest {
         Tokenizer tokenizer = new Tokenizer(input);
         Token token = tokenizer.getTokens();
         // expected get token @#%
-        assertCategory(Token.Type.AMOUNT,token.getValue1());
-        assertCategory(Token.Type.USEREMAIL,token.getValue2());
+        assertCategory(Token.Type.USEREMAIL,token.getValue1());
+        assertCategory(Token.Type.AMOUNT,token.getValue2());
         // expected get value
-        assertValue("2000",token.getValue1());
-        assertValue("test@gmail.com",token.getValue2());
+        assertValue("2000",token.getValue2());
+        assertValue("test@gmail.com",token.getValue1());
 
     }
 }

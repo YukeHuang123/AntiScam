@@ -95,8 +95,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
   - **Code Contribution in the final App**
     - Basic Features - DataFiles: [scamCase.json](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/assets/scamCase.json)
     - Custom Feature - FB-Persist: Extension: 
-        - [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
-        - [ScamCaseDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L66-148)
+        - `ScamCaseDao.java` [add and get data from firestore interface](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
+        - `ScamCaseDaoImpl.java`[add and get data from firestore implementation](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L66-148)
     
     **UI**
     
@@ -127,9 +127,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
        - [setOnClickListener()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L44-52)
        - [OnClickListener for the item view](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L72-81)
     
-  - **Code and App Design** 
-    
-    - I involved in the DAO and adapter design pattern.
+  - **Code and App Design**
+    - I involved in the DAO design pattern.
     - I designed the [case detail page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_case_detail.xml), [add post page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml), [submit successfully page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_submit_success_page.xml) and [floating action button](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml#L116-126) in main menu.
     
   - **Others**: 
@@ -148,7 +147,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
       1. [LoadShowData] medium
       2. [Data-Profile] easy
       4. [P2P-Block] medium
-      5. [Data-Persist] (Extension part)
+      5. [Data-Persist] (Extension Part)
     - Code Implementation
     
       1. UI
@@ -196,9 +195,10 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
       5. bean
     
-         1. [ScamCaseWithUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java)
+         1. [BlockModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/BlockModel.java)
     
-         2. [BlockModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/BlockModel.java)
+      6. tool
+         1. [AndroidUtil](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AndroidUtil.java)
   - **Code and App Design** 
     
     - Design Pattern: dao and adapter design parttern.
@@ -227,67 +227,84 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 ## Application Description
 
-*[What is your application, what does it do? Include photos or diagrams if necessary]*
 
-*Here is a pet specific application example*
+Our AntiScam application is a user-driven platform designed to combat scams by allowing users to share their experiences, provide scam alerts, and engage in meaningful communication with the content creator. 
+- Users can post details of scam incidents, including the type of scam, title, payment method, monetary losses incurred and so on.
+- The search functionality enables easy access to specific scam cases, helping users find relevant information quickly. 
+- The app features a private messaging system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
+- We prioritize user privacy and have implemented a 'block' feature, granting users control over their communication preferences by allowing them to prevent specific users from sending direct messages. 
+- On the user's profile page, users can view their browsing history, and the last post read will show on the top of history section.
+- User also have choice to delete all the history records.
+- We also offer personalized services, allowing users to click on their avatar to change it to other photo.
+- The add post button is draggable, user can drag it along the right edge.
 
-*PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
+Our app aims to create an informed community, protecting individuals from potential scams.
+<img src="https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/application%20screenshot/add_post.png"  width="30%" height="30%">
+![Add post](application screenshot/add_post.png) <br>
+![change avatar](application screenshot/change_avatar.png) <br>
+![chat](application screenshot/chat.png) <br>
+![delete history records](application screenshot/delete_history_records.png) <br>
+![main menu](application screenshot/main_menu.png) <br>
+![my profile](application screenshot/my_profile.png) <br>
+![other use profile](application screenshot/other_user_profile.png) <br>
+![search for title](application screenshot/search_for_title.png) <br>
 
 ### Application Use Cases and or Examples
 
-**Target Users: General Public**
-
+**Target Users: Public**
 - **Use Case 1: Searching for Scam Case**
    - **User:** John
    - **Scenario:** John receives a suspicious email advertising a product at an unbelievably low price, significantly lower than the market price. He is unsure whether this is a scam or a genuine bargain.
    - **Action:** John opens the AntiScam app and uses the search feature to look for product and service scams.
   - **Result:** John finds some posts that exactly match his scenario, which confirms that this is a scam, and he saves $150.
+<br><br>
+- **Use Case 2: Knowing the Latest Scam Tactics**
+   - **User:** Sarah
+   - **Scenario:** Sarah is curious about the latest scam tactics.
+   - **Action:** She accesses the AntiScam app and search for scam cases by interested title or scam types. 
+   - **Result:** Sarah find there are various of Scam Tactics, and knowing it in advance can help her to avoid being scammed.
+<br><br>
+  
+**Target Users: Victims**
+- **Use Case 3: Reporting a Scam Case and Alerting Others**
+    - **User:** Amy
+    - **Scenario:**  After identifying that she has encountered a social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
+    - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script.
+    - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
+<br><br>
+- **Use Case 4: Seek help and potential ways to get money back**
+    - **User:** Vera
+    - **Scenario:** Vera feels hopeless because she just lost a large amount of money by a scam.
+    - **Action:** Vera opens the AntiScam app and add a post about her experience. In the description part, she includes the willing to get help. Then she submits it.
+    - **Result:**  Other users see her post and message her privately. Some users provide really useful methods which help Vera to calm down. But Vera encounter one user is up to no good. She decides to block that user from message her.
+<br><br>
+- **Use Case 5: Seek Comfort and Social needs**
+   - **User:** Emily
+   - **Scenario:** Emily faced a romance scam recently, she cries every day and want to find someone to talk with.
+   - **Action:** She opens AntiScam app and search for romance scams.
+   - **Result:** She finds one user called Isabella also face romance scam recently,she messages Isabella and share her story, they become good friends.
+<br><br>
 
-- **Use Case 2: Reporting a Scam Case**
-   - **User:** Amy
-   - **Scenario:**  After identifying that she has encountered an social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
-   - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script. 
-   - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
-
-- **Use Case 3: Reporting a Scam Case**
-
-   - **Scenario:** Emily is about to make an online purchase and wants to check if the seller is reliable.
-   - **Action:** She enters the seller's information into the app's search bar.
-  - **Result:** The app displays scam alerts related to the seller, helping Emily make an informed decision.
-
-**Target Users: Anti-Scam Community**
-Use Case 3: Discussing Scam Tactics
-
-User: Sarah
-Scenario: Sarah is curious about the latest scam tactics.
-Action: She accesses the app's discussion forum.
-Result: Sarah joins a conversation about scams, shares her insights, and learns from others in the community.
-Use Case 4: Alerting Others About a New Scam
-
-User: Michael
-Scenario: Michael falls victim to a new scam and wants to warn others.
-Action: He creates a scam alert post and adds a detailed description.
-Result: The post is published, and other users can see it and avoid falling for the same scam.
-Target Users: Moderators
-Use Case 5: Reviewing and Moderating Posts
-
-User: Moderator
-Scenario: The moderator logs into the AntiScam app.
-Action: They review recent posts and comments to ensure they adhere to community guidelines.
-Result: Inappropriate content is removed, and users are notified of the action taken.
-Use Case 6: Supporting Users
-
-User: Moderator
-Scenario: A user reports an issue with the app.
-Action: The moderator responds to the user's request for assistance.
-Result: The user's issue is resolved, ensuring a positive user experience.
-
+**Target Users:authorities such as government agencies, police and so on**
+- **Use Case 6: make announcement about recent scams**
+    - **User:** government agencies, police and so on
+    - **Scenario:** These authorities want to make official announcements about recent scams to inform and alert the public.
+    - **Action:** They log in to the AntiScam application and create a new announcement. 
+    - **Result:**  The announcement is published on the AntiScam platform, and users can access this important information to stay informed and protected against scams.
+      <br><br>
+  
+**Staff to maintain the application**
+- **Use Case 7: make announcement about recent scams**
+    - **User:** Moderator
+    - **Scenario:** A user post a new scam case in AntiScam app.
+    - **Action:** They review recent posts to ensure this user adhere to community guidelines.
+    - **Result:** Inappropriate content is removed, and other users can not see it.
+  <br><br>
 <hr> 
 
 ### Application UML
 
-![UML ClassDiagram](media/UML-6442.png) 
-<br>
+![UML ClassDiagram](media/UML-6442.png) <br><br>
 <hr>
 
 
@@ -440,34 +457,37 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 4. [Search] Users are able to search for scam case information on app. Search feature utilises the Tokenizer and Parser. Combined searches are supported. (medium)
 
    - Search token, combine symbol and compare symbol
-
-
-| Token | Search target |
-|:------|:-------------:|
-| @     |  user email   |  
-| #     |    title      |      
-| %     |    amount     | 
-| $     |   scam type   | 
-
-
-     The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>' and so on. 
-
+   
+     Token and search target
+   
+     - token: @, search target: user email
+     - token: #, search target: title
+     - token: %, amount
+     - token: $, scam type
+   
+     The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>', '>=', '<=' and so on. 
+   
    - Code
-
-     Class [act/SearchResultActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java)
-
-     Class [searchCore/Token](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/Token.java)
-
-     Class [searchCore/TokenHelper](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/TokenHelper.java)
-
-     Class [searchCore/Tokenizer](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/Tokenizer.java)
-
-     Class [manager/SearchDataManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/repository/DataRepository.java)
+   
+      Class act/MainMenu
+   
+      ​	- Method [search()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L258-273)
+   
+      Class [act/SearchResultActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java)
+   
+      Class [searchCore/Token](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Token.java)
+   
+      Class [searchCore/Parser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Parser.java)
+   
+      Class [searchCore/Tokenizer](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Tokenizer.java)
+   
+      Class [manager/SearchDataManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/SearchDataManager.java)
+   
 
 
 ### Custom Features
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
-1. [Data-Profile]. A user profile page has been created, which includes the user's profile image and username. Users can also modify their profile picture and username on this page by clicking image or username.  (easy)
+1. [Data-Profile]. A user profile page has been created, which includes the user's profile image and username. Users can also modify their profile image and user name, by clicking image or username users will be redirected to update profile page.  (easy)
    
    * Code:
    
@@ -489,7 +509,7 @@ Feature Category: Greater Data Usage, Handling and Sophistication <br>
 
      ​	- Method [deletePost](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L292-312)
    
-     Class [tool/LRUCache]
+     Class tool/LRUCache
    
      ​	- Method [remove](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java#L80-85)
 
@@ -510,13 +530,13 @@ Feature Category: Firebase Integration
 
      Class [act/SubmitSuccessPage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SubmitSuccessPage.java)
 
-     Class dataclass/ScamCaseDao
+     Class dao/ScamCaseDao
 
-     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L19-27)
+     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L19-22)
 
-     Class dataclass/ScamCaseDaoImpl
+     Class dao/ScamCaseDaoImpl
 
-     ​	- Method [addScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L90-101)
+     ​	- Method [addScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L91-101)
 
      ​	- Method [getNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L103-125)
 
@@ -550,10 +570,8 @@ Feature Category: Peer to Peer Messaging
 
      ​	- Method [blockUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L279-301)
 
-     Class [blockDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDao.java)
+     Class [dao/BlockManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/BlockManager.java)
 
-     Class [blockDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDaoImpl.java)
-     
      Class [bean/BlockModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/BlockModel.java)
 
 <hr>
