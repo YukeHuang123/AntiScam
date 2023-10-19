@@ -35,6 +35,9 @@ public class UserDaoImpl implements UserDao {
         return userDao;
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     // Get user by email
     @Override
     public void getUserByEmail(String targetEmail, UserDao.UserCallback userCallback) {
@@ -98,6 +101,9 @@ public class UserDaoImpl implements UserDao {
         });
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     public DocumentReference userDetails(String DocumentID) {
         return FirebaseFirestore.getInstance().collection("users").document(DocumentID);
     }

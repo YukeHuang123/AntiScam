@@ -41,6 +41,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class Profile extends AppCompatActivity {
     private RecyclerView recyclerViewProfile;
     private ScamCaseCardProfileAdapter cardAdapterProfile;

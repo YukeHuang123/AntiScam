@@ -8,6 +8,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class AndroidUtil {
     // How to use
     // AndroidUtil.showToast(getApplicationContext(), "your message");

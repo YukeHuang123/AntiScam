@@ -219,6 +219,9 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.scrollToPosition(chatModels.size() - 1);
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     private void initBlock() {
         // Find block and unblock button
         blockBtnView = findViewById(R.id.blockBtn);
@@ -266,6 +269,9 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     void blockUser() {
 //        BlockModel blockModel = new BlockModel(user.getEmail(), email);
         Map<String, Object> blockRecords = new HashMap<>();

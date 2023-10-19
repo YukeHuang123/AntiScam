@@ -21,6 +21,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class UserInfoManager {
     private static String authUserEmail;
     private static String authUserName;
