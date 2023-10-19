@@ -53,7 +53,6 @@ public class ScamCaseUserCombine {
                             Log.i(TAG, "onScamCaseReceived: "+scamCaseWithUser);
                             dataList.add(scamCaseWithUser);
 
-                            // 你可以继续使用你的判断逻辑，或者调整它以适应你的需求
                             if (dataList.size() == 100) {
                                 callback.onDataLoaded(dataList);
                             }
@@ -70,7 +69,7 @@ public class ScamCaseUserCombine {
         ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
         UserDaoImpl userDaoImpl = UserDaoImpl.getInstance();
 
-        userDaoImpl.getAllUsers(tokenizer, new UserDao.UserCallback() { // 注意：你需要为这个方法定义一个新的回调接口
+        userDaoImpl.getAllUsers(tokenizer, new UserDao.UserCallback() {
             @Override
             public void onUserReceived(User user) {
 
@@ -78,7 +77,6 @@ public class ScamCaseUserCombine {
 
             @Override
             public void onUsersReceived(List<User> users) {
-                // 然后，当所有的用户都被加载后，获取ScamCases
                 scamCaseDaoImpl.getAllScamCases(tokenizer,
                         new ScamCaseDao.ScamCasesCallback() {
                             @Override

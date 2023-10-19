@@ -33,9 +33,23 @@ collaboration:
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
 code:
-  - comment:
-    url:
-    licence:
+  - comment: We use this tool in 'update profile' page.
+    url: https://github.com/Dhaval2404/ImagePicker
+    licence: Copyright 2019-2021, Dhaval Patel
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at
+            
+            http://www.apache.org/licenses/LICENSE-2.0
+            
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+  - comment: We use this tool in 'update profile' page.
+    url: https://github.com/bumptech/glide
+    licence: BSD, part MIT and Apache 2.0. See the [LICENSE file](https://github.com/bumptech/glide/blob/master/LICENSE) for details.
 
 
 # add as many "url+licence+comment" entries as necessary
@@ -54,10 +68,10 @@ assets:
       [x] using online resources (e.g., Stackoverflow, blogs)
 
 2. If not completed by yourself only, how did the use of Gen AI tools (and which ones), contribute to completing this assignment?
-  - Tool(s): <tools used here>
+  - Tool(s): https://blog.csdn.net/a553181867/article/details/89500648
   
 3. How did they contribute to the completion of this assignment?
-  - <your answer here>
+  - We use this tool to crop rectangular image into circular one.
 
 4. How long did it take to complete this assignment (approximately, in hours)?
   - <your answer here> hours
@@ -72,5 +86,5 @@ members:
     uid: u7618794
   - name: Junzhe Huang
     uid: u7551551
-  - name:
-    uid:
+  - name: Yijing Jia
+    uid: u7566045

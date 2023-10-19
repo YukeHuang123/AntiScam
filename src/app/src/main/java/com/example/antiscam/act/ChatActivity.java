@@ -23,7 +23,7 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ChatAdapter;
 import com.example.antiscam.bean.BlockModel;
 import com.example.antiscam.bean.ChatModel;
-import com.example.antiscam.dao.BlockManager;
+import com.example.antiscam.dao.BlockDaoImpl;
 import com.example.antiscam.manager.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -110,8 +110,8 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     }
                 }
-
-                documentIds = BlockManager.getDocumentId("blocked", email);
+                BlockDaoImpl blockDaoImpl = new BlockDaoImpl();
+                documentIds = blockDaoImpl.getDocumentId("blocked", email);
 
                 refreshRecycleView();
             }
@@ -278,7 +278,8 @@ public class ChatActivity extends AppCompatActivity {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully blocked");
                         blockBtnView.setVisibility(View.GONE);
                         unblockBtnView.setVisibility(View.VISIBLE);
-                        documentIds = BlockManager.getDocumentId("blocked", email);
+                        BlockDaoImpl blockDaoImpl = new BlockDaoImpl();
+                        documentIds = blockDaoImpl.getDocumentId("blocked", email);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
