@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ChatModel</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.bean</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatModel (com.example.antiscam.bean)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatModel</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.bean;
+&nbsp;
+&nbsp;import android.net.Uri;
+&nbsp;
+&nbsp;import com.google.firebase.database.IgnoreExtraProperties;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;@IgnoreExtraProperties
+&nbsp;public class ChatModel {
+&nbsp;
+&nbsp;    public static final int SEND = 0;
+&nbsp;    public static final int RECEIVE = 1;
+&nbsp;
+&nbsp;    private String sendUserEmail;
+&nbsp;    private String sendUserImg;
+&nbsp;    private String sendUserName;
+&nbsp;    private String receiveUserEmail;
+&nbsp;    private String receiveUserImg;
+&nbsp;    private String receiveUserName;
+&nbsp;
+&nbsp;    private String content;
+<b class="nc">&nbsp;    private Long sendTime = System.currentTimeMillis();</b>
+&nbsp;    private int type;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;    public ChatModel() {</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public ChatModel(String sendUserEmail, String sendUserImg, String sendUserName, String receiveUserEmail, String receiveUserImg, String receiveUserName, String content, int type) {</b>
+<b class="nc">&nbsp;        this.sendUserEmail = sendUserEmail;</b>
+<b class="nc">&nbsp;        this.sendUserImg = sendUserImg;</b>
+<b class="nc">&nbsp;        this.sendUserName = sendUserName;</b>
+<b class="nc">&nbsp;        this.receiveUserEmail = receiveUserEmail;</b>
+<b class="nc">&nbsp;        this.receiveUserImg = receiveUserImg;</b>
+<b class="nc">&nbsp;        this.receiveUserName = receiveUserName;</b>
+<b class="nc">&nbsp;        this.content = content;</b>
+<b class="nc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getSendUserEmail() {
+<b class="nc">&nbsp;        return sendUserEmail;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getSendUserImg() {
+<b class="nc">&nbsp;        return sendUserImg;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getSendUserName() {
+<b class="nc">&nbsp;        return sendUserName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getReceiveUserEmail() {
+<b class="nc">&nbsp;        return receiveUserEmail;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getReceiveUserImg() {
+<b class="nc">&nbsp;        return receiveUserImg;</b>
+&nbsp;    }
+&nbsp;    public void setReceiveUserName(String userName){
+<b class="nc">&nbsp;        this.receiveUserName = userName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getReceiveUserName() {
+<b class="nc">&nbsp;        return receiveUserName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getContent() {
+<b class="nc">&nbsp;        return content;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getSendTime() {
+<b class="nc">&nbsp;        return sendTime;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getType() {
+<b class="nc">&nbsp;        return type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setType(int type) {
+<b class="nc">&nbsp;        this.type = type;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;ChatModel{&quot; +</b>
+&nbsp;                &quot;sendUserEmail=&#39;&quot; + sendUserEmail + &#39;\&#39;&#39; +
+&nbsp;                &quot;, sendUserImg=&#39;&quot; + sendUserImg + &#39;\&#39;&#39; +
+&nbsp;                &quot;, sendUserName=&#39;&quot; + sendUserName + &#39;\&#39;&#39; +
+&nbsp;                &quot;, receiveUserEmail=&#39;&quot; + receiveUserEmail + &#39;\&#39;&#39; +
+&nbsp;                &quot;, receiveUserImg=&#39;&quot; + receiveUserImg + &#39;\&#39;&#39; +
+&nbsp;                &quot;, receiveUserName=&#39;&quot; + receiveUserName + &#39;\&#39;&#39; +
+&nbsp;                &quot;, content=&#39;&quot; + content + &#39;\&#39;&#39; +
+&nbsp;                &quot;, sendTime=&quot; + sendTime +
+&nbsp;                &quot;, type=&quot; + type +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

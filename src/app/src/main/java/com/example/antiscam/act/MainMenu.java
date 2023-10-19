@@ -21,10 +21,10 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.core.Tokenizer;
-import com.example.antiscam.dataclass.ScamCaseUserCombine;
-import com.example.antiscam.dataclass.UserInfoManager;
-import com.example.antiscam.repository.DataRepository;
-import com.example.antiscam.singleton.CacheSingleton;
+import com.example.antiscam.dao.ScamCaseUserCombine;
+import com.example.antiscam.manager.UserInfoManager;
+import com.example.antiscam.manager.SearchDataManager;
+import com.example.antiscam.tool.HistoryCache;
 import com.example.antiscam.tool.DataLoadCallback;
 import com.example.antiscam.tool.LRUCache;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,7 +43,7 @@ public class MainMenu extends AppCompatActivity {
     String authUserName;
     String authUserEmail;
     String authUserAvatarPath;
-    private CacheSingleton cacheSingleton;
+    private HistoryCache historyCache;
     private LRUCache<String, ScamCaseWithUser> cache;
     private Handler handler;
     private Runnable refreshRunnable;
@@ -78,13 +78,13 @@ public class MainMenu extends AppCompatActivity {
         // Data List for scam case card and set scam case data to adapter
 //        List<scamCaseList> dataList = scamCaseListAccess.loadJsonData(this, "scamCase.json");
         List<ScamCaseWithUser> dataList = new ArrayList<>();
-        cacheSingleton = CacheSingleton.getInstance();
-        cache = cacheSingleton.getCache(this);
+        historyCache = HistoryCache.getInstance();
+        cache = historyCache.getCache(this);
 //
         if (cache == null) {
             Log.d("cache", "no cache find");
             cache = new LRUCache<>(100);
-            cacheSingleton.setCache(this, cache);
+            historyCache.setCache(this, cache);
         }
         Log.d("cache", cache.toString());
 
@@ -96,7 +96,7 @@ public class MainMenu extends AppCompatActivity {
 
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> dataList) {
-                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+                SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
                 cardAdapter.setData(dataList);
             }
         });
@@ -107,7 +107,7 @@ public class MainMenu extends AppCompatActivity {
                 Intent intent = new Intent(MainMenu.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
 
-                cache = cacheSingleton.getCache(MainMenu.this);
+                cache = historyCache.getCache(MainMenu.this);
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
 //                Gson gson = new Gson();
 //                Gson gson = new GsonBuilder()
@@ -117,7 +117,7 @@ public class MainMenu extends AppCompatActivity {
 //                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
 //                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
 //                Log.d("cacheToStr", JSON.toJSONString(cache));
-                cacheSingleton.setCache(MainMenu.this, cache);
+                historyCache.setCache(MainMenu.this, cache);
 
                 startActivity(intent);
             }
@@ -166,7 +166,7 @@ public class MainMenu extends AppCompatActivity {
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
             public void onDataLoaded(List<ScamCaseWithUser> dataList) {
-                DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+                SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
                 cardAdapter.setData(dataList);
                 cardAdapter.notifyDataSetChanged();
             }
@@ -267,7 +267,7 @@ public class MainMenu extends AppCompatActivity {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;
             }
-            DataRepository.getInstance().addAllScamCaseWithUsers(dataList);
+            SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
             startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
         });
     }

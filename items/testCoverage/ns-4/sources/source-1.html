@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ScamCaseBuilder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.builder</a>
+</div>
+
+<h1>Coverage Summary for Class: ScamCaseBuilder (com.example.antiscam.builder)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ScamCaseBuilder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.builder;
+&nbsp;
+&nbsp;import com.example.antiscam.bean.ScamCase;
+&nbsp;import com.example.antiscam.tool.NewDate;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;
+<b class="nc">&nbsp;public class ScamCaseBuilder {</b>
+&nbsp;
+&nbsp;
+&nbsp;    public static ScamCase makeScamCase(int id,String amount,String contact,String day, String month, String year,String description,String payment, String user,String type, String title, String age, String city){
+<b class="nc">&nbsp;        ScamCase scamCase=new ScamCase();</b>
+<b class="nc">&nbsp;        double amount1 = Double.parseDouble(amount);</b>
+<b class="nc">&nbsp;        scamCase.setAmount(amount1);</b>
+<b class="nc">&nbsp;        scamCase.setContactMethod(contact);</b>
+<b class="nc">&nbsp;        scamCase.setScam_id(id);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        Date scamDate = NewDate.createNewDate(day, month, year);</b>
+<b class="nc">&nbsp;        scamCase.setDate(scamDate);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        scamCase.setDescription(description);</b>
+<b class="nc">&nbsp;        scamCase.setPaymentMethod(payment);</b>
+<b class="nc">&nbsp;        scamCase.setPost_user(user);</b>
+<b class="nc">&nbsp;        scamCase.setScam_type(type);</b>
+<b class="nc">&nbsp;        scamCase.setTitle(title);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        int age1 = Integer.parseInt(age);</b>
+<b class="nc">&nbsp;        scamCase.setVictim_age(age1);</b>
+<b class="nc">&nbsp;        Date postDate=new Date();</b>
+&nbsp;
+<b class="nc">&nbsp;        scamCase.setVictim_city(city);</b>
+<b class="nc">&nbsp;        scamCase.setPost_date(postDate);</b>
+&nbsp;
+<b class="nc">&nbsp;        return scamCase;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

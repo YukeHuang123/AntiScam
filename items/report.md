@@ -1,4 +1,4 @@
-# [G0 - Team Name] Report
+# [G32] Report
 
 The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
 
@@ -38,11 +38,11 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 The key area(s) of responsibilities for each member
 
 | UID        |        Name        |                               Role |
-|:-----------|:------------------:|-----------------------------------:|
-| u7558707   |     Zhaoyun Xu     |         Project Manager, Developer |
-| u7618794   |     Yuke Huang     |             UI Designer, Developer |
-| u7566045   |     Yijing Jia     |             UI Designer, Developer |
-| u7551551   |    Junzhe Huang    |                  Developer, Tester |
+|:-----------|:------------------:|:-----------------------------------|
+| u7558707   |     Zhaoyun Xu     |  Project Manager, Developer |
+| u7618794   |     Yuke Huang     |  UI Designer, Developer |
+| u7566045   |     Yijing Jia     |  UI Designer, Developer |
+| u7551551   |    Junzhe Huang    |  Developer, Tester |
 
 
 ## Summary of Individual Contributions
@@ -62,19 +62,35 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
 
-1. **UID1, Name1**  I have 25% contribution, as follows: <br>
-  - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+1. **u7551551 Junzhe Huang** I contribute 25% of the code. Here are my contributions:
+    - Features Implementation
+    1. [Data Search] Hard
+    2. [User Chat] Hard
+    - Code Implementation
+        1. bean
+            1. `ChatModel.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ChatModel.java
+        2. searchCore
+            1. `Token.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Token.java
+            2. `TokenHelper.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/TokenHelper.java
+            3. `Tokenizer.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Tokenizer.java
+        3. ui
+            1. `MainMenu.class` [search()] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java
+            2. `SearchResultActivity.class` [search()] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java
+            3. `ChatActivity.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java
+        4. manager
+            1. `SearchDataManager.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/SearchDataManager.java
 
-  - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
-
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+    - Code Design:
+        1. Tokenizer pattern
+        2. Singleton pattern
+        3. Database table design
+        4. chat design
+    - UI Design:
+        1. All of UI design of chat
+    - Report Writing:
+        1. Application Design and Decisions (partial - 25%)
+        2. Summary of Individual Contributions
+    
 
 2. **u7618794, Yuke Huang**  I have 25% contribution, as follows: 
   - **Code Contribution in the final App**
@@ -82,10 +98,12 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Custom Feature - FB-Persist: Extension: 
         - [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
         - [ScamCaseDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L66-148)
+       
     **UI**
     - Add post activity: 
       - [AddPostPage.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/AddPostPage.java)
       - [activity_add_post_page.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml)
+      - [items in each Spinner](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/strings.xml#L30-160)
     - Case details activity: 
        - [CaseDetail.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/CaseDetail.java)
        - [activity_case_detail.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_case_detail.xml)
@@ -105,23 +123,19 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - implements Parcelable to ScamCaseWithUser class:
         - [CREATOR](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L33-49)
         - [describeContents() and writeToParcel()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L59-76)
-    - other code
-       - [ScamCaseBuilder.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/builder/ScamCaseBuilder.java)
-       - [CheckInput.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CheckInput.java)
-       - [GetString.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/GetString.java)
-       - [NewDate.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/NewDate.java)
+    - other 
        - [setOnClickListener()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L44-52)
        - [OnClickListener for the item view](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L72-81)
     
-
   - **Code and App Design** 
     - I involved in the DAO and adapter design pattern.
     - I designed the [case detail page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_case_detail.xml), [add post page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml), [submit successfully page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_submit_success_page.xml) and [floating action button](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml#L116-126) in main menu.
 
   - **Others**: 
-    - responsible for all the meeting minutes writing.
-    - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and change the icon.
+    - responsible for 8 meeting minutes writing.
+    - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and implement the adaptive icons: [ic_launcher_foreground.webp](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp), [ic_launcher_background.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/ic_launcher_background.xml)
     - create the UML class diagram independently
+    - report: responsible for Application Description, Team management, and conflict Resolution Protocol.
 
 3. **UID1, Name1**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
@@ -163,39 +177,57 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 ### Application Use Cases and or Examples
 
-*[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
+**Target Users: General Public**
+- **Use Case 1: Searching for Scam Case**
+   - **User:** John
+   - **Scenario:** John receives a suspicious email advertising a product at an unbelievably low price, significantly lower than the market price. He is unsure whether this is a scam or a genuine bargain.
+   - **Action:** John opens the AntiScam app and uses the search feature to look for product and service scams.
+  - **Result:** John finds some posts that exactly match his scenario, which confirms that this is a scam, and he saves $150.
 
-*Here is a pet training application example*
+- **Use Case 2: Reporting a Scam Case**
+   - **User:** Amy
+   - **Scenario:**  After identifying that she has encountered an social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
+   - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script. 
+   - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
 
-*Molly wants to inquiry about her cat, McPurr's recent troublesome behaviour*
-1. *Molly notices that McPurr has been hostile since...*
-2. *She makes a post about... with the tag...*
-3. *Lachlan, a vet, writes a reply to Molly's post...*
-4. ...
-5. *Molly gives Lachlan's reply a 'tick' response*
+- **Use Case 3: Reporting a Scam Case**
 
-*Here is a map navigation application example*
+   - **Scenario:** Emily is about to make an online purchase and wants to check if the seller is reliable.
+   - **Action:** She enters the seller's information into the app's search bar.
+  - **Result:** The app displays scam alerts related to the seller, helping Emily make an informed decision.
 
-*Targets Users: Drivers*
+**Target Users: Anti-Scam Community**
+Use Case 3: Discussing Scam Tactics
 
-* *Users can use it to navigate in order to reach the destinations.*
-* *Users can learn the traffic conditions*
-* ...
+User: Sarah
+Scenario: Sarah is curious about the latest scam tactics.
+Action: She accesses the app's discussion forum.
+Result: Sarah joins a conversation about scams, shares her insights, and learns from others in the community.
+Use Case 4: Alerting Others About a New Scam
 
-*Target Users: Those who want to find some good restaurants*
+User: Michael
+Scenario: Michael falls victim to a new scam and wants to warn others.
+Action: He creates a scam alert post and adds a detailed description.
+Result: The post is published, and other users can see it and avoid falling for the same scam.
+Target Users: Moderators
+Use Case 5: Reviewing and Moderating Posts
 
-* *Users can find nearby restaurants and the application can give recommendations*
-* ...
+User: Moderator
+Scenario: The moderator logs into the AntiScam app.
+Action: They review recent posts and comments to ensure they adhere to community guidelines.
+Result: Inappropriate content is removed, and users are notified of the action taken.
+Use Case 6: Supporting Users
 
-*List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
+User: Moderator
+Scenario: A user reports an issue with the app.
+Action: The moderator responds to the user's request for assistance.
+Result: The user's issue is resolved, ensuring a positive user experience.
 
 <hr> 
 
 ### Application UML
 
-![ClassDiagramExample](media/_examples/ClassDiagramExample.png) <br>
-*[Replace the above with a class diagram. You can look at how we have linked an image here as an example of how you can do it too.]*
-
+![UML ClassDiagram](media/UML-6442.png) <br>
 <hr>
 
 ## Code Design and Decisions
@@ -248,20 +280,33 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 ### Parser
 
 ### <u>Grammar(s)</u>
-*[How do you design the grammar? What are the advantages of your designs?]*
-*If there are several grammars, list them all under this section and what they relate to.*
+Designed with a tokenizer-based approach for parsing grammar, utilizing common string prefixes to reduce query time, minimize unnecessary string comparisons, resulting in higher query efficiency than a hash tree.
 
 Production Rules:
 
-    <Non-Terminal> ::= <some output>
-    <Non-Terminal> ::= <some output>
-
-
+elixir
+Copy
+%=2000    ::= Query amount
+#=title   ::= Query title
+@=xxx@gmail.com ::= Query username
+%>2000   ::= Greater-than query
+%>=2000  ::= Greater-than or equal to query
+%<2000   ::= Less-than query
+%<=2000  ::= Less-than or equal to query
+%!=2000  ::= Not-equal-to query
+%=2000&#=title ::= AND query
+%=2000||#=title ::= OR query
 ### <u>Tokenizers and Parsers</u>
 
-*[Where do you use tokenisers and parsers? How are they built? What are the advantages of the designs?]*
+*Collects user search strings, incorporates them into tokenizer parsing, generating corresponding tokens, and storing corresponding values. Then, generates corresponding Firebase Filter syntax based on these tokens.
 
-<hr>
+Advantages:
+
+Text Preprocessing: The tokenizer can convert raw text into discrete language units such as words or sub-words. Tokenization allows for the transformation of text into a form that computers can understand and process.
+Language Understanding: Tokenizers can help us better understand the meaning of the text. By dividing the text into language units, we can more easily identify the structure of sentences, the meaning of words, and their relationships.
+Feature Extraction: In natural language processing tasks, tokenizers can serve as a part of feature extraction. By dividing the text into words or phrases, we can extract various statistical features, such as word frequency, part of speech, etc.
+Multilanguage Support: Tokenizers can handle multiple languages, including English, Chinese, French, etc. For cross-language text processing tasks, tokenizers are indispensable tools. Different languages have different tokenization rules and characteristics.
+Customized Rules: Tokenizers often provide functionality for customized rules, which can be adjusted according to specific needs.*
 
 ### Others
 
@@ -488,27 +533,52 @@ Feature Category: Peer to Peer Messaging
 
 ## Testing Summary
 
-*[What features have you tested? What is your testing coverage?]*
-*Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
-
-*Here is an example:*
-
-1. Tests for Search
-   - Code: [TokenizerTest Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) for the [Tokenizer Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43)
-   - *Number of test cases: ...*
-   - *Code coverage: ...*
-   - *Types of tests created and descriptions: ...*
-2. xxx
-
 We've done testing through two ways: white box, black box testing. And we've found bugs and solved some of them by debugging or logging to the console.
 
-White box testing
+- White box testing
 
-In white box testing, we utilized the emulator to execute all our methods and code. Given our familiarity with the expected outcomes of the code, we tailored our tests accordingly. For example, we inspected the UI layout to confirm it aligned with our intended design. At the same time, we tested the search functionality by setting various search parameters and ensuring the results matched our expectations. This approach helped us detect and rectify certain overlooked errors.
+  In white box testing, we utilized the emulator to execute all our methods and code. Given our familiarity with the expected outcomes of the code, we tailored our tests accordingly. For example, we inspected the UI layout to confirm it aligned with our intended design. At the same time, we tested the search functionality by setting various search parameters and ensuring the results matched our expectations. This approach helped us detect and rectify certain overlooked errors.
 
-We managed to successfully test some functionalities like "onCreate" or "onClick". By examining the specifics of the code within these methods, we could check if the appropriate actions were being triggered. For instance, if we clicked the button, we would certainly know if there was an error by looking at the interface and database to check if that's the right function we wanted to achieve.
+  We managed to successfully test some functionalities like "onCreate" or "onClick". By examining the specifics of the code within these methods, we could check if the appropriate actions were being triggered. For instance, if we clicked the button, we would certainly know if there was an error by looking at the interface and database to check if that's the right function we wanted to achieve.
 
-<br> <hr>
+- Black box testing:
+
+  - We wrote some black box testing by Junit to ensure our tokenizer, parser functions are implemented correctly. The codes we tested are as follows:
+    - [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AVLTree.java)
+    - [LRUCache.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java)
+    - [TreeHashMap.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/TreeHashMap.java)
+    - Token.java
+    - Tokenizer.java
+
+  - The test we wrote is to test most of the functions we are using and track their outputs. For example, in the LRUCache class, we wrote several tests to meet our application requirements:
+
+    ```java
+    testBasicFunction()  // Tests the fundamental operations of the cache
+    testEmptyCache()	// Ensures the cache behaves correctly when it's empty.
+    testCacheSizeLimit()	// Checks that the cache does not exceed its predefined size limit.
+    testAddWhenFull()	 // Validates that when the cache is full and a new item is added, the least recently used item is correctly added.	
+    testGetAll() 	// Tests the ability to retrieve all items in the cache.
+    testRemove()	 // Ensures that items can be manually removed from the cache
+    testEvictionOrder()	    // Validates the order in which items are added
+    testRecentUsage()		 // Checks that accessing an item updates its usage.
+    testOverwriteExistingKey()	 // Ensures that if a key already exists in the cache 
+    testNullValue()	 // Tests the cache's behavior when null values are added.
+    ```
+
+- Test Coverage
+
+  We didn't write any tests for the interfaces, UI classes or database connections, and we have done a test coverage report. The testing classes and functions are in the image:
+
+  - In the package tool:(一些类可能要移进来)
+  - 
+
+- Debugging and Logging
+
+  In Android Studio, we set breakpoints in our code, which means when the app runs, it will 'pause' at these breakpoints. This allows us to inspect the current state of the app and examine the values of variables. For example, if we want to see the content of a list of scam cases at a particular point in our code, we can set a breakpoint and the debugger will show us the content of that list when it hits the breakpoint.
+
+  Another way we understand what's happening in our app is by using log statements, like `Log.d()`. Think of these as little notes or messages we leave for ourselves. When a piece of code runs, it leaves these messages in the Logcat, a console in Android Studio. For example, after fetching data from the database, we might leave a message saying 'Data got from database'. Later, we can look at Logcat and see this message, helping us confirm that our data fetching code ran successfully. When dealing with firestore database, understanding the sequence in which data is fetched or saved is crucial and hard, as they may asynchronously load. We can use log statements right after database operations. By checking the sequence of log messages, we will understand the order of our database operations.
+
+<br><hr>
 
 
 ## Team Management

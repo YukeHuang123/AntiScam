@@ -1,10 +1,7 @@
 package com.example.antiscam.act;
 
 
-import static android.content.ContentValues.TAG;
-
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,17 +23,11 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ChatAdapter;
 import com.example.antiscam.bean.BlockModel;
 import com.example.antiscam.bean.ChatModel;
-import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.dataclass.BlockManager;
-import com.example.antiscam.dataclass.ScamCaseDao;
-import com.example.antiscam.dataclass.ScamCaseDaoImpl;
-import com.example.antiscam.singleton.FirebaseAuthManager;
+import com.example.antiscam.dao.BlockManager;
+import com.example.antiscam.manager.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
@@ -44,10 +35,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;

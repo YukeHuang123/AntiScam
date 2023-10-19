@@ -1,6 +1,6 @@
 package com.example.antiscam.act;
 
-import static com.example.antiscam.dataclass.UserInfoManager.getAuthUserEmail;
+import static com.example.antiscam.manager.UserInfoManager.getAuthUserEmail;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.antiscam.R;
 import com.example.antiscam.bean.User;
-import com.example.antiscam.dataclass.UserDaoImpl;
-import com.example.antiscam.dataclass.UserInfoManager;
+import com.example.antiscam.dao.UserDaoImpl;
+import com.example.antiscam.manager.UserInfoManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;

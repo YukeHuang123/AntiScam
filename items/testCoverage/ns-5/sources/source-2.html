@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TokenHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.core</a>
+</div>
+
+<h1>Coverage Summary for Class: TokenHelper (com.example.antiscam.core)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TokenHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TokenHelper$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.core;
+&nbsp;
+&nbsp;import android.util.Log;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;
+&nbsp;import com.google.firebase.firestore.CollectionReference;
+&nbsp;import com.google.firebase.firestore.Filter;
+&nbsp;import com.google.firebase.firestore.Query;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class TokenHelper {
+&nbsp;    private static final String TAG = &quot;TokenHelper&quot;;
+<b class="nc">&nbsp;    private static TokenHelper instance = new TokenHelper();</b>
+&nbsp;
+<b class="nc">&nbsp;    private TokenHelper() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TokenHelper getInstance() {
+<b class="nc">&nbsp;        return instance;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Query genQuery(CollectionReference db, Tokenizer tokenizer) {
+&nbsp;        try {
+<b class="nc">&nbsp;            Filter filter = genFilter(tokenizer);</b>
+<b class="nc">&nbsp;            if (filter != null) {</b>
+<b class="nc">&nbsp;                return db.where(filter);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                throw new Exception();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;            Log.e(&quot;Firestore Query Error&quot;, &quot;Error generating query: &quot; + e.getMessage());</b>
+<b class="nc">&nbsp;            return db.whereEqualTo(&quot;nonExistentField&quot;, &quot;nonExistentValue&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Filter genFilter(Tokenizer tokenizer) {
+<b class="nc">&nbsp;        Token token = tokenizer.getTokens();</b>
+<b class="nc">&nbsp;        Log.i(TAG, &quot;genFilter: &quot; + token);</b>
+<b class="nc">&nbsp;        switch (token.getCtype1()) {</b>
+&nbsp;            case USERNAME:
+<b class="nc">&nbsp;                return genFilter(&quot;post_user&quot;, token.getCtype2(), token.getValue1());</b>
+&nbsp;            case TITLE:
+<b class="nc">&nbsp;                return genFilter(&quot;title&quot;, token.getCtype2(), token.getValue1());</b>
+&nbsp;            case AMOUNT:
+<b class="nc">&nbsp;                return genFilter(&quot;amount&quot;, token.getCtype2(), Integer.parseInt(token.getValue1()));</b>
+&nbsp;            case SCAMTYPE:
+<b class="nc">&nbsp;                return genFilter(&quot;scam_type&quot;, token.getCtype2(), token.getValue1());</b>
+&nbsp;            case AND:
+<b class="nc">&nbsp;                Filter filter = genAndFilter(token.getValue1(), token.getValue2());</b>
+<b class="nc">&nbsp;                if (filter == null) return Filter.and();</b>
+<b class="nc">&nbsp;                else return filter;</b>
+&nbsp;            case OR:
+<b class="nc">&nbsp;                Filter orFilter = genOrFilter(token.getValue1(), token.getValue2());</b>
+<b class="nc">&nbsp;                if (orFilter == null) return Filter.or();</b>
+<b class="nc">&nbsp;                else return orFilter;</b>
+&nbsp;            case STR:
+&nbsp;                break;
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private static Filter genFilter(String field, Token.Type type2, Object value) {
+<b class="nc">&nbsp;        switch (type2) {</b>
+&nbsp;            case EQ: // == or =
+<b class="nc">&nbsp;                return Filter.equalTo(field, value);</b>
+&nbsp;            case NE:  // !=
+<b class="nc">&nbsp;                return Filter.notEqualTo(field, value);</b>
+&nbsp;            case LT: // &lt;
+<b class="nc">&nbsp;                return Filter.lessThan(field, value);</b>
+&nbsp;            case LE: // &lt;=
+<b class="nc">&nbsp;                return Filter.lessThanOrEqualTo(field, value);</b>
+&nbsp;            case GT: // &gt;
+<b class="nc">&nbsp;                return Filter.greaterThan(field, value);</b>
+&nbsp;            case GE: // &gt;=
+<b class="nc">&nbsp;                return Filter.greaterThanOrEqualTo(field, value);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Filter genAndFilter(String exp1, String exp2) {
+<b class="nc">&nbsp;        Tokenizer tokenizer1 = new Tokenizer(exp1);</b>
+<b class="nc">&nbsp;        Tokenizer tokenizer2 = new Tokenizer(exp2);</b>
+<b class="nc">&nbsp;        if (tokenizer1.getTokens().getCtype2() == Token.Type.STR || tokenizer2.getTokens().getCtype2() == Token.Type.STR)</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        return Filter.and(instance.genFilter(tokenizer1), instance.genFilter(tokenizer2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Filter genOrFilter(String exp1, String exp2) {
+<b class="nc">&nbsp;        Tokenizer tokenizer1 = new Tokenizer(exp1);</b>
+<b class="nc">&nbsp;        Tokenizer tokenizer2 = new Tokenizer(exp2);</b>
+<b class="nc">&nbsp;        if (tokenizer1.getTokens().getCtype2() == Token.Type.STR || tokenizer2.getTokens().getCtype2() == Token.Type.STR)</b>
+<b class="nc">&nbsp;            return null;</b>
+<b class="nc">&nbsp;        return Filter.or(instance.genFilter(tokenizer1), instance.genFilter(tokenizer2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

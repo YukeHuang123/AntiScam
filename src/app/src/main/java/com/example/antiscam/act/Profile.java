@@ -22,13 +22,13 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.dataclass.BlockManager;
-import com.example.antiscam.dataclass.ScamCaseDao;
-import com.example.antiscam.dataclass.ScamCaseDaoImpl;
-import com.example.antiscam.dataclass.ScamCaseUserCombine;
-import com.example.antiscam.dataclass.UserInfoManager;
-import com.example.antiscam.singleton.CacheSingleton;
-import com.example.antiscam.singleton.FirebaseAuthManager;
+import com.example.antiscam.dao.BlockManager;
+import com.example.antiscam.dao.ScamCaseDao;
+import com.example.antiscam.dao.ScamCaseDaoImpl;
+import com.example.antiscam.dao.ScamCaseUserCombine;
+import com.example.antiscam.manager.UserInfoManager;
+import com.example.antiscam.tool.HistoryCache;
+import com.example.antiscam.manager.FirebaseAuthManager;
 import com.example.antiscam.tool.AndroidUtil;
 import com.example.antiscam.tool.DataLoadCallback;
 import com.example.antiscam.tool.LRUCache;
@@ -52,7 +52,7 @@ public class Profile extends AppCompatActivity {
     private String authUserEmail;
 //    String documentId;
     ProgressBar progressBar;
-    private CacheSingleton cacheSingleton;
+    private HistoryCache historyCache;
     private LRUCache<String, ScamCaseWithUser> cache;
     private List<String> blockedUserEmails;
     private List<String> blockerEmails;
@@ -76,13 +76,13 @@ public class Profile extends AppCompatActivity {
         List<ScamCaseWithUser> scamCaseWithUserList = new ArrayList<>();
         cardAdapterProfile = new ScamCaseCardProfileAdapter(scamCaseWithUserList, R.layout.profile_cardlist, email);
 
-        cacheSingleton = CacheSingleton.getInstance();
-        cache = cacheSingleton.getCache(this);
+        historyCache = HistoryCache.getInstance();
+        cache = historyCache.getCache(this);
 //
         if (cache == null) {
             Log.d("cache", "no cache find");
             cache = new LRUCache<>(100);
-            cacheSingleton.setCache(this, cache);
+            historyCache.setCache(this, cache);
         }
         Log.d("cache", cache.toString());
 
@@ -107,7 +107,7 @@ public class Profile extends AppCompatActivity {
                 intentCaseDetail.putExtra("scamCaseWithUser", scamCaseWithUser);
                 intentCaseDetail.putExtra("fromPage","userProfile");
 
-                cache = cacheSingleton.getCache(Profile.this);
+                cache = historyCache.getCache(Profile.this);
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
 //                Gson gson = new Gson();
 //                Gson gson = new GsonBuilder()
@@ -117,7 +117,7 @@ public class Profile extends AppCompatActivity {
 //                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
 //                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
 //                Log.d("cacheToStr", JSON.toJSONString(cache));
-                cacheSingleton.setCache(Profile.this, cache);
+                historyCache.setCache(Profile.this, cache);
 
                 startActivity(intentCaseDetail);
             }
@@ -248,7 +248,7 @@ public class Profile extends AppCompatActivity {
             signOutButton.setVisibility(View.GONE);
         }
 
-        cache = cacheSingleton.getCache(this);
+        cache = historyCache.getCache(this);
         if (cache == null || authUserEmail == null || !authUserEmail.equals(email)) {
             historyButton.setVisibility(View.GONE);
         } else {
@@ -290,7 +290,7 @@ public class Profile extends AppCompatActivity {
     }
 
     void deletePost(String documentId, String scamcaseID){
-        cache = cacheSingleton.getCache(this);
+        cache = historyCache.getCache(this);
         FirebaseFirestore.getInstance().collection("scam_cases").document(documentId)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -298,7 +298,7 @@ public class Profile extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully deleted post");
                         cache.remove(scamcaseID, new ScamCaseWithUser());
-                        cacheSingleton.setCache(Profile.this, cache);
+                        historyCache.setCache(Profile.this, cache);
                         reloadScamCase();
                     }
                 })

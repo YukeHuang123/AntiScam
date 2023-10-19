@@ -1,0 +1,218 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ChatAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.antiscam.adapter</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatAdapter (com.example.antiscam.adapter)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ChatAdapter$ViewHolder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.adapter;
+&nbsp;
+&nbsp;import android.view.LayoutInflater;
+&nbsp;import android.view.View;
+&nbsp;import android.view.ViewGroup;
+&nbsp;import android.widget.ImageView;
+&nbsp;import android.widget.LinearLayout;
+&nbsp;import android.widget.TextView;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;import androidx.recyclerview.widget.RecyclerView;
+&nbsp;
+&nbsp;import com.example.antiscam.R;
+&nbsp;import com.example.antiscam.bean.ChatModel;
+&nbsp;import com.example.antiscam.dataclass.UserInfoManager;
+&nbsp;import com.google.firebase.storage.StorageReference;
+&nbsp;
+&nbsp;import java.util.LinkedList;
+&nbsp;
+&nbsp;public class ChatAdapter extends RecyclerView.Adapter&lt;ChatAdapter.ViewHolder&gt; {
+&nbsp;    LinkedList&lt;ChatModel&gt; chatModelList;
+&nbsp;
+<b class="nc">&nbsp;    public ChatAdapter(LinkedList&lt;ChatModel&gt; chatModelList) {</b>
+<b class="nc">&nbsp;        this.chatModelList = chatModelList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @NonNull
+&nbsp;    @Override
+&nbsp;    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+<b class="nc">&nbsp;        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item, parent, false);</b>
+<b class="nc">&nbsp;        return new ViewHolder(view);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+<b class="nc">&nbsp;        ChatModel chatModel = chatModelList.get(position);</b>
+<b class="nc">&nbsp;        if (chatModel.getType() == ChatModel.SEND){</b>
+<b class="nc">&nbsp;            holder.leftLayout.setVisibility(View.GONE);</b>
+<b class="nc">&nbsp;            holder.rightLayout.setVisibility(View.VISIBLE);</b>
+<b class="nc">&nbsp;            holder.rightNickView.setText(chatModel.getSendUserName());</b>
+<b class="nc">&nbsp;            holder.rightContentView.setText(chatModel.getContent());</b>
+<b class="nc">&nbsp;            loadImage(chatModel.getSendUserImg(),holder.rightImgView);</b>
+&nbsp;        }else {
+<b class="nc">&nbsp;            holder.rightLayout.setVisibility(View.GONE);</b>
+<b class="nc">&nbsp;            holder.leftLayout.setVisibility(View.VISIBLE);</b>
+<b class="nc">&nbsp;            holder.leftNickView.setText(chatModel.getReceiveUserName());</b>
+<b class="nc">&nbsp;            holder.leftContentView.setText(chatModel.getContent());</b>
+<b class="nc">&nbsp;            loadImage(chatModel.getSendUserImg(),holder.leftImgView);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getItemCount() {
+<b class="nc">&nbsp;        return chatModelList.size();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void loadImage(String path,ImageView view){
+&nbsp;        try {
+<b class="nc">&nbsp;            StorageReference useravatar = UserInfoManager.getUserAvatar(path);</b>
+<b class="nc">&nbsp;            UserInfoManager.loadUserAvatar(useravatar, view);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class ViewHolder extends RecyclerView.ViewHolder {
+&nbsp;        ImageView leftImgView;
+&nbsp;        TextView leftNickView;
+&nbsp;        TextView leftContentView;
+&nbsp;        LinearLayout leftLayout;
+&nbsp;
+&nbsp;        ImageView rightImgView;
+&nbsp;        TextView rightNickView;
+&nbsp;        TextView rightContentView;
+&nbsp;        LinearLayout rightLayout;
+&nbsp;
+&nbsp;        public ViewHolder(View itemView) {
+<b class="nc">&nbsp;            super(itemView);</b>
+<b class="nc">&nbsp;            leftLayout = itemView.findViewById(R.id.left_layout);</b>
+<b class="nc">&nbsp;            leftImgView = itemView.findViewById(R.id.left_layout_img);</b>
+<b class="nc">&nbsp;            leftNickView = itemView.findViewById(R.id.left_layout_nick);</b>
+<b class="nc">&nbsp;            leftContentView = itemView.findViewById(R.id.left_layout_content);</b>
+<b class="nc">&nbsp;            rightLayout = itemView.findViewById(R.id.right_layout);</b>
+<b class="nc">&nbsp;            rightImgView = itemView.findViewById(R.id.right_layout_img);</b>
+<b class="nc">&nbsp;            rightNickView = itemView.findViewById(R.id.right_layout_nick);</b>
+<b class="nc">&nbsp;            rightContentView = itemView.findViewById(R.id.right_layout_content);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-18 18:59</div>
+</div>
+</body>
+</html>

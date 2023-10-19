@@ -35,11 +35,16 @@ public class LRUCacheTest {
         assertEquals(3, cache.getSize());
 
         cache.put("four", 4);
+        cache.put("five", 5);
+        cache.put("six", 6);
+        cache.put("seven", 7);
+        cache.put("eight", 8);
+        cache.put("nine", 9);
         assertEquals(3, cache.getSize());
     }
 
     @Test
-    public void testEvictionWhenFull() {
+    public void testAddWhenFull() {
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -49,7 +54,27 @@ public class LRUCacheTest {
     }
 
     @Test
-    public void testEvictionOrder() {
+    public void testGetAll() {
+        cache.put("one", 1);
+        cache.put("two", 2);
+        cache.put("three", 3);
+        assertEquals(3, cache.getAll().size());
+        assertEquals(Integer.valueOf(3), cache.getAll().get(0));
+        assertEquals(Integer.valueOf(2), cache.getAll().get(1));
+        assertEquals(Integer.valueOf(1), cache.getAll().get(2));
+    }
+
+    @Test
+    public void testRemove() {
+        cache.put("one", 1);
+        cache.put("two", 2);
+        cache.put("three", 3);
+        cache.remove("three", 3);
+        assertEquals(2, cache.getSize());
+    }
+
+    @Test
+    public void testAddOrder() {
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
