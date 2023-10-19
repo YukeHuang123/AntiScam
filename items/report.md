@@ -229,14 +229,24 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 
 Our AntiScam application is a user-driven platform designed to combat scams by allowing users to share their experiences, provide scam alerts, and engage in meaningful communication with the content creator. 
-- Users can post details of scam incidents, including the type of scam, title, payment method, monetary losses incurred and so on. 
+- Users can post details of scam incidents, including the type of scam, title, payment method, monetary losses incurred and so on.
 - The search functionality enables easy access to specific scam cases, helping users find relevant information quickly. 
-- Additionally, the app features a private messaging system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
+- The app features a private messaging system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
 - We prioritize user privacy and have implemented a 'block' feature, granting users control over their communication preferences by allowing them to prevent specific users from sending direct messages. 
 - On the user's profile page, users can view their browsing history, and the last post read will show on the top of history section.
-- We also offer personalized services, allowing users to click on their profile picture to change it to other photo.
+- User also have choice to delete all the history records.
+- We also offer personalized services, allowing users to click on their avatar to change it to other photo.
+- The add post button is draggable, user can drag it along the right edge.
 
 Our app aims to create an informed community, protecting individuals from potential scams.
+![Add post](application screenshot/add_post.png) <br>
+![change avatar](application screenshot/change_avatar.png) <br>
+![chat](application screenshot/chat.png) <br>
+![delete history records](application screenshot/delete_history_records.png) <br>
+![main menu](application screenshot/main_menu.png) <br>
+![my profile](application screenshot/my_profile.png) <br>
+![other use profile](application screenshot/other_user_profile.png) <br>
+![search for title](application screenshot/search_for_title.png) <br>
 
 ### Application Use Cases and or Examples
 
