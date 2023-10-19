@@ -290,8 +290,11 @@ Result: The user's issue is resolved, ensuring a positive user experience.
 
 ### Application UML
 
-![UML ClassDiagram](media/UML-6442.png) <br>
+![UML ClassDiagram](media/UML-6442.png) 
+<br>
 <hr>
+
+
 
 ## Code Design and Decisions
 
