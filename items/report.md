@@ -93,7 +93,6 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
 2. **u7618794, Yuke Huang**  I have 25% contribution, as follows: 
   - **Code Contribution in the final App**
-    
     - Basic Features - DataFiles: [scamCase.json](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/assets/scamCase.json)
     - Custom Feature - FB-Persist: Extension: 
         - [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
@@ -123,7 +122,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - implements Parcelable to ScamCaseWithUser class:
         - [CREATOR](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L33-49)
         - [describeContents() and writeToParcel()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L59-76)
-    - other 
+    - ScamCaseCardAdapter 
        - [setOnClickListener()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L44-52)
        - [OnClickListener for the item view](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L72-81)
     
@@ -135,7 +134,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
   - **Others**: 
     - responsible for 8 meeting minutes writing.
     - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and implement the adaptive icons: [ic_launcher_foreground.webp](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp), [ic_launcher_background.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/ic_launcher_background.xml)
-    - create the UML class diagram independently
+    - create the [UML class diagram](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/media/UML-6442.png)
+    - write [Conflict Resolution Protocol](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Conflict_Resolution_Protocol.pdf)
     - report: responsible for Application Description, Team management, and conflict Resolution Protocol.
 
 3. **UID1, Name1**  I have 25% contribution, as follows: <br>
