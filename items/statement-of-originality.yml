@@ -74,14 +74,14 @@ assets:
   - We use this tool to crop rectangular image into circular one.
 
 4. How long did it take to complete this assignment (approximately, in hours)?
-  - <your answer here> hours
+  - 80 hours
 
 
 
 # for each member, sign by inputting your name and uid here (remove any empty "name+uid" entries)
 members:
-  - name:
-    uid:
+  - name: Zhaoyun Xu
+    uid: u7558707
   - name: Yuke Huang
     uid: u7618794
   - name: Junzhe Huang
