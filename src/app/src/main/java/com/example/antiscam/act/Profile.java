@@ -331,8 +331,6 @@ public class Profile extends AppCompatActivity {
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
-//    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
-//    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 
     Boolean isBlockedByAuthUser(String authUserEmail){
 //        blockerEmails = BlockManager.getBlockers(receiverEmail);
