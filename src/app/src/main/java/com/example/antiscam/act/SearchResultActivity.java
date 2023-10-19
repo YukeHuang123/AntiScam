@@ -43,7 +43,7 @@ public class SearchResultActivity extends AppCompatActivity {
             historyCache.setCache(this, cache);
         }
 
-        cardAdapter = new ScamCaseCardAdapter(SearchDataManager.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
+        cardAdapter = new ScamCaseCardAdapter(SearchDataManager.getInstance().getScamCaseWithUsers(), R.layout.searchresult_cardlist);
 
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
