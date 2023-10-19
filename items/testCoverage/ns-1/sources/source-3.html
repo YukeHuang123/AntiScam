@@ -51,7 +51,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/60)
+    (0/61)
   </span>
 </td>
 </tr>
@@ -298,7 +298,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/133)
+    (0/134)
   </span>
 </td>
 </tr>
@@ -312,10 +312,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.act;
 &nbsp;
 &nbsp;
-&nbsp;import static android.content.ContentValues.TAG;
-&nbsp;
 &nbsp;import android.content.DialogInterface;
-&nbsp;import android.content.Intent;
 &nbsp;import android.os.Bundle;
 &nbsp;import android.util.Log;
 &nbsp;import android.view.MenuItem;
@@ -337,17 +334,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.example.antiscam.adapter.ChatAdapter;
 &nbsp;import com.example.antiscam.bean.BlockModel;
 &nbsp;import com.example.antiscam.bean.ChatModel;
-&nbsp;import com.example.antiscam.bean.ScamCaseWithUser;
-&nbsp;import com.example.antiscam.dataclass.BlockManager;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseDao;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseDaoImpl;
-&nbsp;import com.example.antiscam.singleton.FirebaseAuthManager;
+&nbsp;import com.example.antiscam.dao.BlockDaoImpl;
+&nbsp;import com.example.antiscam.manager.FirebaseAuthManager;
 &nbsp;import com.example.antiscam.tool.AndroidUtil;
-&nbsp;import com.google.android.gms.tasks.OnCompleteListener;
 &nbsp;import com.google.android.gms.tasks.OnFailureListener;
 &nbsp;import com.google.android.gms.tasks.OnSuccessListener;
-&nbsp;import com.google.android.gms.tasks.Task;
-&nbsp;import com.google.firebase.auth.FirebaseAuth;
 &nbsp;import com.google.firebase.auth.FirebaseUser;
 &nbsp;import com.google.firebase.firestore.CollectionReference;
 &nbsp;import com.google.firebase.firestore.DocumentChange;
@@ -355,10 +346,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.google.firebase.firestore.EventListener;
 &nbsp;import com.google.firebase.firestore.FirebaseFirestore;
 &nbsp;import com.google.firebase.firestore.FirebaseFirestoreException;
-&nbsp;import com.google.firebase.firestore.QueryDocumentSnapshot;
 &nbsp;import com.google.firebase.firestore.QuerySnapshot;
 &nbsp;
-&nbsp;import java.util.ArrayList;
 &nbsp;import java.util.Collections;
 &nbsp;import java.util.Comparator;
 &nbsp;import java.util.HashMap;
@@ -389,6 +378,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    Button blockBtnView;
 &nbsp;    Button unblockBtnView;
 &nbsp;    boolean isBlockingAuthUser;
+&nbsp;    BlockDaoImpl blockDaoImpl;
 &nbsp;
 &nbsp;    @Override
 &nbsp;    protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -400,6 +390,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    private void initConfig() {
+<b class="nc">&nbsp;        blockDaoImpl = BlockDaoImpl.getInstance();</b>
 <b class="nc">&nbsp;        email = getIntent().getStringExtra(&quot;email&quot;);</b>
 <b class="nc">&nbsp;        nick = getIntent().getStringExtra(&quot;nick&quot;);</b>
 <b class="nc">&nbsp;        img = getIntent().getStringExtra(&quot;img&quot;);</b>
@@ -432,8 +423,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;                        }
 &nbsp;                    }
 <b class="nc">&nbsp;                }</b>
-&nbsp;
-<b class="nc">&nbsp;                documentIds = BlockManager.getDocumentId(&quot;blocked&quot;, email);</b>
+<b class="nc">&nbsp;                documentIds = blockDaoImpl.getDocumentId(&quot;blocked&quot;, email);</b>
 &nbsp;
 <b class="nc">&nbsp;                refreshRecycleView();</b>
 &nbsp;            }
@@ -600,7 +590,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;                        AndroidUtil.showToast(getApplicationContext(), &quot;Successfully blocked&quot;);</b>
 <b class="nc">&nbsp;                        blockBtnView.setVisibility(View.GONE);</b>
 <b class="nc">&nbsp;                        unblockBtnView.setVisibility(View.VISIBLE);</b>
-<b class="nc">&nbsp;                        documentIds = BlockManager.getDocumentId(&quot;blocked&quot;, email);</b>
+<b class="nc">&nbsp;                        documentIds = blockDaoImpl.getDocumentId(&quot;blocked&quot;, email);</b>
 &nbsp;                    }
 &nbsp;                })
 <b class="nc">&nbsp;                .addOnFailureListener(new OnFailureListener() {</b>
@@ -634,7 +624,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-18 18:59</div>
+    <div style="float:right;">generated on 2023-10-19 21:06</div>
 </div>
 </body>
 </html>

@@ -51,7 +51,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/74)
+    (0/75)
   </span>
 </td>
 </tr>
@@ -355,7 +355,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/151)
+    (0/152)
   </span>
 </td>
 </tr>
@@ -390,13 +390,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import com.example.antiscam.adapter.ScamCaseCardAdapter;
 &nbsp;import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 &nbsp;import com.example.antiscam.bean.ScamCaseWithUser;
-&nbsp;import com.example.antiscam.dataclass.BlockManager;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseDao;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseDaoImpl;
-&nbsp;import com.example.antiscam.dataclass.ScamCaseUserCombine;
-&nbsp;import com.example.antiscam.dataclass.UserInfoManager;
-&nbsp;import com.example.antiscam.singleton.CacheSingleton;
-&nbsp;import com.example.antiscam.singleton.FirebaseAuthManager;
+&nbsp;import com.example.antiscam.dao.BlockDaoImpl;
+&nbsp;import com.example.antiscam.dao.ScamCaseDao;
+&nbsp;import com.example.antiscam.dao.ScamCaseDaoImpl;
+&nbsp;import com.example.antiscam.dao.ScamCaseUserCombine;
+&nbsp;import com.example.antiscam.manager.UserInfoManager;
+&nbsp;import com.example.antiscam.tool.HistoryCache;
+&nbsp;import com.example.antiscam.manager.FirebaseAuthManager;
 &nbsp;import com.example.antiscam.tool.AndroidUtil;
 &nbsp;import com.example.antiscam.tool.DataLoadCallback;
 &nbsp;import com.example.antiscam.tool.LRUCache;
@@ -418,16 +418,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    private String email;
 &nbsp;    private String userAvatarPath;
 &nbsp;    private String authUserEmail;
-&nbsp;//    String documentId;
-&nbsp;    ProgressBar progressBar;
-&nbsp;    private CacheSingleton cacheSingleton;
+&nbsp;    private HistoryCache historyCache;
 &nbsp;    private LRUCache&lt;String, ScamCaseWithUser&gt; cache;
 &nbsp;    private List&lt;String&gt; blockedUserEmails;
 &nbsp;    private List&lt;String&gt; blockerEmails;
 &nbsp;    private FirebaseUser user;
 &nbsp;
 <b class="nc">&nbsp;    private FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();</b>
-&nbsp;
+&nbsp;    BlockDaoImpl blockDaoImpl;
 &nbsp;
 &nbsp;    @Override
 &nbsp;    protected void onCreate(Bundle savedInstanceState) {
@@ -444,13 +442,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        List&lt;ScamCaseWithUser&gt; scamCaseWithUserList = new ArrayList&lt;&gt;();</b>
 <b class="nc">&nbsp;        cardAdapterProfile = new ScamCaseCardProfileAdapter(scamCaseWithUserList, R.layout.profile_cardlist, email);</b>
 &nbsp;
-<b class="nc">&nbsp;        cacheSingleton = CacheSingleton.getInstance();</b>
-<b class="nc">&nbsp;        cache = cacheSingleton.getCache(this);</b>
+<b class="nc">&nbsp;        historyCache = HistoryCache.getInstance();</b>
+<b class="nc">&nbsp;        cache = historyCache.getCache(this);</b>
 &nbsp;//
 <b class="nc">&nbsp;        if (cache == null) {</b>
 <b class="nc">&nbsp;            Log.d(&quot;cache&quot;, &quot;no cache find&quot;);</b>
 <b class="nc">&nbsp;            cache = new LRUCache&lt;&gt;(100);</b>
-<b class="nc">&nbsp;            cacheSingleton.setCache(this, cache);</b>
+<b class="nc">&nbsp;            historyCache.setCache(this, cache);</b>
 &nbsp;        }
 <b class="nc">&nbsp;        Log.d(&quot;cache&quot;, cache.toString());</b>
 &nbsp;
@@ -475,7 +473,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;                intentCaseDetail.putExtra(&quot;scamCaseWithUser&quot;, scamCaseWithUser);</b>
 <b class="nc">&nbsp;                intentCaseDetail.putExtra(&quot;fromPage&quot;,&quot;userProfile&quot;);</b>
 &nbsp;
-<b class="nc">&nbsp;                cache = cacheSingleton.getCache(Profile.this);</b>
+<b class="nc">&nbsp;                cache = historyCache.getCache(Profile.this);</b>
 <b class="nc">&nbsp;                cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);</b>
 &nbsp;//                Gson gson = new Gson();
 &nbsp;//                Gson gson = new GsonBuilder()
@@ -485,7 +483,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;//                LRUCache&lt;String , ScamCaseWithUser&gt; cache = gson.fromJson(cacheString,
 &nbsp;//                        new TypeToken&lt;LRUCache&lt;String, ScamCaseWithUser&gt;&gt;(){}.getType());
 &nbsp;//                Log.d(&quot;cacheToStr&quot;, JSON.toJSONString(cache));
-<b class="nc">&nbsp;                cacheSingleton.setCache(Profile.this, cache);</b>
+<b class="nc">&nbsp;                historyCache.setCache(Profile.this, cache);</b>
 &nbsp;
 <b class="nc">&nbsp;                startActivity(intentCaseDetail);</b>
 &nbsp;            }
@@ -547,8 +545,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    void initPersonalInfo(){
-<b class="nc">&nbsp;        user = firebaseAuthManager.getUser();</b>
+<b class="nc">&nbsp;        blockDaoImpl = BlockDaoImpl.getInstance();</b>
 &nbsp;
+<b class="nc">&nbsp;        user = firebaseAuthManager.getUser();</b>
 &nbsp;
 &nbsp;        // Get user information
 <b class="nc">&nbsp;        TextView userNameView = findViewById(R.id.userNamePro);</b>
@@ -557,9 +556,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;        // Set user name
 <b class="nc">&nbsp;        userNameView.setText(username);</b>
-&nbsp;
-<b class="nc">&nbsp;        blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表</b>
-<b class="nc">&nbsp;        blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表</b>
+<b class="nc">&nbsp;        blockerEmails = blockDaoImpl.getBlockers(email); // user list who Block Profile user</b>
+<b class="nc">&nbsp;        blockedUserEmails = blockDaoImpl.getBlockedUsers(email); // user list who was blocked by Profile user</b>
 &nbsp;
 &nbsp;        // Get image reference and load to ImageView
 &nbsp;        try {
@@ -616,7 +614,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            signOutButton.setVisibility(View.GONE);</b>
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        cache = cacheSingleton.getCache(this);</b>
+<b class="nc">&nbsp;        cache = historyCache.getCache(this);</b>
 <b class="nc">&nbsp;        if (cache == null || authUserEmail == null || !authUserEmail.equals(email)) {</b>
 <b class="nc">&nbsp;            historyButton.setVisibility(View.GONE);</b>
 &nbsp;        } else {
@@ -658,7 +656,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    void deletePost(String documentId, String scamcaseID){
-<b class="nc">&nbsp;        cache = cacheSingleton.getCache(this);</b>
+<b class="nc">&nbsp;        cache = historyCache.getCache(this);</b>
 <b class="nc">&nbsp;        FirebaseFirestore.getInstance().collection(&quot;scam_cases&quot;).document(documentId)</b>
 <b class="nc">&nbsp;                .delete()</b>
 <b class="nc">&nbsp;                .addOnSuccessListener(new OnSuccessListener&lt;Void&gt;() {</b>
@@ -666,7 +664,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;                    public void onSuccess(Void unused) {
 <b class="nc">&nbsp;                        AndroidUtil.showToast(getApplicationContext(), &quot;Successfully deleted post&quot;);</b>
 <b class="nc">&nbsp;                        cache.remove(scamcaseID, new ScamCaseWithUser());</b>
-<b class="nc">&nbsp;                        cacheSingleton.setCache(Profile.this, cache);</b>
+<b class="nc">&nbsp;                        historyCache.setCache(Profile.this, cache);</b>
 <b class="nc">&nbsp;                        reloadScamCase();</b>
 &nbsp;                    }
 &nbsp;                })
@@ -699,8 +697,6 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        Intent intent = new Intent(this, History.class);</b>
 <b class="nc">&nbsp;        startActivity(intent);</b>
 &nbsp;    }
-&nbsp;//    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
-&nbsp;//    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 &nbsp;
 &nbsp;    Boolean isBlockedByAuthUser(String authUserEmail){
 &nbsp;//        blockerEmails = BlockManager.getBlockers(receiverEmail);
@@ -743,7 +739,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-18 18:59</div>
+    <div style="float:right;">generated on 2023-10-19 21:06</div>
 </div>
 </body>
 </html>
