@@ -241,8 +241,8 @@ Our AntiScam application is a user-driven platform designed to combat scams by a
 Our app aims to create an informed community, protecting individuals from potential scams.
 <br><br>
 <img src="application screenshot/main_menu.png"  width="30%" height="30%">
-<img src="application screenshot/add_post.png"  width="30%" height="30%">
-<img src="application screenshot/search_for_title.png"  width="30%" height="30%">
+<img src="application screenshot/add_post.png"  width="28%" height="28%">
+<img src="application screenshot/search_for_title.png"  width="26%" height="26%">
 <img src="application screenshot/other_user_profile.png"  width="30%" height="30%">
 <img src="application screenshot/chat.png"  width="30%" height="30%">
 <img src="application screenshot/my_profile.png"  width="30%" height="30%">
