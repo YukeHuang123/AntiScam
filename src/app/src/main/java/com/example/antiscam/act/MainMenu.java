@@ -106,23 +106,13 @@ public class MainMenu extends AppCompatActivity {
                 cardAdapter.setData(dataList);
             }
         });
-//        cardAdapter = new mainMenuCardAdapter(dataList);
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
             public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
                 Intent intent = new Intent(MainMenu.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
-
                 cache = historyCache.getCache(MainMenu.this);
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
-//                Gson gson = new Gson();
-//                Gson gson = new GsonBuilder()
-//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
-//                        .create();
-//                String cacheString = gson.toJson(cache);
-//                LRUCache<String , ScamCaseWithUser> cache = gson.fromJson(cacheString,
-//                        new TypeToken<LRUCache<String, ScamCaseWithUser>>(){}.getType());
-//                Log.d("cacheToStr", JSON.toJSONString(cache));
                 historyCache.setCache(MainMenu.this, cache);
 
                 startActivity(intent);
@@ -216,7 +206,9 @@ public class MainMenu extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * @author Yuke Huang, u7618794
+     */
     @SuppressLint("ClickableViewAccessibility")
     void initFltBtn(){
         //set onClick and onTouch listener on fab (FloatingActionButton)

@@ -21,7 +21,9 @@ import com.example.antiscam.dao.ScamCaseDaoImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * @author Yuke Huang, u7618794
+ */
 public class AddPostPage extends AppCompatActivity {
 
     private final ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();

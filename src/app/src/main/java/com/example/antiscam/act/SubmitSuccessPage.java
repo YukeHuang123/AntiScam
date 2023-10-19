@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.antiscam.R;
-
+/**
+ * @author Yuke Huang, u7618794
+ */
 public class SubmitSuccessPage extends AppCompatActivity {
 
     @Override

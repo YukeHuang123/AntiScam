@@ -48,6 +48,9 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         void onAvatarClick(int position, ScamCaseWithUser scamCaseWithUser);
     }
 
+    /**
+     * @author Yuke Huang, u7618794
+     */
     // Method to set the OnClickListener
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
@@ -78,7 +81,9 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         holder.scamTypeTextView.setText(scamCaseWithUser.getScamCase().getScam_type());
         holder.usernameView.setText(scamCaseWithUser.getUser().getUsername());
         holder.postDateView.setText(dateFormat.format(scamCaseWithUser.getScamCase().getPost_date()));
-
+        /**
+         * @author Yuke Huang, u7618794
+         */
         // Set an OnClickListener for the item view(ScamCaseCardAdapter)
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

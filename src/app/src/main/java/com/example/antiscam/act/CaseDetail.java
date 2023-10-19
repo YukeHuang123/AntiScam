@@ -14,7 +14,9 @@ import com.example.antiscam.bean.User;
 import com.example.antiscam.databinding.ActivityCaseDetailBinding;
 import com.example.antiscam.manager.UserInfoManager;
 import com.google.firebase.storage.StorageReference;
-
+/**
+ * @author Yuke Huang, u7618794
+ */
 public class CaseDetail extends AppCompatActivity {
     private ActivityCaseDetailBinding binding;
     private Boolean showProfile = true;

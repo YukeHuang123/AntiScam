@@ -56,6 +56,9 @@ public class ScamCase implements Parcelable {
         this.contactMethod = contactMethod;
     }
 
+    /**
+     * @author Yuke Huang, u7618794
+     */
     protected ScamCase(Parcel in) {
         amount = in.readDouble();
         victim_city = in.readString();
