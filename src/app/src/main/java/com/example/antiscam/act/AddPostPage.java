@@ -76,6 +76,12 @@ public class AddPostPage extends AppCompatActivity {
                 String city = getSpinnerString(spinnerCity);
                 String contact = getSpinnerString(spinnerContact);
 
+                StringBuilder typeBuilder = new StringBuilder(type);
+                if (!type.equals("unexpected money")) {
+                    typeBuilder.append(" scams");
+                }
+                String typeNew = typeBuilder.toString();
+
 
                 /**
                  * create instance of ScamCase and change String input to correct type within makeScamCase method
@@ -99,7 +105,7 @@ public class AddPostPage extends AppCompatActivity {
                         @Override
                         public void onNextId(int nextId) {
                             // Create the ScamCase object with the retrieved nextId
-                            ScamCase scamCase = makeScamCase(nextId, amount1, contact, day1, month1, year1, description1, payment, finalUser1, type, title1, age1, city);
+                            ScamCase scamCase = makeScamCase(nextId, amount1, contact, day1, month1, year1, description1, payment, finalUser1, typeNew, title1, age1, city);
                             Log.d(TAG, "set id successfully: " + nextId);
 
                             // Store the new case in Firebase

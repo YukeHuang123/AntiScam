@@ -50,8 +50,6 @@ public class Profile extends AppCompatActivity {
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
-//    String documentId;
-    ProgressBar progressBar;
     private HistoryCache historyCache;
     private LRUCache<String, ScamCaseWithUser> cache;
     private List<String> blockedUserEmails;
