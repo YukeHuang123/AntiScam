@@ -381,12 +381,14 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 
    - Search token, combine symbol and compare symbol
 
-     | Token | Search target |
-     | :---- | ------------- |
-     | @     | user email    |
-     | #     | title         |
-     | %     | amount        |
-     | $     | scam type     |
+
+| Token | Search target |
+|:------|:-------------:|
+| @     |  user email   |  
+| #     |    title      |      
+| %     |    amount     | 
+| $     |   scam type   | 
+
 
      The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>' and so on. 
 
