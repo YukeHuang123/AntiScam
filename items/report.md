@@ -243,8 +243,8 @@ Our app aims to create an informed community, protecting individuals from potent
 <img src="application screenshot/main_menu.png"  width="30%" height="30%">
 <img src="application screenshot/add_post.png"  width="30%" height="30%">
 <img src="application screenshot/search_for_title.png"  width="30%" height="30%">
-<img src="application screenshot/chat.png"  width="30%" height="30%">
 <img src="application screenshot/other_user_profile.png"  width="30%" height="30%">
+<img src="application screenshot/chat.png"  width="30%" height="30%">
 <img src="application screenshot/my_profile.png"  width="30%" height="30%">
 <img src="application screenshot/delete_history_records.png"  width="30%" height="30%">
 <img src="application screenshot/change_avatar.png"  width="30%" height="30%">
