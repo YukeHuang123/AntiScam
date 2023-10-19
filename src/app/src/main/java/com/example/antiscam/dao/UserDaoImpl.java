@@ -58,6 +58,10 @@ public class UserDaoImpl implements UserDao {
                 });
     }
 
+    /**
+     * @author Zhaoyun Xu, u7558707
+     * @param usersCallback
+     */
     public void getAllUsers(UserDao.UserCallback usersCallback) {
         usersCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

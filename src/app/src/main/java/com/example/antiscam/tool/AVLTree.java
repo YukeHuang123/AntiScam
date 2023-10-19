@@ -1,5 +1,11 @@
 package com.example.antiscam.tool;
 
+
+/**
+ * @author Zhaoyun Xu, u7558707
+ * @param <K>
+ * @param <V>
+ */
 public class AVLTree<K extends Comparable<K>, V> {
 
     public int size;

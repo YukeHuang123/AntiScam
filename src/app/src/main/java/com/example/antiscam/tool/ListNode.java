@@ -1,5 +1,10 @@
 package com.example.antiscam.tool;
 
+
+/**
+ * @author Zhaoyun Xu, u7558707
+ * @param <K>
+ */
 public class ListNode<K> {
         K key;
         ListNode<K> prev;

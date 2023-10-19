@@ -14,6 +14,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
+
+/**
+ * @author Zhaoyun Xu, u7558707
+ */
 public class CacheToFile {
     public static void saveCacheToInternalStorage(Context context, LRUCache<String, ScamCaseWithUser> cache) {
         Gson gson = new GsonBuilder()

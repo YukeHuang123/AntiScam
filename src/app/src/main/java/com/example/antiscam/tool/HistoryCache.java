@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.example.antiscam.bean.ScamCaseWithUser;
 
+/**
+ * @author Zhaoyun Xu, u7558707
+ */
 public class HistoryCache {
     private static HistoryCache instance;
 

@@ -9,6 +9,10 @@ import com.example.antiscam.act.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+/**
+ * @author Zhaoyun Xu, u7558707
+ */
 public class FirebaseAuthManager {
 
     private static FirebaseAuthManager firebaseAuthManager;

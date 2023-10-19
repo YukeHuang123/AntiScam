@@ -2,6 +2,11 @@ package com.example.antiscam.tool;
 
 import java.io.Serializable;
 
+/**
+ * @author Zhaoyun Xu, u7558707
+ * @param <K>
+ * @param <V>
+ */
 public class TreeHashMap<K extends Comparable<K>, V> {
     private AVLTree<K, V>[] buckets;
 

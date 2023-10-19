@@ -24,6 +24,9 @@ import com.example.antiscam.tool.LRUCache;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Zhaoyun Xu, u7558707
+ */
 public class History extends AppCompatActivity {
 
     private RecyclerView recyclerView;

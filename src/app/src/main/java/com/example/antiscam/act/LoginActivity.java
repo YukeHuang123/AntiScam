@@ -34,6 +34,9 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Zhaoyun Xu, u7558707
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailAddress;

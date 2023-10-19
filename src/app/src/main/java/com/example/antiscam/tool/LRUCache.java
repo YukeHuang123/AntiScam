@@ -7,6 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+
+/**
+ * @author Zhaoyun Xu, u7558707
+ * @param <K>
+ * @param <V>
+ */
 public class LRUCache<K extends Comparable<K>, V> {
     private int capacity;
     private TreeHashMap<K, V> map;
