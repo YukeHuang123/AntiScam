@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > Tokenizer</title>
+  <title>Coverage Report > UserInfoManager</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -18,18 +18,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.example.antiscam.core</a>
+    <a href="../index.html">com.example.antiscam.manager</a>
 </div>
 
-<h1>Coverage Summary for Class: Tokenizer (com.example.antiscam.core)</h1>
+<h1>Coverage Summary for Class: UserInfoManager (com.example.antiscam.manager)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -40,33 +37,103 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">Tokenizer</td>
+  <td class="name">UserInfoManager</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (6/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    85.7%
-  </span>
-  <span class="absValue">
-    (48/56)
+    (0/32)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">UserInfoManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UserInfoManager$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UserInfoManager$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UserInfoManager$AuthUserNameCallback</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -74,114 +141,131 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.core;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.antiscam.manager;
 &nbsp;
-&nbsp;import java.util.ArrayList;
-&nbsp;import java.util.LinkedList;
+&nbsp;import android.content.Context;
+&nbsp;import android.net.Uri;
+&nbsp;import android.widget.ImageView;
+&nbsp;import android.widget.TextView;
+&nbsp;
+&nbsp;import androidx.annotation.NonNull;
+&nbsp;
+&nbsp;import com.example.antiscam.R;
+&nbsp;import com.example.antiscam.bean.User;
+&nbsp;import com.example.antiscam.dao.UserDao;
+&nbsp;import com.example.antiscam.dao.UserDaoImpl;
+&nbsp;import com.example.antiscam.tool.CircleImageTransformer;
+&nbsp;import com.google.android.gms.tasks.OnFailureListener;
+&nbsp;import com.google.android.gms.tasks.OnSuccessListener;
+&nbsp;import com.google.firebase.auth.FirebaseUser;
+&nbsp;import com.google.firebase.storage.FirebaseStorage;
+&nbsp;import com.google.firebase.storage.StorageReference;
+&nbsp;import com.squareup.picasso.Picasso;
+&nbsp;
 &nbsp;import java.util.List;
-&nbsp;import java.util.Objects;
-&nbsp;import java.util.regex.Matcher;
-&nbsp;import java.util.regex.Pattern;
-&nbsp;import java.util.stream.Collectors;
 &nbsp;
-&nbsp;public class Tokenizer {
+<b class="nc">&nbsp;public class UserInfoManager {</b>
+&nbsp;    private static String authUserEmail;
+&nbsp;    private static String authUserName;
+&nbsp;    private static String authUserAvatarPath;
+<b class="nc">&nbsp;    private static FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();</b>
+&nbsp;    private static FirebaseUser user;
+&nbsp;    public static void getUserInfo(Context context, TextView userNameView, ImageView imageView) {
+&nbsp;        // Get user information from Firebase
+<b class="nc">&nbsp;        user = firebaseAuthManager.getUser();</b>
+<b class="nc">&nbsp;        if (user != null) {</b>
 &nbsp;
-&nbsp;    private Token token;
-<b class="fc">&nbsp;    private Pattern compile = Pattern.compile(&quot;[|&amp;]&quot;);</b>
+<b class="nc">&nbsp;            String username = user.getDisplayName();</b>
+<b class="nc">&nbsp;            Uri photoUrl = user.getPhotoUrl();</b>
 &nbsp;
-<b class="fc">&nbsp;    public Tokenizer(String input) {</b>
-<b class="fc">&nbsp;        token = tokenize(input);</b>
-<b class="fc">&nbsp;    }</b>
+&nbsp;            // Set user name
+<b class="nc">&nbsp;            userNameView.setText(username);</b>
 &nbsp;
-&nbsp;    private Token tokenize(String input) {
-<b class="fc">&nbsp;        input = input.trim();</b>
-<b class="fc">&nbsp;        if (input.isEmpty()) {</b>
-<b class="nc">&nbsp;            return null;</b>
-&nbsp;        }
+&nbsp;            // Get reference of Firebase storage
+<b class="nc">&nbsp;            FirebaseStorage storage = FirebaseStorage.getInstance();</b>
+<b class="nc">&nbsp;            StorageReference storageRef = storage.getReference();</b>
 &nbsp;
-<b class="fc">&nbsp;        if (input.contains(&quot;|&quot;) || input.contains(&quot;&amp;&quot;)) {</b>
-<b class="fc">&nbsp;            return parser3(input);</b>
-<b class="fc">&nbsp;        } else if (input.startsWith(&quot;@&quot;) || input.startsWith(&quot;#&quot;) || input.startsWith(&quot;%&quot;)|| input.startsWith(&quot;$&quot;)) {</b>
-<b class="fc">&nbsp;            return parser1(input);</b>
-&nbsp;        } else {
-<b class="nc">&nbsp;            return new Token(input, null, Token.Type.STR, null);</b>
-&nbsp;        }
-&nbsp;    }
+&nbsp;            // Get image path
+<b class="nc">&nbsp;            String imagePath = String.valueOf(photoUrl);</b>
 &nbsp;
-&nbsp;    /**
-&nbsp;     * parser @#%$
-&nbsp;     *
-&nbsp;     * @return
-&nbsp;     */
-&nbsp;    private Token parser1(String input) {
-<b class="fc">&nbsp;        if (input.startsWith(&quot;@&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(1);</b>
-<b class="fc">&nbsp;            return parser2(input, Token.Type.USERNAME);</b>
-<b class="fc">&nbsp;        } else if (input.startsWith(&quot;#&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(1);</b>
-<b class="fc">&nbsp;            return parser2(input, Token.Type.TITLE);</b>
-<b class="fc">&nbsp;        } else if (input.startsWith(&quot;%&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(1);</b>
-<b class="fc">&nbsp;            return parser2(input, Token.Type.AMOUNT);</b>
-<b class="nc">&nbsp;        } else if (input.startsWith(&quot;$&quot;)) {</b>
-<b class="nc">&nbsp;            input = input.substring(1);</b>
-<b class="nc">&nbsp;            return parser2(input, Token.Type.SCAMTYPE);</b>
-&nbsp;        } else {
-<b class="nc">&nbsp;            return null;</b>
+&nbsp;            // Get image reference
+<b class="nc">&nbsp;            StorageReference imageRef = storageRef.child(imagePath);</b>
+&nbsp;
+&nbsp;            // load image
+<b class="nc">&nbsp;            loadUserAvatar(imageRef, imageView);</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;    /**
-&nbsp;     * parser !=&lt;&gt;
-&nbsp;     *
-&nbsp;     * @return
-&nbsp;     */
-&nbsp;    private Token parser2(String input, Token.Type type) {
-<b class="fc">&nbsp;        Token.Type type2 = Token.Type.STR;</b>
-<b class="fc">&nbsp;        if (input.contains(&quot;!=&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(2);</b>
-<b class="fc">&nbsp;            type2 = Token.Type.NE;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;&lt;=&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(2);</b>
-<b class="fc">&nbsp;            type2 = Token.Type.LE;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;&gt;=&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(2);</b>
-<b class="fc">&nbsp;            type2 = Token.Type.GE;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;==&quot;)) {</b>
-<b class="nc">&nbsp;            input = input.substring(2);</b>
-<b class="nc">&nbsp;            type2 = Token.Type.EQ;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;&gt;&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(1);</b>
-<b class="fc">&nbsp;            type2 = Token.Type.GT;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;&lt;&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(1);</b>
-<b class="fc">&nbsp;            type2 = Token.Type.LT;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;=&quot;)) {</b>
-<b class="fc">&nbsp;            input = input.substring(1);</b>
-<b class="fc">&nbsp;            type2 = Token.Type.EQ;</b>
+&nbsp;    public static String getAuthUserEmail() {
+&nbsp;
+<b class="nc">&nbsp;        if (user != null) {</b>
+<b class="nc">&nbsp;            authUserEmail = user.getEmail();</b>
 &nbsp;        }
-<b class="fc">&nbsp;        return new Token(input, null, type, type2);</b>
+<b class="nc">&nbsp;        return authUserEmail;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    /**
-&nbsp;     * parser | and &amp;
-&nbsp;     *
-&nbsp;     * @return
-&nbsp;     */
-&nbsp;    private Token parser3(String input) {
-<b class="fc">&nbsp;        String[] split = input.split(&quot;([|&amp;])&quot;);</b>
-<b class="fc">&nbsp;        Token.Type type = Token.Type.STR;</b>
-<b class="fc">&nbsp;        if (input.contains(&quot;&amp;&quot;)) {</b>
-<b class="fc">&nbsp;            type = Token.Type.AND;</b>
-<b class="fc">&nbsp;        } else if (input.contains(&quot;|&quot;)) {</b>
-<b class="fc">&nbsp;            type = Token.Type.OR;</b>
+&nbsp;    public static void getAuthUserName(AuthUserNameCallback callback) {
+<b class="nc">&nbsp;        if (user != null) {</b>
+<b class="nc">&nbsp;            authUserEmail = user.getEmail();</b>
+<b class="nc">&nbsp;            UserDaoImpl userDaoimpl = UserDaoImpl.getInstance();</b>
+<b class="nc">&nbsp;            userDaoimpl.getUserByEmail(authUserEmail, new UserDao.UserCallback() {</b>
+&nbsp;                @Override
+&nbsp;                public void onUserReceived(User user) {
+<b class="nc">&nbsp;                    authUserName = user.getUsername();</b>
+<b class="nc">&nbsp;                    callback.onAuthUserNameReceived(authUserName);</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                @Override
+&nbsp;                public void onUsersReceived(List&lt;User&gt; users) {
+&nbsp;
+<b class="nc">&nbsp;                }</b>
+&nbsp;            });
 &nbsp;        }
-<b class="fc">&nbsp;        return new Token(split[0], split[1], type, null);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    public interface AuthUserNameCallback {
+&nbsp;        void onAuthUserNameReceived(String authUserName);
+&nbsp;    }
+&nbsp;    public static String getAuthUserDisplayName() {
+<b class="nc">&nbsp;        if (user != null) {</b>
+<b class="nc">&nbsp;            authUserName = user.getDisplayName();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return authUserName;</b>
+&nbsp;    }
 &nbsp;
-&nbsp;    public Token getTokens() {
-<b class="fc">&nbsp;        return token;</b>
+&nbsp;    public static String getAuthUserAvatarPath() {
+<b class="nc">&nbsp;        if (user != null) {</b>
+<b class="nc">&nbsp;            Uri photoUrl = user.getPhotoUrl();</b>
+&nbsp;
+&nbsp;            // Get image path
+<b class="nc">&nbsp;            authUserAvatarPath = String.valueOf(photoUrl);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return authUserAvatarPath;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StorageReference getUserAvatar(String imagePath) {
+&nbsp;        // Get reference of Firebase storage
+<b class="nc">&nbsp;        FirebaseStorage storage = FirebaseStorage.getInstance();</b>
+<b class="nc">&nbsp;        StorageReference storageRef = storage.getReference();</b>
+&nbsp;        // Get image reference
+<b class="nc">&nbsp;        StorageReference imageRef = storageRef.child(imagePath);</b>
+&nbsp;
+<b class="nc">&nbsp;        return imageRef;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void loadUserAvatar(StorageReference imageRef, ImageView imageView) {
+<b class="nc">&nbsp;        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener&lt;Uri&gt;() {</b>
+&nbsp;            @Override
+&nbsp;            public void onSuccess(Uri uri) {
+&nbsp;                // use Picasso load and transform image to circle
+<b class="nc">&nbsp;                Picasso.get().load(uri.toString()).transform(new CircleImageTransformer()).into(imageView);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }).addOnFailureListener(new OnFailureListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void onFailure(@NonNull Exception exception) {
+<b class="nc">&nbsp;                imageView.setImageResource(R.drawable.default_avatar);</b>
+&nbsp;            }
+&nbsp;        });
 &nbsp;    }
 &nbsp;}
 </code>
@@ -207,7 +291,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-18 18:59</div>
+    <div style="float:right;">generated on 2023-10-19 21:06</div>
 </div>
 </body>
 </html>

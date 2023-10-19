@@ -20,7 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.example.antiscam.dao.ScamCaseUserCombine;
 import com.example.antiscam.manager.UserInfoManager;
 import com.example.antiscam.manager.SearchDataManager;
@@ -49,6 +49,9 @@ public class MainMenu extends AppCompatActivity {
     private Runnable refreshRunnable;
     private final long REFRESH_INTERVAL = 10000; // 10 seconds
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +76,9 @@ public class MainMenu extends AppCompatActivity {
         handler.postDelayed(refreshRunnable, REFRESH_INTERVAL);
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @SuppressLint("ClickableViewAccessibility")
     private void initMainMenu() {
         // Data List for scam case card and set scam case data to adapter
@@ -151,6 +157,9 @@ public class MainMenu extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     void swipeRefresh(){
         swipeRefreshLayout = findViewById(R.id.swipeContainer);
         // SetOnRefreshListener on SwipeRefreshLayout
@@ -162,6 +171,10 @@ public class MainMenu extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * @author Yijing Jia u7566045
+     */
     void reloadMainmenuScamCase() {
         ScamCaseUserCombine.loadScamCases(new DataLoadCallback() {
             @Override
@@ -171,13 +184,11 @@ public class MainMenu extends AppCompatActivity {
                 cardAdapter.notifyDataSetChanged();
             }
         });
-
-        // Set adapter for recyclerView to display scam list cards
-//        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(cardAdapter);
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     void initProfile(){
         TextView userNameView = findViewById(R.id.userName);
         ImageView imageView = findViewById(R.id.avatarImgView);
@@ -267,7 +278,7 @@ public class MainMenu extends AppCompatActivity {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;
             }
-            SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
+            SearchDataManager.getInstance().addAllSearchDatas(dataList);
             startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
         });
     }

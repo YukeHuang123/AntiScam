@@ -1,4 +1,4 @@
-package com.example.antiscam.core;
+package com.example.antiscam.searchCore;
 
 import java.util.regex.Pattern;
 
@@ -19,7 +19,7 @@ public class Tokenizer {
 
         if (input.contains("|") || input.contains("&")) {
             return parser3(input);
-        } else if (input.startsWith("@") || input.startsWith("#") || input.startsWith("%")|| input.startsWith("$")) {
+        } else if (input.startsWith("@") || input.startsWith("#") || input.startsWith("%") || input.startsWith("$")) {
             return parser1(input);
         } else {
             return new Token(input, null, Token.Type.STR, null);
@@ -89,12 +89,15 @@ public class Tokenizer {
     private Token parser3(String input) {
         String[] split = input.split("([|&])");
         Token.Type type = Token.Type.STR;
-        if (input.contains("&")) {
+        String end = split[split.length - 1];
+        int index = input.length() - end.length() - 1;
+        String beginStr = input.substring(0, index);
+        char symbol = input.charAt(index);
+        if (symbol == '&')
             type = Token.Type.AND;
-        } else if (input.contains("|")) {
+        else if (symbol == '|')
             type = Token.Type.OR;
-        }
-        return new Token(split[0], split[1], type, null);
+        return new Token(end, beginStr, type, null);
     }
 
 

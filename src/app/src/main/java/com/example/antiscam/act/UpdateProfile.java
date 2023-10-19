@@ -36,6 +36,9 @@ import java.util.Map;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class UpdateProfile extends AppCompatActivity {
     ImageView updateAvatar;
     EditText usernameInput;

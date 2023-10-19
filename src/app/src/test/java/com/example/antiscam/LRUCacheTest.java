@@ -1,34 +1,34 @@
 package com.example.antiscam;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import com.example.antiscam.tool.LRUCache;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Test;
 
 public class LRUCacheTest {
 
     private LRUCache<String, Integer> cache;
 
-    @Before
-    public void setUp() {
-        cache = new LRUCache<>(3);
-    }
-
     @Test
     public void testBasicFunction() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         assertEquals(Integer.valueOf(1), cache.get("one"));
     }
 
     @Test
     public void testEmptyCache() {
+        cache = new LRUCache<>(3);
         assertNull(cache.get("anyKey"));
     }
 
     @Test
     public void testCacheSizeLimit() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -45,6 +45,7 @@ public class LRUCacheTest {
 
     @Test
     public void testAddWhenFull() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -55,6 +56,7 @@ public class LRUCacheTest {
 
     @Test
     public void testGetAll() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -66,6 +68,7 @@ public class LRUCacheTest {
 
     @Test
     public void testRemove() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -75,6 +78,7 @@ public class LRUCacheTest {
 
     @Test
     public void testAddOrder() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -85,6 +89,7 @@ public class LRUCacheTest {
 
     @Test
     public void testRecentUsage() {
+        cache = new LRUCache<>(3);
         cache.put("one", 1);
         cache.put("two", 2);
         cache.put("three", 3);
@@ -96,6 +101,7 @@ public class LRUCacheTest {
 
     @Test
     public void testOverwriteExistingKey() {
+        cache = new LRUCache<>(3);
         cache.put("two", 2);
         cache.put("two", 22);
         assertEquals(Integer.valueOf(22), cache.get("two"));
@@ -103,6 +109,7 @@ public class LRUCacheTest {
 
     @Test
     public void testNullValue() {
+        cache = new LRUCache<>(3);
         cache.put("nullTest", null);
         assertNull(cache.get("nullTest"));
     }

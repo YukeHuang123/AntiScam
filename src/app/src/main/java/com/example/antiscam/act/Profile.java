@@ -41,6 +41,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class Profile extends AppCompatActivity {
     private RecyclerView recyclerViewProfile;
     private ScamCaseCardProfileAdapter cardAdapterProfile;
@@ -50,8 +53,6 @@ public class Profile extends AppCompatActivity {
     private String email;
     private String userAvatarPath;
     private String authUserEmail;
-//    String documentId;
-    ProgressBar progressBar;
     private HistoryCache historyCache;
     private LRUCache<String, ScamCaseWithUser> cache;
     private List<String> blockedUserEmails;
@@ -59,7 +60,7 @@ public class Profile extends AppCompatActivity {
     private FirebaseUser user;
 
     private FirebaseAuthManager firebaseAuthManager = FirebaseAuthManager.getInstance();
-
+    BlockDaoImpl blockDaoImpl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +180,9 @@ public class Profile extends AppCompatActivity {
     }
 
     void initPersonalInfo(){
-        user = firebaseAuthManager.getUser();
+        blockDaoImpl = BlockDaoImpl.getInstance();
 
+        user = firebaseAuthManager.getUser();
 
         // Get user information
         TextView userNameView = findViewById(R.id.userNamePro);
@@ -189,7 +191,6 @@ public class Profile extends AppCompatActivity {
 
         // Set user name
         userNameView.setText(username);
-        BlockDaoImpl blockDaoImpl = new BlockDaoImpl();
         blockerEmails = blockDaoImpl.getBlockers(email); // user list who Block Profile user
         blockedUserEmails = blockDaoImpl.getBlockedUsers(email); // user list who was blocked by Profile user
 

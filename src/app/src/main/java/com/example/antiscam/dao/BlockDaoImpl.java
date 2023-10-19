@@ -16,6 +16,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class BlockDaoImpl implements BlockDao {
     private List<String> blockedUsers = new ArrayList<>();
     private List<String> blockers = new ArrayList<>();
@@ -24,6 +27,18 @@ public class BlockDaoImpl implements BlockDao {
     private BlockModel blockedData;
     private BlockModel blockingData;
 
+    private static BlockDaoImpl blockDao;
+
+
+    private BlockDaoImpl() {
+    }
+
+    public static BlockDaoImpl getInstance() {
+        if (blockDao == null) {
+            blockDao = new BlockDaoImpl();
+        }
+        return blockDao;
+    }
     public List<String> getDocumentId(String field, String email) {
         FirebaseFirestore.getInstance().collection("block")
                 .whereEqualTo(field, email)

@@ -5,8 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.core.TokenHelper;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Parser;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,6 +39,9 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
         return scamCaseDao;
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
         casesCollection.orderBy("post_date", Query.Direction.DESCENDING).limit(100).get()
@@ -63,7 +66,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     @Override
     public void getAllScamCases(Tokenizer tokenizer, ScamCasesCallback scamCasesCallback) {
-        Query query = TokenHelper.getInstance().genQuery(casesCollection, tokenizer);
+        Query query = Parser.getInstance().genQuery(casesCollection, tokenizer);
         query.limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -145,6 +148,9 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                 });
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @Override
     public void getDocumentId(int scam_id, OnDocumentIdCallback callback) {
         casesCollection

@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.User;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -35,6 +35,9 @@ public class UserDaoImpl implements UserDao {
         return userDao;
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     // Get user by email
     @Override
     public void getUserByEmail(String targetEmail, UserDao.UserCallback userCallback) {
@@ -98,6 +101,9 @@ public class UserDaoImpl implements UserDao {
         });
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     public DocumentReference userDetails(String DocumentID) {
         return FirebaseFirestore.getInstance().collection("users").document(DocumentID);
     }

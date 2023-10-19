@@ -1,7 +1,7 @@
 package com.example.antiscam.dao;
 
 import com.example.antiscam.bean.User;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.List;

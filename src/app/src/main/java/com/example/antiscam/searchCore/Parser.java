@@ -1,4 +1,4 @@
-package com.example.antiscam.core;
+package com.example.antiscam.searchCore;
 
 import android.util.Log;
 
@@ -6,14 +6,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.Query;
 
-public class TokenHelper {
+public class Parser {
     private static final String TAG = "TokenHelper";
-    private static TokenHelper instance = new TokenHelper();
+    private static Parser instance = new Parser();
 
-    private TokenHelper() {
+    private Parser() {
     }
 
-    public static TokenHelper getInstance() {
+    public static Parser getInstance() {
         return instance;
     }
 
