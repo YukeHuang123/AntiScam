@@ -26,16 +26,24 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
     protected OnClickListener onClickListener;
     private OnAvatarClickListener onAvatarClickListener;
 
-
+    /**
+     * @author Yijing Jia u7566045
+     */
     public ScamCaseCardAdapter(List<ScamCaseWithUser> dataList, int layoutResourceID) {
         this.dataList = dataList;
         this.layoutResourceID = layoutResourceID;
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     public void setOnAvatarClickListener(OnAvatarClickListener listener) {
         this.onAvatarClickListener = listener;
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     public interface OnAvatarClickListener {
         void onAvatarClick(int position, ScamCaseWithUser scamCaseWithUser);
     }
@@ -50,6 +58,9 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         void onItemClick(int position, ScamCaseWithUser scamCaseWithUser);
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @NonNull
     @Override
     public ScamCaseCardAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -79,6 +90,9 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
             }
         });
 
+        /**
+         * @author Yijing Jia u7566045
+         */
         holder.avatarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +130,9 @@ public class ScamCaseCardAdapter extends RecyclerView.Adapter<ScamCaseCardAdapte
         return dataList.size();
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     public static class CardViewHolder extends RecyclerView.ViewHolder {
 
         public TextView titleTextView;

@@ -39,6 +39,9 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
         return scamCaseDao;
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @Override
     public void getAllScamCase(ScamCaseCallback scamCaseCallback) {
         casesCollection.orderBy("post_date", Query.Direction.DESCENDING).limit(100).get()
@@ -145,6 +148,9 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
                 });
     }
 
+    /**
+     * @author Yijing Jia u7566045
+     */
     @Override
     public void getDocumentId(int scam_id, OnDocumentIdCallback callback) {
         casesCollection

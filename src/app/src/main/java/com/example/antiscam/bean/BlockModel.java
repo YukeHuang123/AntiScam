@@ -1,5 +1,8 @@
 package com.example.antiscam.bean;
 
+/**
+ * @author Yijing Jia u7566045
+ */
 public class BlockModel {
     private String blocker;
     private String blocked;
