@@ -121,12 +121,12 @@ public class History extends AppCompatActivity {
         deleteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 创建并显示删除确认对话框
+                // Create and display alert dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
-                builder.setTitle("Delete All History"); // 对话框标题
-                builder.setMessage("Are you sure you want to delete all history records?"); // 对话框消息
+                builder.setTitle("Delete All History");
+                builder.setMessage("Are you sure you want to delete all history records?");
 
-                // 添加 "Yes" 按钮，用户确认删除
+                // Add 'Yes' button
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -137,7 +137,6 @@ public class History extends AppCompatActivity {
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // 用户取消删除操作，不执行任何操作
                     }
                 });
 

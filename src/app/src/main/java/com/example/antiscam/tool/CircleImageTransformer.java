@@ -12,7 +12,6 @@ public class CircleImageTransformer implements Transformation {
 
     @Override
     public Bitmap transform(Bitmap source) {
-        //去图片宽高的最小值，变成正方形图片
         int size = Math.min(source.getWidth(),source.getHeight());
 
         Bitmap bitmap = Bitmap.createBitmap(size,size,source.getConfig());

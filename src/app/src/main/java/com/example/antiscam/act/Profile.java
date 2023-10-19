@@ -22,7 +22,7 @@ import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.adapter.ScamCaseCardProfileAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.dao.BlockManager;
+import com.example.antiscam.dao.BlockDaoImpl;
 import com.example.antiscam.dao.ScamCaseDao;
 import com.example.antiscam.dao.ScamCaseDaoImpl;
 import com.example.antiscam.dao.ScamCaseUserCombine;
@@ -189,9 +189,9 @@ public class Profile extends AppCompatActivity {
 
         // Set user name
         userNameView.setText(username);
-
-        blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
-        blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
+        BlockDaoImpl blockDaoImpl = new BlockDaoImpl();
+        blockerEmails = blockDaoImpl.getBlockers(email); // user list who Block Profile user
+        blockedUserEmails = blockDaoImpl.getBlockedUsers(email); // user list who was blocked by Profile user
 
         // Get image reference and load to ImageView
         try {
@@ -331,8 +331,6 @@ public class Profile extends AppCompatActivity {
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
-//    blockerEmails = BlockManager.getBlockers(email); // Block Profile用户的user列表
-//    blockedUserEmails = BlockManager.getBlockedUsers(email); // 被Profile用户block的用户列表
 
     Boolean isBlockedByAuthUser(String authUserEmail){
 //        blockerEmails = BlockManager.getBlockers(receiverEmail);
