@@ -229,33 +229,26 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 
 Our AntiScam application is a user-driven platform designed to combat scams by allowing users to share their experiences, provide scam alerts, and engage in meaningful communication with the content creator. 
-- Users can post details of scam incidents, including the type of scam, title, payment method, monetary losses incurred and so on.
-- The search functionality enables easy access to specific scam cases, helping users find relevant information quickly. 
-- The app features a private messaging system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
-- We prioritize user privacy and have implemented a 'block' feature, granting users control over their communication preferences by allowing them to prevent specific users from sending direct messages. 
-- On the user's profile page, users can view their browsing history, and the last post read will show on the top of history section.
-- User also have choice to delete all the history records.
-- We also offer personalized services, allowing users to click on their avatar to change it to other photo.
-- The add post button is draggable, user can drag it along the right edge.
+1. Users can [post details of scam incidents](application screenshot/add_post.png) including the type of scam, title, payment method, monetary losses incurred and so on.
+2. The [search functionality](application screenshot/search_for_title.png) enables easy access to specific scam cases, helping users find relevant information quickly. 
+3. The app features a [private messaging](application screenshot/chat.png) system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
+4. We prioritize user privacy and have implemented a ['block'](application screenshot/chat.png) feature, granting users control over their communication preferences by allowing them to prevent specific users from sending direct messages. 
+5. On the [user's profile](application screenshot/my_profile.png) page, users can view their browsing history, and the last post read will show on the top of history section.
+6. User also have choice to [delete all the history records](application screenshot/delete_history_records.png).
+7. We also offer personalized services, allowing users to click on their [avatar](application screenshot/change_avatar.png) to change it to other photo.
+8. The add post button in the [main menu](application screenshot/main_menu.png) is draggable, user can drag it along the right edge.
 
 Our app aims to create an informed community, protecting individuals from potential scams.
-<img src="application screenshot/add_post.png"  width="30%" height="30%">
-<img src="application screenshot/change_avatar.png"  width="30%" height="30%">
-<img src="application screenshot/chat.png"  width="30%" height="30%">
-<img src="application screenshot/delete_history_records.png"  width="30%" height="30%">
+<br><br>
 <img src="application screenshot/main_menu.png"  width="30%" height="30%">
-<img src="application screenshot/my_profile.png"  width="30%" height="30%">
-<img src="application screenshot/other_user_profile.png"  width="30%" height="30%">
+<img src="application screenshot/add_post.png"  width="30%" height="30%">
 <img src="application screenshot/search_for_title.png"  width="30%" height="30%">
-![Add post](application screenshot/add_post.png) <br>
-![change avatar](application screenshot/change_avatar.png) <br>
-![chat](application screenshot/chat.png) <br>
-![delete history records](application screenshot/delete_history_records.png) <br>
-![main menu](application screenshot/main_menu.png) <br>
-![my profile](application screenshot/my_profile.png) <br>
-![other use profile](application screenshot/other_user_profile.png) <br>
-![search for title](application screenshot/search_for_title.png) <br>
-
+<img src="application screenshot/chat.png"  width="30%" height="30%">
+<img src="application screenshot/other_user_profile.png"  width="30%" height="30%">
+<img src="application screenshot/my_profile.png"  width="30%" height="30%">
+<img src="application screenshot/delete_history_records.png"  width="30%" height="30%">
+<img src="application screenshot/change_avatar.png"  width="30%" height="30%">
+<br><br>
 ### Application Use Cases and or Examples
 
 **Target Users: Public**
