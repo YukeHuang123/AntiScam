@@ -51,7 +51,7 @@ assets:
 1. You (as a group) completed this work (tick the most appropriate option):
   - [ ] by yourself (as a group) without the help of others;
       [ ] with Gen AI tools (e.g., ChatGPT, Co-Pilot).
-      [ ] using online resources (e.g., Stackoverflow, blogs)
+      [x] using online resources (e.g., Stackoverflow, blogs)
 
 2. If not completed by yourself only, how did the use of Gen AI tools (and which ones), contribute to completing this assignment?
   - Tool(s): <tools used here>
@@ -68,8 +68,8 @@ assets:
 members:
   - name:
     uid:
-  - name:
-    uid:
+  - name: Yuke Huang
+    uid: u7618794
   - name:
     uid:
   - name:
