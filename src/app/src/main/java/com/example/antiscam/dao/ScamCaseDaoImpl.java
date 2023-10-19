@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.searchCore.TokenHelper;
+import com.example.antiscam.searchCore.Parser;
 import com.example.antiscam.searchCore.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,7 +63,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     @Override
     public void getAllScamCases(Tokenizer tokenizer, ScamCasesCallback scamCasesCallback) {
-        Query query = TokenHelper.getInstance().genQuery(casesCollection, tokenizer);
+        Query query = Parser.getInstance().genQuery(casesCollection, tokenizer);
         query.limit(100).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
