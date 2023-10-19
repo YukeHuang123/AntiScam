@@ -27,4 +27,20 @@ public class SearchDataManager {
         scamCaseWithUsers.clear();
         scamCaseWithUsers.addAll(v);
     }
+
+    /////////////////////  search result
+    private List<ScamCaseWithUser> searchDatas = new ArrayList<>();
+    public List<ScamCaseWithUser> getSearchDatas(){
+        return searchDatas;
+    }
+    public void clearSearchDatas(){
+        searchDatas.clear();
+    }
+    public void addSearchData(ScamCaseWithUser scamCaseWithUser){
+        searchDatas.add(scamCaseWithUser);
+    }
+    public void addAllSearchDatas(Collection<ScamCaseWithUser> v){
+        searchDatas.clear();
+        searchDatas.addAll(v);
+    }
 }

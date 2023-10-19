@@ -267,7 +267,7 @@ public class MainMenu extends AppCompatActivity {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;
             }
-            SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
+            SearchDataManager.getInstance().addAllSearchDatas(dataList);
             startActivity(new Intent(this, SearchResultActivity.class).putExtra("search_content", query));
         });
     }

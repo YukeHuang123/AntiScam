@@ -43,7 +43,7 @@ public class SearchResultActivity extends AppCompatActivity {
             historyCache.setCache(this, cache);
         }
 
-        cardAdapter = new ScamCaseCardAdapter(SearchDataManager.getInstance().getScamCaseWithUsers(), R.layout.mainmenu_cardlist);
+        cardAdapter = new ScamCaseCardAdapter(SearchDataManager.getInstance().getSearchDatas(), R.layout.mainmenu_cardlist);
 
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 Toast.makeText(this, "Result is Empty,Please retry", Toast.LENGTH_LONG).show();
                 return;
             }
-            SearchDataManager.getInstance().addAllScamCaseWithUsers(dataList);
+            SearchDataManager.getInstance().addAllSearchDatas(dataList);
             cardAdapter.setData(dataList);
         });
     }
