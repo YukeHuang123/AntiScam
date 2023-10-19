@@ -147,10 +147,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
       1. [LoadShowData] medium
       2. [Data-Profile] easy
-      3. [Data-Deletion] medium (partial - 50%)
       4. [P2P-Block] medium
       5. [Data-Persist] (Extension part)
-    
     - Code Implementation
     
       1. UI
@@ -201,12 +199,10 @@ Note that the core criteria of contribution is based on `code contribution` (the
          1. [ScamCaseWithUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java)
     
          2. [BlockModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/BlockModel.java)
-    
   - **Code and App Design** 
     
     - Design Pattern: dao and adapter design parttern.
     - UI design: Designed UI style and created all the [UI demo](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/UI_Demo.zip) using Axure.
-    
   - **Others**:  
 
     - Report Writing
@@ -290,8 +286,11 @@ Result: The user's issue is resolved, ensuring a positive user experience.
 
 ### Application UML
 
-![UML ClassDiagram](media/UML-6442.png) <br>
+![UML ClassDiagram](media/UML-6442.png) 
+<br>
 <hr>
+
+
 
 ## Code Design and Decisions
 
