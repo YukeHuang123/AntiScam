@@ -1,4 +1,4 @@
-package com.example.antiscam.core;
+package com.example.antiscam.searchCore;
 
 import android.util.Log;
 

@@ -5,8 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.core.TokenHelper;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.TokenHelper;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;

@@ -1,7 +1,11 @@
 package com.example.antiscam.tool;
 
+import org.checkerframework.checker.units.qual.K;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class LRUCache<K extends Comparable<K>, V> {
     private int capacity;
@@ -164,26 +168,30 @@ public class LRUCache<K extends Comparable<K>, V> {
         }
 
         public ListNode<K> find(K key) {
-            ListNode<K> currentNode = head;
-            while (currentNode != null) {
+            DLLIterator iterator = new DLLIterator(head);
+            while (iterator.hasNext()) {
+                ListNode<K> currentNode = iterator.getCurrentNode();
                 if (currentNode.key.equals(key)) {
                     return currentNode;
                 }
-                currentNode = currentNode.next;
+                iterator.next();
             }
             return null;
         }
 
         public ListNode<K> findPreviousNode(K key) {
-            ListNode<K> currentNode = head;
-            while (currentNode != null && currentNode.next != null) {
-                if (currentNode.next.key.equals(key)) {
-                    return currentNode;
+            DLLIterator iterator = new DLLIterator(head);
+            ListNode<K> previous = null;
+            while (iterator.hasNext()) {
+                ListNode<K> current = iterator.next();
+                if (current.key.equals(key)) {
+                    return previous;
                 }
-                currentNode = currentNode.next;
+                previous = current;
             }
             return null;
         }
+
 
 
         public ListNode<K> getHead() {
@@ -217,6 +225,41 @@ public class LRUCache<K extends Comparable<K>, V> {
         public void setCapacity(int capacity) {
             this.capacity = capacity;
         }
+
+        private class DLLIterator implements Iterator<ListNode<K>> {
+            private ListNode<K> previousNode = null;
+            private ListNode<K> currentNode;
+
+            public DLLIterator(ListNode<K> currentNode) {
+                this.currentNode = currentNode;
+            }
+
+            @Override
+            public boolean hasNext() {
+                return currentNode != null;
+            }
+
+            @Override
+            public ListNode<K> next() {
+                if (currentNode == null) {
+                    throw new NoSuchElementException();
+                }
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+                return previousNode;
+            }
+
+
+            public ListNode<K> getCurrentNode() {
+                return currentNode;
+            }
+
+            public ListNode<K> getPreviousNode() {
+                return previousNode;
+            }
+
+        }
+
     }
 
 

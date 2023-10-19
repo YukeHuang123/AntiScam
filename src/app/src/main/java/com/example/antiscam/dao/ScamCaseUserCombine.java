@@ -5,7 +5,7 @@ import android.util.Log;
 import com.example.antiscam.bean.ScamCase;
 import com.example.antiscam.bean.ScamCaseWithUser;
 import com.example.antiscam.bean.User;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.example.antiscam.tool.DataLoadCallback;
 
 import java.util.ArrayList;

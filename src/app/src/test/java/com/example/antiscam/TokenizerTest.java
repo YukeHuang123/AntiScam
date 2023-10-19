@@ -1,7 +1,7 @@
 package com.example.antiscam;
 
-import com.example.antiscam.core.Token;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Token;
+import com.example.antiscam.searchCore.Tokenizer;
 
 import org.junit.Assert;
 import org.junit.Test;

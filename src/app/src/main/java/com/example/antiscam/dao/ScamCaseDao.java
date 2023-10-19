@@ -1,7 +1,7 @@
 package com.example.antiscam.dao;
 
 import com.example.antiscam.bean.ScamCase;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Tokenizer;
 
 import java.util.List;
 

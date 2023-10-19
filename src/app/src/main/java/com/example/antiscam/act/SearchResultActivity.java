@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.antiscam.R;
 import com.example.antiscam.adapter.ScamCaseCardAdapter;
 import com.example.antiscam.bean.ScamCaseWithUser;
-import com.example.antiscam.core.Tokenizer;
+import com.example.antiscam.searchCore.Tokenizer;
 import com.example.antiscam.dao.ScamCaseUserCombine;
 import com.example.antiscam.manager.SearchDataManager;
 import com.example.antiscam.tool.HistoryCache;
