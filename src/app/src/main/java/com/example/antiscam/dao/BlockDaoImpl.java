@@ -24,6 +24,18 @@ public class BlockDaoImpl implements BlockDao {
     private BlockModel blockedData;
     private BlockModel blockingData;
 
+    private static BlockDaoImpl blockDao;
+
+
+    private BlockDaoImpl() {
+    }
+
+    public static BlockDaoImpl getInstance() {
+        if (blockDao == null) {
+            blockDao = new BlockDaoImpl();
+        }
+        return blockDao;
+    }
     public List<String> getDocumentId(String field, String email) {
         FirebaseFirestore.getInstance().collection("block")
                 .whereEqualTo(field, email)

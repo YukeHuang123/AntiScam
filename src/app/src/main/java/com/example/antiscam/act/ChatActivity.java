@@ -67,6 +67,7 @@ public class ChatActivity extends AppCompatActivity {
     Button blockBtnView;
     Button unblockBtnView;
     boolean isBlockingAuthUser;
+    BlockDaoImpl blockDaoImpl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initConfig() {
+        blockDaoImpl = BlockDaoImpl.getInstance();
         email = getIntent().getStringExtra("email");
         nick = getIntent().getStringExtra("nick");
         img = getIntent().getStringExtra("img");
@@ -110,7 +112,6 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     }
                 }
-                BlockDaoImpl blockDaoImpl = new BlockDaoImpl();
                 documentIds = blockDaoImpl.getDocumentId("blocked", email);
 
                 refreshRecycleView();
@@ -278,7 +279,6 @@ public class ChatActivity extends AppCompatActivity {
                         AndroidUtil.showToast(getApplicationContext(), "Successfully blocked");
                         blockBtnView.setVisibility(View.GONE);
                         unblockBtnView.setVisibility(View.VISIBLE);
-                        BlockDaoImpl blockDaoImpl = new BlockDaoImpl();
                         documentIds = blockDaoImpl.getDocumentId("blocked", email);
                     }
                 })
