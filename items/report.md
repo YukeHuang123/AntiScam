@@ -93,7 +93,6 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
 2. **u7618794, Yuke Huang**  I have 25% contribution, as follows: 
   - **Code Contribution in the final App**
-    
     - Basic Features - DataFiles: [scamCase.json](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/assets/scamCase.json)
     - Custom Feature - FB-Persist: Extension: 
         - [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
@@ -124,7 +123,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - implements Parcelable to ScamCaseWithUser class:
         - [CREATOR](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L33-49)
         - [describeContents() and writeToParcel()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L59-76)
-    - other 
+    - ScamCaseCardAdapter 
        - [setOnClickListener()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L44-52)
        - [OnClickListener for the item view](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L72-81)
     
@@ -137,7 +136,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
     - responsible for 8 meeting minutes writing.
     - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and implement the adaptive icons: [ic_launcher_foreground.webp](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp), [ic_launcher_background.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/ic_launcher_background.xml)
-    - create the UML class diagram independently
+    - create the [UML class diagram](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/media/UML-6442.png)
+    - write [Conflict Resolution Protocol](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Conflict_Resolution_Protocol.pdf)
     - report: responsible for Application Description, Team management, and conflict Resolution Protocol.
 
 3. **u7566045, Yijing Jia**  I have 25% contribution, as follows: <br>
@@ -442,12 +442,14 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 
    - Search token, combine symbol and compare symbol
 
-     | Token | Search target |
-     | :---- | ------------- |
-     | @     | user email    |
-     | #     | title         |
-     | %     | amount        |
-     | $     | scam type     |
+
+| Token | Search target |
+|:------|:-------------:|
+| @     |  user email   |  
+| #     |    title      |      
+| %     |    amount     | 
+| $     |   scam type   | 
+
 
      The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>' and so on. 
 
@@ -640,26 +642,22 @@ We've done testing through two ways: white box, black box testing. And we've fou
 - *[Team Meeting 5](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%205.md)*
 - *[Team Meeting 6](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%206.md)*
 - *[Team Meeting 7](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%207.md)*
+- *[Team Meeting 8](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%208.md)*
 
 
-| No. |     Date     |                       Type |
-|:----|:------------:|---------------------------:|
-| 1   |    |  |
-| 2   |   |      |
-| 3   |    |      |
-| 4   |  |    |
-| 5   |  |    |
-| 6   |  |    |
-| 7   |  |    |
-
+| No. |    Date    |                Topic                |
+|:----|:----------:|:-----------------------------------:|
+| 1   | 2023-09-06 |  review of assignment requirements  |
+| 2   | 2023-09-07 |        discuss app scenarios        | 
+| 3   | 2023-09-08 |       discuss basic features        |
+| 4   | 2023-09-10 |         UI tasks allocation         | 
+| 5   | 2023-09-14 |      custom features selection      |
+| 6   | 2023-09-17 | implement basic and custom features |
+| 7   | 2023-10-06 |        review tasks progress        |
+| 8   | 2023-10-18 |  report + code review +checklist    |
+In addition to these eight meetings, our team have regular stand-up meetings to review the progress of our tasks. Furthermore, whenever a team member encounters challenges or difficulties, we support and help each other. All the team members are good at teamwork, each meeting we can communicate effectively and every groupmates can finish their allocated tasks on time.
 
 <hr>
 
 ### Conflict Resolution Protocol
-*[Write a well defined protocol your team can use to handle conflicts. That is, if your group has problems, what is the procedure for reaching consensus or solving a problem?
-(If you choose to make this an external document, link to it here)]*
-
-This shall include an agreed procedure for situations including (but not limited to):
-- e.g., if a member fails to meet the initial plan and/or deadlines
-- e.g., if your group has issues, how will your group reach consensus or solve the problem?
-- e.g., if a member gets sick, what is the solution? Alternatively, what is your plan to mitigate the impact of unforeseen incidents for this 6-to-8-week project? 
+- *[Conflict Resolution Protocol](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Conflict_Resolution_Protocol.pdf)*
