@@ -241,8 +241,8 @@ Our AntiScam application is a user-driven platform designed to combat scams by a
 Our app aims to create an informed community, protecting individuals from potential scams.
 <br><br>
 <img src="application screenshot/main_menu.png"  width="30%" height="30%">
-<img src="application screenshot/add_post.png"  width="28%" height="28%">
-<img src="application screenshot/search_for_title.png"  width="26%" height="26%">
+<img src="application screenshot/add_post.png"  width="30%" height="30%">
+<img src="application screenshot/search_for_title.png"  width="30%" height="30%">
 <img src="application screenshot/other_user_profile.png"  width="30%" height="30%">
 <img src="application screenshot/chat.png"  width="30%" height="30%">
 <img src="application screenshot/my_profile.png"  width="30%" height="30%">
@@ -590,10 +590,11 @@ Feature Category: Peer to Peer Messaging
 *Here is an example:*
 
 1. *Bug 1:*
-   - *A space bar (' ') in the sign in email will crash the application.*
+   - *When user add new post and submit successfully, the firestore will store this object in the scam_cases collection, but a extra field "scalability" will automaticly add to this object with value 0. This bug will not affect the data show in the case detail page.*
    - ...
 
 2. *Bug 2:*
+   - 
 3. ...
 
 <br> <hr>
