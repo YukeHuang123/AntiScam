@@ -675,6 +675,8 @@ We've done testing through two ways: white box, black box testing. And we've fou
 | 6   | 2023-09-17 | implement basic and custom features |
 | 7   | 2023-10-06 |        review tasks progress        |
 | 8   | 2023-10-18 |  report + code review +checklist    |
+
+<br><br>
 In addition to these eight meetings, our team have regular stand-up meetings to review the progress of our tasks. Furthermore, whenever a team member encounters challenges or difficulties, we support and help each other. All the team members are good at teamwork, each meeting we can communicate effectively and every groupmates can finish their allocated tasks on time.
 
 <hr>
