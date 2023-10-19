@@ -239,8 +239,14 @@ Our AntiScam application is a user-driven platform designed to combat scams by a
 - The add post button is draggable, user can drag it along the right edge.
 
 Our app aims to create an informed community, protecting individuals from potential scams.
-<img src="https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/application%20screenshot/add_post.png"  width="30%" height="30%">
-<img src="application screenshot/add_post.png" width="200" height="200">
+<img src="application screenshot/add_post.png"  width="30%" height="30%">
+<img src="application screenshot/change_avatar.png"  width="30%" height="30%">
+<img src="application screenshot/chat.png"  width="30%" height="30%">
+<img src="application screenshot/delete_history_records.png"  width="30%" height="30%">
+<img src="application screenshot/main_menu.png"  width="30%" height="30%">
+<img src="application screenshot/my_profile.png"  width="30%" height="30%">
+<img src="application screenshot/other_user_profile.png"  width="30%" height="30%">
+<img src="application screenshot/search_for_title.png"  width="30%" height="30%">
 ![Add post](application screenshot/add_post.png) <br>
 ![change avatar](application screenshot/change_avatar.png) <br>
 ![chat](application screenshot/chat.png) <br>
