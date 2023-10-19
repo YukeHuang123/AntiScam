@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockDaoImpl implements BlockDao {
-    static List<String> blockedUsers = new ArrayList<>();
-    static List<String> blockers = new ArrayList<>();
-    static String documentId;
-    static List<String> documentIdList = new ArrayList<>();
-    static BlockModel blockedData;
-    static BlockModel blockingData;
+    private List<String> blockedUsers = new ArrayList<>();
+    private List<String> blockers = new ArrayList<>();
+    private String documentId;
+    private List<String> documentIdList = new ArrayList<>();
+    private BlockModel blockedData;
+    private BlockModel blockingData;
 
     public List<String> getDocumentId(String field, String email) {
         FirebaseFirestore.getInstance().collection("block")
