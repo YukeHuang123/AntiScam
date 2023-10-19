@@ -16,7 +16,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockManager {
+public class BlockDaoImpl implements BlockDao {
     static List<String> blockedUsers = new ArrayList<>();
     static List<String> blockers = new ArrayList<>();
     static String documentId;
@@ -24,7 +24,7 @@ public class BlockManager {
     static BlockModel blockedData;
     static BlockModel blockingData;
 
-    public static List<String> getDocumentId(String field, String email) {
+    public List<String> getDocumentId(String field, String email) {
         FirebaseFirestore.getInstance().collection("block")
                 .whereEqualTo(field, email)
                 .get()
@@ -46,7 +46,7 @@ public class BlockManager {
         return documentIdList;
     }
     // Get blockers
-    public static List<String> getBlockedUsers(String blockerEmail) {
+    public List<String> getBlockedUsers(String blockerEmail) {
         //
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.clearPersistence();
@@ -71,7 +71,7 @@ public class BlockManager {
     }
 
     // Get blocked users
-    public static List<String> getBlockers(String blockedUserEmail) {
+    public List<String> getBlockers(String blockedUserEmail) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.clearPersistence();
         Log.d("getBlock", "start search");
@@ -93,10 +93,5 @@ public class BlockManager {
                     }
                 });
         return blockers;
-    }
-
-    public static void unblock(String blockedUserEmail) {
-        //
-
     }
 }
