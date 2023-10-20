@@ -21,7 +21,9 @@ import com.example.antiscam.dao.ScamCaseDaoImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * @author Yuke Huang, u7618794
+ */
 public class AddPostPage extends AppCompatActivity {
 
     private final ScamCaseDaoImpl scamCaseDaoImpl = ScamCaseDaoImpl.getInstance();
@@ -46,8 +48,6 @@ public class AddPostPage extends AppCompatActivity {
                 if (intent.hasExtra("user")) {
                     user = intent.getStringExtra("user");
                 }
-                //set scam id
-
 
                 //find editText and spinner by id
                 EditText age = findViewById(R.id.editAge);
@@ -81,13 +81,6 @@ public class AddPostPage extends AppCompatActivity {
                     typeBuilder.append(" scams");
                 }
                 String typeNew = typeBuilder.toString();
-
-
-                /**
-                 * create instance of ScamCase and change String input to correct type within makeScamCase method
-                 */
-                String finalUser = user;
-
 
                 /**
                  * check whether all the fields are filled.

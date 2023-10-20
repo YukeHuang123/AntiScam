@@ -13,7 +13,9 @@ public interface ScamCaseDao {
     interface ScamCaseCallback {
         void onScamCaseReceived(ScamCase scamcase);
     }
-
+    /**
+     * @author Yuke Huang, u7618794
+     */
     void getAllScamCases(Tokenizer tokenizer, ScamCasesCallback scamCasesCallback);
     interface ScamCasesCallback {
         void onScamCaseReceived(List<ScamCase> scamcase);

@@ -87,7 +87,8 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
 
     /**
      * Add data to Firestore database
-     * @param scamcase:
+     * @param scamcase: the case object
+     * @author Yuke Huang, u7618794
      */
 
     @Override
@@ -106,6 +107,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
     /**
      * find the field called nextID
      * @param callback: is a interface
+     * @author Yuke Huang, u7618794
      */
 
     public void getNextId(NextIdCallback callback) {
@@ -134,6 +136,7 @@ public class ScamCaseDaoImpl implements ScamCaseDao {
     /**
      * nextID plus 1 when customer add a new post
      * @param callback: interface use to call other method
+     * @author Yuke Huang, u7618794
      */
     @Override
     public void updateNextId(NextIdCallback callback) {

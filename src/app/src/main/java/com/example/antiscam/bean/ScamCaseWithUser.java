@@ -30,6 +30,9 @@ public class ScamCaseWithUser implements Parcelable {
         this.user = user;
     }
 
+    /**
+     * @author Yuke Huang, u7618794
+     */
     protected ScamCaseWithUser(Parcel in) {
         // Read data from Parcel and initialize object
         scamCase = in.readParcelable(ScamCase.class.getClassLoader());

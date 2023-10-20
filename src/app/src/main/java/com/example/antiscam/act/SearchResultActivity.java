@@ -45,22 +45,16 @@ public class SearchResultActivity extends AppCompatActivity {
 
         cardAdapter = new ScamCaseCardAdapter(SearchDataManager.getInstance().getSearchDatas(), R.layout.mainmenu_cardlist);
 
+        /**
+         * @author Yuke Huang, u7618794
+         */
         cardAdapter.setOnClickListener(new ScamCaseCardAdapter.OnClickListener() {
             @Override
             public void onItemClick(int position, ScamCaseWithUser scamCaseWithUser) {
                 Intent intent = new Intent(SearchResultActivity.this, CaseDetail.class);
                 intent.putExtra("scamCaseWithUser", scamCaseWithUser);
-
                 cache = historyCache.getCache(SearchResultActivity.this);
                 cache.put(String.valueOf(scamCaseWithUser.getScamCase().getScam_id()), scamCaseWithUser);
-//                Gson gson = new GsonBuilder()
-//                        .setExclusionStrategies(new DoublyLinkedListExclusionStrategy())
-//                        .create();
-//                String cacheString = gson.toJson(cache);
-//                LRUCache<String, ScamCaseWithUser> cache = gson.fromJson(cacheString,
-//                        new TypeToken<LRUCache<String, ScamCaseWithUser>>() {
-//                        }.getType());
-//                Log.d("cacheToStr", JSON.toJSONString(cache));
                 historyCache.setCache(SearchResultActivity.this, cache);
 
                 startActivity(intent);
