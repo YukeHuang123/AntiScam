@@ -95,11 +95,10 @@ Note that the core criteria of contribution is based on `code contribution` (the
   - **Code Contribution in the final App**
     - Basic Features - DataFiles: [scamCase.json](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/assets/scamCase.json)
     - Custom Feature - FB-Persist: Extension: 
-        - `ScamCaseDao.java` [add and get data from firestore interface](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
-        - `ScamCaseDaoImpl.java`[add and get data from firestore implementation](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L66-148)
+        - [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L13-22)
+        - [ScamCaseDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L66-148)
     
     **UI**
-    
     - Add post activity: 
       - [AddPostPage.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/AddPostPage.java)
       - [activity_add_post_page.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml)
@@ -123,91 +122,33 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - implements Parcelable to ScamCaseWithUser class:
         - [CREATOR](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L33-49)
         - [describeContents() and writeToParcel()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java#L59-76)
-    - ScamCaseCardAdapter 
+    - other 
        - [setOnClickListener()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L44-52)
        - [OnClickListener for the item view](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java#L72-81)
     
-  - **Code and App Design**
-    - I involved in the DAO design pattern.
+  - **Code and App Design** 
+    - I involved in the DAO and adapter design pattern.
     - I designed the [case detail page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_case_detail.xml), [add post page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_add_post_page.xml), [submit successfully page](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_submit_success_page.xml) and [floating action button](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml#L116-126) in main menu.
-    
+
   - **Others**: 
-    
     - responsible for 8 meeting minutes writing.
     - design the [application icon figure](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/drawable/icon.png) and implement the adaptive icons: [ic_launcher_foreground.webp](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp), [ic_launcher_background.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/values/ic_launcher_background.xml)
-    - create the [UML class diagram](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/media/UML-6442.png)
-    - write [Conflict Resolution Protocol](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Conflict_Resolution_Protocol.pdf)
+    - create the UML class diagram independently
     - report: responsible for Application Description, Team management, and conflict Resolution Protocol.
 
-3. **u7566045, Yijing Jia**  I have 25% contribution, as follows: <br>
+3. **UID1, Name1**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
-    
-    - Feature Implementation
-    
-      1. [LoadShowData] medium
-      2. [Data-Profile] easy
-      4. [P2P-Block] medium
-      5. [Data-Persist] (Extension Part)
-    - Code Implementation
-    
-      1. UI
-    
-         1. Mainmenu
-            1. [MainMenu.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java)
-            2. [activity_main_menu.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml)
-            3. [mainmenu_cardlist](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/mainmenu_cardlist.xml)
-    
-         2. Profile
-            1. [Profile.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java)
-            2. [activity_profile.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_profile.xml)
-    
-         3. UpdateProfile
-            1. [UpdateProfile.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/UpdateProfile.java)
-            2. [activity_update_profile.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_update_profile.xml)
-            3. [profile_cardlist.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/profile_cardlist.xml)
-         4. ChatActivity
-            1. Method [initBlock()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L221-266)
-            2. Method [blockUser()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L268-291)
-    
-      2. dao
-    
-         1. [blockDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDao.java)
-         2. [blockDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDaoImpl.java)
-         3. ScamCaseDao
-            1. [getAllScamCase()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L9-12)
-            2. [getDocumentId()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L23-27)
-         4. ScamCaseDaoImpl 
-            1. [getAllScamCase()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L43-62)
-            2. [getDocumentId()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L149-170)
-         5. UserDao
-            1. [getUserByEmail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDao.java#L10)
-         6. UserDaoImpl
-            1. [getUserByEmail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java#L40-59)
-    
-      3. adapter
-    
-         1. [ScamCaseCardAdapter - 60%](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java)
-         2. [ScamCaseCardProfileAdapter](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardProfileAdapter.java)
-    
-      4. manager
-    
-         1. [UserInfoManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/UserInfoManager.java)
-    
-      5. bean
-    
-         1. [BlockModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/BlockModel.java)
-    
-      6. tool
-         1. [AndroidUtil](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AndroidUtil.java)
-  - **Code and App Design** 
-    
-    - Design Pattern: dao and adapter design parttern.
-    - UI design: Designed UI style and created all the [UI demo](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/UI_Demo.zip) using Axure.
-  - **Others**:  
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
 
-    - Report Writing
-      1. Implementation of features
-      2. Individual Contributions
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
 
 4. **UID1, Name1**  I have 25% contribution, as follows: <br>
@@ -227,132 +168,131 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 ## Application Description
 
+*[What is your application, what does it do? Include photos or diagrams if necessary]*
 
-Our AntiScam application is a user-driven platform designed to combat scams by allowing users to share their experiences, provide scam alerts, and engage in meaningful communication with the content creator. 
-- Users can post details of scam incidents, including the type of scam, title, payment method, monetary losses incurred and so on.
-- The search functionality enables easy access to specific scam cases, helping users find relevant information quickly. 
-- The app features a private messaging system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
-- We prioritize user privacy and have implemented a 'block' feature, granting users control over their communication preferences by allowing them to prevent specific users from sending direct messages. 
-- On the user's profile page, users can view their browsing history, and the last post read will show on the top of history section.
-- User also have choice to delete all the history records.
-- We also offer personalized services, allowing users to click on their avatar to change it to other photo.
-- The add post button is draggable, user can drag it along the right edge.
+*Here is a pet specific application example*
 
-Our app aims to create an informed community, protecting individuals from potential scams.
-<img src="https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/application%20screenshot/add_post.png"  width="30%" height="30%">
-![Add post](application screenshot/add_post.png) <br>
-![change avatar](application screenshot/change_avatar.png) <br>
-![chat](application screenshot/chat.png) <br>
-![delete history records](application screenshot/delete_history_records.png) <br>
-![main menu](application screenshot/main_menu.png) <br>
-![my profile](application screenshot/my_profile.png) <br>
-![other use profile](application screenshot/other_user_profile.png) <br>
-![search for title](application screenshot/search_for_title.png) <br>
+*PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
 
 ### Application Use Cases and or Examples
 
-**Target Users: Public**
+**Target Users: General Public**
 - **Use Case 1: Searching for Scam Case**
    - **User:** John
    - **Scenario:** John receives a suspicious email advertising a product at an unbelievably low price, significantly lower than the market price. He is unsure whether this is a scam or a genuine bargain.
    - **Action:** John opens the AntiScam app and uses the search feature to look for product and service scams.
   - **Result:** John finds some posts that exactly match his scenario, which confirms that this is a scam, and he saves $150.
-<br><br>
-- **Use Case 2: Knowing the Latest Scam Tactics**
-   - **User:** Sarah
-   - **Scenario:** Sarah is curious about the latest scam tactics.
-   - **Action:** She accesses the AntiScam app and search for scam cases by interested title or scam types. 
-   - **Result:** Sarah find there are various of Scam Tactics, and knowing it in advance can help her to avoid being scammed.
-<br><br>
-  
-**Target Users: Victims**
-- **Use Case 3: Reporting a Scam Case and Alerting Others**
-    - **User:** Amy
-    - **Scenario:**  After identifying that she has encountered a social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
-    - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script.
-    - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
-<br><br>
-- **Use Case 4: Seek help and potential ways to get money back**
-    - **User:** Vera
-    - **Scenario:** Vera feels hopeless because she just lost a large amount of money by a scam.
-    - **Action:** Vera opens the AntiScam app and add a post about her experience. In the description part, she includes the willing to get help. Then she submits it.
-    - **Result:**  Other users see her post and message her privately. Some users provide really useful methods which help Vera to calm down. But Vera encounter one user is up to no good. She decides to block that user from message her.
-<br><br>
-- **Use Case 5: Seek Comfort and Social needs**
-   - **User:** Emily
-   - **Scenario:** Emily faced a romance scam recently, she cries every day and want to find someone to talk with.
-   - **Action:** She opens AntiScam app and search for romance scams.
-   - **Result:** She finds one user called Isabella also face romance scam recently,she messages Isabella and share her story, they become good friends.
-<br><br>
 
-**Target Users:authorities such as government agencies, police and so on**
-- **Use Case 6: make announcement about recent scams**
-    - **User:** government agencies, police and so on
-    - **Scenario:** These authorities want to make official announcements about recent scams to inform and alert the public.
-    - **Action:** They log in to the AntiScam application and create a new announcement. 
-    - **Result:**  The announcement is published on the AntiScam platform, and users can access this important information to stay informed and protected against scams.
-      <br><br>
-  
-**Staff to maintain the application**
-- **Use Case 7: make announcement about recent scams**
-    - **User:** Moderator
-    - **Scenario:** A user post a new scam case in AntiScam app.
-    - **Action:** They review recent posts to ensure this user adhere to community guidelines.
-    - **Result:** Inappropriate content is removed, and other users can not see it.
-  <br><br>
+- **Use Case 2: Reporting a Scam Case**
+   - **User:** Amy
+   - **Scenario:**  After identifying that she has encountered an social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
+   - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script. 
+   - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
+
+- **Use Case 3: Reporting a Scam Case**
+
+   - **Scenario:** Emily is about to make an online purchase and wants to check if the seller is reliable.
+   - **Action:** She enters the seller's information into the app's search bar.
+  - **Result:** The app displays scam alerts related to the seller, helping Emily make an informed decision.
+
+**Target Users: Anti-Scam Community**
+Use Case 3: Discussing Scam Tactics
+
+User: Sarah
+Scenario: Sarah is curious about the latest scam tactics.
+Action: She accesses the app's discussion forum.
+Result: Sarah joins a conversation about scams, shares her insights, and learns from others in the community.
+Use Case 4: Alerting Others About a New Scam
+
+User: Michael
+Scenario: Michael falls victim to a new scam and wants to warn others.
+Action: He creates a scam alert post and adds a detailed description.
+Result: The post is published, and other users can see it and avoid falling for the same scam.
+Target Users: Moderators
+Use Case 5: Reviewing and Moderating Posts
+
+User: Moderator
+Scenario: The moderator logs into the AntiScam app.
+Action: They review recent posts and comments to ensure they adhere to community guidelines.
+Result: Inappropriate content is removed, and users are notified of the action taken.
+Use Case 6: Supporting Users
+
+User: Moderator
+Scenario: A user reports an issue with the app.
+Action: The moderator responds to the user's request for assistance.
+Result: The user's issue is resolved, ensuring a positive user experience.
+
 <hr> 
 
 ### Application UML
 
-![UML ClassDiagram](media/UML-6442.png) <br><br>
+![UML ClassDiagram](media/UML-6442.png) <br>
 <hr>
 
-
-
 ## Code Design and Decisions
-
-This is an important section of your report and should include all technical decisions made. Well-written justifications will increase your marks for both the report as well as for the relevant parts (e.g., data structure). This includes, for example,
-
-- Details about the parser (describe the formal grammar and language used)
-
-- Decisions made (e.g., explain why you chose one or another data structure, why you used a specific data model, etc.)
-
-- Details about the design patterns used (where in the code, justification of the choice, etc)
-
-*Please give clear and concise descriptions for each subsections of this part. It would be better to list all the concrete items for each subsection and give no more than `5` concise, crucial reasons of your design.
 
 <hr>
 
 ### Data Structures
 
-*[What data structures did your team utilise? Where and why?]*
+*We used the following data structures in our project:*
 
-Here is a partial (short) example for the subsection `Data Structures`:*
-
-*I used the following data structures in my project:*
-
-1. *LinkedList*
-   * *Objective: used for storing xxxx for xxx feature.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+1. *LRU cache (A custom implemented cache mechanism)*
+   * *Objective:*
+      * To efficiently store and retrieve information about scam cases that users have read, we implemented a custom TreeHashMap in LRUCache. Each time a user reads a new scam case, its details are stored in this TreeHashMap. Additionally, we use a custom doubly-linked list to keep track of the order in which users have read the scam cases, allowing the historical interface to display these cases in the order of reading. This design effectively forms an LRUCache structure with a fixed capacity of 100 cases. Once this capacity is filled, the earliest read case will be pushed to make room for a new scam case upon its addition.
+      * Every activity which is trying to use cache firstly use [getInstance()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java#L16), then use [getCache()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java#L24) and [setCache()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java#L28) to get and update cache in the local files of phones or simulators.
+   * *Code Locations: defined in [Class LRUCache](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java)*
    * *Reasons:*
-      * *It is more efficient than Arraylist for insertion with a time complexity O(1)*
-      * *We don't need to access the item by index for xxx feature because...*
-      * For the (part), the data ... (characteristics) ...
-
-2. ...
-
-3. ...
+      * Frequently accessed data can be retrieved rapidly from memory, avoiding the need to reload from a database or another store, thus significantly reducing data access latency. Users can conveniently view the scam cases they've most recently read without the wait of extensive loading or retrieval processes.
+2. *TreeHashMap (A custom implemented hash map)*
+   * *Objective:*
+     * TreeHashMap is created in `TreeHashMap.java`, then`LRUCache` use it in [line 10](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java#L18). When users reads case information in application, we store and update cache, treehashmap and doubly-linked list.
+   * *Code Locations: defined in [Class TreeHashMap](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/TreeHashMap.java)*
+   * *Reasons:*
+     * In the ideal scenario where no hash collisions are present, operations like querying, inserting, and deleting within our cache are remarkably efficient with a time complexity of ***O*(1)**. This design choice ensures an fast response for data retrieval, insertion, and removal from the cache.
+     * By adding a custom TreeHashMap to our LRU Cache for key-value pair storage, we gain the advantage of both structured hierarchical storage and quick access.
+3. *AVL Tree(A custom implemented data structure)*
+   * *Objective:*
+     * AVLTree is used as the underlying data structure for hash buckets in TreeHashMap, with every hash map has 10 avl trees in total.
+   * *Code Locations: defined in [Class AVLTree](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AVLTree.java)*
+   * *Reasons:*
+     * AVL trees offer a consistent time complexity of ***O(log(n))*** for operations like queries, insertions, and deletions. Even in cases where hash collisions occur in hash map, the retrieval, addition, and removal of data from hash buckets remain fast due to the AVL tree's self-balancing property.
+     * Compared to linked lists and standard binary search trees, AVL trees ensure a more balanced structure, preventing the tree from becoming too skewed on extreme cases. 
+     * AVL trees strike a balance between operation speed and complexity. AVL trees has better querying efficiency compared to red-black trees, they slightly lag behind in insertion and deletion. However, this trade-off is often worthwhile, especially when considering the added complexity of implementing red-black trees.
+     *  B-trees have their own advantages in large datasets or databases because they store data in large nodes, AVL trees offer a more straightforward implementation for memory. As we only store 100 cases, while 10 cases for every avl tree in average,  AVL trees become the best choice for smaller datasets.
+4. *Doubly-linked List*
+   * *Objective:*
+     * In LRU Cache, a doubly-linked list is implemented to track the order in which scams are read.
+   * *Code Locations: defined in [Class DoublyLinkedList](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java#L99)*
+   * *Reasons:*
+     * The inherent structure of a doubly-linked list enables efficient removal of nodes from any position and addition to the front ensuring that the cache operations remain rapid and the least recently used items are easily identified and removed when the cache is full.
+5. *Json*
+   * *Objective:*
+     * We store cache as local files in json format.
+   * *Code Locations: defined in Method [saveCacheToInternalStorage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CacheToFile.java#L22), [loadCacheFromInternalStorage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CacheToFile.java#L32)*
+   * *Reasons:*
+     * The inherent structure of a doubly-linked list enables efficient removal of nodes from any position and addition to the front ensuring that the cache operations remain rapid and the least recently used items are easily identified and removed when the cache is full.
 
 <hr>
-
 ### Design Patterns
-*[What design patterns did your team utilise? Where and why?]*
 
-1. *xxx Pattern*
-   * *Objective: used for storing xxxx for xxx feature.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+*We used the following design patterns in our project:*
+
+1. *DAO*
+   * *Objective: In our project, we implemented the DAO (Data Access Object) pattern in our data querying and storage classes.*
+   * *Code Locations: defined in [BlockDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDao.java), [BlockDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDaoImpl.java), [ScamCaseDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java), [ScamCaseDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java)*, [UserDao.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDao.java), [UserDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java)
    * *Reasons:*
-      * ...
+      * The main reason for adopting this pattern is that it makes data access logic away from our business logic(like in Adapter or Activity). This separation allows us for more flexibility when it comes to modifying or extending our data sources, at the same time, ensuring that our business logic remains unchanged. Moreover, by using the DAO pattern, our code becomes more readable and maintainable, which makes debugging more easily.
+2. *Singleton*
+   * *Objective: We implemented the Singleton pattern in our data querying and storage classes to guarantee a single instance throughout the application. We've also implemented it on the LRUCache.*
+   * *Code Locations: defined in [BlockDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDaoImpl.java), [ScamCaseDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java)*, [UserDaoImpl.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java), [HistoryCache.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java)
+   * *Reasons:*
+     * The Singleton pattern plays an important role in efficiently managing resources within an application. By ensuring that only one instance of a dao class exists, we can effectively control our application's memory consumption, thus reducing overhead and boosting the application's performance. Although Firebase utilizes a connection pool to solve issues related to resource contention and data inconsistency, our primary motivation was to economize memory usage and improve operational performance. This approach enhances object management, eliminates the unnecessary replication of objects or connections, and results in smoother, more responsive application behavior.
+3. *Interator*
+   * *Objective: We implemented the Iterator design pattern on our doubly-linked list to provide a unified way to traverse through its elements.*
+   * *Code Locations: defined in [Class LRUCache.DoublyLinkedList.DLLIterator](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java#L235-267)*
+   * *Reasons:*
+     * The Iterator pattern offers several advantages when applied to a doubly-linked list. Firstly, it abstracts the underlying data structure, allowing for a consistent way to access elements of the list. This enables potential future modifications to the list without altering other function. Secondly, the Iterator enhances code readability by offering a standard nethod to iterate, reducing the complexities of traversal. Lastly, it provides a safer way to read through the list by guarding against concurrent modifications, which might lead to unpredictable danger.
 
 <hr>
 
@@ -393,8 +333,24 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 
 <br>
 <hr>
+| No   | 待确认点/待办                                           |
+| :--- | ------------------------------------------------------- |
+| 1    | Class FirebaseAuthManage是否需要写进Log in的feature？？ |
+| 2    | DataFile需要将comp21006442@gmail.com加为Developer       |
+| 3    | Login中的updateFirestore是用来做什么的？？              |
+| 4    | LoadShowData是否还需要接收notifications？               |
+|      |                                                         |
+|      |                                                         |
+|      |                                                         |
+|      |                                                         |
+|      |                                                         |
+
+
 
 ## Implemented Features
+
+*[What features have you implemented? where, how, and why?]* <br>
+*List all features you have completed in their separate categories with their featureId. THe features must be one of the basic/custom features, or an approved feature from Voice Four Feature.*
 
 ### Basic Features
 1. [LogIn]. Log in refers to the process where users enter their username and password on a login page to verify their identity and grant them access privileges. User information is stored in Firebase. If the username and password entered on the login page are correct, the user logs in successfully and is redirected to the app's main page. Otherwise, a toast message pops up, indicating that the username or password is incorrect.
@@ -407,9 +363,9 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 
    * Code: 
 
-     Class [act/LoginActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java) 
+     Class [LoginActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L1-225) 
 
-     Class [manager/FirebaseAuthManage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/FirebaseAuthManager.java)
+     **????** Class [FirebaseAuthManage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/singleton/FirebaseAuthManager.java#L1-72)
 
 2. [DataFiles].2,500 scam cases were created, including information such as post user, post date, scam type, title, description, etc. The data files were stored in JSON format and then batch-imported into Firebase as a collection. (easy)
 
@@ -431,63 +387,54 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 
      Class [act/CaseDetail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/CaseDetail.java)
 
-     Class [act/History](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/History.java)
-
      Class [adapter/ScamCaseCardAdapter](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ScamCaseCardAdapter.java)
 
-     Class [dao/ScamCaseDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java)
+     Class [dataclass/ScamCaseDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java)
 
-     Class [dao/ScamCaseDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java)
+     Class [dataclass/ScamCaseUserCombine](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseUserCombine.java)
 
-     Class [dao/ScamCaseUserCombine](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseUserCombine.java)
+     Class [dataclass/UserDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/UserDao.java)
 
-     Class [dao/UserDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDao.java)
+     Class [dataclass/UserDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/UserDaoImpl.java)
 
-     Class [dao/UserDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java)
-
-     Class [manager/UserInfoManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/UserInfoManager.java)
+     Class [dataclass/UserInfoManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/UserInfoManager.java)
 
      Class [bean/ScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCase.java)
-     
-     Class [bean/User](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/User.java)
-     
+
      Class [bean/ScamCaseWithUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ScamCaseWithUser.java)
-     
+
+     Class [bean/User](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/User.java)
 
 4. [Search] Users are able to search for scam case information on app. Search feature utilises the Tokenizer and Parser. Combined searches are supported. (medium)
 
    - Search token, combine symbol and compare symbol
-   
-     Token and search target
-   
-     - token: @, search target: user email
-     - token: #, search target: title
-     - token: %, amount
-     - token: $, scam type
-   
-     The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>', '>=', '<=' and so on. 
-   
-   - Code
-   
-      Class act/MainMenu
-   
-      ​	- Method [search()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L258-273)
-   
-      Class [act/SearchResultActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java)
-   
-      Class [searchCore/Token](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Token.java)
-   
-      Class [searchCore/Parser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Parser.java)
-   
-      Class [searchCore/Tokenizer](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/searchCore/Tokenizer.java)
-   
-      Class [manager/SearchDataManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/SearchDataManager.java)
-   
 
+     | Token | Search target |
+     | :---- | ------------- |
+     | @     | user email    |
+     | #     | title         |
+     | %     | amount        |
+     | $     | scam type     |
+
+     The symbols '&' (for 'and') and '|' (for 'or') are used, as well as the comparison symbols '=', '<',  '>' and so on. 
+
+   - Code
+
+     Class [act/SearchResultActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java)
+
+     Class [core/Token](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/Token.java)
+
+     Class [core/TokenHelper](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/TokenHelper.java)
+
+     Class [core/Tokenizer](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/core/Tokenizer.java)
+
+     Class [repository/DataRepository](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/repository/DataRepository.java)
+
+     <br>
 
 ### Custom Features
 Feature Category: Greater Data Usage, Handling and Sophistication <br>
-1. [Data-Profile]. A user profile page has been created, which includes the user's profile image and username. Users can also modify their profile image and user name, by clicking image or username users will be redirected to update profile page.  (easy)
+1. [Data-Profile]. A user profile page has been created, which includes the user's profile image and username. Users can also modify their profile picture and username on this page by clicking image or username.  (easy)
    
    * Code:
    
@@ -505,15 +452,11 @@ Feature Category: Greater Data Usage, Handling and Sophistication <br>
 
      Class act/Profile 
 
-     ​	- Method [onDelBtnClick](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L126-159)
+     ​	- Method [onDelBtnClick](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L126-159)<br>
 
      ​	- Method [deletePost](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L292-312)
-   
-     Class tool/LRUCache
-   
-     ​	- Method [remove](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java#L80-85)
 
-Feature Category: Firebase Integration 
+Feature Category: Firebase Integration <br>
 3. [FB-Auth] Use Firebase to implement User Authentication.  (easy)
 
    * Code: 
@@ -521,6 +464,8 @@ Feature Category: Firebase Integration
      Class act/LoginActivity
 
      ​	- Method [logIn](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L135-149) 
+
+     ​	- Method [onStart](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L126-133)
 
 4. [FB-Persist] Use Firebase to persist all data used in app. User could add posts and the data will be stored in Firebase. Without restarting, when other users swipe down, the scam case list will be updated synchronously as the Firebase is updated. This means that users will be able to see the instant updates from another user. (hard)
 
@@ -530,17 +475,25 @@ Feature Category: Firebase Integration
 
      Class [act/SubmitSuccessPage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SubmitSuccessPage.java)
 
-     Class dao/ScamCaseDao
+     Class [builder/ScamCaseBuilder](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/builder/ScamCaseBuilder.java)
 
-     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L19-22)
+     Class dataclass/ScamCaseDao
 
-     Class dao/ScamCaseDaoImpl
+     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDao.java#L19-27)
 
-     ​	- Method [addScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L91-101)
+     Class dataclass/ScamCaseDaoImpl
+
+     ​	- Method [addScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L90-101)
 
      ​	- Method [getNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L103-125)
 
      ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L127-137)
+
+     Class [tool/CheckInput](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CheckInput.java)
+
+     Class [tool/GetString](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/GetString.java)
+
+     Class [tool/NewDate](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/NewDate.java)
 
      Class act/Mainmenu
 
@@ -557,8 +510,6 @@ Feature Category: Peer to Peer Messaging
      Class [act/ChatActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java)
 
      Class [adapter/ChatAdapter](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/adapter/ChatAdapter.java)
-     
-     Class [bean/ChatModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/ChatModel.java)
 
 6. [P2P-Block] Provide users with the ability to ‘block’ and prevent another user from direct messaging them. However, users can still send private messages to users they have blocked. Users who have been blocked will be unable to send private messages to the person who blocked them. (medium)
 
@@ -570,7 +521,7 @@ Feature Category: Peer to Peer Messaging
 
      ​	- Method [blockUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L279-301)
 
-     Class [dao/BlockManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/BlockManager.java)
+     Class [dataclass/BlockManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/BlockManager.java)
 
      Class [bean/BlockModel](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/BlockModel.java)
 
@@ -580,7 +531,7 @@ Feature Category: Peer to Peer Messaging
 
 - Suprised feature is not implemented
 
-   <hr>
+  <br> <hr>
 
 ## Summary of Known Errors and Bugs
 
@@ -594,9 +545,10 @@ Feature Category: Peer to Peer Messaging
    - ...
 
 2. *Bug 2:*
+
 3. ...
 
-<br> <hr>
+   
 
 
 ## Testing Summary
@@ -612,13 +564,14 @@ We've done testing through two ways: white box, black box testing. And we've fou
 - Black box testing:
 
   - We wrote some black box testing by Junit to ensure our tokenizer, parser functions are implemented correctly. The codes we tested are as follows:
-    - [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AVLTree.java)
-    - [LRUCache.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java)
-    - [TreeHashMap.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/TreeHashMap.java)
-    - Token.java
-    - Tokenizer.java
-
-  - The test we wrote is to test most of the functions we are using and track their outputs. For example, in the LRUCache class, we wrote several tests to meet our application requirements:
+    - [AVLTreeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/AVLTreeTest.java)
+    - [CodeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/CodeTest.java)
+    - [LRUCacheTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/LRUCacheTest.java)
+    - [ListNodeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/ListNodeTest.java)
+    - [NodeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/NodeTest.java)
+    - [TokenizerTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/TokenizerTest.java)
+    
+  - The test we wrote is to test most of the functions we are using and track their outputs. For example, in the `LRUCache` class, we wrote several tests to meet our application requirements:
 
     ```java
     testBasicFunction()  // Tests the fundamental operations of the cache
@@ -635,10 +588,26 @@ We've done testing through two ways: white box, black box testing. And we've fou
 
 - Test Coverage
 
-  We didn't write any tests for the interfaces, UI classes or database connections, and we have done a test coverage report. The testing classes and functions are in the image:
+  We didn't write any tests for the interfaces, UI classes or database connections, and we have done a test coverage report. The testing classes and functions are in the images:
 
-  - In the package tool:(一些类可能要移进来)
-  - 
+  - ![test coverage1](photos/test_coverage1.png)
+
+  - ![test_coverage2](photos/test_coverage2.png)
+
+  - We can check the coverage for the classes and files we test:
+
+    | class       | class coverage | method coverage | line coverage |
+    | ----------- | -------------- | --------------- | ------------- |
+    | AVLTree     | 100%           | 87%             | 93.3%         |
+    | LRUCache    | 100%           | 55.90%          | 78.60%        |
+    | ListNode    | 100%           | 87.50%          | 85.7%         |
+    | Node        | 100%           | 81.80%          | 85%           |
+    | TreeHashMap | 100%           | 77.80%          | 80.60%        |
+    | Token       | 100%           | 63.60%          | 70.60%        |
+    | Tokenizer   | 100%           | 100%            | 86.70%        |
+    | Average     | 100%           | 79%             | 79%           |
+
+  - The average coverage is above 70%. And the reason for the low coverage of `LRUCache` is that it contains many inside private class method, which we are not using and not able to test, but these codes are retained for the functionality of gson(which can serialize the complex class of `LRUCache` to Json format, which is easy to test and check).
 
 - Debugging and Logging
 
@@ -659,22 +628,26 @@ We've done testing through two ways: white box, black box testing. And we've fou
 - *[Team Meeting 5](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%205.md)*
 - *[Team Meeting 6](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%206.md)*
 - *[Team Meeting 7](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%207.md)*
-- *[Team Meeting 8](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Meeting%20materials/meeting%208.md)*
 
 
-| No. |    Date    |                Topic                |
-|:----|:----------:|:-----------------------------------:|
-| 1   | 2023-09-06 |  review of assignment requirements  |
-| 2   | 2023-09-07 |        discuss app scenarios        | 
-| 3   | 2023-09-08 |       discuss basic features        |
-| 4   | 2023-09-10 |         UI tasks allocation         | 
-| 5   | 2023-09-14 |      custom features selection      |
-| 6   | 2023-09-17 | implement basic and custom features |
-| 7   | 2023-10-06 |        review tasks progress        |
-| 8   | 2023-10-18 |  report + code review +checklist    |
-In addition to these eight meetings, our team have regular stand-up meetings to review the progress of our tasks. Furthermore, whenever a team member encounters challenges or difficulties, we support and help each other. All the team members are good at teamwork, each meeting we can communicate effectively and every groupmates can finish their allocated tasks on time.
+| No. |     Date     |                       Type |
+|:----|:------------:|---------------------------:|
+| 1   |    |  |
+| 2   |   |      |
+| 3   |    |      |
+| 4   |  |    |
+| 5   |  |    |
+| 6   |  |    |
+| 7   |  |    |
+
 
 <hr>
 
 ### Conflict Resolution Protocol
-- *[Conflict Resolution Protocol](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Conflict_Resolution_Protocol.pdf)*
+*[Write a well defined protocol your team can use to handle conflicts. That is, if your group has problems, what is the procedure for reaching consensus or solving a problem?
+(If you choose to make this an external document, link to it here)]*
+
+This shall include an agreed procedure for situations including (but not limited to):
+- e.g., if a member fails to meet the initial plan and/or deadlines
+- e.g., if your group has issues, how will your group reach consensus or solve the problem?
+- e.g., if a member gets sick, what is the solution? Alternatively, what is your plan to mitigate the impact of unforeseen incidents for this 6-to-8-week project? 
