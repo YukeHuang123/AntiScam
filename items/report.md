@@ -261,7 +261,7 @@ Our AntiScam application is a user-driven platform designed to combat scams by a
 3. The app features a [private messaging](application screenshot/chat.png) system that fosters direct communication between users, facilitating the exchange of insights and clarification on scam-related issues. 
 4. We prioritize user privacy and have implemented a ['block'](application screenshot/chat.png) feature, granting users control over their communication preferences by allowing them to prevent specific users from sending direct messages. 
 5. On the [user's profile](application screenshot/my_profile.png) page, users can view their browsing history, and the last post read will show on the top of history section.
-6. User also have choice to [delete all the history records](application screenshot/delete_history_records.png).
+6. User also have choice to [delete all the history records](application screenshot/delete_history_records.png) and [delete their previous posts](application screenshot/delete_post.png).
 7. We also offer personalized services, allowing users to click on their [avatar](application screenshot/change_avatar.png) to change it to other photo.
 8. The add post button in the [main menu](application screenshot/main_menu.png) is draggable, user can drag it along the right edge.
 
@@ -275,6 +275,7 @@ Our app aims to create an informed community, protecting individuals from potent
 <img src="application screenshot/my_profile.png"  width="30%" height="30%">
 <img src="application screenshot/delete_history_records.png"  width="30%" height="30%">
 <img src="application screenshot/change_avatar.png"  width="30%" height="30%">
+<img src="application screenshot/delete_post.png"  width="30%" height="30%">
 <br><br>
 ### Application Use Cases and or Examples
 
