@@ -50,6 +50,9 @@ code:
   - comment: We use this tool in 'update profile' page.
     url: https://github.com/bumptech/glide
     licence: BSD, part MIT and Apache 2.0. See the [LICENSE file](https://github.com/bumptech/glide/blob/master/LICENSE) for details.
+  - comment: We use this tool for cache's json serialization and deserialization.
+    url: https://github.com/google/gson
+    licence: Gson is released under the Apache 2.0 license. See the [LICENSE file](https://github.com/google/gson/blob/main/LICENSE) for details.
 
 
 # add as many "url+licence+comment" entries as necessary

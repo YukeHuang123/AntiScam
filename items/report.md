@@ -156,7 +156,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
          1. Mainmenu
             1. [MainMenu.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java)
-            2. [activity_main_menu.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml)
+            2. activity_main_menu.xml
             3. [mainmenu_cardlist](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/mainmenu_cardlist.xml)
     
          2. Profile
@@ -212,19 +212,70 @@ Note that the core criteria of contribution is based on `code contribution` (the
       2. Individual Contributions
 
 
-4. **UID1, Name1**  I have 25% contribution, as follows: <br>
+4. **u7558707, Zhaoyun Xu**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+    - **Code Contribution in the final App**
+    
+      - Feature Implementation
 
-  - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
-
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+        1. [LogIn] easy
+        2. [Data-Deletion] medium
+        3. [FB-Persist] medium
+      - Code Implementation
+    
+        1. UI
+    
+           - Login and Logout
+             - [ChatActivity.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java) [All of class]
+             - [activity_login.xml ](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_login.xml)[All of class]
+             - [logout_button.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/logout_button.xml) [All of class]
+           - History
+             - [History.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/History.java) [All of class]
+             - [activity_history.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_history.xml) [All of class]
+             - [history_cardlist.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/history_cardlist.xml) [All of class]
+        2. dao
+           - ScamCaseUserCombine
+             - [Method: loadScamCases()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseUserCombine.java#L22-65)
+           - UserDao
+             - [Method: getAllUsers()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDao.java#L11)
+           - UserDaoImpl
+             1. [Method: getAllUsers()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java#L64-85)
+        3. manager
+    
+           - [FirebaseAuthManager.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/FirebaseAuthManager.java) [All of class]
+        4. bean
+    
+           - [User.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/User.java) 
+        5. tool
+           - [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/AVLTree.java) [All of class]
+           - [CacheToFile.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CacheToFile.java) [All of class]
+           - [DataLoadCallback.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/DataLoadCallback.java) [All of class]
+           - [DoublyLinkedListExclusionStrategy.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/DoublyLinkedListExclusionStrategy.java) [All of class]
+           - [HistoryCache.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java) [All of class]
+           - [LRUCache.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java) [All of class]
+           - [ListNode.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/ListNode.java) [All of class]
+           - [Node.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/Node.java) [All of class]
+           - [TreeHashMap.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/TreeHashMap.java) [All of class]
+        6. Test
+           - [AVLTreeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/AVLTreeTest.java) [All of class]
+           - [LRUCacheTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/LRUCacheTest.java) [All of class]
+           - [ListNodeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/ListNodeTest.java) [All of class]
+           - [NodeTest.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/test/java/com/example/antiscam/NodeTest.java) [All of class]
+    
+      - **Code and App Design** 
+    
+        - Design Pattern: singleton and iterator design pattern.
+        - Implement AVL tree data structure and relevant custom `LRUCache` and `DoublyLinkedList`data structure.
+    
+      - **Others**:  
+    
+        - Report Writing
+          1. Data Structures
+          2. Design Patterns
+          3. Testing Summary
+          4. Individual Contributions
+    
+        - As the team leader, I allocate tasks, manage project assignments, and assist team members in addressing challenging code implementations and resolving bugs.
 
 
 ## Application Description
@@ -321,6 +372,7 @@ Our app aims to create an informed community, protecting individuals from potent
    * *Objective:*
       * To efficiently store and retrieve information about scam cases that users have read, we implemented a custom TreeHashMap in LRUCache. Each time a user reads a new scam case, its details are stored in this TreeHashMap. Additionally, we use a custom doubly-linked list to keep track of the order in which users have read the scam cases, allowing the historical interface to display these cases in the order of reading. This design effectively forms an LRUCache structure with a fixed capacity of 100 cases. Once this capacity is filled, the earliest read case will be pushed to make room for a new scam case upon its addition.
       * Every activity which is trying to use cache firstly use [getInstance()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java#L16), then use [getCache()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java#L24) and [setCache()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/HistoryCache.java#L28) to get and update cache in the local files of phones or simulators.
+      * When any scam case is deleted in the `Profile`, the local cache will also remove it, making the local history works fine.
    * *Code Locations: defined in [Class LRUCache](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/LRUCache.java)*
    * *Reasons:*
       * Frequently accessed data can be retrieved rapidly from memory, avoiding the need to reload from a database or another store, thus significantly reducing data access latency. Users can conveniently view the scam cases they've most recently read without the wait of extensive loading or retrieval processes.
@@ -348,12 +400,13 @@ Our app aims to create an informed community, protecting individuals from potent
      * The inherent structure of a doubly-linked list enables efficient removal of nodes from any position and addition to the front ensuring that the cache operations remain rapid and the least recently used items are easily identified and removed when the cache is full.
 5. *Json*
    * *Objective:*
-     * We store cache as local files in json format.
+     * We store cache as local files in json format by using `GSON`.
    * *Code Locations: defined in Method [saveCacheToInternalStorage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CacheToFile.java#L22), [loadCacheFromInternalStorage](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/tool/CacheToFile.java#L32)*
    * *Reasons:*
      * The inherent structure of a doubly-linked list enables efficient removal of nodes from any position and addition to the front ensuring that the cache operations remain rapid and the least recently used items are easily identified and removed when the cache is full.
 
 <hr>
+
 ### Design Patterns
 
 *We used the following design patterns in our project:*
@@ -612,7 +665,7 @@ Feature Category: Peer to Peer Messaging
    - ...
 
 2. *Bug 2:*
-   - 
+   - 删除了之后其他设备的history不会被删除
 3. ...
 
 <br> <hr>
