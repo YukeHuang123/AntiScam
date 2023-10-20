@@ -112,7 +112,8 @@ The key area(s) of responsibilities for each member
     - create the [UML class diagram](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/media/UML-6442.png)
     - write [Conflict Resolution Protocol](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/Conflict_Resolution_Protocol.pdf)
     - report: responsible for Application Description, Team management, and conflict Resolution Protocol.
-    - feature video edit
+    - features video edit
+    - presentation slides
 
 3. **u7566045, Yijing Jia**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
