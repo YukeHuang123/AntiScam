@@ -463,6 +463,8 @@ Production Rules:
 
 ## Implemented Features
 
+[features.mp4](features.mp4)
+
 ### Basic Features
 1. [LogIn]. Log in refers to the process where users enter their username and password on a login page to verify their identity and grant them access privileges. User information is stored in Firebase. If the username and password entered on the login page are correct, the user logs in successfully and is redirected to the app's main page. Otherwise, a toast message pops up, indicating that the username or password is incorrect.
 
