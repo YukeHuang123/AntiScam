@@ -647,18 +647,22 @@ Feature Category: Peer to Peer Messaging
 
 ## Summary of Known Errors and Bugs
 
-*[Where are the known errors and bugs? What consequences might they lead to?]*
-*List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
+1. *Bug in Firestore:*
 
-*Here is an example:*
-
-1. *Bug 1:*
    - *When user add new post and submit successfully, the firestore will store this object in the scam_cases collection, but a extra field "scalability" will automaticly add to this object with value 0. This bug will not affect the data show in the case detail page.*
-   - ...
 
-2. *Bug 2:*
-   - 删除了之后其他设备的history不会被删除
-3. ...
+2. *Bug in History:*
+
+   - When a user ***A*** deletes his created scam case ***S*** on one device, the record of ***S*** still appears in the browsing history of other users' devices.
+
+3. *Bug in Chats:*
+
+   - When the device is new and opens `Chats` page, it may directly go back to `MainMenu` page. The `Chats` page will still work after that.
+
+   - When a user ***A*** blocks another user ***B***, if he leaves `Chats` page and directly goes into `Chats ` Page again from `Profile` Page, the `block` button will stay unchanged, this is the same when he unblocks another user and same condition with `unblock` button. Clicking the unchanged button will **cause error**.
+
+     The button can be changed by leave both `Chats` Page and `Profile` Page, which means starting from the `MainMenu` Page again.
+
 
 <br> <hr>
 
@@ -719,7 +723,9 @@ We've done testing through two ways: white box, black box testing. And we've fou
     | Tokenizer   | 100%           | 100%            | 86.70%        |
     | Average     | 100%           | 79%             | 79%           |
 
-  - The average coverage is above 70%. And the reason for the low coverage of `LRUCache` is that it contains many inside private class method, which we are not using and not able to test, but these codes are retained for the functionality of gson(which can serialize the complex class of `LRUCache` to Json format, which is easy to test and check).
+  - The average coverage is above 70%. And the reason for the low coverage of `LRUCache` is that it contains many inside private class method, which we are not using and not able to test, but these codes are retained for the functionality of `gson`(which can serialize the complex class of `LRUCache` to Json format, which is easy to test and check).
+
+  - To check more detailed, please [Click Here for a detailed Coverage Report](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/items/testCoverage/index.html)
 
 - Debugging and Logging
 
