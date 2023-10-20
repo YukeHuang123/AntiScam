@@ -115,7 +115,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
        - [SubmitSuccessPage.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SubmitSuccessPage.java)
        - [activity_submit_success_page.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_submit_success_page.xml)
        <br><br>
-**other**
+       **other**
     - implements Parcelable to User class:
         - [CREATOR](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/User.java#L30-46)
         - [describeContents() and writeToParcel()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/bean/User.java#L72-82)
@@ -168,23 +168,23 @@ Note that the core criteria of contribution is based on `code contribution` (the
             2. [activity_update_profile.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_update_profile.xml)
             3. [profile_cardlist.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/profile_cardlist.xml)
          4. ChatActivity
-            1. Method [initBlock()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L221-266)
-            2. Method [blockUser()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L268-291)
+            1. Method [initBlock()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L225-270)
+            2. Method [blockUser()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L275-297)
     
       2. dao
     
          1. [blockDao](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDao.java)
          2. [blockDaoImpl](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/BlockDaoImpl.java)
          3. ScamCaseDao
-            1. [getAllScamCase()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L9-12)
-            2. [getDocumentId()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L23-27)
+            1. [getAllScamCase()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L46-65)
+            2. [getDocumentId()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L33-37)
          4. ScamCaseDaoImpl 
             1. [getAllScamCase()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L43-62)
-            2. [getDocumentId()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L149-170)
+            2. [getDocumentId()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L158-179)
          5. UserDao
             1. [getUserByEmail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDao.java#L10)
          6. UserDaoImpl
-            1. [getUserByEmail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java#L40-59)
+            1. [getUserByEmail](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/UserDaoImpl.java#L43-62)
     
       3. adapter
     
@@ -259,33 +259,33 @@ Our app aims to create an informed community, protecting individuals from potent
    - **Scenario:** John receives a suspicious email advertising a product at an unbelievably low price, significantly lower than the market price. He is unsure whether this is a scam or a genuine bargain.
    - **Action:** John opens the AntiScam app and uses the search feature to look for product and service scams.
   - **Result:** John finds some posts that exactly match his scenario, which confirms that this is a scam, and he saves $150.
-<br><br>
+   <br><br>
 - **Use Case 2: Knowing the Latest Scam Tactics**
    - **User:** Sarah
    - **Scenario:** Sarah is curious about the latest scam tactics.
    - **Action:** She accesses the AntiScam app and search for scam cases by interested title or scam types. 
    - **Result:** Sarah find there are various of Scam Tactics, and knowing it in advance can help her to avoid being scammed.
-<br><br>
-  
+   <br><br>
+
 **Target Users: Victims**
 - **Use Case 3: Reporting a Scam Case and Alerting Others**
     - **User:** Amy
     - **Scenario:**  After identifying that she has encountered a social media scam, Amy notices that the script used in the chat is slightly different from the cases she has seen before.
     - **Action:** Amy clicks the plus button on the main menu page and fills in the required information, including title, lost amount, scam type, and more. She then describes the detailed process she experienced and shares the new scam script.
     - **Result:**  The AntiScam app records her scam case, and when she returns to the main page, she finds that her post is already showed at the top, and all other users can see the new post.
-<br><br>
+    <br><br>
 - **Use Case 4: Seek help and potential ways to get money back**
     - **User:** Vera
     - **Scenario:** Vera feels hopeless because she just lost a large amount of money by a scam.
     - **Action:** Vera opens the AntiScam app and add a post about her experience. In the description part, she includes the willing to get help. Then she submits it.
     - **Result:**  Other users see her post and message her privately. Some users provide really useful methods which help Vera to calm down. But Vera encounter one user is up to no good. She decides to block that user from message her.
-<br><br>
+    <br><br>
 - **Use Case 5: Seek Comfort and Social needs**
    - **User:** Emily
    - **Scenario:** Emily faced a romance scam recently, she cries every day and want to find someone to talk with.
    - **Action:** She opens AntiScam app and search for romance scams.
    - **Result:** She finds one user called Isabella also face romance scam recently,she messages Isabella and share her story, they become good friends.
-<br><br>
+   <br><br>
 
 **Target Users:authorities such as government agencies, police and so on**
 - **Use Case 6: make announcement about recent scams**
@@ -294,7 +294,7 @@ Our app aims to create an informed community, protecting individuals from potent
     - **Action:** They log in to the AntiScam application and create a new announcement. 
     - **Result:**  The announcement is published on the AntiScam platform, and users can access this important information to stay informed and protected against scams.
       <br><br>
-  
+
 **Staff to maintain the application**
 - **Use Case 7: make announcement about recent scams**
     - **User:** Moderator
@@ -425,7 +425,7 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
 
    * Link to the Firebase repo: [scam_cases](https://console.firebase.google.com/project/antiscam-5b447/firestore/data/~2Fscam_cases)
 
-3. [LoadShowData]. When a user is logged in and redirected to the main menu, scam cases listed on the main menu will be loaded from Firebase every 10 seconds. Since each scam case contains both scam case information and user information, we load and combine them together, presenting them as a single scam case card. If a new post is added, upon returning to the main page, the data on the main page will also be refreshed. If a user clicks on a scam case card, they will be directed to the detailed information page for that scam case. Additionally, the user's avatar will also be loaded from Firebase. (Medium)
+3. [LoadShowData]. When a user is logged in and redirected to the main menu, scam cases listed on the main menu will be loaded from Firebase every 10 seconds. Since each scam case contains both scam case information and user information, we load and combine them together, presenting them as a single scam case card. If a new post is added, upon returning to the main page, the data on the main page will also be refreshed. If a user clicks on a scam case card, they will be directed to the detailed information page for that scam case. The browse history will be recorded, users could find their browse history in profile-History page. Additionally, the user's avatar will also be loaded from Firebase. (Medium)
 
    - Code
 
@@ -473,7 +473,7 @@ Customized Rules: Tokenizers often provide functionality for customized rules, w
    
       Class act/MainMenu
    
-      ​	- Method [search()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L258-273)
+      ​	- Method [search()](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L261-276)
    
       Class [act/SearchResultActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/SearchResultActivity.java)
    
@@ -507,9 +507,9 @@ Feature Category: Greater Data Usage, Handling and Sophistication <br>
 
      Class act/Profile 
 
-     ​	- Method [onDelBtnClick](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L126-159)
+     ​	- Method [onDelBtnClick](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L129-160)
 
-     ​	- Method [deletePost](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L292-312)
+     ​	- Method [deletePost](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/Profile.java#L293-313)
    
      Class tool/LRUCache
    
@@ -520,9 +520,7 @@ Feature Category: Firebase Integration
 
    * Code: 
 
-     Class act/LoginActivity
-
-     ​	- Method [logIn](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java#L135-149) 
+     Class [act/LoginActivity](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/LoginActivity.java)
 
 4. [FB-Persist] Use Firebase to persist all data used in app. User could add posts and the data will be stored in Firebase. Without restarting, when other users swipe down, the scam case list will be updated synchronously as the Firebase is updated. This means that users will be able to see the instant updates from another user. (hard)
 
@@ -534,21 +532,21 @@ Feature Category: Firebase Integration
 
      Class dao/ScamCaseDao
 
-     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L19-22)
+     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDao.java#L25-28)
 
      Class dao/ScamCaseDaoImpl
 
-     ​	- Method [addScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L91-101)
+     ​	- Method [addScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L95-105)
 
-     ​	- Method [getNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L103-125)
+     ​	- Method [getNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L113-134)
 
-     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/ScamCaseDaoImpl.java#L127-137)
+     ​	- Method [updateNextId](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dao/ScamCaseDaoImpl.java#L142-152)
 
      Class act/Mainmenu
 
-     ​	- Method [swipeRefresh](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L154-164)
+     ​	- Method [swipeRefresh](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L153-163)
 
-     ​	- Method [reloadMainmenuScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L165-173)
+     ​	- Method [reloadMainmenuScamCase](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java#L168-177)
 
 Feature Category: Peer to Peer Messaging
 
@@ -568,9 +566,9 @@ Feature Category: Peer to Peer Messaging
 
      Class act/ChatActivity
 
-     ​	- Method [initBlock](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L232-277)
+     ​	- Method [initBlock](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L225-270)
 
-     ​	- Method [blockUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L279-301)
+     ​	- Method [blockUser](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java#L275-297)
 
      Class [dao/BlockManager](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/dataclass/BlockManager.java)
 
