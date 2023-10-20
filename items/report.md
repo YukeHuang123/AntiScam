@@ -1,19 +1,5 @@
 # [G32] Report
 
-The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
-
-Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submission (like the current sentence), otherwise it hampers the professionality in your documentation.
-
-*Here are some tips to write a good report:*
-
-* `Bullet points` are allowed and strongly encouraged for this report. Try to summarise and list the highlights of your project (rather than give long paragraphs).*
-
-* *Try to create `diagrams` for parts that could greatly benefit from it.*
-
-* *Try to make your report `well structured`, which is easier for the reviewers to capture the necessary information.*
-
-*We give instructions enclosed in square brackets [...] and examples for each sections to demonstrate what are expected for your project report. Note that they only provide part of the skeleton and your description should be more content-rich. Quick references about markdown by [CommonMark](https://commonmark.org/help/)*
-
 ## Table of Contents
 
 1. [Team Members and Roles](#team-members-and-roles)
@@ -28,7 +14,7 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 
 ## Administrative
-- Firebase Repository Link: <insert-link-to-firebase-repository>
+- Firebase Repository Link: https://console.firebase.google.com/project/antiscam-5b447/
    - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to due date.
 - Two user accounts for markers' access are usable on the app's APK (do not change the username and password unless there are exceptional circumstances. Note that they are not real e-mail addresses in use):
    - Username: comp2100@anu.edu.au	Password: comp2100
@@ -47,22 +33,8 @@ The key area(s) of responsibilities for each member
 
 ## Summary of Individual Contributions
 
-Specific details of individual contribution of each member to the project.
-
-Each team member is responsible for writing **their own subsection**.
-
-A generic summary will not be acceptable and may result in a significant lose of marks.
-
-*[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
-
-*[Code Implementation. Which features did you implement? Which classes or methods was each member involved in? Provide an approximate proportion in pecentage of the contribution of each member to the whole code implementation, e.g. 30%.]*
-
-*you should ALSO provide links to the specified classes and/or functions*
-Note that the core criteria of contribution is based on `code contribution` (the technical developing of the App).
-
-*Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
-
 1. **u7551551 Junzhe Huang** I contribute 25% of the code. Here are my contributions:
+    
     - Features Implementation
     1. [Data Search] Hard
     2. [User Chat] Hard
@@ -79,7 +51,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
             3. `ChatActivity.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/ChatActivity.java
         4. manager
             1. `SearchDataManager.class` [All of class] https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/manager/SearchDataManager.java
-
+    
     - Code Design:
         1. Tokenizer pattern
         2. Singleton pattern
@@ -436,35 +408,55 @@ Designed with a tokenizer-based approach for parsing grammar, utilizing common s
 
 Production Rules:
 
-elixir
-Copy
-%=2000    ::= Query amount
-#=title   ::= Query title
-@=xxx@gmail.com ::= Query username
-%>2000   ::= Greater-than query
-%>=2000  ::= Greater-than or equal to query
-%<2000   ::= Less-than query
-%<=2000  ::= Less-than or equal to query
-%!=2000  ::= Not-equal-to query
-%=2000&#=title ::= AND query
-%=2000||#=title ::= OR query
+- %=2000    ::= Query amount
+- #=title   ::= Query title
+- @=xxx@anu.edu.au ::= Query username
+- %>2000   ::= Greater-than query
+- %>=2000  ::= Greater-than or equal to query
+- %<2000   ::= Less-than query
+- %<=2000  ::= Less-than or equal to query
+- %!=2000  ::= Not-equal-to query
+- %=2000&#=title ::= AND query
+- %=2000||#=title ::= OR query
+
 ### <u>Tokenizers and Parsers</u>
 
-*Collects user search strings, incorporates them into tokenizer parsing, generating corresponding tokens, and storing corresponding values. Then, generates corresponding Firebase Filter syntax based on these tokens.
+- Token:
 
-Advantages:
+  - Operator:
 
-Text Preprocessing: The tokenizer can convert raw text into discrete language units such as words or sub-words. Tokenization allows for the transformation of text into a form that computers can understand and process.
-Language Understanding: Tokenizers can help us better understand the meaning of the text. By dividing the text into language units, we can more easily identify the structure of sentences, the meaning of words, and their relationships.
-Feature Extraction: In natural language processing tasks, tokenizers can serve as a part of feature extraction. By dividing the text into words or phrases, we can extract various statistical features, such as word frequency, part of speech, etc.
-Multilanguage Support: Tokenizers can handle multiple languages, including English, Chinese, French, etc. For cross-language text processing tasks, tokenizers are indispensable tools. Different languages have different tokenization rules and characteristics.
-Customized Rules: Tokenizers often provide functionality for customized rules, which can be adjusted according to specific needs.*
+    ```
+    Token.USEREMAIL(@)
+    Token.TITLE(#)
+    Token.AMOUNT(%)
+    Token.SCAMTYPE($)
+    Token.NE:(!=)
+    Token.LE:(<=)
+    Token.GE:(>=)
+    Token.GT:(>)
+    Token.LT:(<)
+    Token.EQ:(=)
+    Token.AND:(&)
+    Token.OR:(|)
+    TOKEN.STR:(String)
+    ```
 
-### Others
+​	We collect user search strings, incorporates them into tokenizer parsing, generating corresponding tokens, and storing corresponding values. Then, generates corresponding Firebase Filter syntax based on these tokens.
 
-*[What other design decisions have you made which you feel are relevant? Feel free to separate these into their own subheadings.]*
+- Advantages:
+
+  - Text Preprocessing: The tokenizer can convert raw text into discrete language units such as words or sub-words. Tokenization allows for the transformation of text into a form that computers can understand and process.
+
+  - Language Understanding: Tokenizers can help us better understand the meaning of the text. By dividing the text into language units, we can more easily identify the structure of sentences, the meaning of words, and their relationships.
+
+  - Feature Extraction: In natural language processing tasks, tokenizers can serve as a part of feature extraction. By dividing the text into words or phrases, we can extract various statistical features, such as word frequency, part of speech, etc.
+
+  - Multilanguage Support: Tokenizers can handle multiple languages, including English, Chinese, French, etc. For cross-language text processing tasks, tokenizers are indispensable tools. Different languages have different tokenization rules and characteristics.
+
+  - Customized Rules: Tokenizers often provide functionality for customized rules, which can be adjusted according to specific needs.
 
 <br>
+
 <hr>
 
 ## Implemented Features
