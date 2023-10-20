@@ -34,7 +34,7 @@ The key area(s) of responsibilities for each member
 ## Summary of Individual Contributions
 
 1. **u7551551 Junzhe Huang** I contribute 25% of the code. Here are my contributions:
-    
+   
     - Features Implementation
     1. [Data Search] Hard
     2. [User Chat] Hard
@@ -130,7 +130,7 @@ The key area(s) of responsibilities for each member
     
          1. Mainmenu
             1. [MainMenu.java](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/java/com/example/antiscam/act/MainMenu.java)
-            2. activity_main_menu.xml
+            2. [activity_main_menu.xml](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/activity_main_menu.xml)
             3. [mainmenu_cardlist](https://gitlab.cecs.anu.edu.au/u7558707/ga-23s2/-/blob/main/src/app/src/main/res/layout/mainmenu_cardlist.xml)
     
          2. Profile
@@ -664,7 +664,8 @@ Feature Category: Peer to Peer Messaging
    - When a user ***A*** blocks another user ***B***, if he leaves `Chats` page and directly goes into `Chats ` Page again from `Profile` Page, the `block` button will stay unchanged, this is the same when he unblocks another user and same condition with `unblock` button. Clicking the unchanged button will **cause error**.
 
      The button can be changed by leave both `Chats` Page and `Profile` Page, which means starting from the `MainMenu` Page again.
-
+   
+   - For logged-in users, the name displayed in "Chats" is the user display name from Firebase authentication. However, for other users, the name displayed in "Chats" is the username stored in the user table.
 
 <br> <hr>
 
